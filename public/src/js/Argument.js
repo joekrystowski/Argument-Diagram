@@ -11,9 +11,11 @@ joint.shapes.basic.customRect = joint.shapes.basic.Generic.extend({
       'rect': {'fill':'white', 'stroke':'black', width:100, height: 100},
       'text': { 'font-size':12, 'ref-x':.5, 'ref-y':.5, ref:'rect', 'y-alignment':'middle', 'x-alignment':'middle'}
     },
+    // ADD CUSTOM ATTRIBUTES HERE
     link_color: 'black',
     weight: "1",
     type: "none",
+    // ---
   })
 })
 
@@ -54,6 +56,7 @@ class Argument {
           fill: config.text_color,
         }
       },
+      // set custom attributes here:
       link_color: config.link_color,
       weight: config.weight,
       type: config.type

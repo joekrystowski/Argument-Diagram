@@ -35,6 +35,8 @@ joint.elementTools.EditButton = joint.elementTools.Button.extend({
     },
     rotate: true,
     action: function(evt) {
+      // FILL "edit-container" elements with current model values HERE
+      // EDITTING these values when save button is clicked -> SaveEditsButton.js
       let editView = document.getElementById("edit-container");
       editView.style.display = "flex";
       editModel = this.model;
