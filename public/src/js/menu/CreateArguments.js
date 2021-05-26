@@ -26,8 +26,8 @@ function createArgument() {
 function createObjection() {
   //creating new rect (Joint.js object)
   let new_rect = new Argument({
-    x: 800,
-    y: 800,
+    x: 100,
+    y: 100,
     text: "Test objection",
     type: "objection",
     body_color: color.objection.bodyColor,
