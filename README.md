@@ -25,6 +25,7 @@ Custom Rect:
   - better contrast for default objection font color & outline (stroke) (see color.js)
 
 Linking:
+  - adjust link stroke size based on source weight
   -prevent duplicate links (LinkButton.js)
   -prevent double sided linking (LinkButto.js)
   -edit link weight (going to need quite a few things here)
@@ -35,5 +36,10 @@ other:
   - improve icon readability (tools)
 
 Long term: 
-  - summation of link weights?
+  main:
   - import & export (going to want JSON objects here)
+  - dependent premises
+  - text or numbers (number each element)
+
+  other:
+  - summation of link weights?
