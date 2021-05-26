@@ -4,7 +4,8 @@
   "description": "This project is built on the open source Joint.js library -> https://resources.jointjs.com/docs/jointjs/v3.3/joint.html",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./server.js"
   },
   "repository": {
     "type": "git",
