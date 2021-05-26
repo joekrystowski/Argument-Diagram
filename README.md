@@ -6,32 +6,34 @@ It should handle most of the backend things for us like physically drawing the e
 TODO 
 
 Known Bugs:
-  - Removing a rect after selecting it for linking causes problems. need to remove it from selected array upon removal
+  - Removing a rect after selecting it for linking causes problems. need to remove it from selected array upon removal (maybe LinkButton.js)
 
-Editing:
+Editing: (EditButton.js & SaveEditsButton.js (also html & css))
   - link colors
   - link weight
   - rect background color
   - rect text color
   - font-size (will want to make font-size a custom attribute)
   - rect size
-  -
+  - link weight
 
 Custom Rect:
-  - font-size custom attribute
+  -  make font-size a custom attribute (see Argument.js)
+  - show/hide tools on click instead of mouseover. This will allow us to move the buttons slightly off the side
+      of the rect to improve readability (see ManageTools.js)
+  - larger default font size (see Argument.js & createArguments.js)
+  - better contrast for default objection font color & outline (stroke) (see color.js)
+
+Linking:
+  -prevent duplicate links (LinkButton.js)
+  -prevent double sided linking (LinkButto.js)
+  -edit link weight (going to need quite a few things here)
 
 other:
+  - interface on Argument boxes to adjust size manually (ManageTools.js?)
+  - improve UI look (html, css & tools)
+  - improve icon readability (tools)
 
-- interface to add new links (connections) between arguments
-    -> different color link when objections are the source ---DONE
-- interface on Argument boxes to adjust size manually
-- code to automatically adjust size of the text if it overflows the current Argument size. width should be fixed and only changed manually, height can be adjust automatically
-    to account for overflow -----> partially done 
-
-
-
-
-  Linking:
-    -prevent duplicate links
-    -prevent double sided linking
-    -edit link weight
+Long term: 
+  - summation of link weights?
+  - import & export (going to want JSON objects here)
