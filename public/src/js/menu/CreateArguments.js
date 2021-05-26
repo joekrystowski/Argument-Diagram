@@ -4,8 +4,8 @@
 function createArgument() {
   //creating new rect (Joint.js object)
   let new_rect = new Argument({
-    x: 800,
-    y: 800,
+    x: 100,
+    y: 100,
     text: "Test argument",
     type: "argument",
     body_color: color.argument.bodyColor,
