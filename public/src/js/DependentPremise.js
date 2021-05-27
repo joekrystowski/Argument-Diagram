@@ -39,25 +39,21 @@ class DependentPremise {
     //generate new text string for display
     let combined_text = combineText(text_wrap1, text_wrap2, width);
 
+    // define weight
 
-    //creates a string of text, attempting to fit as many characters as possible 
-    //into a line of size width, before separating with newline character and repeating
-    let text_wrap = joint.util.breakText("this is a dependent premise", {width: 90})
-    // regular expression to find number of lines in text_wrap
-    // searching for all instances (g-> global) of \n in text_wrap string
-    // if none are found, instead of attempting to read .length of undefined,
-    //an empty array of .length. 0 is returned.
-    let count = (text_wrap.match(/\n/g) || []).length;
-    console.log(count);
+        // Needs to be implemented, not sure how we want to do this
+
+    // 
+
     //custom rect configuration
     this.rect = new joint.shapes.basic.DependentPremise({
     position: {
-        x: config.x,
-        y:config.y
+        x: x,
+        y: y
     },
     size: {
-        width: 100,
-        height: 13*(count+1)
+        width: width,
+        height: height + 13,
     },
     attrs: {
         rect: {
@@ -74,7 +70,7 @@ class DependentPremise {
             stroke: config.stroke
         },
         text: {
-        text: text_wrap,
+        text: combined_text,
         fill: config.text_color,
         }
     },
@@ -139,7 +135,7 @@ function combineText(text1, text2) {
     console.log("combined:")
     console.log(output_str);
 
-    return "hi";
+    return output_str;
 }
 
 function findLongestLength(arr) {
