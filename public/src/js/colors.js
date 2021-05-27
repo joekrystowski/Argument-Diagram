@@ -10,5 +10,11 @@ let color = {
     textColor: "#8a2727",
     stroke: "#8a2727",
     linkColor: "#8a2727",
+  },
+  dependentPremise: {
+    bodyColor: "#ebebeb",
+    textColor: "#292929",
+    stroke: "#292929",
+    linkColor: "#2cc94c"
   }
 }
