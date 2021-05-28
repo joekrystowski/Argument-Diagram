@@ -1,4 +1,4 @@
-/* global Argument DependentPremise graph paper addRectTools color*/
+/* global Argument DependentPremise graph paper addRectTools addDependentPremiseTools color*/
 
 //when new-argument-button is clicked
 function createArgument() {
@@ -63,6 +63,6 @@ function createDependentPremise(rect1, rect2) {
   //add new rect to the graph for displaying
   new_dependent_premise.rect.addTo(graph);
   //adds the buttons to each rect
-  addRectTools(new_dependent_premise.rect);
+  addDependentPremiseTools(new_dependent_premise.rect);
   return new_dependent_premise;
 }

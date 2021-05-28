@@ -37,7 +37,7 @@ class DependentPremise {
     let text_wrap2 = rect2.attributes.attrs.text.text;
     
     //generate new text string for display
-    let combined_text = combineText(text_wrap1, text_wrap2, width);
+    let combined_text = combineText(text_wrap1, text_wrap2);
 
     // define weight
 
@@ -52,7 +52,7 @@ class DependentPremise {
         y: y
     },
     size: {
-        width: width,
+        width: width + 36, // should be dependent on font size
         height: height + 13,
     },
     attrs: {
@@ -129,7 +129,9 @@ function combineText(text1, text2) {
             }
         }
         //end of line
-        output_str += "\n"
+        if (ctr + 1 < arr1.length || ctr + 1 < arr2.length) {
+            output_str += "\n";
+        }
         ctr++
     }
     console.log("combined:")

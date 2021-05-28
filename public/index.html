@@ -38,12 +38,23 @@
           <button class="menu-button" id="new-argument-button" onclick="createArgument()">+</button>
           <button class="menu-button" id="objection-button" onclick="createObjection()">!</button>
         </div>
-        <div id="edit-container">
-          <form id="edit-form">
+        <!-- edit rect div -->
+        <div id="edit-rect-container" class="edit-container">
+          <form id="edit-rect-form">
             <h1 class="menu-text">Edit text:</h1>
-            <textarea id="model-text" rows="8" cols="25"></textarea>
+            <textarea id="rect-model-text" rows="8" cols="25"></textarea>
           </form>
-          <button id="save-edit-button" class="menu-button" onclick="saveEdits()">Save</button>
+          <button id="save-edit-rect-button" class="menu-button" onclick="saveRectEdits()">Save</button>
+        </div>
+        <!-- end of edit rect div -->
+        <div id="edit-DP-container" class="edit-container">
+          <form id="edit-DP-form">
+            <h1 class="menu-text">Edit left text:</h1>
+            <textarea id="DP-model-left-text" rows="8" cols="25"></textarea>
+            <h1 class="menu-text">Edit right text:</h1>
+            <textarea id="DP-model-right-text" rows="8" cols="25"></textarea>
+          </form>
+          <button id="save-edit-DP -button" class="menu-button" onclick="saveDPEdits()">Save</button>
         </div>
       </div>
       <div id="myholder" class="joint-style-default"></div>
