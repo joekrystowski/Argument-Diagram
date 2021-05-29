@@ -1,5 +1,6 @@
 /* global joint editModel */
 
+import joint from 'jointjs';
 import { editModel } from '../tools/EditButton'
 
 function saveEdits() {

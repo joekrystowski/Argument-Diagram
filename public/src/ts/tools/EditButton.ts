@@ -1,9 +1,14 @@
 /* global joint */
 
+import joint from "jointjs";
+
 export let editModel;
 // custom edit tool definition
 export class EditButton extends joint.elementTools.Button {
 // TODO: extend class
+  defaults() {
+    
+  }
 }
 
 joint.elementTools.EditButton = joint.elementTools.Button.extend({

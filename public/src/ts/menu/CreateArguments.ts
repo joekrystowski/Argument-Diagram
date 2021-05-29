@@ -2,6 +2,7 @@
 import { color } from '../colors';
 import { addRectTools } from '../tools/ManageTools';
 import { graph, paper } from '../main'
+import { Argument } from '../Argument'
 
 //when new-argument-button is clicked
 function createArgument() {

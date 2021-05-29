@@ -1,18 +1,37 @@
 /* global joint */
+import * as joint from 'jointjs'
 
-
-class CustomRect extends joint.shapes.basic.Generic {
-  //custom shape declaration
-  constructor() {
-    super();
-    // TODO: extend class
-    //also deepsupplement is apparently deprecated
+declare module "jointjs" {
+  namespace shapes {
+    namespace app {
+      class CustomRect extends joint.shapes.basic.Generic {
+        //custom shape declaration
+      }
+    }
   }
 }
 
+const CustomRect = joint.shapes.standard.Rectangle.define("app.CustomRect", {
+  markup: '<g class="rotatable"><g class="scalable"><rect/></g><text/></g>',
+  attrs: {
+    rect: { fill: "white", stroke: "black", width: 100, height: 100 },
+    text: {
+      "font-size": 12,
+      "ref-x": 0.5,
+      "ref-y": 0.5,
+      ref: "rect",
+      "y-alignment": "middle",
+      "x-alignment": "middle",
+    },
+  },
+  link_color: "black",
+  weight: "1",
+  type: "none",
+});
+
 // //custom shape declaration
 // joint.shapes.basic.customRect = joint.shapes.basic.Generic.extend({
-//   markup: '<g class="rotatable"><g class="scalable"><rect/></g><text/></g>',
+// markup: '<g class="rotatable"><g class="scalable"><rect/></g><text/></g>',
 
 //   defaults: joint.util.deepSupplement({
 //     type: "basic.customRect",
@@ -35,24 +54,30 @@ class CustomRect extends joint.shapes.basic.Generic {
 //   }),
 // });
 
+(<any>Object).assign(joint.shapes, {
+  app: {
+    CustomRect,
+  }
+})
+
 interface ArgumentOptions {
   x: number;
   y: number;
   text: string;
   type: string;
   body_color: string;
-  text_color: string; 
+  text_color: string;
   stroke: string;
   link_color: string;
   weight: string;
 }
 
-class Argument {
+export class Argument {
   position: {
     x: number;
     y: number;
-  }
-  rect: joint.shapes.basic.Generic
+  };
+  rect: joint.shapes.app.CustomRect
 
   constructor(config: ArgumentOptions) {
     // not used

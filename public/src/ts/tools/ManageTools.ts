@@ -1,8 +1,7 @@
 /* global joint paper */
 import joint from 'jointjs'
-import { EditButton } from './EditButton'
-import { LinkButton } from './LinkButton'
-import { graph, paper } from '../main'
+import { paper } from '../main'
+// import { LinkButton } from './LinkButton'
 
 // adding tools (buttons) to rects
 export function addRectTools(element) {
