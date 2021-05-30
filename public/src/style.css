@@ -1,5 +1,4 @@
 body, html {
-  font-family: monospace;
   margin:0px;
   padding:0px;
 }
@@ -31,7 +30,7 @@ body, html {
   justify-content: center;
 }
 
-.edit-container {
+#edit-container {
   display:none;
   flex-direction: column;
   align-items:center;
@@ -54,20 +53,31 @@ body, html {
 }
 
 #new-argument-button {
-  font-size: 5vh; 
+  font-size: 5vmin; 
   background-color: RGB(145, 255, 149);
   color: RGB(85, 194, 89);
   border-color: RGB(85, 194, 89);
 }
 
+#new-argument-button:hover {
+  background-color: RGB(105, 255, 109);
+  color: RGB(55, 154, 59);
+}
+
+
 #objection-button {
-  font-size: 5vh;
+  font-size: 5vmin;
   background-color: #ff8585;
   color: #bf4e4e;
   border-color: #bf4e4e;
 }
 
-#save-edit-rect-button {
+#objection-button:hover {
+	background-color: #ff7474;
+	color: #5f2c2c;
+}
+
+#save-edit-button {
   width: 10vh;
   
 }
