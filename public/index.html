@@ -8,24 +8,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.3.3/backbone.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jointjs/3.3.0/joint.js"></script>
-  
+    <!-- <script src="node_modules/jointjs/dist/joint.js"></script> -->
+
     <!-- OTHER SCRIPTS -->
-    <script src="src/js/colors.js"></script>
+    <script type="module" src="src/js/colors.js"></script>
   
     <!--TOOL SCRIPTS-->
-    <script src="src/js/tools/LinkButton.js"></script>
-    <script src="src/js/tools/EditButton.js"></script>
-    <script src="src/js/tools/ManageTools.js"></script>
-    <script src="src/js/tools/CombinePremise.js"></script>
+    <script type="module" src="src/js/tools/EditButton.js"></script>
+    <script type="module" src="src/js/tools/CombinePremise.js"></script>
+    <script type="module" src="src/js/tools/EditDependentPremiseButton.js"></script>
+    <script type="module" src="src/js/tools/ManageTools.js"></script>
+    <script type="module" src="src/js/tools/LinkButton.js"></script>
     
     <!-- MENU SCRIPTS -->
-    <script src="src/js/menu/CreateArguments.js"></script>
-    <script src="src/js/menu/SaveEditsButton.js"></script>
+    <script type="module" src="src/js/menu/CreateArguments.js"></script>
+    <script type="module" src="src/js/menu/SaveEditsButton.js"></script>
   
     <!-- Main Scripts -->
-    <script src="src/js/Argument.js"></script>
-    <script src="src/js/DependentPremise.js"></script>
-    <script src="src/js/main.js" defer></script>
+    <script type="module" src="src/js/Argument.js"></script>
+    <script type="module" src="src/js/DependentPremise.js"></script>
+    <script type="module" src="src/js/main.js" defer></script>
   
     <link rel="stylesheet" href="src/css/style.css"/>
   </head>
@@ -35,8 +37,10 @@
     <div id="main">
       <div id="menu-container">
         <div id= "constructor-buttons">
-          <button class="menu-button" id="new-argument-button" onclick="createArgument()">+</button>
-          <button class="menu-button" id="objection-button" onclick="createObjection()">!</button>
+          <!-- <button class="menu-button" id="new-argument-button" onclick="createArgument()">+</button> -->
+          <button class="menu-button" id = "new-argument-button">+</button>
+          <!-- <button class="menu-button" id="objection-button" onclick="createObjection()">!</button> -->
+          <button class="menu-button" id="objection-button">!</button>
         </div>
         <!-- edit rect div -->
         <div id="edit-rect-container" class="edit-container">
@@ -44,7 +48,8 @@
             <h1 class="menu-text">Edit text:</h1>
             <textarea id="rect-model-text" rows="8" cols="25"></textarea>
           </form>
-          <button id="save-edit-rect-button" class="menu-button" onclick="saveRectEdits()">Save</button>
+          <!-- <button id="save-edit-rect-button" class="menu-button" onclick="saveRectEdits()">Save</button> -->
+          <button id="save-edit-rect-button" class="menu-button">Save</button>
         </div>
         <!-- end of edit rect div -->
         <div id="edit-DP-container" class="edit-container">
@@ -54,7 +59,8 @@
             <h1 class="menu-text">Edit right text:</h1>
             <textarea id="DP-model-right-text" rows="8" cols="25"></textarea>
           </form>
-          <button id="save-edit-DP -button" class="menu-button" onclick="saveDPEdits()">Save</button>
+          <!-- <button id="save-edit-DP-button" class="menu-button" onclick="saveDPEdits()">Save</button> -->
+          <button id="save-edit-DP-button" class="menu-button">Save</button>
         </div>
       </div>
       <div id="myholder" class="joint-style-default"></div>
