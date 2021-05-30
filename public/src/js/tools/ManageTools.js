@@ -11,8 +11,9 @@ export function addRectTools(element) {
     let linkButton = new joint.elementTools.LinkButton();
     //edit button
     let editButton = new joint.elementTools.EditButton();
+    let combinedPremiseButton = new joint.elementTools.CombinePremiseButton();
     let toolsView = new joint.dia.ToolsView({
-        tools: [boundaryTool, removeButton, linkButton, editButton]
+        tools: [boundaryTool, removeButton, linkButton, editButton, combinedPremiseButton]
     });
     //element view is in charge of rendering the elements on the paper
     let elementView = element.findView(paper);
