@@ -85,7 +85,7 @@ export class DependentPremise {
         console.log(this.rect);
     }
 }
-function combineText(text1, text2) {
+export function combineText(text1, text2) {
     //create two arrays by splitting each string at \n
     let arr1 = text1.split("\n");
     let arr2 = text2.split("\n");

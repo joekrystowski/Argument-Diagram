@@ -1,6 +1,6 @@
 /* global joint createDependentPremise*/
 // const joint = window.joint;
-import { saveEdits } from './menu/SaveEditsButton.js';
+import { saveRectEdits, saveDPEdits } from './menu/SaveEditsButton.js';
 import { createArgument, createObjection, createDependentPremise } from './menu/CreateArguments.js';
 
 // this is built on Joint.js, an open source library. It handles a lot of the
@@ -23,8 +23,11 @@ newArgumentButton.addEventListener("click", createArgument);
 let objectionButton = document.getElementById("objection-button") as HTMLElement;
 objectionButton.addEventListener("click", createObjection);
 
-let saveEditButton = document.getElementById("save-edit-button") as HTMLElement;
-saveEditButton.addEventListener("click",saveEdits);
+let saveEditRectButton = document.getElementById("save-edit-rect-button") as HTMLElement;
+saveEditRectButton.addEventListener("click",saveRectEdits);
+
+let saveEditDPButton = document.getElementById("save-edit-DP-button") as HTMLElement;
+saveEditDPButton.addEventListener("click",saveDPEdits);
 
 let arg1 = createArgument();
 let arg2 = createArgument();

@@ -1,6 +1,6 @@
 /* global joint createDependentPremise*/
 // const joint = window.joint;
-import { saveEdits } from './menu/SaveEditsButton.js';
+import { saveRectEdits, saveDPEdits } from './menu/SaveEditsButton.js';
 import { createArgument, createObjection, createDependentPremise } from './menu/CreateArguments.js';
 // this is built on Joint.js, an open source library. It handles a lot of the
 // fundamental pieces for us on the back end, we have to implement the front end / interface
@@ -17,8 +17,10 @@ let newArgumentButton = document.getElementById("new-argument-button");
 newArgumentButton.addEventListener("click", createArgument);
 let objectionButton = document.getElementById("objection-button");
 objectionButton.addEventListener("click", createObjection);
-let saveEditButton = document.getElementById("save-edit-button");
-saveEditButton.addEventListener("click", saveEdits);
+let saveEditRectButton = document.getElementById("save-edit-rect-button");
+saveEditRectButton.addEventListener("click", saveRectEdits);
+let saveEditDPButton = document.getElementById("save-edit-DP-button");
+saveEditDPButton.addEventListener("click", saveDPEdits);
 let arg1 = createArgument();
 let arg2 = createArgument();
 //testing
