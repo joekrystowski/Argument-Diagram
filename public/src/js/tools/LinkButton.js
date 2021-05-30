@@ -1,6 +1,6 @@
 /* global joint addLinkTools graph */
 
-let selected = []
+let selected_links = []
 //custom link tool definition
 joint.elementTools.LinkButton = joint.elementTools.Button.extend({
   name: "link-button",
@@ -36,22 +36,22 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
       // this is where the actual function of the button goes (onclick event basically)
       console.log('linking mode active')
       //linking mode active
-      selected.push(this.model);
+      selected_links.push(this.model);
       console.log(this.model.id);
-      console.log("currently selected: " + selected)
-      if (selected.length === 2) {
+      console.log("currently selected: " + selected_links)
+      if (selected_links.length === 2) {
         console.log("length of 2")
         //check if two models are the same model
-        if (selected[0].id === selected[1].id) {
+        if (selected_links[0].id === selected_links[1].id) {
           console.log("duplicate model detected")
           //duplicate
-          selected.pop();
+          selected_links.pop();
         } else {
           //two elements ready for linking
-          createLink(selected[0], selected[1]);
+          createLink(selected_links[0], selected_links[1]);
           console.log("link made")
           //empty array
-          selected = [];
+          selected_links = [];
         }
       }
     }  

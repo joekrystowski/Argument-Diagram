@@ -1,5 +1,5 @@
-
 body, html {
+  font-family: monospace;
   margin:0px;
   padding:0px;
 }
@@ -31,7 +31,7 @@ body, html {
   justify-content: center;
 }
 
-#edit-container {
+.edit-container {
   display:none;
   flex-direction: column;
   align-items:center;
@@ -67,7 +67,7 @@ body, html {
   border-color: #bf4e4e;
 }
 
-#save-edit-button {
+#save-edit-rect-button {
   width: 10vh;
   
 }
