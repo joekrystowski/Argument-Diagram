@@ -1,7 +1,7 @@
 /* global joint editModel */
-import * as joint from 'https://cdnjs.cloudflare.com/ajax/libs/jointjs/3.3.0/joint.js';
+const joint = window.joint;
 import { editModel } from '../tools/EditButton.js';
-function saveEdits() {
+export function saveEdits() {
     let editView = document.getElementById("edit-container");
     //---- Save Edits Here -----
     // note: doing something like

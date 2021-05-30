@@ -1,5 +1,5 @@
 /* global joint */
-import * as joint from 'https://cdnjs.cloudflare.com/ajax/libs/jointjs/3.3.0/joint.js';
+const joint = window.joint;
 const CustomRect = joint.shapes.standard.Rectangle.define("app.CustomRect", {
     markup: '<g class="rotatable"><g class="scalable"><rect/></g><text/></g>',
     attrs: {

@@ -1,7 +1,6 @@
 /* global joint paper */
-import * as joint from 'https://cdnjs.cloudflare.com/ajax/libs/jointjs/3.3.0/joint.js'
+const joint = window.joint;
 import { paper } from '../main.js'
-// import { LinkButton } from './LinkButton'
 
 // adding tools (buttons) to rects
 export function addRectTools(element: joint.shapes.app.CustomRect) {

@@ -1,6 +1,5 @@
 /* global joint */
-
-import * as joint from 'https://cdnjs.cloudflare.com/ajax/libs/jointjs/3.3.0/joint.js'
+const joint = window.joint
 
 export let editModel: joint.shapes.app.CustomRect;
 // custom edit tool definition
