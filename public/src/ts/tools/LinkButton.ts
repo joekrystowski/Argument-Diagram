@@ -1,20 +1,18 @@
 /* global joint addLinkTools graph */
 
-import { Model, View} from 'backbone';
-import * as joint from 'jointjs';
-import { graph } from '../main'
-import { addLinkTools } from './ManageTools'
+import * as joint from 'https://cdnjs.cloudflare.com/ajax/libs/jointjs/3.3.0/joint.js';
+import { graph } from '../main.js'
+import { addLinkTools } from './ManageTools.js'
 
-let selected:Model[] = [] //add type?
+let selected:joint.shapes.app.CustomRect[] = [] //add type?
 
 declare module "jointjs" {
   namespace elementTools {
     class LinkButton extends joint.elementTools.Button {
-      // action(): joint.elementTools.Button.ActionCallback | undefined; 
+
     }
   }
 }
-
 
 //custom link tool definition
 class LinkButton extends joint.elementTools.Button {
@@ -49,11 +47,10 @@ class LinkButton extends joint.elementTools.Button {
       rotate: true,
       action: button_action
     });
-    this.ac
   }
 }
-
-function button_action(evt: JQuery.Event, elementView: View, buttonView: View): joint.elementTools.Button.ActionCallback | undefined {
+//change any to actual type
+function button_action(this: any): joint.elementTools.Button.ActionCallback | undefined {
   // this is where the actual function of the button goes (onclick event basically)
   console.log('linking mode active')
   //linking mode active
@@ -85,7 +82,7 @@ function button_action(evt: JQuery.Event, elementView: View, buttonView: View): 
 })
 
 //link two rects together
-function createLink(model1: Model, model2: Model) {
+function createLink(model1: joint.shapes.app.CustomRect, model2: joint.shapes.app.CustomRect) {
   console.log(model1.attributes.link_color);
   //passes in Argument objects
   let link = new joint.shapes.standard.Link();

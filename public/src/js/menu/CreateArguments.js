@@ -1,46 +1,45 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /* global Argument graph paper addRectTools color*/
-var colors_1 = require("../colors");
-var ManageTools_1 = require("../tools/ManageTools");
-var main_1 = require("../main");
+import { color } from '../colors.js';
+import { addRectTools } from '../tools/ManageTools.js';
+import { graph, paper } from '../main.js';
+import { Argument } from '../Argument.js';
 //when new-argument-button is clicked
-function createArgument() {
+export function createArgument() {
     //creating new rect (Joint.js object)
-    var new_rect = new Argument({
+    let new_rect = new Argument({
         x: 100,
         y: 100,
         text: "Test argument",
         type: "argument",
-        body_color: colors_1.color.argument.bodyColor,
-        text_color: colors_1.color.argument.textColor,
-        stroke: colors_1.color.argument.stroke,
-        link_color: colors_1.color.argument.linkColor,
+        body_color: color.argument.bodyColor,
+        text_color: color.argument.textColor,
+        stroke: color.argument.stroke,
+        link_color: color.argument.linkColor,
         weight: "1.0"
     });
     //add new rect to the graph for displaying
-    new_rect.rect.addTo(main_1.graph);
+    new_rect.rect.addTo(graph);
     //adds the buttons to each rect
-    ManageTools_1.addRectTools(new_rect.rect);
+    addRectTools(new_rect.rect);
     return new_rect;
-    var elementView = new_rect.rect.findView(main_1.paper);
+    let elementView = new_rect.rect.findView(paper);
 }
 //when objection-button is clicked
-function createObjection() {
+export function createObjection() {
     //creating new rect (Joint.js object)
-    var new_rect = new Argument({
+    let new_rect = new Argument({
         x: 100,
         y: 100,
         text: "Test objection",
         type: "objection",
-        body_color: colors_1.color.objection.bodyColor,
-        text_color: colors_1.color.objection.textColor,
-        stroke: colors_1.color.objection.stroke,
-        link_color: colors_1.color.objection.linkColor,
+        body_color: color.objection.bodyColor,
+        text_color: color.objection.textColor,
+        stroke: color.objection.stroke,
+        link_color: color.objection.linkColor,
         weight: "-1.0"
     });
-    new_rect.rect.addTo(main_1.graph);
+    new_rect.rect.addTo(graph);
     //adds the buttons to each rect
-    ManageTools_1.addRectTools(new_rect.rect);
+    addRectTools(new_rect.rect);
     return new_rect;
 }

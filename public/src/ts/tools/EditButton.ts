@@ -1,15 +1,24 @@
 /* global joint */
 
-import joint from "jointjs";
+import * as joint from 'https://cdnjs.cloudflare.com/ajax/libs/jointjs/3.3.0/joint.js'
 
-export let editModel;
+export let editModel: joint.shapes.app.CustomRect;
 // custom edit tool definition
-export class EditButton extends joint.elementTools.Button {
-// TODO: extend class
-  defaults() {
-    
+declare module "jointjs" {
+  namespace elementTools {
+    class EditButton extends joint.elementTools.Button {
+
+    }
   }
 }
+
+// class EditButton extends joint.elementTools.Button {
+//   constructor() {
+//     super({
+
+//     });
+//   }
+// }
 
 joint.elementTools.EditButton = joint.elementTools.Button.extend({
   name: "edit-button",
@@ -43,14 +52,21 @@ joint.elementTools.EditButton = joint.elementTools.Button.extend({
       y: 0,
     },
     rotate: true,
-    action: function(evt) {
+    //change any to actual type
+    action: function(this: any) {
       // FILL "edit-container" elements with current model values HERE
       // EDITTING these values when save button is clicked -> SaveEditsButton.js
-      let editView = document.getElementById("edit-container");
+      let editView = document.getElementById("edit-container") as HTMLElement;
       editView.style.display = "flex";
       editModel = this.model;
-      let modelText = document.getElementById("model-text");
+      let modelText = document.getElementById("model-text") as HTMLTextAreaElement;
       modelText.value = editModel.attributes.attrs.text.text;
     }  
   }
 });
+
+// (<any>Object).assign(joint.elementTools, {
+//   app: {
+//     EditButton,
+//   }
+// })

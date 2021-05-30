@@ -1,5 +1,5 @@
 /* global joint */
-import * as joint from 'jointjs'
+import * as joint from 'https://cdnjs.cloudflare.com/ajax/libs/jointjs/3.3.0/joint.js'
 
 declare module "jointjs" {
   namespace shapes {
@@ -98,7 +98,7 @@ export class Argument {
     let count = (text_wrap.match(/\n/g) || []).length;
     console.log(count);
     //custom rect configuration
-    this.rect = {
+    this.rect = new CustomRect({
       position: {
         x: config.x,
         y: config.y,
@@ -120,7 +120,7 @@ export class Argument {
       link_color: config.link_color,
       weight: config.weight,
       type: config.type,
-    };
+    });
 
     console.log(this.rect);
   }

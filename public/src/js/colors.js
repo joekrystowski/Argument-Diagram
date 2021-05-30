@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.color = void 0;
-exports.color = {
+export let color = {
     argument: {
         bodyColor: "#ebebeb",
         textColor: "#292929",

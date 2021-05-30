@@ -19,6 +19,7 @@
   "homepage": "https://github.com/joekrystowski/Argument-Diagram#readme",
   "dependencies": {
     "@types/backbone": "^1.4.10",
+    "@types/jointjs": "^2.0.0",
     "backbone": "^1.4.0",
     "express": "^4.17.1",
     "jointjs": "^3.3.1"

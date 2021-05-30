@@ -1,18 +1,19 @@
-"use strict";
 /* global joint */
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.paper = exports.graph = void 0;
 // this is built on Joint.js, an open source library. It handles a lot of the
 // fundamental pieces for us on the back end, we have to implement the front end / interface
 // to interact with it
-var jointjs_1 = __importDefault(require("jointjs"));
-exports.graph = new jointjs_1.default.dia.Graph();
+console.log("start");
+import * as joint from 'https://cdnjs.cloudflare.com/ajax/libs/jointjs/3.3.0/joint.js';
+import { createArgument, createObjection } from './menu/CreateArguments.js';
+export let graph = new joint.dia.Graph();
 // the paper renders the image of the graph
-exports.paper = new jointjs_1.default.dia.Paper({
+export let paper = new joint.dia.Paper({
     el: document.getElementById("myholder"),
-    model: exports.graph,
+    model: graph,
     gridSize: 1,
 });
+console.log("setup");
+let newArgumentButton = document.getElementById("new-argument-button");
+newArgumentButton.addEventListener("click", createArgument);
+let objectionButton = document.getElementById("objection-button");
+objectionButton.addEventListener("click", createObjection);

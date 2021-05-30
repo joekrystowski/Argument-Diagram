@@ -1,11 +1,11 @@
 /* global Argument graph paper addRectTools color*/
-import { color } from '../colors';
-import { addRectTools } from '../tools/ManageTools';
-import { graph, paper } from '../main'
-import { Argument } from '../Argument'
+import { color } from '../colors.js';
+import { addRectTools } from '../tools/ManageTools.js';
+import { graph, paper } from '../main.js'
+import { Argument } from '../Argument.js'
 
 //when new-argument-button is clicked
-function createArgument() {
+export function createArgument() {
   //creating new rect (Joint.js object)
   let new_rect = new Argument({
     x: 100,
@@ -27,7 +27,7 @@ function createArgument() {
 }
 
 //when objection-button is clicked
-function createObjection() {
+export function createObjection() {
   //creating new rect (Joint.js object)
   let new_rect = new Argument({
     x: 100,

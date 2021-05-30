@@ -1,10 +1,10 @@
 /* global joint paper */
-import joint from 'jointjs'
-import { paper } from '../main'
+import * as joint from 'https://cdnjs.cloudflare.com/ajax/libs/jointjs/3.3.0/joint.js'
+import { paper } from '../main.js'
 // import { LinkButton } from './LinkButton'
 
 // adding tools (buttons) to rects
-export function addRectTools(element) {
+export function addRectTools(element: joint.shapes.app.CustomRect) {
   // boundary tool shows boundaries of element
   let boundaryTool = new joint.elementTools.Boundary();
   //remove tool deletes a rect
@@ -36,7 +36,7 @@ export function addRectTools(element) {
 
 
 // adding tools to links
-export function addLinkTools(link) {
+export function addLinkTools(link: joint.shapes.standard.Link) {
   let removeButton = new joint.linkTools.Remove();
   let toolsView = new joint.dia.ToolsView({
     tools: [removeButton]
