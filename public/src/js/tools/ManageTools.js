@@ -24,14 +24,12 @@ function addRectTools(element) {
   //start with tools hidden
   elementView.hideTools();
 
-  // ------ paper events -------
-  paper.on("element:mouseenter", function(elementView) {
-    elementView.showTools();
+  // deselects elements that were not clicked on.
+  paper.on("element:pointerclick", function(eventView){
+    if (eventView !== elementView){
+      elementView.hideTools();
+    }
   });
-  paper.on("element:mouseleave", function(elementView) {
-    elementView.hideTools();
-  });
-  // --- end of paper events -----
 }
 
 
