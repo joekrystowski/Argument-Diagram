@@ -1,10 +1,10 @@
 /* global joint addLinkTools graph */
-const joint = window.joint
+const joint = window.joint;
 
-import { graph } from '../main.js'
-import { addLinkTools } from './ManageTools.js'
+import { graph } from '../graph.js';
+import { addLinkTools } from './ManageTools.js';
 
-let selected_links:joint.shapes.app.CustomRect[] = [] //add type?
+let selected_links:joint.shapes.app.CustomRect[] = [];
 
 declare module "jointjs" {
   namespace elementTools {
@@ -13,6 +13,7 @@ declare module "jointjs" {
     }
   }
 }
+
 joint.elementTools.LinkButton = joint.elementTools.Button.extend({
   name: "link-button",
   options: {
@@ -43,9 +44,32 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
       y: 0,
     },
     rotate: true,
-    action: button_action
+    action: function(this: any){
+      // this is where the actual function of the button goes (onclick event basically)
+      console.log('linking mode active')
+      //linking mode active
+      selected_links.push(this.model);
+      console.log(this.model.id);
+      console.log("currently selected: " + selected_links)
+      if (selected_links.length === 2) {
+        console.log("length of 2")
+        //check if two models are the same model
+        if (selected_links[0].id === selected_links[1].id) {
+          console.log("duplicate model detected")
+          //duplicate
+          selected_links.pop();
+        } else {
+          //two elements ready for linking
+          createLink(selected_links[0], selected_links[1]);
+          console.log("link made")
+          //empty array
+          selected_links = [];
+        }
+      }
+      return;
+    }
   }
-})
+});
 //custom link tool definition
 // class LinkButton extends joint.elementTools.Button {
 //   constructor() {
@@ -82,30 +106,30 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
 //   }
 // }
 //change any to actual type
-function button_action(this: any): joint.elementTools.Button.ActionCallback | undefined {
-  // this is where the actual function of the button goes (onclick event basically)
-  console.log('linking mode active')
-  //linking mode active
-  selected_links.push(this.model);
-  console.log(this.model.id);
-  console.log("currently selected: " + selected_links)
-  if (selected_links.length === 2) {
-    console.log("length of 2")
-    //check if two models are the same model
-    if (selected_links[0].id === selected_links[1].id) {
-      console.log("duplicate model detected")
-      //duplicate
-      selected_links.pop();
-    } else {
-      //two elements ready for linking
-      createLink(selected_links[0], selected_links[1]);
-      console.log("link made")
-      //empty array
-      selected_links = [];
-    }
-  }
-  return;
-}
+// function button_action(this: any): joint.elementTools.Button.ActionCallback | undefined {
+//   // this is where the actual function of the button goes (onclick event basically)
+//   console.log('linking mode active')
+//   //linking mode active
+//   selected_links.push(this.model);
+//   console.log(this.model.id);
+//   console.log("currently selected: " + selected_links)
+//   if (selected_links.length === 2) {
+//     console.log("length of 2")
+//     //check if two models are the same model
+//     if (selected_links[0].id === selected_links[1].id) {
+//       console.log("duplicate model detected")
+//       //duplicate
+//       selected_links.pop();
+//     } else {
+//       //two elements ready for linking
+//       createLink(selected_links[0], selected_links[1]);
+//       console.log("link made")
+//       //empty array
+//       selected_links = [];
+//     }
+//   }
+//   return;
+// }
 
 // (<any>Object).assign(joint.elementTools, {
 //   app: {
@@ -114,7 +138,7 @@ function button_action(this: any): joint.elementTools.Button.ActionCallback | un
 // })
 
 //link two rects together
-function createLink(model1: joint.shapes.app.CustomRect, model2: joint.shapes.app.CustomRect) {
+function createLink(model1:any, model2:any) {
   console.log(model1.attributes.link_color);
   //passes in Argument objects
   let link = new joint.shapes.standard.Link();

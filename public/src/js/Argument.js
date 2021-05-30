@@ -43,7 +43,7 @@ const CustomRect = joint.shapes.standard.Rectangle.define("app.CustomRect", {
 Object.assign(joint.shapes, {
     app: {
         CustomRect,
-    }
+    },
 });
 export class Argument {
     constructor(config) {

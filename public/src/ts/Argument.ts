@@ -1,5 +1,5 @@
 /* global joint */
-const joint = window.joint
+const joint = window.joint;
 
 declare module "jointjs" {
   namespace shapes {
@@ -57,8 +57,8 @@ const CustomRect = joint.shapes.standard.Rectangle.define("app.CustomRect", {
 (<any>Object).assign(joint.shapes, {
   app: {
     CustomRect,
-  }
-})
+  },
+});
 
 interface ArgumentOptions {
   x: number;
@@ -77,7 +77,7 @@ export class Argument {
     x: number;
     y: number;
   };
-  rect: joint.shapes.app.CustomRect
+  rect: joint.shapes.app.CustomRect;
 
   constructor(config: ArgumentOptions) {
     // not used
