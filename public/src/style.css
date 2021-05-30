@@ -79,5 +79,9 @@ body, html {
 
 #save-edit-button {
   width: 10vh;
-  
+}
+
+#save-edit-button:hover {
+  background-color: #ddddff;
+  width: 10vh;
 }
