@@ -50,6 +50,8 @@ joint.elementTools.RemoveDependentPreimseButton = joint.elementTools.Button.exte
         let model2 = model.attributes.model2;
         model1.addTo(graph);
         model2.addTo(graph);
+        console.log(model1)
+        console.log(model2)
         if (model1.attributes.type === "argument" || model1.attributes.type === "objection") {
             addRectTools(model1);
         } else {
