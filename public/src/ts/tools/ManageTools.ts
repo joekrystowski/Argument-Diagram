@@ -25,13 +25,17 @@ export function addRectTools(element: joint.shapes.app.CustomRect) {
   //start with tools hidden
   elementView.hideTools();
 
-  // ------ paper events -------
-  paper.on("element:mouseenter", function(elementView) {
+  element.on("change:position", function () {
+    paper.hideTools();
     elementView.showTools();
-  });
-  paper.on("element:mouseleave", function(elementView) {
-    elementView.hideTools();
-  });
+  })
+
+  // deselects elements that were not clicked on.
+  paper.on("element:pointerclick", function(eventView){
+    if (eventView !== elementView){
+      elementView.hideTools();
+    }
+  })
   // --- end of paper events -----
 }
 
@@ -80,13 +84,36 @@ export function addDependentPremiseTools(element: joint.shapes.app.DependentPrem
   //start with tools hidden
   elementView.hideTools();
 
-  // ------ paper events -------
-  paper.on("element:mouseenter", function(elementView) {
+  element.on("change:position", function () {
+    paper.hideTools();
     elementView.showTools();
-  });
-  paper.on("element:mouseleave", function(elementView) {
-    elementView.hideTools();
+  })
+
+  // ------ paper events -------
+  paper.on("element:pointerclick", function(eventView){
+    if (eventView !== elementView){
+      elementView.hideTools();
+    }
   });
   // --- end of paper events -----
-
 }
+
+
+paper.on("element:pointerclick", function(eventView){
+  if (eventView._toolsView.tools.length <= 0){
+    console.log("What is this? an element with no tools?")
+    console.log("Well that is quite strange.");
+    return
+  }
+  if(eventView._toolsView.tools[0].isVisible() == true){
+    //console.log("UnClicked=>Hiding!");
+    eventView.hideTools();
+  }else{
+    //console.log("Clicked=>Showing!");
+    eventView.showTools();
+  }
+});
+
+paper.on("blank:pointerclick", function(evt) {
+  paper.hideTools();
+})

@@ -81,3 +81,7 @@ body, html {
   width: 10vh;
   
 }
+
+.save-button:hover {
+    background-color: #ddddff;
+}
