@@ -1,8 +1,9 @@
 /* global joint paper */
-
+const joint = window.joint;
+import { paper } from '../graph.js'
 
 // adding tools (buttons) to rects
-function addRectTools(element) {
+export function addRectTools(element: joint.shapes.app.CustomRect) {
   // boundary tool shows boundaries of element
   let boundaryTool = new joint.elementTools.Boundary();
   //remove tool deletes a rect
@@ -11,11 +12,11 @@ function addRectTools(element) {
   let linkButton = new joint.elementTools.LinkButton();
   //edit button
   let editButton = new joint.elementTools.EditButton();
-  // dependent premise button
-  let combinePremiseButton = new joint.elementTools.CombinePremiseButton();
 
+  let combinedPremiseButton = new joint.elementTools.CombinePremiseButton();
+  
   let toolsView = new joint.dia.ToolsView({
-    tools: [boundaryTool, removeButton, linkButton, editButton, combinePremiseButton]
+    tools: [boundaryTool, removeButton, linkButton, editButton, combinedPremiseButton]
   });
 
   //element view is in charge of rendering the elements on the paper
@@ -24,19 +25,23 @@ function addRectTools(element) {
   //start with tools hidden
   elementView.hideTools();
 
-  // ------ paper events -------
-  paper.on("element:mouseenter", function(elementView) {
+  element.on("change:position", function () {
+    paper.hideTools();
     elementView.showTools();
-  });
-  paper.on("element:mouseleave", function(elementView) {
-    elementView.hideTools();
-  });
+  })
+
+  // deselects elements that were not clicked on.
+  paper.on("element:pointerclick", function(eventView){
+    if (eventView !== elementView){
+      elementView.hideTools();
+    }
+  })
   // --- end of paper events -----
 }
 
 
 // adding tools to links
-function addLinkTools(link) {
+export function addLinkTools(link: joint.shapes.standard.Link) {
   let removeButton = new joint.linkTools.Remove();
   let toolsView = new joint.dia.ToolsView({
     tools: [removeButton]
@@ -56,7 +61,7 @@ function addLinkTools(link) {
   // --- end of paper events -----
 }
 
-function addDependentPremiseTools(element)  {
+export function addDependentPremiseTools(element: joint.shapes.app.DependentPremiseRect)  {
   // the first four buttons are the same buttons that Rects get
   // boundary tool shows boundaries of element
   let boundaryTool = new joint.elementTools.Boundary();
@@ -79,13 +84,36 @@ function addDependentPremiseTools(element)  {
   //start with tools hidden
   elementView.hideTools();
 
-  // ------ paper events -------
-  paper.on("element:mouseenter", function(elementView) {
+  element.on("change:position", function () {
+    paper.hideTools();
     elementView.showTools();
-  });
-  paper.on("element:mouseleave", function(elementView) {
-    elementView.hideTools();
+  })
+
+  // ------ paper events -------
+  paper.on("element:pointerclick", function(eventView){
+    if (eventView !== elementView){
+      elementView.hideTools();
+    }
   });
   // --- end of paper events -----
-
 }
+
+
+paper.on("element:pointerclick", function(eventView){
+  if (eventView._toolsView.tools.length <= 0){
+    console.log("What is this? an element with no tools?")
+    console.log("Well that is quite strange.");
+    return
+  }
+  if(eventView._toolsView.tools[0].isVisible() == true){
+    //console.log("UnClicked=>Hiding!");
+    eventView.hideTools();
+  }else{
+    //console.log("Clicked=>Showing!");
+    eventView.showTools();
+  }
+});
+
+paper.on("blank:pointerclick", function(evt) {
+  paper.hideTools();
+})

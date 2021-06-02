@@ -1,4 +1,4 @@
-let color = {
+export let color = {
   argument: {
     bodyColor: "#ebebeb",
     textColor: "#292929",
