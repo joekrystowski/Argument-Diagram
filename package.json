@@ -23,9 +23,9 @@
     "jointjs": "^3.3.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7",
     "@types/backbone": "^1.4.10",
     "@types/jointjs": "^2.0.0",
+    "nodemon": "^2.0.7",
     "typescript": "^4.3.2"
   }
 }

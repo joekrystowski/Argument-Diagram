@@ -1,7 +1,16 @@
+:root {
+  --save-blue: #5271eb;
+}
+
 body, html {
   font-family: monospace;
   margin:0px;
   padding:0px;
+}
+
+i {
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 /* !important to override default styling */
@@ -22,6 +31,7 @@ body, html {
   display: flex;
   flex-direction: column;
   background-color: #f2f2f2;
+  border-right: 1px solid black;
   width: 20.2vw;
 }
 
@@ -31,10 +41,17 @@ body, html {
   justify-content: center;
 }
 
-.edit-container {
-  display:none;
+#edit-container {
+  display:flex;
   flex-direction: column;
   align-items:center;
+  padding: 10px;
+}
+
+#edit-form {
+  display:flex;
+  flex-direction: inherit;
+  align-items: inherit;
 }
 
 .menu-text {
@@ -53,6 +70,14 @@ body, html {
   cursor: pointer;
 }
 
+.save-button {
+  background-color: var(--save-blue);
+  color: white;
+  width:120px;
+  height:60px;
+  font-size:1.5vw;
+}
+
 #new-argument-button {
   font-size: 5vh; 
   background-color: RGB(145, 255, 149);
@@ -65,9 +90,4 @@ body, html {
   background-color: #ff8585;
   color: #bf4e4e;
   border-color: #bf4e4e;
-}
-
-#save-edit-rect-button {
-  width: 10vh;
-  
 }
