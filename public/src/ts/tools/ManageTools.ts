@@ -15,8 +15,15 @@ export function addRectTools(element: joint.shapes.app.CustomRect) {
 
   let combinedPremiseButton = new joint.elementTools.CombinePremiseButton();
   
+  let rect_tools = [boundaryTool, removeButton, linkButton, editButton]
+
+  //only add dependent premise tool to argument type, not objection
+  if (element.attributes.type == "argument") {
+    rect_tools.push(combinedPremiseButton);
+  }
+
   let toolsView = new joint.dia.ToolsView({
-    tools: [boundaryTool, removeButton, linkButton, editButton, combinedPremiseButton]
+    tools: rect_tools
   });
 
   //element view is in charge of rendering the elements on the paper
