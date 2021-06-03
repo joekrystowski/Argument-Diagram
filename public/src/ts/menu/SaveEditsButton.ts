@@ -21,7 +21,7 @@ export function saveEdits() {
       let max_height = Math.max(...heights);
       //the 36 is dependent on font-size!!
       let width = 36 + editModel.attributes.models.reduce((total:number, model:Argument['rect']) => total + model.attributes.size.width, 0);
-      let combinedText = text_wraps.slice(1).reduce((total:string, current:string, index:number, array:string[]) => {
+      let combinedText = text_wraps.slice(1).reduce((total:string, current:string) => {
         //skip first one
         return combineText(total, current);
       }, text_wraps[0]);
