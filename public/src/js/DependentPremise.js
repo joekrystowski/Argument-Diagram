@@ -18,8 +18,7 @@ const DependentPremiseRect = joint.shapes.standard.Rectangle.define("app.Depende
     link_color: "green",
     weight: "1",
     type: "dependent-premise",
-    model1: undefined,
-    model2: undefined,
+    models: []
     // ---
 });
 Object.assign(joint.shapes, {
@@ -32,6 +31,20 @@ export class DependentPremise {
     constructor(config) {
         let rect1 = config.rect1.clone();
         let rect2 = config.rect2.clone();
+        let models = [];
+        if (rect1.attributes.type === "dependent-premise") {
+            models.push(...rect1.attributes.models);
+        }
+        else {
+            models.push(rect1);
+        }
+        if (rect2.attributes.type === "dependent-premise") {
+            models.push(...rect2.attributes.models);
+        }
+        else {
+            models.push(rect2);
+        }
+        console.log("models", models);
         //set size
         let width = rect1.attributes.size.width + rect2.attributes.size.width;
         let height = Math.max(rect1.attributes.size.height, rect2.attributes.size.height);
@@ -79,8 +92,7 @@ export class DependentPremise {
             link_color: config.link_color,
             weight: config.weight,
             type: config.type,
-            model1: rect1,
-            model2: rect2,
+            models: models
         });
         console.log(this.rect);
     }
@@ -89,8 +101,6 @@ export function combineText(text1, text2) {
     //create two arrays by splitting each string at \n
     let arr1 = text1.split("\n");
     let arr2 = text2.split("\n");
-    console.log(arr1);
-    console.log(arr2);
     let buffer = 3; // so that completely filled lines are not right next to each other
     let width1 = findLongestLength(arr1) + buffer;
     let width2 = findLongestLength(arr2) + buffer;
@@ -136,8 +146,6 @@ export function combineText(text1, text2) {
         }
         ctr++;
     }
-    console.log("combined:");
-    console.log(output_str);
     return output_str;
 }
 function findLongestLength(arr) {

@@ -37,11 +37,14 @@ joint.elementTools.EditButton = joint.elementTools.Button.extend({
         action: function () {
             // FILL "edit-container" elements with current model values HERE
             // EDITTING these values when save button is clicked -> SaveEditsButton.js
-            let editView = document.getElementById("edit-rect-container");
-            editView.style.display = "flex";
+            const editView = $('#edit-container');
+            editView.show();
             editModel = this.model;
-            let modelText = document.getElementById("rect-model-text");
-            modelText.value = editModel.attributes.attrs.text.text;
+            const form = $('#edit-form');
+            form.empty();
+            form.append(`<label class="menu-text">Edit Argument Text:</label>`);
+            form.append(`<textarea id="model-text-rect" name="model-text-rect" rows="8" cols="25">${editModel.attributes.attrs.text.text}</textarea>`);
+            form.append('<br/>');
         }
     }
 });
@@ -83,19 +86,19 @@ joint.elementTools.EditDependentPremiseButton = joint.elementTools.Button.extend
         },
         rotate: true,
         action: function () {
-            // make sure other edit windows are hidden
-            document.getElementById("edit-rect-container").style.display = "none";
             // FILL "edit-container" elements with current model values HERE
             // EDITTING these values when save button is clicked -> SaveEditsButton.js
-            let editView = document.getElementById("edit-DP-container");
-            editView.style.display = "flex";
+            const editView = $('#edit-container');
+            editView.show();
             editModel = this.model;
-            //left text
-            let leftText = document.getElementById("DP-model-left-text");
-            leftText.value = editModel.attributes.model1.attributes.attrs.text.text;
-            // right text
-            let rightText = document.getElementById("DP-model-right-text");
-            rightText.value = editModel.attributes.model2.attributes.attrs.text.text;
+            console.log("editModel", editModel);
+            const form = $('#edit-form');
+            form.empty();
+            editModel.attributes.models.forEach((model, index) => {
+                form.append(`<label class="menu-text">Edit Argument ${index + 1} Text:</label>`);
+                form.append(`<textarea id="model-text-DP-${index}" name="model-text-DP-${index}" rows="8" cols="25">${model.attributes.attrs.text.text}</textarea>`);
+                form.append('<br/>');
+            });
         }
     }
 });

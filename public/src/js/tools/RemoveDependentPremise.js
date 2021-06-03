@@ -1,5 +1,5 @@
 import { graph } from "../graph.js";
-import { addRectTools, addDependentPremiseTools } from "./ManageTools.js";
+import { addRectTools } from "./ManageTools.js";
 const joint = window.joint;
 joint.elementTools.RemoveDependentPreimseButton = joint.elementTools.Button.extend({
     name: "remove-dependent-premise-button",
@@ -31,28 +31,13 @@ joint.elementTools.RemoveDependentPreimseButton = joint.elementTools.Button.exte
             y: 0,
         },
         rotate: true,
+        //cast this context to any type, not sure what type it would be otherwise
         action: function () {
             let model = this.model;
-            console.log("dependent-premise-removed");
-            // add component models
-            let model1 = model.attributes.model1;
-            let model2 = model.attributes.model2;
-            model1.addTo(graph);
-            model2.addTo(graph);
-            console.log(model1);
-            console.log(model2);
-            if (model1.attributes.type === "argument" || model1.attributes.type === "objection") {
-                addRectTools(model1);
-            }
-            else {
-                addDependentPremiseTools(model1);
-            }
-            if (model2.attributes.type === "argument" || model2.attributes.type === "objection") {
-                addRectTools(model2);
-            }
-            else {
-                addDependentPremiseTools(model2);
-            }
+            model.attributes.models.forEach((element) => {
+                element.addTo(graph);
+                addRectTools(element);
+            });
             //remove this dependent premise
             model.remove();
         }
