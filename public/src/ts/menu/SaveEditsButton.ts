@@ -2,57 +2,42 @@
 const joint = window.joint;
 import { editModel } from '../tools/EditButton.js';
 import { combineText } from '../DependentPremise.js';
+import { Argument } from '../Argument.js';
 
-export function saveRectEdits() {
-  let editView = document.getElementById("edit-rect-container") as HTMLElement;
-  //---- Save Edits Here -----
-  // note: doing something like
-  // editModel.attributes.attrs.text.text = text_wrap will NOT update the attributes live on the Paper
-  // Instead, you should use editModel.set() for most things
-  // .set() takes two arguments
-  let text = (document.getElementById("rect-model-text")as HTMLTextAreaElement).value;
-  let text_wrap = joint.util.breakText(text, {width: 90})
-  let count = (text_wrap.match(/\n/g) || []).length;
-  let new_height = 16 + 13*(count)
-  editModel.set('attrs', {text: {text: text_wrap}});
-  editModel.resize(editModel.attributes.size.width, new_height);
-  console.log(editModel.attributes.attrs.text.text)
+export function saveEdits() {
+  let texts:Array<HTMLElement> = $('[name^="model-text-"]').toArray();
+  let text_wraps:Array<string> = texts.map((element:HTMLElement) => joint.util.breakText((<HTMLTextAreaElement>element).value, {width: 90}));
+  let num_lines:Array<number> = text_wraps.map(wrap => (wrap.match(/\n/g) || []).length);
+  //magic numbers have to do with font size... ask Joe
+  let heights:Array<number> = num_lines.map(lines => 16 + 13 * lines);
+
+  if(editModel.attributes.type === "dependent-premise") {
+    //save new text and adjust size on each model in dependent premise
+    editModel.attributes.models.forEach((model:Argument['rect'], index:number) => {
+      model.attr('text/text', text_wraps[index]);
+      model.resize(model.attributes.size.width, heights[index]);
+      console.log(model.attributes.attrs.text.text);
+    });
+      let max_height = Math.max(...heights);
+      //the 36 is dependent on font-size!!
+      let width = 36 + editModel.attributes.models.reduce((total:number, model:Argument['rect']) => total + model.attributes.size.width, 0);
+      let combinedText = text_wraps.slice(1).reduce((total:string, current:string) => {
+        //skip first one
+        return combineText(total, current);
+      }, text_wraps[0]);
+      //let combinedText = combineText(left_wrap, right_wrap);
+
+      editModel.attr('text/text', combinedText)
+      editModel.resize(width, max_height);
+      // console.log((height/16) - 1)
+      console.log("new_text", editModel.attributes.attrs.text.text)
+  }
+  else {
+    //just update the single model with the new text and size
+    editModel.attr('text/text', text_wraps[0]);
+    editModel.resize(editModel.attributes.size.width, heights[0]);
+  }
   
-  //hide edit menu
-  editView.style.display = "none";
-}
-
-export function saveDPEdits() {
-  
-  let editView = document.getElementById("edit-DP-container") as HTMLElement;
-
-  // left model edits
-  let lefttext = (document.getElementById("DP-model-left-text") as HTMLTextAreaElement).value;
-  let left_wrap = joint.util.breakText(lefttext, {width: 90})
-  let left_count = (left_wrap.match(/\n/g) || []).length; 
-  let left_height = 16 + 13*(left_count)
-  editModel.attributes.model1.set('attrs', {text: {text: left_wrap}});
-  editModel.attributes.model1.resize(editModel.attributes.model1.attributes.size.width, left_height);
-  console.log(editModel.attributes.model1.attributes.attrs.text.text);
-  
-  // right model edits
-  let righttext = (document.getElementById("DP-model-right-text") as HTMLTextAreaElement).value;
-  let right_wrap = joint.util.breakText(righttext, {width: 90})
-  let right_count = (right_wrap.match(/\n/g) || []).length; 
-  let right_height = 16 + 13*(right_count);
-  editModel.attributes.model2.set('attrs', {text: {text: right_wrap}});
-  editModel.attributes.model2.resize(editModel.attributes.model2.attributes.size.width, right_height);
-  console.log(editModel.attributes.model2.attributes.attrs.text.text);
-
-  //now update actual DP shape
-  let height = Math.max(editModel.attributes.model1.attributes.size.height, editModel.attributes.model2.attributes.size.height);
-  let width = editModel.attributes.model1.attributes.size.width + editModel.attributes.model2.attributes.size.width + 36; //36 should be dependent on font size
-  editModel.resize(width, height);
-  let combinedText = combineText(left_wrap, right_wrap);
-  editModel.set('attrs', {text: {text: combinedText}})
-  console.log(editModel.attributes.attrs.text.text)
-  
-  //hide edit menu
-  editView.style.display = "none";
-
+  const editContainer = $('#edit-container');
+  editContainer.hide();
 }

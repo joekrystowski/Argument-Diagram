@@ -12,8 +12,13 @@ export function addRectTools(element) {
     //edit button
     let editButton = new joint.elementTools.EditButton();
     let combinedPremiseButton = new joint.elementTools.CombinePremiseButton();
+    let rect_tools = [boundaryTool, removeButton, linkButton, editButton];
+    //only add dependent premise tool to argument type, not objection
+    if (element.attributes.type == "argument") {
+        rect_tools.push(combinedPremiseButton);
+    }
     let toolsView = new joint.dia.ToolsView({
-        tools: [boundaryTool, removeButton, linkButton, editButton, combinedPremiseButton]
+        tools: rect_tools
     });
     //element view is in charge of rendering the elements on the paper
     let elementView = element.findView(paper);
@@ -56,7 +61,7 @@ export function addDependentPremiseTools(element) {
     // boundary tool shows boundaries of element
     let boundaryTool = new joint.elementTools.Boundary();
     //remove tool deletes a rect
-    let removeButton = new joint.elementTools.Remove();
+    let removeDependentPremiseButton = new joint.elementTools.RemoveDependentPreimseButton();
     // link button
     let linkButton = new joint.elementTools.LinkButton();
     // dependent premise button
@@ -64,7 +69,7 @@ export function addDependentPremiseTools(element) {
     //the edit button is specific to dependent premise
     let editDependentPremiseButton = new joint.elementTools.EditDependentPremiseButton();
     let toolsView = new joint.dia.ToolsView({
-        tools: [boundaryTool, removeButton, linkButton, editDependentPremiseButton, combinePremiseButton]
+        tools: [boundaryTool, removeDependentPremiseButton, linkButton, editDependentPremiseButton, combinePremiseButton]
     });
     //element view is in charge of rendering the elements on the paper
     let elementView = element.findView(paper);
