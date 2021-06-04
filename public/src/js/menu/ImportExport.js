@@ -1,11 +1,10 @@
 import { graph } from '../graph.js';
-const util = require('util');
 export function importGraph() {
-    console.log('hello');
+    console.log('test');
 }
 export function exportGraph() {
-    const data = util.inspect(graph.toJSON());
-    const filename = "myDiagram.JSON";
+    const data = JSON.stringify(graph.toJSON());
+    const filename = "myDiagram.json";
     const file = new Blob([data], { type: "application/json" });
     if (window.navigator.msSaveOrOpenBlob) { // IE10+
         window.navigator.msSaveOrOpenBlob(file, filename);

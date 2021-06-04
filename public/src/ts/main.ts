@@ -71,4 +71,4 @@ exportButton.addEventListener("click", exportGraph);
 let arg1 = createArgument(100, 100);
 let arg2 = createArgument(300, 100);
 //testing
-let test = createDependentPremise(arg1.rect, arg2.rect);
+//let test = createDependentPremise(arg1.rect, arg2.rect);
