@@ -91,3 +91,7 @@ i {
   color: #bf4e4e;
   border-color: #bf4e4e;
 }
+
+[joint-selector="text"] {
+  background-color: transparent;
+}

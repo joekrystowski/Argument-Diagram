@@ -130,7 +130,11 @@ function createLink(model1, model2) {
     console.log(model1.attributes.link_color);
     //passes in Argument objects
     let link = new joint.shapes.standard.Link();
-    link.source(model1);
+    link.source(model1, {
+        connectionPoint: {
+            name: "boundary"
+        }
+    });
     link.target(model2);
     //link attributes based on arg1/rect1 (source)
     link.attr({

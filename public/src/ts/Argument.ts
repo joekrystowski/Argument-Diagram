@@ -1,3 +1,5 @@
+import { calcHeight } from "./util.js";
+
 /* global joint */
 const joint = window.joint;
 
@@ -87,10 +89,8 @@ export class Argument {
     };
     //creates a string of text, attempting to fit as many characters as possible
     //into a line of size width, before separating with newline character and repeating
-    let text_wrap = joint.util.breakText(
-      " a lot of text a lot of text a lot of text a lot of text a lot of text a lot of text a lot of text",
-      { width: 90 }
-    );
+    //90 is default width
+    let text_wrap = joint.util.breakText(config.text, { width: 90 } );
     // regular expression to find number of lines in text_wrap
     // searching for all instances (g-> global) of \n in text_wrap string
     // if none are found, instead of attempting to read .length of undefined,
@@ -105,7 +105,7 @@ export class Argument {
       },
       size: {
         width: 100,
-        height: 13 * (count + 1),
+        height: calcHeight(count),
       },
       attrs: {
         rect: {
