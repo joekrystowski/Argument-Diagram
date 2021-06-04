@@ -1,16 +1,16 @@
 /* global Argument DependentPremise graph paper addRectTools addDependentPremiseTools color*/
 import { color } from '../colors.js';
 import { addRectTools, addDependentPremiseTools } from '../tools/ManageTools.js';
-import { graph, paper } from '../graph.js';
+import { graph } from '../graph.js';
 import { Argument } from '../Argument.js';
 import { DependentPremise } from '../DependentPremise.js';
 //when new-argument-button is clicked
-export function createArgument() {
+export function createArgument(x, y) {
     //creating new rect (Joint.js object)
-    let new_rect = new Argument({
-        x: 100,
-        y: 100,
-        text: "Test argument",
+    const new_rect = new Argument({
+        x: x,
+        y: y,
+        text: "Argument",
         type: "argument",
         body_color: color.argument.bodyColor,
         text_color: color.argument.textColor,
@@ -23,15 +23,14 @@ export function createArgument() {
     //adds the buttons to each rect
     addRectTools(new_rect.rect);
     return new_rect;
-    let elementView = new_rect.rect.findView(paper);
 }
 //when objection-button is clicked
-export function createObjection() {
+export function createObjection(x, y) {
     //creating new rect (Joint.js object)
-    let new_rect = new Argument({
-        x: 100,
-        y: 100,
-        text: "Test objection",
+    const new_rect = new Argument({
+        x: x,
+        y: y,
+        text: "Objection",
         type: "objection",
         body_color: color.objection.bodyColor,
         text_color: color.objection.textColor,
