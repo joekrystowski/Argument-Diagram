@@ -1,5 +1,4 @@
 import { graph } from '../graph.js'
-//import { inspect } from '../util.js'
 
 export function importGraph() {
     console.log('test');
@@ -7,8 +6,7 @@ export function importGraph() {
 
 export function exportGraph() {
     const data = JSON.stringify(graph.toJSON());
-    console.log(data);
-    const filename = "myDiagram.JSON";
+    const filename = "myDiagram.json";
     const file = new Blob([data], {type: "application/json"});    
     if (window.navigator.msSaveOrOpenBlob) {// IE10+
         window.navigator.msSaveOrOpenBlob(file, filename);
