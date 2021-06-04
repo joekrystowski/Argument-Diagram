@@ -1,13 +1,12 @@
-import { graph, paper } from '../graph.js'
-import util from 'util';
+import { graph } from '../graph.js'
+import { inspect } from '../util.js'
 
 export function importGraph() {
-    console.log('hello');
+    console.log('test');
 }
 
-
 export function exportGraph() {
-    const data = util.inspect(graph.toJSON());
+    const data = inspect(graph.toJSON());
     const filename = "myDiagram.JSON";
     const file = new Blob([data], {type: "application/json"});    
     if (window.navigator.msSaveOrOpenBlob) {// IE10+

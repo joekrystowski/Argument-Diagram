@@ -1,5 +1,8 @@
 import { graph } from '../graph.js';
-import util from 'util';
+const util = require('util');
+export function importGraph() {
+    console.log('hello');
+}
 export function exportGraph() {
     const data = util.inspect(graph.toJSON());
     const filename = "myDiagram.JSON";
@@ -19,7 +22,4 @@ export function exportGraph() {
             window.URL.revokeObjectURL(url);
         }, 0);
     }
-}
-export function importGraph() {
-    console.log('hello');
 }

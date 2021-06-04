@@ -2,7 +2,7 @@
 // const joint = window.joint;
 import { saveEdits } from './menu/SaveEditsButton.js';
 import { createArgument, createObjection, createDependentPremise } from './menu/CreateArguments.js';
-import { exportGraph } from './menu/ImportExport.js';
+import { importGraph, exportGraph } from './menu/ImportExport.js';
 import { Argument } from './Argument.js';
 import { color } from './colors.js';
 import { paper, graph } from './graph.js';
@@ -63,7 +63,10 @@ const editContainer= $('#edit-container');
 editContainer.hide();
 
 const importButton = document.getElementById("import-button") as HTMLElement;
-importButton.addEventListener("click", exportGraph);
+importButton.addEventListener("click", importGraph);
+
+const exportButton = document.getElementById("export-button") as HTMLElement;
+exportButton.addEventListener("click", exportGraph);
 
 let arg1 = createArgument(100, 100);
 let arg2 = createArgument(300, 100);
