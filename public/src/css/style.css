@@ -1,5 +1,10 @@
 :root {
   --save-blue: #5271eb;
+  --header-dark-gray: #353131;
+  --header-hover-gray: #5c5555;
+  --white: #FFFFFF;
+
+  --header-height: 100px;
 }
 
 body, html {
@@ -13,16 +18,105 @@ i {
   margin-right: 5px;
 }
 
-/* !important to override default styling */
+button {
+  border: none;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+/* !important to override default styling
 #myholder {
   height: 100vh !important;
   width: 79.8vw !important;
-  /* background-color: RGB(240,240,240) !important ;/* very light gray */
-}
+  /* background-color: RGB(240,240,240) !important ;/* very light gray 
+} */
 
 #main {
   display: flex;
-  float: right;
+  position: relative;
+}
+
+#header {
+  position: absolute;
+  background-color: var(--header-dark-gray);
+  top: 0px;
+  left: 0px;
+  height: var(--header-height);
+  z-index: 99;
+  transition: height 2s;
+  padding-left: 100px;
+
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+
+.button-dropdown {
+  background-color: inherit;
+  color:var(--white);
+  font-size: 30px;
+}
+
+header .hover-dropdown {
+  background-color: var(--header-dark-gray);
+  height: 100%;
+  width:20%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+header .hover-dropdown:hover {
+  background-color: var(--header-hover-gray);
+}
+
+header .hover-dropdown:hover .dropdown-content {
+  display: flex;
+}
+
+.dropdown-content {
+  background-color: var(--header-dark-gray);
+  color: var(--white);
+  font-size: 1vw;
+  width:100%;
+  position: absolute;
+  top: var(--header-height);
+  padding-top: 1px;
+  display: none;
+  flex-direction: column;
+}
+
+.dropdown-content div {
+  padding: 20px 0px 20px 20px;
+}
+
+.dropdown-content div:hover {
+  background-color: var(--header-hover-gray);
+  cursor: grab;
+}
+
+.button-dropdown i {
+  margin-right: 10px;
+}
+
+#toggleHeaderButton {
+  position: absolute;
+  color: var(--white);
+  background-color: var(--header-gray);
+  padding: 0px;
+  left: 50vw;
+  border: none;
+  bottom: -30px;
+  height: 40px;
+  width: 50px;
+  border-radius: 0 0 60px 60px;
+}
+
+.fill-available {
+  width: 100%;
 }
 
 /* ----- Menu ----- */
@@ -91,3 +185,4 @@ i {
   color: #bf4e4e;
   border-color: #bf4e4e;
 }
+
