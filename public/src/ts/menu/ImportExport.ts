@@ -2,10 +2,19 @@ import { graph } from '../graph.js'
 const joint = window.joint;
 
 export function importGraph(): void {
-    const erase = window.confirm("Erase your current workspace?");
-    console.log(erase);
-    const newGraph = new joint.dia.Graph;
-    //newGraph.fromJSON();
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.onchange = function(e: Event) {
+        const file = (e.target as HTMLInputElement).files![0];
+        const reader = new FileReader();
+        reader.readAsText(file,'UTF-8');
+        reader.onload = readerEvent => {
+            const content = readerEvent.target!.result as string;
+            graph.fromJSON(JSON.parse(content!));
+        }
+    }
+    input.click();
+    //const erase = window.confirm("Erase your current workspace?")
 }
 
 export function exportGraph(): void {
