@@ -45,7 +45,7 @@ button:hover {
   left: 0px;
   height: var(--header-height);
   z-index: 99;
-  transition: height 2s;
+  transition: height 1s;
   padding-left: 100px;
 
   display:flex;
@@ -60,13 +60,22 @@ button:hover {
   font-size: 30px;
 }
 
+#addDropdown {
+  width:25%;
+}
+
 header .hover-dropdown {
   background-color: var(--header-dark-gray);
   height: 100%;
-  width:20%;
   display: flex;
   justify-content: center;
   position: relative;
+}
+
+header .hover-dropdown .wrapper{
+  height: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 header .hover-dropdown:hover {
@@ -90,7 +99,10 @@ header .hover-dropdown:hover .dropdown-content {
 }
 
 .dropdown-content div {
-  padding: 20px 0px 20px 20px;
+  padding: 20px 20px 20px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .dropdown-content div:hover {
@@ -105,7 +117,7 @@ header .hover-dropdown:hover .dropdown-content {
 #toggleHeaderButton {
   position: absolute;
   color: var(--white);
-  background-color: var(--header-gray);
+  background-color: var(--header-dark-gray);
   padding: 0px;
   left: 50vw;
   border: none;

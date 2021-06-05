@@ -50,11 +50,13 @@ function toggleHeader() {
     header.toggleClass('collapsed');
     if (header.hasClass('collapsed')) {
         header.css('height', '0');
+        header.find('.wrapper').hide();
         header.find('i').removeClass('fa-chevron-up');
         header.find('i').addClass('fa-chevron-down');
     }
     else {
         header.css('height', '100px');
+        header.find('.wrapper').show();
         header.find('i').removeClass('fa-chevron-down');
         header.find('i').addClass('fa-chevron-up');
     }

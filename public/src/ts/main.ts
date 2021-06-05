@@ -62,17 +62,19 @@ import { paper, graph } from './graph.js';
 // editContainer.hide();
 
 function toggleHeader() {
-    const header = $('#header');
-    header.toggleClass('collapsed');
-    if(header.hasClass('collapsed')){
-        header.css('height', '0');
-        header.find('i').removeClass('fa-chevron-up');
-        header.find('i').addClass('fa-chevron-down');
+    const button = $('#toggleHeaderButton');
+    button.toggleClass('collapsed');
+    if(button.hasClass('collapsed')){
+        button.css('height', '0');
+        $('#header').find('.wrapper').hide();
+        button.find('i').removeClass('fa-chevron-up');
+        button.find('i').addClass('fa-chevron-down');
     }
     else {
-        header.css('height', '100px');
-        header.find('i').removeClass('fa-chevron-down');
-        header.find('i').addClass('fa-chevron-up');
+        button.css('height', '100px');
+        $('#header').find('.wrapper').show();
+        button.find('i').removeClass('fa-chevron-down');
+        button.find('i').addClass('fa-chevron-up');
     }
 }
 
