@@ -6,13 +6,13 @@ import { Argument } from '../Argument.js'
 import { DependentPremise } from '../DependentPremise.js';
 
 //when new-argument-button is clicked
-export function createArgument(x:number, y:number) {
+export function createArgument(x:number, y:number, props:any={}) {
   //creating new rect (Joint.js object)
   const new_rect = new Argument({
-    x: x,
-    y: y,
-    text: "Argument",
-    type: "argument",
+    x: props.x || x,
+    y: props.y || y,
+    text: (props.attrs ? props.text.text : (props.text || "Argument") ),
+    type: props.type || "argument",
     body_color: color.argument.bodyColor,
     text_color: color.argument.textColor, 
     stroke: color.argument.stroke,
@@ -27,13 +27,13 @@ export function createArgument(x:number, y:number) {
 }
 
 //when objection-button is clicked
-export function createObjection(x:number, y:number) {
+export function createObjection(x:number, y:number, props:any={}) {
   //creating new rect (Joint.js object)
   const new_rect = new Argument({
-    x: x,
-    y: y,
-    text: "Objection",
-    type: "objection",
+    x: props.x || x,
+    y: props.y || y,
+    text: props.attrs.text.text || props.text || "Objection",
+    type: props.type || "objection",
     body_color: color.objection.bodyColor,
     text_color: color.objection.textColor,
     stroke: color.objection.stroke, 
@@ -50,8 +50,8 @@ export function createObjection(x:number, y:number) {
 export function createDependentPremise(rect1: joint.shapes.app.CustomRect, rect2: joint.shapes.app.CustomRect) {
   //creating new rect (Joint.js object)
   let new_dependent_premise = new DependentPremise({
-    rect1: rect1,
-    rect2: rect2,
+    props1: rect1.attributes,
+    props2: rect2.attributes,
     x: 100,
     y: 100,
     text: "A dependent premise",
@@ -68,5 +68,8 @@ export function createDependentPremise(rect1: joint.shapes.app.CustomRect, rect2
   new_dependent_premise.rect.addTo(graph);
   //adds the buttons to each rect
   addDependentPremiseTools(new_dependent_premise.rect);
+
+  console.log(new_dependent_premise);
+
   return new_dependent_premise;
 }
