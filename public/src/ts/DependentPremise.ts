@@ -30,7 +30,7 @@ const DependentPremiseRect = joint.shapes.standard.Rectangle.define(
     link_color: "green",
     weight: "1",
     type: "dependent-premise",
-    models: []
+    props: []
     // ---
   }
 );
@@ -42,8 +42,8 @@ const DependentPremiseRect = joint.shapes.standard.Rectangle.define(
 });
 
 interface DependentPremiseOptions {
-  rect1: joint.shapes.app.CustomRect,
-  rect2: joint.shapes.app.CustomRect,
+  props1: any,
+  props2: any,
   x: number,
   y: number,
   text: string,
@@ -60,37 +60,37 @@ interface DependentPremiseOptions {
 export class DependentPremise {
   rect: joint.shapes.app.DependentPremiseRect
   constructor(config: DependentPremiseOptions) {
-    let rect1 = config.rect1.clone();
-    let rect2 = config.rect2.clone();
+    let props1 = Object.assign({}, config.props1);
+    let props2 = Object.assign({}, config.props2);
 
-    let models: Array<any> = [];
-    if (rect1.attributes.type === "dependent-premise") {
-      models.push(...rect1.attributes.models);
+    let props: Array<any> = [];
+    if (props1.type === "dependent-premise") {
+      props.push(...props1.props);
     }
     else {
-      models.push(rect1);
+      props.push(props1);
     }
-    if (rect2.attributes.type === "dependent-premise") {
-      models.push(...rect2.attributes.models);
+    if (props2.type === "dependent-premise") {
+      props.push(...props2.props);
     }
     else {
-      models.push(rect2);
+      props.push(props2);
     }
 
-    console.log("models", models);
+    console.log("props", props);
 
     //set size
-    let width = rect1.attributes.size.width + rect2.attributes.size.width;
+    let width = props1.size.width + props2.size.width;
     let height = Math.max(
-      rect1.attributes.size.height,
-      rect2.attributes.size.height
+      props1.size.height,
+      props2.size.height
     );
     // set position (average position of two rects)
-    let x = (rect1.attributes.position.x + rect2.attributes.position.x) / 2;
-    let y = (rect1.attributes.position.y + rect2.attributes.position.y) / 2;
+    let x = (props1.position.x + props2.position.x) / 2;
+    let y = (props1.position.y + props2.position.y) / 2;
     //text wrap for both
-    let text_wrap1 = rect1.attributes.attrs.text.text;
-    let text_wrap2 = rect2.attributes.attrs.text.text;
+    let text_wrap1 = props1.attrs.text.text;
+    let text_wrap2 = props2.attrs.text.text;
 
     //generate new text string for display
     let combined_text = combineText(text_wrap1, text_wrap2);
@@ -134,9 +134,9 @@ export class DependentPremise {
       link_color: config.link_color,
       weight: config.weight,
       type: config.type,
-      models: models
+      props: props
     });
-    console.log(this.rect);
+    console.log("NEW DEPENDENT PREMISE", this.rect);
   }
 }
 
