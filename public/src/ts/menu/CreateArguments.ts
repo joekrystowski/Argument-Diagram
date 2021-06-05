@@ -32,7 +32,7 @@ export function createObjection(x:number, y:number, props:any={}) {
   const new_rect = new Argument({
     x: props.x || x,
     y: props.y || y,
-    text: props.attrs.text.text || props.text || "Objection",
+    text: (props.attrs ? props.text.text : (props.text || "Objection") ),
     type: props.type || "objection",
     body_color: color.objection.bodyColor,
     text_color: color.objection.textColor,

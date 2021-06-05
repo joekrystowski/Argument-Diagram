@@ -1,5 +1,6 @@
 import { graph } from '../graph.js';
 const joint = window.joint;
+// not fully working
 export function importGraph() {
     const input = document.createElement('input');
     input.type = 'file';
@@ -16,7 +17,7 @@ export function importGraph() {
     //const erase = window.confirm("Erase your current workspace?")
 }
 export function exportGraph() {
-    const data = JSON.stringify(graph.toJSON());
+    const data = JSON.stringify(graph.toJSON(), null, 2);
     const filename = "myDiagram.json";
     const file = new Blob([data], { type: "application/json" });
     if (window.navigator.msSaveOrOpenBlob) { // IE10+
