@@ -35,7 +35,7 @@ i {
   width: 20.2vw;
 }
 
-#constructor-buttons {
+#menu-buttons {
   display:flex;
   flex-direction: row;
   justify-content: center;
@@ -90,4 +90,8 @@ i {
   background-color: #ff8585;
   color: #bf4e4e;
   border-color: #bf4e4e;
+}
+
+#import-button, #export-button {
+  height:3vw;
 }

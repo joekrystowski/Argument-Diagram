@@ -1,7 +1,11 @@
 import { graph } from '../graph.js'
+const joint = window.joint;
 
-export function importGraph() {
-    console.log('test');
+export function importGraph(): void {
+    const erase = window.confirm("Erase your current workspace?");
+    console.log(erase);
+    const newGraph = new joint.dia.Graph;
+    //newGraph.fromJSON();
 }
 
 export function exportGraph(): void {
