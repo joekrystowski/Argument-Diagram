@@ -4,7 +4,7 @@ export function importGraph() {
     console.log('test');
 }
 
-export function exportGraph() {
+export function exportGraph(): void {
     const data = JSON.stringify(graph.toJSON());
     const filename = "myDiagram.json";
     const file = new Blob([data], {type: "application/json"});    
