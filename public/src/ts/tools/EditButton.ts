@@ -119,9 +119,9 @@ joint.elementTools.EditDependentPremiseButton = joint.elementTools.Button.extend
       const form = $('#edit-form');
       form.empty();
 
-      editModel.attributes.models.forEach((model:Argument['rect'], index:number) => {
+      editModel.attributes.props.forEach((propObj:any, index:number) => {
         form.append(`<label class="menu-text">Edit Argument ${index+1} Text:</label>`);
-        form.append(`<textarea id="model-text-DP-${index}" name="model-text-DP-${index}" rows="8" cols="25">${model.attributes.attrs.text.text}</textarea>`);
+        form.append(`<textarea id="model-text-DP-${index}" name="model-text-DP-${index}" rows="8" cols="25">${propObj.attrs.text.text}</textarea>`);
         form.append('<br/>');
       });
     }  

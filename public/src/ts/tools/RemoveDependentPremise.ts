@@ -49,20 +49,25 @@ joint.elementTools.RemoveDependentPreimseButton = joint.elementTools.Button.exte
       action: function (this:any) {
         let model = this.model;
 
-        model.attributes.props.forEach((props:any) => {
+        let spawn_pos = Object.assign({}, model.attributes.position);
+        const spawn_padding = 10;
+        model.attributes.props.forEach((propObj:any, index:number) => {
           const new_rect = new Argument({
-            x: props.position.x,
-            y: props.position.y,
-            text: props.attrs.text.text,
-            type: props.type,
+            x: spawn_pos.x,
+            y: spawn_pos.y,
+            text: propObj.attrs.text.text,
+            type: propObj.type,
             body_color: color.argument.bodyColor,
             text_color: color.argument.textColor, 
             stroke: color.argument.stroke,
             link_color: color.argument.linkColor,
             weight: "1.0"
           });
+
           new_rect.rect.addTo(graph);
           addRectTools(new_rect.rect);
+
+          spawn_pos.x += propObj.size.width + spawn_padding;
           
         });
 
