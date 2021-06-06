@@ -84,6 +84,9 @@ header .hover-dropdown:hover {
 
 header .hover-dropdown:hover .dropdown-content {
   display: flex;
+  height: 145px ;
+  border-top: 1px solid var(--header-dark-gray);
+
 }
 
 .dropdown-content {
@@ -93,9 +96,11 @@ header .hover-dropdown:hover .dropdown-content {
   width:100%;
   position: absolute;
   top: var(--header-height);
-  padding-top: 1px;
-  display: none;
+  display: flex;
   flex-direction: column;
+  height: 0;
+  transition: height 0.7s;
+  overflow: hidden;
 }
 
 .dropdown-content div {
