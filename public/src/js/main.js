@@ -1,7 +1,7 @@
 /* global joint createDependentPremise */
 // const joint = window.joint;
 import { saveEdits } from './menu/SaveEditsButton.js';
-import { createArgument, createObjection, createDependentPremise } from './menu/CreateArguments.js';
+import { createArgument, createObjection } from './menu/CreateArguments.js';
 // this is built on Joint.js, an open source library. It handles a lot of the
 // fundamental pieces for us on the back end, we have to implement the front end / interface
 // to interact with it
@@ -82,7 +82,9 @@ addDropdown.addEventListener('mouseenter', hoverDropdown.bind(null, addDropdown)
 addDropdown.addEventListener('mouseleave', hoverDropdown.bind(null, addDropdown));
 const toggleHeaderButton = document.getElementById('toggleHeaderButton');
 toggleHeaderButton.addEventListener('click', toggleHeader);
+
 let arg1 = createArgument(100, 100);
 let arg2 = createArgument(300, 100);
 //testing
 let test = createDependentPremise(arg1.rect, arg2.rect);
+

@@ -19,6 +19,7 @@ export function createArgument(x:number, y:number) {
     link_color: color.argument.linkColor,
     weight: "1.0"
   });
+
   //add new rect to the graph for displaying
   new_rect.rect.addTo(graph);
   //adds the buttons to each rect
@@ -40,6 +41,7 @@ export function createObjection(x:number, y:number) {
     link_color: color.objection.linkColor,
     weight: "-1.0"
   });
+  
   new_rect.rect.addTo(graph);
   //adds the buttons to each rect
   addRectTools(new_rect.rect);
@@ -50,8 +52,8 @@ export function createObjection(x:number, y:number) {
 export function createDependentPremise(rect1: joint.shapes.app.CustomRect, rect2: joint.shapes.app.CustomRect) {
   //creating new rect (Joint.js object)
   let new_dependent_premise = new DependentPremise({
-    rect1: rect1,
-    rect2: rect2,
+    props1: rect1.attributes,
+    props2: rect2.attributes,
     x: 100,
     y: 100,
     text: "A dependent premise",
@@ -68,5 +70,6 @@ export function createDependentPremise(rect1: joint.shapes.app.CustomRect, rect2
   new_dependent_premise.rect.addTo(graph);
   //adds the buttons to each rect
   addDependentPremiseTools(new_dependent_premise.rect);
+
   return new_dependent_premise;
 }
