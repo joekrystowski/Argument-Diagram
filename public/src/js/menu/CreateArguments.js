@@ -5,13 +5,13 @@ import { graph } from '../graph.js';
 import { Argument } from '../Argument.js';
 import { DependentPremise } from '../DependentPremise.js';
 //when new-argument-button is clicked
-export function createArgument(x, y, props = {}) {
+export function createArgument(x, y) {
     //creating new rect (Joint.js object)
     const new_rect = new Argument({
-        x: props.x || x,
-        y: props.y || y,
-        text: (props.attrs ? props.text.text : (props.text || "Argument")),
-        type: props.type || "argument",
+        x: x,
+        y: y,
+        text: "Argument",
+        type: "argument",
         body_color: color.argument.bodyColor,
         text_color: color.argument.textColor,
         stroke: color.argument.stroke,
@@ -25,13 +25,13 @@ export function createArgument(x, y, props = {}) {
     return new_rect;
 }
 //when objection-button is clicked
-export function createObjection(x, y, props = {}) {
+export function createObjection(x, y) {
     //creating new rect (Joint.js object)
     const new_rect = new Argument({
-        x: props.x || x,
-        y: props.y || y,
-        text: (props.attrs ? props.text.text : (props.text || "Objection")),
-        type: props.type || "objection",
+        x: x,
+        y: y,
+        text: "Objection",
+        type: "objection",
         body_color: color.objection.bodyColor,
         text_color: color.objection.textColor,
         stroke: color.objection.stroke,
@@ -64,6 +64,5 @@ export function createDependentPremise(rect1, rect2) {
     new_dependent_premise.rect.addTo(graph);
     //adds the buttons to each rect
     addDependentPremiseTools(new_dependent_premise.rect);
-    console.log(new_dependent_premise);
     return new_dependent_premise;
 }
