@@ -119,6 +119,10 @@ header .hover-dropdown:hover .dropdown-content {
   margin-right: 10px;
 }
 
+#toggle-legend{
+  display: flex;
+}
+
 #toggleHeaderButton {
   position: absolute;
   color: var(--white);
@@ -189,17 +193,21 @@ header .hover-dropdown:hover .dropdown-content {
   font-size:1.5vw;
 }
 
-/* #new-argument-button {
-  font-size: 5vh; 
-  background-color: RGB(145, 255, 149);
-  color: RGB(85, 194, 89);
-  border-color: RGB(85, 194, 89);
-} */
+/* header buttons */
 
-#objection-button {
-  font-size: 5vh;
-  background-color: #ff8585;
-  color: #bf4e4e;
-  border-color: #bf4e4e;
+#toggle-legend-button {
+  font-size: 30px;
+  background-color: var(--header-dark-gray);
+  color: var(--white);
+  width: 100%;
+  height: var(--header-height);
+  padding-left: 80px;
+  padding-right: 80px;
+  z-index: 3;
 }
+
+#toggle-legend-button:hover {
+  background-color: var(--header-hover-gray);
+}
+
 
