@@ -1,5 +1,10 @@
 :root {
   --save-blue: #5271eb;
+  --header-dark-gray: #353131;
+  --header-hover-gray: #5c5555;
+  --white: #FFFFFF;
+
+  --header-height: 100px;
 }
 
 body, html {
@@ -13,16 +18,118 @@ i {
   margin-right: 5px;
 }
 
+button {
+  border: none;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
 /* !important to override default styling */
 #myholder {
   height: 100vh !important;
   width: 79.8vw !important;
-  /* background-color: RGB(240,240,240) !important ;/* very light gray */
-}
+} 
 
 #main {
+  position: relative;
+}
+
+#header {
+  position: relative;
+  background-color: var(--header-dark-gray);
+  height: var(--header-height);
+  z-index: 99;
+  transition: height 1s;
+  padding-left: 100px;
+
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#wrapper {
   display: flex;
-  float: right;
+}
+
+.button-dropdown {
+  background-color: inherit;
+  color:var(--white);
+  font-size: 30px;
+}
+
+#addDropdown {
+  width:25%;
+}
+
+header .hover-dropdown {
+  background-color: var(--header-dark-gray);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+header .hover-dropdown .wrapper{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+header .hover-dropdown:hover {
+  background-color: var(--header-hover-gray);
+  cursor: pointer;
+}
+
+header .hover-dropdown:hover .dropdown-content {
+  display: flex;
+}
+
+.dropdown-content {
+  background-color: var(--header-dark-gray);
+  color: var(--white);
+  font-size: 1vw;
+  width:100%;
+  position: absolute;
+  top: var(--header-height);
+  padding-top: 1px;
+  display: none;
+  flex-direction: column;
+}
+
+.dropdown-content div {
+  padding: 20px 20px 20px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dropdown-content div:hover {
+  background-color: var(--header-hover-gray);
+  cursor: grab;
+}
+
+.button-dropdown i {
+  margin-right: 10px;
+}
+
+#toggleHeaderButton {
+  position: absolute;
+  color: var(--white);
+  background-color: var(--header-dark-gray);
+  padding: 0px;
+  left: 50vw;
+  border: none;
+  bottom: -30px;
+  height: 40px;
+  width: 50px;
+  border-radius: 0 0 60px 60px;
+}
+
+.fill-available {
+  /* for some reason doing 100% makes the header wider than the page*/
+  width: 95%;
 }
 
 /* ----- Menu ----- */
@@ -67,7 +174,6 @@ i {
   text-align:center;
   margin: 2vh;
   box-shadow: 7px, 6px, 28px, 1px rgba(0,0,0,0.24);
-  cursor: pointer;
 }
 
 .save-button {
@@ -78,12 +184,12 @@ i {
   font-size:1.5vw;
 }
 
-#new-argument-button {
+/* #new-argument-button {
   font-size: 5vh; 
   background-color: RGB(145, 255, 149);
   color: RGB(85, 194, 89);
   border-color: RGB(85, 194, 89);
-}
+} */
 
 #objection-button {
   font-size: 5vh;
@@ -91,3 +197,4 @@ i {
   color: #bf4e4e;
   border-color: #bf4e4e;
 }
+

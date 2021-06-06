@@ -37,19 +37,31 @@
     
       <!-- content -->
     <div id="main">
-      <div id="menu-container">
-        <div id= "constructor-buttons">
-          <!-- <button class="menu-button" id="new-argument-button" onclick="createArgument()">+</button> -->
-          <button class="menu-button" id="new-argument-button" draggable="true"><i class="fa fa-plus"></i></button>
-          <!-- <button class="menu-button" id="objection-button" onclick="createObjection()">!</button> -->
-          <button class="menu-button" id="objection-button" draggable="true"><i class="fa fa-exclamation"></i></button>
+      <header id="header" class="fill-available">
+        <div id="addDropdown" class="hover-dropdown">
+          <div class="wrapper fill-available">
+            <button class="button-dropdown"><i class="fa fa-plus" style="color: #00FF00;"></i>Add <i class="fa chevron fa-chevron-right"></i></button>
+            <div class="dropdown-content collapsed">
+              <div id="new-argument-button">Argument<img id="new-argument-img" src="src/img/Argument.jpg" width="180" alt="Argument Shape"></div>
+              <div id="new-objection-button">Objection <img id="new-objection-img" src="src/img/Objection.jpg" width="180"alt="Objection Shape"></div>
+            </div>
+          </div>
         </div>
-        <div id="edit-container" class="edit-container">
-          <form id="edit-form"></form>
-          <button id="save-edit-button" class="menu-button save-button"><i class="fa fa-save"></i>Save</button>
+        <button id="toggleHeaderButton"><i class="fa fa-chevron-up fa-2x"></i></button>
+      </header>
+      <div id="wrapper">
+        <div id="menu-container">
+          <div id="edit-container" class="edit-container">
+            <form id="edit-form"></form>
+            <button id="save-edit-button" class="menu-button save-button"><i class="fa fa-save"></i>Save</button>
+          </div>
         </div>
+        <div id="myholder" class="joint-style-default"></div>
       </div>
-      <div id="myholder" class="joint-style-default"></div>
     </div>
   </body>
 </html>
+
+
+<!--
+<div id="myholder" class="joint-style-default"></div> -->
