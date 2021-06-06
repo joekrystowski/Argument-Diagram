@@ -20,59 +20,62 @@ import { paper, graph } from './graph.js';
 // });
 
 // console.log("setup");
-// const newArgumentButton = document.getElementById("new-argument-button") as HTMLElement;
-// newArgumentButton.addEventListener("click", createArgument.bind(null, 100, 100));
-// newArgumentButton.addEventListener("dragstart", (event) => {
-//     event.dataTransfer?.setData('type', 'argument');
-// })
+const newArgumentButton = document.getElementById("new-argument-button") as HTMLElement;
+newArgumentButton.addEventListener("click", createArgument.bind(null, 100, 100));
+newArgumentButton.addEventListener("dragstart", (event) => {
+    event.dataTransfer?.setData('type', 'argument');
+})
 
-// const objectionButton = document.getElementById("objection-button") as HTMLElement;
-// objectionButton.addEventListener("click", createObjection.bind(null, 100, 100));
-// objectionButton.addEventListener("dragstart", (event) => {
-//     event.dataTransfer?.setData('type', 'objection');
-// })
+const objectionButton = document.getElementById("new-objection-button") as HTMLElement;
+objectionButton.addEventListener("click", createObjection.bind(null, 100, 100));
+objectionButton.addEventListener("dragstart", (event) => {
+    event.dataTransfer?.setData('type', 'objection');
+})
 
 // const saveEditButton = document.getElementById("save-edit-button") as HTMLElement;
 // saveEditButton.addEventListener("click",saveEdits);
 
-// const paperContainer = document.getElementById("myholder") as HTMLElement;
-// paperContainer.addEventListener("dragover", (event) => {
-//     event.preventDefault();
-// });
-// paperContainer.addEventListener("drop", (event) => {
-//     const type = event.dataTransfer?.getData('type');
-//     if(type === 'argument') {
-//         createArgument(
-//             event.clientX - paperContainer.getBoundingClientRect().left,
-//             event.clientY - paperContainer.getBoundingClientRect().top
-//         );
-//     }
-//     else if (type === 'objection') {
-//         createObjection(
-//             event.clientX - paperContainer.getBoundingClientRect().left,
-//             event.clientY - paperContainer.getBoundingClientRect().top
-//         );
-//     }
-//     else {
-//         throw new Error("Something went wrong when determining dataTransfer type.");
-//     }
-// })
+const paperContainer = document.getElementById("myholder") as HTMLElement;
+paperContainer.addEventListener("dragover", (event) => {
+    event.preventDefault();
+});
+paperContainer.addEventListener("drop", (event) => {
+    const type = event.dataTransfer?.getData('type');
+    if(type === 'argument') {
+        createArgument(
+            event.clientX - paperContainer.getBoundingClientRect().left,
+            event.clientY - paperContainer.getBoundingClientRect().top
+        );
+    }
+    else if (type === 'objection') {
+        createObjection(
+            event.clientX - paperContainer.getBoundingClientRect().left,
+            event.clientY - paperContainer.getBoundingClientRect().top
+        );
+    }
+    else {
+        throw new Error("Something went wrong when determining dataTransfer type.");
+    }
+})
 
-// const editContainer= $('#edit-container');
-// editContainer.hide();
+const editContainer= $('#edit-container');
+editContainer.hide();
 
 function toggleHeader() {
     const button = $('#toggleHeaderButton');
+    const header = $('#header');
     button.toggleClass('collapsed');
+    console.log(button);
+    console.log(button.find('i'));
     if(button.hasClass('collapsed')){
-        button.css('height', '0');
-        $('#header').find('.wrapper').hide();
+        header.css('height', '0');
+        header.find('.wrapper').hide();
         button.find('i').removeClass('fa-chevron-up');
         button.find('i').addClass('fa-chevron-down');
     }
     else {
-        button.css('height', '100px');
-        $('#header').find('.wrapper').show();
+        header.css('height', '100px');
+        header.find('.wrapper').show();
         button.find('i').removeClass('fa-chevron-down');
         button.find('i').addClass('fa-chevron-up');
     }

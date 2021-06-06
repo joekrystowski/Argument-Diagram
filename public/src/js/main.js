@@ -1,3 +1,4 @@
+import { createArgument, createObjection } from './menu/CreateArguments.js';
 // this is built on Joint.js, an open source library. It handles a lot of the
 // fundamental pieces for us on the back end, we have to implement the front end / interface
 // to interact with it
@@ -9,56 +10,56 @@
 //   gridSize: 1,
 // });
 // console.log("setup");
-// const newArgumentButton = document.getElementById("new-argument-button") as HTMLElement;
-// newArgumentButton.addEventListener("click", createArgument.bind(null, 100, 100));
-// newArgumentButton.addEventListener("dragstart", (event) => {
-//     event.dataTransfer?.setData('type', 'argument');
-// })
-// const objectionButton = document.getElementById("objection-button") as HTMLElement;
-// objectionButton.addEventListener("click", createObjection.bind(null, 100, 100));
-// objectionButton.addEventListener("dragstart", (event) => {
-//     event.dataTransfer?.setData('type', 'objection');
-// })
+const newArgumentButton = document.getElementById("new-argument-button");
+newArgumentButton.addEventListener("click", createArgument.bind(null, 100, 100));
+newArgumentButton.addEventListener("dragstart", (event) => {
+    var _a;
+    (_a = event.dataTransfer) === null || _a === void 0 ? void 0 : _a.setData('type', 'argument');
+});
+const objectionButton = document.getElementById("new-objection-button");
+objectionButton.addEventListener("click", createObjection.bind(null, 100, 100));
+objectionButton.addEventListener("dragstart", (event) => {
+    var _a;
+    (_a = event.dataTransfer) === null || _a === void 0 ? void 0 : _a.setData('type', 'objection');
+});
 // const saveEditButton = document.getElementById("save-edit-button") as HTMLElement;
 // saveEditButton.addEventListener("click",saveEdits);
-// const paperContainer = document.getElementById("myholder") as HTMLElement;
-// paperContainer.addEventListener("dragover", (event) => {
-//     event.preventDefault();
-// });
-// paperContainer.addEventListener("drop", (event) => {
-//     const type = event.dataTransfer?.getData('type');
-//     if(type === 'argument') {
-//         createArgument(
-//             event.clientX - paperContainer.getBoundingClientRect().left,
-//             event.clientY - paperContainer.getBoundingClientRect().top
-//         );
-//     }
-//     else if (type === 'objection') {
-//         createObjection(
-//             event.clientX - paperContainer.getBoundingClientRect().left,
-//             event.clientY - paperContainer.getBoundingClientRect().top
-//         );
-//     }
-//     else {
-//         throw new Error("Something went wrong when determining dataTransfer type.");
-//     }
-// })
-// const editContainer= $('#edit-container');
-// editContainer.hide();
+const paperContainer = document.getElementById("myholder");
+paperContainer.addEventListener("dragover", (event) => {
+    event.preventDefault();
+});
+paperContainer.addEventListener("drop", (event) => {
+    var _a;
+    const type = (_a = event.dataTransfer) === null || _a === void 0 ? void 0 : _a.getData('type');
+    if (type === 'argument') {
+        createArgument(event.clientX - paperContainer.getBoundingClientRect().left, event.clientY - paperContainer.getBoundingClientRect().top);
+    }
+    else if (type === 'objection') {
+        createObjection(event.clientX - paperContainer.getBoundingClientRect().left, event.clientY - paperContainer.getBoundingClientRect().top);
+    }
+    else {
+        throw new Error("Something went wrong when determining dataTransfer type.");
+    }
+});
+const editContainer = $('#edit-container');
+editContainer.hide();
 function toggleHeader() {
+    const button = $('#toggleHeaderButton');
     const header = $('#header');
-    header.toggleClass('collapsed');
-    if (header.hasClass('collapsed')) {
+    button.toggleClass('collapsed');
+    console.log(button);
+    console.log(button.find('i'));
+    if (button.hasClass('collapsed')) {
         header.css('height', '0');
         header.find('.wrapper').hide();
-        header.find('i').removeClass('fa-chevron-up');
-        header.find('i').addClass('fa-chevron-down');
+        button.find('i').removeClass('fa-chevron-up');
+        button.find('i').addClass('fa-chevron-down');
     }
     else {
         header.css('height', '100px');
         header.find('.wrapper').show();
-        header.find('i').removeClass('fa-chevron-down');
-        header.find('i').addClass('fa-chevron-up');
+        button.find('i').removeClass('fa-chevron-down');
+        button.find('i').addClass('fa-chevron-up');
     }
 }
 function hoverDropdown(element) {
@@ -78,7 +79,6 @@ addDropdown.addEventListener('mouseenter', hoverDropdown.bind(null, addDropdown)
 addDropdown.addEventListener('mouseleave', hoverDropdown.bind(null, addDropdown));
 const toggleHeaderButton = document.getElementById('toggleHeaderButton');
 toggleHeaderButton.addEventListener('click', toggleHeader);
-export {};
 // let arg1 = createArgument(100, 100);
 // let arg2 = createArgument(300, 100);
 // //testing
