@@ -71,10 +71,11 @@ header .hover-dropdown {
   position: relative;
 }
 
-header .hover-dropdown .wrapper{
+header .wrapper{
   height: 100%;
   display: flex;
   justify-content: center;
+  overflow: hidden;
 }
 
 header .hover-dropdown:hover {
@@ -200,7 +201,7 @@ header .hover-dropdown:hover .dropdown-content {
   background-color: var(--header-dark-gray);
   color: var(--white);
   width: 100%;
-  height: var(--header-height);
+  height: 100%;
   padding-left: 80px;
   padding-right: 80px;
   z-index: 3;
