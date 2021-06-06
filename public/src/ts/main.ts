@@ -32,8 +32,8 @@ objectionButton.addEventListener("dragstart", (event) => {
     event.dataTransfer?.setData('type', 'objection');
 })
 
-// const saveEditButton = document.getElementById("save-edit-button") as HTMLElement;
-// saveEditButton.addEventListener("click",saveEdits);
+const saveEditButton = document.getElementById("save-edit-button") as HTMLElement;
+saveEditButton.addEventListener("click",saveEdits);
 
 const paperContainer = document.getElementById("myholder") as HTMLElement;
 paperContainer.addEventListener("dragover", (event) => {
@@ -103,7 +103,7 @@ const toggleHeaderButton = document.getElementById('toggleHeaderButton') as HTML
 toggleHeaderButton.addEventListener('click', toggleHeader);
 
 
-// let arg1 = createArgument(100, 100);
-// let arg2 = createArgument(300, 100);
-// //testing
-// let test = createDependentPremise(arg1.rect, arg2.rect);
+let arg1 = createArgument(100, 100);
+let arg2 = createArgument(300, 100);
+//testing
+let test = createDependentPremise(arg1.rect, arg2.rect);
