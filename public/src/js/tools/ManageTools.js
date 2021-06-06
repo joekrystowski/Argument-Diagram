@@ -15,6 +15,7 @@ export function addRectTools(element) {
     let rect_tools = [boundaryTool, removeButton, linkButton, editButton];
     //only add dependent premise tool to argument type, not objection
     if (element.attributes.type == "argument") {
+        console.log("adding dp button");
         rect_tools.push(combinedPremiseButton);
     }
     let toolsView = new joint.dia.ToolsView({
