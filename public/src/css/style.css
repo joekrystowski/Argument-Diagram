@@ -262,7 +262,7 @@ header .hover-dropdown:hover .dropdown-content {
   width: 100vw;
   display: flex;
   flex-direction: column;
-  margin-top: 3rem;
+  margin-top: 4rem;
   background-color: var(--bg);
   transition: display var(--transition-speed);
   display: none;
