@@ -1,6 +1,6 @@
 /* global joint createDependentPremise */
 // const joint = window.joint;
-import { saveEdits } from "./menu/SaveEditsButton.js";
+import { saveEdits, discardEdits } from "./menu/SaveEditsButton.js";
 import {
   createArgument,
   createObjection,
@@ -27,13 +27,16 @@ import { paper, graph } from "./graph.js";
 const argumentImage = new Image();
 argumentImage.src = "src/img/Argument.jpg";
 
-const newArgumentButton = document.getElementById(
-  "new-argument-button"
-) as HTMLElement;
-newArgumentButton.addEventListener(
-  "click",
-  createArgument.bind(null, 100, 100)
-);
+let argCounter = 0; //TODO: temporary until we fix selecting arguments
+
+const newArgumentButton = document.getElementById("new-argument-button") as HTMLElement;
+newArgumentButton.addEventListener("click", () => {
+  createArgument(100+10*argCounter, 100+10*argCounter);
+  ++argCounter;
+  if(argCounter > 29) {
+    argCounter = 0;
+  }
+});
 newArgumentButton.addEventListener("dragstart", (event) => {
   // event.dataTransfer?.setDragImage(argumentImage, argumentImage.naturalWidth/2, argumentImage.naturalHeight/2);
   event.dataTransfer?.setDragImage(argumentImage, 0, 0);
@@ -46,10 +49,10 @@ newArgumentButton.addEventListener("dragstart", (event) => {
 //     event.dataTransfer?.setData('type', 'objection');
 // })
 
-const saveEditButton = document.getElementById(
-  "save-edit-button"
-) as HTMLElement;
+const saveEditButton = document.getElementById("save-edit-button") as HTMLElement;
 saveEditButton.addEventListener("click", saveEdits);
+const exitEditButton = document.getElementById("exit-edit-button") as HTMLElement;
+exitEditButton.addEventListener("click", discardEdits);
 
 const paperContainer = document.getElementById("myholder") as HTMLElement;
 paperContainer.addEventListener("dragover", (event) => {
@@ -115,8 +118,7 @@ paperContainer.addEventListener("drop", (event) => {
 // const toggleHeaderButton = document.getElementById('toggleHeaderButton') as HTMLElement;
 // toggleHeaderButton.addEventListener('click', toggleHeader);
 
-console.log("creatingArguments");
-let arg1 = createArgument(100, 100);
-let arg2 = createArgument(300, 100);
+let arg1 = createArgument(200, 100);
+let arg2 = createArgument(600, 100);
 //testing
 let test = createDependentPremise(arg1.rect, arg2.rect);

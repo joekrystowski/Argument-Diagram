@@ -106,10 +106,23 @@
       <div id="wrapper">
         <div id="menu-container">
           <div id="edit-container" class="edit-container">
+            <div id="edit-top" class="edit-top">
+              <label class="menu-text">Edit Argument Text</label>`
+              <button id="exit-edit-button" class="menu-button exit-button">
+                <i class="fas fa-times"></i></i><span>Cancel</span>
+              </button>
+            </div>
             <form id="edit-form"></form>
-            <button id="save-edit-button" class="menu-button save-button">
-              <i class="fa fa-save"></i><span>Save</span>
-            </button>
+            <div id="edit-bottom" class="edit-bottom">
+              <button id="save-edit-button" class="menu-button save-button">
+                <i class="fa fa-save"></i><span>Save</span>
+              </button>
+              <span class="objection-label">Objection</span>
+              <label class="switch">
+                <input id="objection-switch" type="checkbox">
+                <span class="slider round"></span>
+              </label>
+            </div>
           </div>
         </div>
         <div id="myholder" class="joint-style-default"></div>

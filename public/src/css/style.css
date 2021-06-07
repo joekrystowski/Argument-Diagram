@@ -1,7 +1,7 @@
 :root {
   font-size: 16px;
   --transition-speed: 200ms;
-
+  /* temp colors */
   --accent-pink: #FF6B6B;
   --accent-red: #FF206E;
   --accent-orange: #F49E4C;
@@ -70,7 +70,7 @@ button:hover {
 }
 
 .toolbar-item {
-  margin: 0 0.5rem;
+  margin: 0 1rem;
 }
 .toolbar-item:first-child {
   margin-left: 0;
@@ -108,8 +108,9 @@ button:hover {
 
 
 .argument-rect {
-  fill: var(--accent-green);
-  border-radius: 100rem;
+  fill: var(--accent-gray);
+  /* border-radius: 100rem; */
+  stroke: var(--bg);
 }
 
 .argument-text {
@@ -121,11 +122,51 @@ button:hover {
   padding: 1rem;
 }
 
+.argument-link-rect {
+  font-size: 12px;
+  fill: var(--bg);
+}
+
+.argument-link-text {
+  font-size: 12px;
+  stroke: var(--accent-gray);
+}
+
+.objection-rect {
+  fill: var(--accent-orange);
+  stroke: var(--bg);
+}
+
+.objection-text {
+  width: 100%;
+  height: 100%;
+  font-size: 12px;
+  text-align: center;
+  fill:var(--bg);
+  padding: 1rem;
+}
+
+
+
 .joint-paper-grid {
   background-color: var(--bg);
 }
 
-/* .custom-rect {
+
+.edit-bottom {
+  display: flex;
+  align-items: center;
+}
+
+
+/* .argument-rect {
+  display: flex;
+  width: clamp(45ch, 50%, 75ch);
+  height: 4rem;
+}
+
+.argument-rect-text {
+  fill: var(--accent-red);
   display: flex;
   width: clamp(45ch, 50%, 75ch);
   height: 4rem;
@@ -265,21 +306,22 @@ header .hover-dropdown:hover .dropdown-content {
 }
 
 .menu-text {
-  margin: 0.5rem;
-  font-size:20px;
+  margin: 1rem;
+  font-size:24px;
   color: var(--accent-gray);
 }
 
 .model-text-rect {
-  margin: 0.5rem;
-  height: 5rem;
-  min-height: 2rem;
-  max-height: 12rem;
+  margin: 0 1rem;
+  height: 9rem;
+  min-height: 1.5rem;
+  max-height: 21rem;
   resize: vertical;
 
   border: none;
   background-color: var(--toolbar-bg);
   color: var(--accent-gray);
+  font-size: 1.5rem;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
@@ -290,13 +332,88 @@ header .hover-dropdown:hover .dropdown-content {
   /* height:5rem;
   width:5rem; */
   text-align:center;
-  margin: 0.5rem;
+  margin: 0 1rem;
   
   /* box-shadow: 7px, 6px, 28px, 1px rgba(0,0,0,0.24); */
   /* display: none */
 }
 
-/* ------- Save Button -------- */
+.edit-top {
+  display: flex;
+  align-items: center;
+}
+
+/* ------- Cancel Edits Button -------- */
+.fa-times {
+  position: absolute;
+  margin-right: 60%;
+  z-index: 2;
+  transition: var(--transition-speed);
+}
+.exit-button span {
+  position: absolute;
+  margin-left: 20%;
+  z-index: 2;
+  transition: var(--transition-speed) ;
+}
+
+.exit-button {
+  /* position: absolute; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 2rem;
+  width:6rem;
+  height:2.5rem;
+  font-size: 16px;
+  overflow: hidden;
+  margin-left: auto;
+
+  color: var(--accent-gray);
+  background-color: var(--accent-blue);
+  transition: var(--transition-speed);
+}
+
+.exit-button:after{
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  border-radius: 2rem;
+  height: 100%;
+  background: var(--accent-green);
+  transition: width var(--transition-speed);
+}
+
+.changed.exit-button:after{
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  border-radius: 2rem;
+  height: 100%;
+  background: var(--accent-pink);
+  transition: width var(--transition-speed);
+}
+
+.exit-button:hover{
+  color: var(--bg);
+  background-color: var(--bg);
+}
+.exit-button:hover > .fa-times{
+  margin-right: 0;
+}
+.exit-button:hover > span{
+  margin-left: 200%;
+}
+.exit-button:hover:after{
+  width: 100%;
+}
+
+/* ------- Save Edits Button -------- */
 
 .fa-save {
   position: absolute;
@@ -320,9 +437,9 @@ header .hover-dropdown:hover .dropdown-content {
   background-color: var(--accent-blue);
   border-radius: 2rem;
   color: var(--accent-gray);
-  width:8rem;
-  height:3rem;
-  font-size: 20px;
+  width:6rem;
+  height:2.5rem;
+  font-size: 16px;
   overflow: hidden;
   transition: var(--transition-speed);
 }
@@ -347,7 +464,7 @@ header .hover-dropdown:hover .dropdown-content {
   width: 0;
   border-radius: 2rem;
   height: 100%;
-  background: var(--accent-pink);
+  background: var(--accent-yellow);
   transition: width var(--transition-speed);
 }
 
@@ -364,12 +481,80 @@ header .hover-dropdown:hover .dropdown-content {
 .save-button:hover:after{
   width: 100%;
 }
-.save-button:active:after{
+.save-button:active:hover:after{
   width: 100%;
   background-color: var(--accent-green);
 }
 
-.save-button:focus:after {
+
+/* ------- Objection Edit Button -------- */
+
+.objection-label {
+  margin-left: auto;
+  color: var(--accent-gray);
+  font-size: 16px;
+}
+/* The switch - the box around the slider */
+.switch {
+  margin: 0 1rem;
+  position: relative;
+  display: inline-block;
+  width: 4rem;
+  height: 2rem;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--toolbar-bg);
+  transition: var(--transition-speed);
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1.8rem;
+  width: 1.8rem;
+  left: 0.1rem;
+  bottom: 0.1rem;
+  background-color: var(--accent-gray);
+  transition: var(--transition-speed);
+}
+
+input:checked + .slider {
+  background-color: var(--accent-orange);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 0.1rem var(--accent-orange);
+}
+
+input:checked + .slider:before {
+  transform: translateX(2rem);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 1rem;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* .save-button:focus:after {
   color: var(--bg);
   background-color: var(--accent-green);
 }
@@ -384,7 +569,7 @@ header .hover-dropdown:hover .dropdown-content {
 .save-button:visited:after {
   color: var(--bg);
   background-color: var(--accent-green);
-}
+} */
 
 /* #new-argument-button {
   font-size: 5vh; 

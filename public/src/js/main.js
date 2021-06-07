@@ -1,6 +1,6 @@
 /* global joint createDependentPremise */
 // const joint = window.joint;
-import { saveEdits } from "./menu/SaveEditsButton.js";
+import { saveEdits, discardEdits } from "./menu/SaveEditsButton.js";
 import { createArgument, createObjection, createDependentPremise, } from "./menu/CreateArguments.js";
 // this is built on Joint.js, an open source library. It handles a lot of the
 // fundamental pieces for us on the back end, we have to implement the front end / interface
@@ -15,8 +15,15 @@ import { createArgument, createObjection, createDependentPremise, } from "./menu
 // console.log("setup");
 const argumentImage = new Image();
 argumentImage.src = "src/img/Argument.jpg";
+let argCounter = 0; //TODO: temporary until we fix selecting arguments
 const newArgumentButton = document.getElementById("new-argument-button");
-newArgumentButton.addEventListener("click", createArgument.bind(null, 100, 100));
+newArgumentButton.addEventListener("click", () => {
+    createArgument(100 + 10 * argCounter, 100 + 10 * argCounter);
+    ++argCounter;
+    if (argCounter > 29) {
+        argCounter = 0;
+    }
+});
 newArgumentButton.addEventListener("dragstart", (event) => {
     var _a, _b;
     // event.dataTransfer?.setDragImage(argumentImage, argumentImage.naturalWidth/2, argumentImage.naturalHeight/2);
@@ -30,6 +37,8 @@ newArgumentButton.addEventListener("dragstart", (event) => {
 // })
 const saveEditButton = document.getElementById("save-edit-button");
 saveEditButton.addEventListener("click", saveEdits);
+const exitEditButton = document.getElementById("exit-edit-button");
+exitEditButton.addEventListener("click", discardEdits);
 const paperContainer = document.getElementById("myholder");
 paperContainer.addEventListener("dragover", (event) => {
     event.preventDefault();
@@ -85,8 +94,7 @@ paperContainer.addEventListener("drop", (event) => {
 // addDropdown.addEventListener('mouseleave', hoverDropdown.bind(null, addDropdown));
 // const toggleHeaderButton = document.getElementById('toggleHeaderButton') as HTMLElement;
 // toggleHeaderButton.addEventListener('click', toggleHeader);
-console.log("creatingArguments");
-let arg1 = createArgument(100, 100);
-let arg2 = createArgument(300, 100);
+let arg1 = createArgument(200, 100);
+let arg2 = createArgument(600, 100);
 //testing
 let test = createDependentPremise(arg1.rect, arg2.rect);
