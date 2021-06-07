@@ -5,7 +5,7 @@ import { color } from '../colors.js';
 import { graph } from '../graph.js';
 import { addLinkTools } from './ManageTools.js';
 
-let selected_links:joint.shapes.app.CustomRect[] = [];
+export let selected_links:joint.shapes.app.CustomRect[] = [];
 
 declare module "jointjs" {
   namespace elementTools {

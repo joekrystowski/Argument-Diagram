@@ -206,10 +206,11 @@ header .hover-dropdown {
   position: relative;
 }
 
-header .hover-dropdown .wrapper{
+header .wrapper{
   height: 100%;
   display: flex;
   justify-content: center;
+  overflow: hidden;
 }
 
 header .hover-dropdown:hover {
@@ -252,6 +253,10 @@ header .hover-dropdown:hover .dropdown-content {
 
 .button-dropdown i {
   margin-right: 10px;
+}
+
+#toggle-legend{
+  display: flex;
 }
 
 #toggleHeaderButton {

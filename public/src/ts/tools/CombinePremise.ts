@@ -11,7 +11,7 @@ declare module "jointjs" {
   }
 }
 
-let selected_premises: (joint.shapes.app.DependentPremiseRect | joint.shapes.app.CustomRect)[] = []
+export let selected_premises: (joint.shapes.app.DependentPremiseRect | joint.shapes.app.CustomRect)[] = []
 //custom link tool definition
 joint.elementTools.CombinePremiseButton = joint.elementTools.Button.extend({
   name: "combine-premise-button",

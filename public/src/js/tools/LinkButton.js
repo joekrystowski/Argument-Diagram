@@ -3,7 +3,7 @@ const joint = window.joint;
 import { color } from '../colors.js';
 import { graph } from '../graph.js';
 import { addLinkTools } from './ManageTools.js';
-let selected_links = [];
+export let selected_links = [];
 joint.elementTools.LinkButton = joint.elementTools.Button.extend({
     name: "link-button",
     options: {

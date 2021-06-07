@@ -2,7 +2,7 @@
 const joint = window.joint;
 import { createDependentPremise } from '../menu/CreateArguments.js';
 import { color } from '../colors.js';
-let selected_premises = [];
+export let selected_premises = [];
 //custom link tool definition
 joint.elementTools.CombinePremiseButton = joint.elementTools.Button.extend({
     name: "combine-premise-button",
