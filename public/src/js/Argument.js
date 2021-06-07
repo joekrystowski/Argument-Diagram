@@ -36,6 +36,23 @@ const CustomRect = joint.shapes.standard.Rectangle.define("app.CustomRect", {
     weight: "1",
     type: "none",
 });
+// const CustomRect = joint.shapes.standard.Rectangle.define("app.CustomRect", {
+//   // markup: '<g class="rotatable"><g class="scalable"><rect/></g><text/></g>',
+//   attrs: {
+//     body: {
+//         class: "custom-rect",
+//         rx: 10,
+//         ry: 10,
+//         fill: '#ffffff'
+//       },
+//     label: {
+//       fontSize: 12
+//     },
+//   },
+//   link_color: "black",
+//   weight: "1",
+//   type: "none",
+// });
 Object.assign(joint.shapes, {
     app: {
         CustomRect,

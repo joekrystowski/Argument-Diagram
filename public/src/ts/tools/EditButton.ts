@@ -80,7 +80,6 @@ joint.elementTools.EditButton = joint.elementTools.Button.extend({
       
         let val = elem.val() as string;
         elem.data("oldVal", val);
-
       
         elem.on("propertychange change click keyup input paste", function () {
           let newVal = elem.val();
