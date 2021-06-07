@@ -5,5 +5,8 @@ export let graph = new joint.dia.Graph();
 export let paper = new joint.dia.Paper({
   el: document.getElementById("myholder") as HTMLElement,
   model: graph,
-  gridSize: 1,
+  height: window.innerHeight,
+  gridSize: 10,
+  drawGrid: true,
+  preventContextMenu: false
 });

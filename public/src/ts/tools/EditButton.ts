@@ -53,17 +53,37 @@ joint.elementTools.EditButton = joint.elementTools.Button.extend({
     action: function(this: any) {
       // FILL "edit-container" elements with current model values HERE
       // EDITTING these values when save button is clicked -> SaveEditsButton.js
+      const saveButton = document.getElementById("save-edit-button");
+      saveButton?.classList.remove("changed");
+
       const editView = $('#edit-container');
-      editView.show();
+      editView.show(200);
 
       editModel = this.model;
 
       const form = $('#edit-form');
       form.empty();
 
-      form.append(`<label class="menu-text">Edit Argument Text:</label>`);
-      form.append(`<textarea id="model-text-rect" name="model-text-rect" rows="8" cols="25">${editModel.attributes.attrs.text.text}</textarea>`);
+      form.append(`<label class="menu-text">Edit Argument Text</label>`);
+      form.append(`<textarea id="model-text-rect" name="model-text-rect" class="model-text-rect">${editModel.attributes.attrs.text.text}</textarea>`);
       form.append('<br/>');
+      //TODO: remove loop and replace with object
+      $(".model-text-rect").each(function () {
+        const elem = $(this);
+      
+        let val = elem.val() as string;
+        elem.data("oldVal", val);
+      
+        elem.on("propertychange change click keyup input paste", function () {
+          let newVal = elem.val();
+          if (elem.data("oldVal") != newVal) {
+            saveButton?.classList.add("changed");
+          }
+          if (elem.data("oldVal") === newVal) {
+            saveButton?.classList.remove("changed");
+          }
+        });
+      });
     }  
   }
 });
@@ -109,8 +129,11 @@ joint.elementTools.EditDependentPremiseButton = joint.elementTools.Button.extend
     action: function(this: any) {
       // FILL "edit-container" elements with current model values HERE
       // EDITTING these values when save button is clicked -> SaveEditsButton.js
+      const saveButton = document.getElementById("save-edit-button");
+      saveButton?.classList.remove("changed");
+
       const editView = $('#edit-container');
-      editView.show();
+      editView.show(200);
       
       editModel = this.model;
 
@@ -119,10 +142,28 @@ joint.elementTools.EditDependentPremiseButton = joint.elementTools.Button.extend
       const form = $('#edit-form');
       form.empty();
 
-      editModel.attributes.models.forEach((model:Argument['rect'], index:number) => {
-        form.append(`<label class="menu-text">Edit Argument ${index+1} Text:</label>`);
-        form.append(`<textarea id="model-text-DP-${index}" name="model-text-DP-${index}" rows="8" cols="25">${model.attributes.attrs.text.text}</textarea>`);
+      editModel.attributes.props.forEach((propObj:any, index:number) => {
+        form.append(`<label class="menu-text">Edit Argument ${index+1} Text</label>`);
+        form.append(`<textarea id="model-text-DP-${index}" name="model-text-DP-${index}" class="model-text-rect">${propObj.attrs.text.text}</textarea>`);
         form.append('<br/>');
+      });
+      //TODO: remove loop and replace with objects
+      //fix for dependent premises
+      $(".model-text-rect").each(function () {
+        const elem = $(this);
+      
+        let val = elem.val() as string;
+        elem.data("oldVal", val);
+      
+        elem.on("propertychange change click keyup input paste", function () {
+          let newVal = elem.val();
+          if (elem.data("oldVal") != newVal) {
+            saveButton?.classList.add("changed");
+          }
+          if (elem.data("oldVal") === newVal) {
+            saveButton?.classList.remove("changed");
+          }
+        });
       });
     }  
   }

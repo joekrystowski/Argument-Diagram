@@ -13,24 +13,22 @@ export function saveEdits() {
 
   if(editModel.attributes.type === "dependent-premise") {
     //save new text and adjust size on each model in dependent premise
-    editModel.attributes.models.forEach((model:Argument['rect'], index:number) => {
-      model.attr('text/text', text_wraps[index]);
-      model.resize(model.attributes.size.width, heights[index]);
-      console.log(model.attributes.attrs.text.text);
+    editModel.attributes.props.forEach((propObj:any, index:number) => {
+      propObj.attrs.text.text = text_wraps[index];
+      propObj.size.height = heights[index];
     });
-      let max_height = Math.max(...heights);
-      //the 36 is dependent on font-size!!
-      let width = 36 + editModel.attributes.models.reduce((total:number, model:Argument['rect']) => total + model.attributes.size.width, 0);
-      let combinedText = text_wraps.slice(1).reduce((total:string, current:string) => {
-        //skip first one
-        return combineText(total, current);
-      }, text_wraps[0]);
-      //let combinedText = combineText(left_wrap, right_wrap);
 
-      editModel.attr('text/text', combinedText)
-      editModel.resize(width, max_height);
-      // console.log((height/16) - 1)
-      console.log("new_text", editModel.attributes.attrs.text.text)
+    let max_height = Math.max(...heights);
+    //the 36 is dependent on font-size!!
+    let width = 36 + editModel.attributes.props.reduce((total:number, propObj:any) => total + propObj.size.width, 0);
+    let combinedText = text_wraps.slice(1).reduce((total:string, current:string) => {
+      return combineText(total, current);
+    }, text_wraps[0]);
+
+    editModel.attr('text/text', combinedText)
+    editModel.resize(width, max_height);
+    // console.log((height/16) - 1)
+    console.log("new_text", editModel.attributes.attrs.text.text)
   }
   else {
     //just update the single model with the new text and size
@@ -39,5 +37,5 @@ export function saveEdits() {
   }
   
   const editContainer = $('#edit-container');
-  editContainer.hide();
+  editContainer.hide(200);
 }

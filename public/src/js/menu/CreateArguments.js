@@ -47,8 +47,8 @@ export function createObjection(x, y) {
 export function createDependentPremise(rect1, rect2) {
     //creating new rect (Joint.js object)
     let new_dependent_premise = new DependentPremise({
-        rect1: rect1,
-        rect2: rect2,
+        props1: rect1.attributes,
+        props2: rect2.attributes,
         x: 100,
         y: 100,
         text: "A dependent premise",

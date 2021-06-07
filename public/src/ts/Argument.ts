@@ -16,8 +16,8 @@ declare module "jointjs" {
 const CustomRect = joint.shapes.standard.Rectangle.define("app.CustomRect", {
   markup: '<g class="rotatable"><g class="scalable"><rect/></g><text/></g>',
   attrs: {
-    rect: { fill: "white", stroke: "black", width: 100, height: 100 },
-    text: {
+    rect: { class:"argument-rect", width: 100, height: 100}, //, fill: "white", stroke: "black", width: 100, height: 100 },
+    text: { class:"argument-text",
       "font-size": 12,
       "ref-x": 0.5,
       "ref-y": 0.5,
@@ -29,7 +29,24 @@ const CustomRect = joint.shapes.standard.Rectangle.define("app.CustomRect", {
   link_color: "black",
   weight: "1",
   type: "none",
-});
+}); 
+// const CustomRect = joint.shapes.standard.Rectangle.define("app.CustomRect", {
+//   // markup: '<g class="rotatable"><g class="scalable"><rect/></g><text/></g>',
+//   attrs: {
+//     body: {
+//         class: "custom-rect",
+//         rx: 10,
+//         ry: 10,
+//         fill: '#ffffff'
+//       },
+//     label: {
+//       fontSize: 12
+//     },
+//   },
+//   link_color: "black",
+//   weight: "1",
+//   type: "none",
+// });
 
 // //custom shape declaration
 // joint.shapes.basic.customRect = joint.shapes.basic.Generic.extend({
@@ -109,6 +126,7 @@ export class Argument {
       },
       attrs: {
         rect: {
+          // class: "arg",
           fill: config.body_color,
         },
         text: {

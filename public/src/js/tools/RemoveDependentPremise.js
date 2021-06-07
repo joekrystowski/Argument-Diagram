@@ -1,5 +1,7 @@
 import { graph } from "../graph.js";
 import { addRectTools } from "./ManageTools.js";
+import { Argument } from "../Argument.js";
+import { color } from "../colors.js";
 const joint = window.joint;
 joint.elementTools.RemoveDependentPreimseButton = joint.elementTools.Button.extend({
     name: "remove-dependent-premise-button",
@@ -34,9 +36,23 @@ joint.elementTools.RemoveDependentPreimseButton = joint.elementTools.Button.exte
         //cast this context to any type, not sure what type it would be otherwise
         action: function () {
             let model = this.model;
-            model.attributes.models.forEach((element) => {
-                element.addTo(graph);
-                addRectTools(element);
+            let spawn_pos = Object.assign({}, model.attributes.position);
+            const spawn_padding = 10;
+            model.attributes.props.forEach((propObj, index) => {
+                const new_rect = new Argument({
+                    x: spawn_pos.x,
+                    y: spawn_pos.y,
+                    text: propObj.attrs.text.text,
+                    type: propObj.type,
+                    body_color: color.argument.bodyColor,
+                    text_color: color.argument.textColor,
+                    stroke: color.argument.stroke,
+                    link_color: color.argument.linkColor,
+                    weight: "1.0"
+                });
+                new_rect.rect.addTo(graph);
+                addRectTools(new_rect.rect);
+                spawn_pos.x += propObj.size.width + spawn_padding;
             });
             //remove this dependent premise
             model.remove();
