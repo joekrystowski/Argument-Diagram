@@ -1,11 +1,26 @@
 :root {
-  --save-blue: #5271eb;
+  font-size: 16px;
+  --transition-speed: 200ms;
+
+  --accent-pink: #FF6B6B;
+  --accent-red: #FF206E;
+  --accent-orange: #F49E4C;
+  --accent-yellow: #F5EE9E;
+  --accent-green: #61E786;
+  --accent-blue: #3B8EA5;
+  --accent-violet: #CFB3CD;
+  --accent-gray: #EEF0F2;
+
+  --bg: #222222;
+  --toolbar-bg: #363434;
+
 }
 
 body, html {
   font-family: monospace;
   margin:0px;
   padding:0px;
+  background-color: var(--bg);
 }
 
 i {
@@ -13,39 +28,253 @@ i {
   margin-right: 5px;
 }
 
-/* !important to override default styling */
-#myholder {
-  height: 100vh !important;
-  width: 79.8vw !important;
-  /* background-color: RGB(240,240,240) !important ;/* very light gray */
+header i {
+  color: lightgray;
 }
 
-#main {
-  display: flex;
-  float: right;
+button {
+  border: none;
 }
+
+button:hover {
+  cursor: pointer;
+}
+
+/* !important to override default styling */
+#myholder {
+  height: calc(100vh - 3rem) !important;
+  width: 100vw !important;
+  margin-top: 3rem;
+} 
+
+#main {
+  position: relative;
+}
+
+.toolbar {
+  width: 100vw;
+  height: 4rem;
+  top: 0;
+  z-index: 5;
+  position: fixed;
+  background-color: var(--toolbar-bg);
+}
+
+.toolbar-list {
+  width: 100%;
+  height: 100%;
+
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  justify-content: center;
+}
+
+.toolbar-item {
+  margin: 0 0.5rem;
+}
+.toolbar-item:first-child {
+  margin-left: 0;
+}
+.toolbar-item:last-child {
+  margin-left: auto;
+  margin-right: 0 !important;
+}
+
+
+.toolbar-button {
+  height: 100%;
+  padding: 0.2rem;
+  margin: 0;
+  background-color: transparent;
+
+  display: flex;
+  align-items: center;
+  filter: opacity(0.75);
+  transition: var(--transition-speed);
+
+  color: lightgray;
+  font-size: 20px;
+}
+
+.toolbar-button:hover {
+  filter: opacity(1);
+}
+
+.toolbar-button svg{
+  /* min-height: 2rem; */
+
+  fill: var(--accent-gray);
+}
+
+
+
+.objection-rect {
+  fill: var(--accent-red);
+  stroke: black;
+}
+
+.argument-rect {
+  /*fill: var(--accent-green); */
+  border-radius: 100rem;
+  stroke: black;
+}
+
+.argument-text {
+  width: 100%;
+  height: 100%;
+  font-size: 12px;
+  text-align: center;
+  fill:var(--bg);
+  padding: 1rem;
+}
+
+.joint-paper-grid {
+  /* background-color: var(--bg);*/
+}
+
+/* .custom-rect {
+  display: flex;
+  width: clamp(45ch, 50%, 75ch);
+  height: 4rem;
+} */
+/* #header {
+  position: relative;
+  background-color: var(--header-dark-gray);
+  height: var(--header-height);
+  z-index: 99;
+  transition: height 1s;
+  padding-left: 100px;
+
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#wrapper {
+  display: flex;
+}
+
+.button-dropdown {
+  background-color: inherit;
+  color:var(--white);
+  font-size: 30px;
+}
+
+#addDropdown {
+  width:25%;
+}
+
+header .hover-dropdown {
+  background-color: var(--header-dark-gray);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+header .wrapper{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+header .hover-dropdown:hover {
+  background-color: var(--header-hover-gray);
+  cursor: pointer;
+}
+
+header .hover-dropdown:hover .dropdown-content {
+  display: flex;
+  height: 145px ;
+  border-top: 1px solid var(--header-dark-gray);
+
+}
+
+.dropdown-content {
+  background-color: var(--header-dark-gray);
+  color: var(--white);
+  font-size: 1vw;
+  width:100%;
+  position: absolute;
+  top: var(--header-height);
+  display: flex;
+  flex-direction: column;
+  height: 0;
+  transition: height 0.7s;
+  overflow: hidden;
+}
+
+.dropdown-content div {
+  padding: 20px 20px 20px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dropdown-content div:hover {
+  background-color: var(--header-hover-gray);
+  cursor: grab;
+}
+
+.button-dropdown i {
+  margin-right: 10px;
+}
+
+#toggle-legend{
+  display: flex;
+}
+
+#toggleHeaderButton {
+  position: absolute;
+  color: var(--white);
+  background-color: var(--header-dark-gray);
+  padding: 0px;
+  left: 50vw;
+  border: none;
+  bottom: -30px;
+  height: 40px;
+  width: 50px;
+  border-radius: 0 0 60px 60px;
+}
+
+.fill-available {
+  /* for some reason doing 100% makes the header wider than the page*/
+  /* width: 95%; */
+/* } */
 
 /* ----- Menu ----- */
 
-#menu-container {
+/* #menu-container {
   display: flex;
   flex-direction: column;
   background-color: #f2f2f2;
   border-right: 1px solid black;
   width: 20.2vw;
-}
+} */
 
+<<<<<<< HEAD
 #menu-buttons {
+=======
+/* #constructor-buttons {
+>>>>>>> 907a4b0cf01a5c3a9ba6d7a8d1315881615b75b3
   display:flex;
   flex-direction: row;
   justify-content: center;
-}
+} */
+
 
 #edit-container {
-  display:flex;
+  width: 100vw;
+  display: flex;
   flex-direction: column;
-  align-items:center;
-  padding: 10px;
+  margin-top: 4rem;
+  background-color: var(--bg);
+  transition: display var(--transition-speed);
+  display: none;
 }
 
 #edit-form {
@@ -55,22 +284,54 @@ i {
 }
 
 .menu-text {
+  margin: 0.5rem;
   font-size:20px;
+  color: var(--accent-gray);
+}
+
+.model-text-rect {
+  margin: 0.5rem;
+  height: 5rem;
+  min-height: 2rem;
+  max-height: 12rem;
+  resize: vertical;
+
+  border: none;
+  background-color: var(--toolbar-bg);
+  color: var(--accent-gray);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 /* ------- Buttons -------- */
 
 .menu-button {
-  border-radius: 10px;
-  height:5vw;
-  width:5vw;
+  
+  /* height:5rem;
+  width:5rem; */
   text-align:center;
-  margin: 2vh;
-  box-shadow: 7px, 6px, 28px, 1px rgba(0,0,0,0.24);
-  cursor: pointer;
+  margin: 0.5rem;
+  
+  /* box-shadow: 7px, 6px, 28px, 1px rgba(0,0,0,0.24); */
+  /* display: none */
+}
+
+/* ------- Save Button -------- */
+
+.fa-save {
+  position: absolute;
+  margin-right: 50%;
+  z-index: 2;
+  transition: var(--transition-speed);
+}
+.save-button span {
+  position: absolute;
+  margin-left: 20%;
+  z-index: 2;
+  transition: var(--transition-speed) ;
 }
 
 .save-button {
+<<<<<<< HEAD
   background-color: var(--save-blue);
   color: white;
   width:120px;
@@ -95,3 +356,99 @@ i {
 #import-button, #export-button {
   height:3vw;
 }
+=======
+  /* position: absolute; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: var(--accent-blue);
+  border-radius: 2rem;
+  color: var(--accent-gray);
+  width:8rem;
+  height:3rem;
+  font-size: 20px;
+  overflow: hidden;
+  transition: var(--transition-speed);
+}
+
+.save-button:after{
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  border-radius: 2rem;
+  height: 100%;
+  background: var(--accent-blue);
+  transition: width var(--transition-speed);
+}
+
+.changed.save-button:after{
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  border-radius: 2rem;
+  height: 100%;
+  background: var(--accent-green);
+  transition: width var(--transition-speed);
+}
+
+.save-button:hover{
+  color: var(--bg);
+  background-color: var(--bg);
+}
+.save-button:hover > .fa-save{
+  margin-right: 0;
+}
+.save-button:hover > span{
+  margin-left: 200%;
+}
+.save-button:hover:after{
+  width: 100%;
+}
+.save-button:active:after{
+  width: 100%;
+  background-color: var(--accent-green);
+}
+
+.save-button:focus:after {
+  color: var(--bg);
+  background-color: var(--accent-green);
+}
+.save-button:focus {
+  color: var(--bg);
+  background-color: var(--accent-green);
+}
+.save-button:visited {
+  color: var(--bg);
+  background-color: var(--accent-green);
+}
+.save-button:visited:after {
+  color: var(--bg);
+  background-color: var(--accent-green);
+}
+
+/* header buttons */
+
+#toggle-legend-button {
+  font-size: 30px;
+  background-color: var(--header-dark-gray);
+  color: var(--white);
+  width: 100%;
+  height: 100%;
+  padding-left: 80px;
+  padding-right: 80px;
+  z-index: 3;
+}
+@media screen and (max-width: 28rem) {
+  .toolbar-item:not(:first-child) {
+    display: none;
+  }
+  .toolbar-item:last-child {
+    display: initial;
+  }
+}
+>>>>>>> 907a4b0cf01a5c3a9ba6d7a8d1315881615b75b3

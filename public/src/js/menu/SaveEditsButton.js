@@ -31,5 +31,5 @@ export function saveEdits() {
         editModel.resize(editModel.attributes.size.width, heights[0]);
     }
     const editContainer = $('#edit-container');
-    editContainer.hide();
+    editContainer.hide(200);
 }
