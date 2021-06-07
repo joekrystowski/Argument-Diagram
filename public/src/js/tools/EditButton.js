@@ -114,13 +114,8 @@ joint.elementTools.EditDependentPremiseButton = joint.elementTools.Button.extend
             const form = $('#edit-form');
             form.empty();
             editModel.attributes.props.forEach((propObj, index) => {
-<<<<<<< HEAD
-                form.append(`<label class="menu-text">Edit Argument ${index + 1} Text:</label>`);
-                form.append(`<textarea id="model-text-DP-${index}" name="model-text-DP-${index}" rows="8" cols="25">${propObj.attrs.text.text}</textarea>`);
-=======
                 form.append(`<label class="menu-text">Edit Argument ${index + 1} Text</label>`);
                 form.append(`<textarea id="model-text-DP-${index}" name="model-text-DP-${index}" class="model-text-rect">${propObj.attrs.text.text}</textarea>`);
->>>>>>> 907a4b0cf01a5c3a9ba6d7a8d1315881615b75b3
                 form.append('<br/>');
             });
             //TODO: remove loop and replace with objects

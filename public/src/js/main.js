@@ -1,13 +1,8 @@
 /* global joint createDependentPremise */
 // const joint = window.joint;
-<<<<<<< HEAD
-import { saveEdits } from './menu/SaveEditsButton.js';
-import { createArgument, createObjection } from './menu/CreateArguments.js';
-import { importGraph, exportGraph } from './menu/ImportExport.js';
-=======
 import { saveEdits } from "./menu/SaveEditsButton.js";
-import { createArgument, createObjection, createDependentPremise, } from "./menu/CreateArguments.js";
->>>>>>> 907a4b0cf01a5c3a9ba6d7a8d1315881615b75b3
+import { createArgument, createObjection, } from "./menu/CreateArguments.js";
+import { importGraph, exportGraph } from "./menu/ImportExport.js";
 // this is built on Joint.js, an open source library. It handles a lot of the
 // fundamental pieces for us on the back end, we have to implement the front end / interface
 // to interact with it
@@ -55,14 +50,6 @@ paperContainer.addEventListener("drop", (event) => {
         throw new Error("Something went wrong when determining dataTransfer type.");
     }
 });
-<<<<<<< HEAD
-const editContainer = $('#edit-container');
-editContainer.hide();
-const importButton = document.getElementById("import-button");
-importButton.addEventListener("click", importGraph);
-const exportButton = document.getElementById("export-button");
-exportButton.addEventListener("click", exportGraph);
-=======
 // const editContainer= $('#edit-container');
 // editContainer.hide();
 // function toggleHeader() {
@@ -96,13 +83,16 @@ exportButton.addEventListener("click", exportGraph);
 //         $(element).find('i.chevron').addClass('fa-chevron-down');
 //     }
 // }
+const importButton = document.getElementById("import-button");
+importButton.addEventListener("click", importGraph);
+const exportButton = document.getElementById("export-button");
+exportButton.addEventListener("click", exportGraph);
 // const addDropdown = document.getElementById('addDropdown') as HTMLElement;
 // addDropdown.addEventListener('mouseenter', hoverDropdown.bind(null, addDropdown));
 // addDropdown.addEventListener('mouseleave', hoverDropdown.bind(null, addDropdown));
 // const toggleHeaderButton = document.getElementById('toggleHeaderButton') as HTMLElement;
 // toggleHeaderButton.addEventListener('click', toggleHeader);
 console.log("creatingArguments");
->>>>>>> 907a4b0cf01a5c3a9ba6d7a8d1315881615b75b3
 let arg1 = createArgument(100, 100);
 let arg2 = createArgument(300, 100);
 //testing

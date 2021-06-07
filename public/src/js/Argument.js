@@ -5,10 +5,6 @@ const CustomRect = joint.shapes.standard.Rectangle.define("app.CustomRect", {
     markup: '<g class="rotatable"><g class="scalable"><rect/></g><text/></g>',
     attrs: {
         rect: { class: "argument-rect", width: 100, height: 100 },
-        body: {
-            rx: 10,
-            ry: 10
-        },
         text: { class: "argument-text",
             "font-size": 12,
             "ref-x": 0.5,
