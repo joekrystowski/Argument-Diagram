@@ -27,24 +27,21 @@ import { paper, graph } from "./graph.js";
 const argumentImage = new Image();
 argumentImage.src = "src/img/Argument.jpg";
 
-const newArgumentButton = document.getElementById(
-  "new-argument-button"
-) as HTMLElement;
-newArgumentButton.addEventListener(
-  "click",
-  createArgument.bind(null, 100, 100)
-);
+const newArgumentButton = document.getElementById("new-argument-button") as HTMLElement;
+newArgumentButton.addEventListener("click",createArgument.bind(null, 100, 100));
+
 newArgumentButton.addEventListener("dragstart", (event) => {
   // event.dataTransfer?.setDragImage(argumentImage, argumentImage.naturalWidth/2, argumentImage.naturalHeight/2);
   event.dataTransfer?.setDragImage(argumentImage, 0, 0);
   event.dataTransfer?.setData("type", "argument");
 });
 
-// const objectionButton = document.getElementById("new-objection-button") as HTMLElement;
-// objectionButton.addEventListener("click", createObjection.bind(null, 100, 100));
-// objectionButton.addEventListener("dragstart", (event) => {
-//     event.dataTransfer?.setData('type', 'objection');
-// })
+const objectionButton = document.getElementById("new-objection-button") as HTMLElement;
+objectionButton.addEventListener("click", createObjection.bind(null, 100, 100));
+  objectionButton.addEventListener("dragstart", (event) => {
+    event.dataTransfer?.setDragImage(argumentImage, 0, 0)
+    event.dataTransfer?.setData('type', 'objection');
+})
 
 const saveEditButton = document.getElementById(
   "save-edit-button"

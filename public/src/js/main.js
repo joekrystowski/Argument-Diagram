@@ -23,11 +23,13 @@ newArgumentButton.addEventListener("dragstart", (event) => {
     (_a = event.dataTransfer) === null || _a === void 0 ? void 0 : _a.setDragImage(argumentImage, 0, 0);
     (_b = event.dataTransfer) === null || _b === void 0 ? void 0 : _b.setData("type", "argument");
 });
-// const objectionButton = document.getElementById("new-objection-button") as HTMLElement;
-// objectionButton.addEventListener("click", createObjection.bind(null, 100, 100));
-// objectionButton.addEventListener("dragstart", (event) => {
-//     event.dataTransfer?.setData('type', 'objection');
-// })
+const objectionButton = document.getElementById("new-objection-button");
+objectionButton.addEventListener("click", createObjection.bind(null, 100, 100));
+objectionButton.addEventListener("dragstart", (event) => {
+    var _a, _b;
+    (_a = event.dataTransfer) === null || _a === void 0 ? void 0 : _a.setDragImage(argumentImage, 0, 0);
+    (_b = event.dataTransfer) === null || _b === void 0 ? void 0 : _b.setData('type', 'objection');
+});
 const saveEditButton = document.getElementById("save-edit-button");
 saveEditButton.addEventListener("click", saveEdits);
 const paperContainer = document.getElementById("myholder");
