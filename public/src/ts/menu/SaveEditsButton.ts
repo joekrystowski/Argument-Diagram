@@ -37,5 +37,5 @@ export function saveEdits() {
   }
   
   const editContainer = $('#edit-container');
-  editContainer.hide();
+  editContainer.hide(200);
 }
