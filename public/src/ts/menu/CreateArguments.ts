@@ -1,4 +1,6 @@
 /* global Argument DependentPremise graph paper addRectTools addDependentPremiseTools color*/
+const joint = window.joint;
+
 import { color } from '../colors.js';
 import { addRectTools, addDependentPremiseTools } from '../tools/ManageTools.js';
 import { graph, paper } from '../graph.js'
@@ -51,6 +53,12 @@ export function createObjection(x:number, y:number) {
 // When DependentPremise is made
 export function createDependentPremise(rect1: joint.shapes.app.CustomRect, rect2: joint.shapes.app.CustomRect) {
   //creating new rect (Joint.js object)
+  //remove highlights from rect1 and rect2
+  let modelView1 = rect1.findView(paper)
+  joint.dia.HighlighterView.remove(modelView1, 'dp-highlight')
+  let modelView2 = rect2.findView(paper)
+  joint.dia.HighlighterView.remove(modelView2, 'dp-highlight')
+
   let new_dependent_premise = new DependentPremise({
     props1: rect1.attributes,
     props2: rect2.attributes,

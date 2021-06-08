@@ -2,7 +2,7 @@
 const joint = window.joint;
 
 import { color } from '../colors.js';
-import { graph } from '../graph.js';
+import { graph, paper } from '../graph.js';
 import { addLinkTools } from './ManageTools.js';
 
 export let selected_links:joint.shapes.app.CustomRect[] = [];
@@ -46,12 +46,25 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
     },
     rotate: true,
     action: function(this: any){
+      let elementView = this.model.findView(paper);
       // this is where the actual function of the button goes (onclick event basically)
       console.log('linking mode active')
       //linking mode active
       selected_links.push(this.model);
       console.log(this.model.id);
       console.log("currently selected: " + selected_links)
+      //add highlight
+      joint.highlighters.mask.add(elementView, { selector: 'root' }, 'link-highlight', {
+        padding: 5,
+        layer: "back",
+
+        attrs: {
+            'stroke': '#6696ff',
+            'stroke-opacity': 1,
+            'stroke-width': 3,
+        }
+      });
+
       if (selected_links.length === 2) {
         console.log("length of 2")
         //check if two models are the same model
@@ -171,4 +184,10 @@ function createLink(model1:joint.shapes.app.CustomRect, model2:joint.shapes.app.
   console.log(link);
   link.addTo(graph);
   addLinkTools(link);
+
+  //remove highlights from models
+  let linkView1 = model1.findView(paper);
+  joint.dia.HighlighterView.remove(linkView1, 'link-highlight')
+  let linkView2 = model2.findView(paper);
+  joint.dia.HighlighterView.remove(linkView2, 'link-highlight')
 }
