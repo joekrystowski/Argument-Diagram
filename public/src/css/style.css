@@ -299,11 +299,7 @@ header .hover-dropdown:hover .dropdown-content {
   width: 20.2vw;
 } */
 
-<<<<<<< HEAD
-#menu-buttons {
-=======
 /* #constructor-buttons {
->>>>>>> b4298f420ad48fdae75705ca17d02e9ca3e3be01
   display:flex;
   flex-direction: row;
   justify-content: center;
@@ -604,13 +600,6 @@ input:checked + .slider:before {
   background-color: #ff8585;
   color: #bf4e4e;
   border-color: #bf4e4e;
-<<<<<<< HEAD
-}
-
-#import-button, #export-button {
-  height:3vw;
-}
-=======
 } */
 
 @media screen and (max-width: 28rem) {
@@ -621,4 +610,3 @@ input:checked + .slider:before {
     display: initial;
   }
 }
->>>>>>> b4298f420ad48fdae75705ca17d02e9ca3e3be01
