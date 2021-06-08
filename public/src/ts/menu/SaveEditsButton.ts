@@ -31,11 +31,32 @@ export function saveEdits() {
     console.log("new_text", editModel.attributes.attrs.text.text)
   }
   else {
+    const objectionSwitch = document.getElementById("objection-switch") as HTMLInputElement;
+    if(editModel.attributes.type === "argument" && objectionSwitch.checked) {
+      editModel.attributes.type = "objection";
+      editModel.attr("text/class","objection-text");
+      editModel.attr("rect/class","objection-rect");
+    }
+    else if(editModel.attributes.type === "objection" && !objectionSwitch.checked) {
+      editModel.attributes.type = "argument";
+      editModel.attr("text/class","argument-text");
+      editModel.attr("rect/class","argument-rect");
+    }
+
     //just update the single model with the new text and size
     editModel.attr('text/text', text_wraps[0]);
     editModel.resize(editModel.attributes.size.width, heights[0]);
   }
   
+  const saveButton = document.getElementById("save-edit-button");
+  saveButton?.classList.remove("changed");
+
+  const editContainer = $('#edit-container');
+  editContainer.hide(200);
+}
+
+
+export function discardEdits() {
   const editContainer = $('#edit-container');
   editContainer.hide(200);
 }

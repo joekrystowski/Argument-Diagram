@@ -25,7 +25,7 @@ joint.elementTools.EditButton = joint.elementTools.Button.extend({
       selector: "button",
       attributes: {
         'r': 7,
-        'fill': "#f2f2f2",
+        'fill': "#F5EE9E",
         'cursor': "pointer",
         'outline': 'black',
       }
@@ -53,18 +53,29 @@ joint.elementTools.EditButton = joint.elementTools.Button.extend({
     action: function(this: any) {
       // FILL "edit-container" elements with current model values HERE
       // EDITTING these values when save button is clicked -> SaveEditsButton.js
+      const exitButton = document.getElementById("exit-edit-button");
+      exitButton?.classList.remove("changed");
       const saveButton = document.getElementById("save-edit-button");
       saveButton?.classList.remove("changed");
+      
+      editModel = this.model;
+
+      const objectionSwitch = document.getElementById("objection-switch") as HTMLInputElement;
+      objectionSwitch.checked = editModel.attributes.type === "objection";
+      const objectionLabel = document.getElementById("objection-label") as HTMLInputElement;
+      const switchLabel = document.getElementById("switch-label") as HTMLInputElement;
+      objectionLabel.style.visibility = "visible";
+      switchLabel.style.visibility = "visible";
 
       const editView = $('#edit-container');
       editView.show(200);
 
-      editModel = this.model;
+      
 
       const form = $('#edit-form');
       form.empty();
 
-      form.append(`<label class="menu-text">Edit Argument Text</label>`);
+      // form.append(`<label class="menu-text">Edit Argument Text</label>`);
       form.append(`<textarea id="model-text-rect" name="model-text-rect" class="model-text-rect">${editModel.attributes.attrs.text.text}</textarea>`);
       form.append('<br/>');
       //TODO: remove loop and replace with object
@@ -77,9 +88,11 @@ joint.elementTools.EditButton = joint.elementTools.Button.extend({
         elem.on("propertychange change click keyup input paste", function () {
           let newVal = elem.val();
           if (elem.data("oldVal") != newVal) {
+            exitButton?.classList.add("changed");
             saveButton?.classList.add("changed");
           }
           if (elem.data("oldVal") === newVal) {
+            exitButton?.classList.remove("changed");
             saveButton?.classList.remove("changed");
           }
         });
@@ -102,7 +115,7 @@ joint.elementTools.EditDependentPremiseButton = joint.elementTools.Button.extend
       selector: "button",
       attributes: {
         'r': 7,
-        'fill': "#f2f2f2",
+        'fill': "#F5EE9E",
         'cursor': "pointer",
         'outline': 'black',
       }
@@ -129,8 +142,14 @@ joint.elementTools.EditDependentPremiseButton = joint.elementTools.Button.extend
     action: function(this: any) {
       // FILL "edit-container" elements with current model values HERE
       // EDITTING these values when save button is clicked -> SaveEditsButton.js
+      const exitButton = document.getElementById("exit-edit-button");
+      exitButton?.classList.remove("changed");
       const saveButton = document.getElementById("save-edit-button");
       saveButton?.classList.remove("changed");
+      const objectionLabel = document.getElementById("objection-label") as HTMLInputElement;
+      const switchLabel = document.getElementById("switch-label") as HTMLInputElement;
+      objectionLabel.style.visibility = "hidden";
+      switchLabel.style.visibility = "hidden";
 
       const editView = $('#edit-container');
       editView.show(200);
@@ -158,9 +177,11 @@ joint.elementTools.EditDependentPremiseButton = joint.elementTools.Button.extend
         elem.on("propertychange change click keyup input paste", function () {
           let newVal = elem.val();
           if (elem.data("oldVal") != newVal) {
+            exitButton?.classList.add("changed");
             saveButton?.classList.add("changed");
           }
           if (elem.data("oldVal") === newVal) {
+            exitButton?.classList.remove("changed");
             saveButton?.classList.remove("changed");
           }
         });
