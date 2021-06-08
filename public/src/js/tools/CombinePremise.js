@@ -22,7 +22,7 @@ joint.elementTools.CombinePremiseButton = joint.elementTools.Button.extend({
                     //genuinely no idea what this is called but I used it to draw the arrow on the button
                     'd': 'M -4 -1 0 4 M 0 4 4 -1 M 0 4 0 -4',
                     'fill': 'none',
-                    'stroke': '#FFFFFF',
+                    'stroke': '#EEF0F2',
                     'stroke-width': 2,
                     'pointer-events': 'none'
                 }
