@@ -44,6 +44,10 @@ joint.elementTools.EditButton = joint.elementTools.Button.extend({
             editModel = this.model;
             const objectionSwitch = document.getElementById("objection-switch");
             objectionSwitch.checked = editModel.attributes.type === "objection";
+            const objectionLabel = document.getElementById("objection-label");
+            const switchLabel = document.getElementById("switch-label");
+            objectionLabel.style.visibility = "visible";
+            switchLabel.style.visibility = "visible";
             const editView = $('#edit-container');
             editView.show(200);
             const form = $('#edit-form');
@@ -115,6 +119,10 @@ joint.elementTools.EditDependentPremiseButton = joint.elementTools.Button.extend
             exitButton === null || exitButton === void 0 ? void 0 : exitButton.classList.remove("changed");
             const saveButton = document.getElementById("save-edit-button");
             saveButton === null || saveButton === void 0 ? void 0 : saveButton.classList.remove("changed");
+            const objectionLabel = document.getElementById("objection-label");
+            const switchLabel = document.getElementById("switch-label");
+            objectionLabel.style.visibility = "hidden";
+            switchLabel.style.visibility = "hidden";
             const editView = $('#edit-container');
             editView.show(200);
             editModel = this.model;
