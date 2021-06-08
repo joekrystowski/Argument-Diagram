@@ -1,11 +1,27 @@
 :root {
-  --save-blue: #5271eb;
+  font-size: 16px;
+  --transition-speed: 200ms;
+  /* temp colors */
+  --accent-pink: #FF6B6B;
+  --accent-red: #FF206E;
+  --accent-orange: #F49E4C;
+  --accent-yellow: #F5EE9E;
+  --accent-green: #61E786;
+  --accent-blue: #3B8EA5;
+  --accent-violet: #CFB3CD;
+  --accent-gray: #EEF0F2;
+
+  --bg: #222222;
+  --toolbar-bg: #363434;
+
 }
 
 body, html {
-  font-family: monospace;
+  /* font-family: monospace; */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   margin:0px;
   padding:0px;
+  background-color: var(--bg);
 }
 
 i {
@@ -13,39 +29,295 @@ i {
   margin-right: 5px;
 }
 
-/* !important to override default styling */
-#myholder {
-  height: 100vh !important;
-  width: 79.8vw !important;
-  /* background-color: RGB(240,240,240) !important ;/* very light gray */
+header i {
+  color: lightgray;
 }
 
-#main {
-  display: flex;
-  float: right;
+button {
+  border: none;
 }
+
+button:hover {
+  cursor: pointer;
+}
+
+/* !important to override default styling */
+#myholder {
+  height: calc(100vh - 3rem) !important;
+  width: 100vw !important;
+  margin-top: 3rem;
+} 
+
+#main {
+  position: relative;
+}
+
+.toolbar {
+  width: 100vw;
+  height: 3rem;
+  top: 0;
+  z-index: 5;
+  position: fixed;
+  background-color: var(--toolbar-bg);
+}
+
+.toolbar-list {
+  width: 100%;
+  height: 100%;
+
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.toolbar-item {
+  margin: 0 1rem;
+  height: 100%;
+}
+.toolbar-item i{
+  margin-top: 0.5rem;
+  width: 100%;
+  height: 100%;
+}
+
+.toolbar-item:first-child {
+  margin-left: 0;
+}
+.toolbar-item:last-child {
+  margin-left: auto;
+  margin-right: 0 !important;
+}
+
+
+.toolbar-button {
+  height: 100%;
+  padding: 0.2rem;
+  margin: 0;
+  background-color: transparent;
+
+  display: flex;
+  align-items: center;
+  filter: opacity(0.75);
+  transition: var(--transition-speed);
+}
+
+.toolbar-button:hover {
+  filter: opacity(1);
+}
+
+.toolbar-button svg{
+  /* min-height: 2rem; */
+
+  fill: var(--accent-gray);
+}
+
+
+
+
+
+.argument-rect {
+  fill: var(--accent-gray);
+  /* border-radius: 100rem; */
+  stroke: var(--bg);
+}
+
+.argument-text {
+  width: 100%;
+  height: 100%;
+  font-size: 12px;
+  text-align: center;
+  fill:var(--bg);
+  padding: 1rem;
+}
+
+.argument-link-rect {
+  font-size: 12px;
+  fill: var(--bg);
+}
+
+.argument-link-text {
+  font-size: 12px;
+  stroke: var(--accent-gray);
+}
+
+.objection-rect {
+  fill: var(--accent-orange);
+  stroke: var(--bg);
+}
+
+.objection-text {
+  width: 100%;
+  height: 100%;
+  font-size: 12px;
+  text-align: center;
+  fill:var(--bg);
+  padding: 1rem;
+}
+
+
+
+.joint-paper-grid {
+  background-color: var(--bg);
+}
+
+
+.edit-bottom {
+  display: flex;
+  align-items: center;
+}
+
+
+/* .argument-rect {
+  display: flex;
+  width: clamp(45ch, 50%, 75ch);
+  height: 4rem;
+}
+
+.argument-rect-text {
+  fill: var(--accent-red);
+  display: flex;
+  width: clamp(45ch, 50%, 75ch);
+  height: 4rem;
+} */
+/* #header {
+  position: relative;
+  background-color: var(--header-dark-gray);
+  height: var(--header-height);
+  z-index: 99;
+  transition: height 1s;
+  padding-left: 100px;
+
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#wrapper {
+  display: flex;
+}
+
+.button-dropdown {
+  background-color: inherit;
+  color:var(--white);
+  font-size: 30px;
+}
+
+#addDropdown {
+  width:25%;
+}
+
+header .hover-dropdown {
+  background-color: var(--header-dark-gray);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+header .wrapper{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+header .hover-dropdown:hover {
+  background-color: var(--header-hover-gray);
+  cursor: pointer;
+}
+
+header .hover-dropdown:hover .dropdown-content {
+  display: flex;
+  height: 145px ;
+  border-top: 1px solid var(--header-dark-gray);
+
+}
+
+.dropdown-content {
+  background-color: var(--header-dark-gray);
+  color: var(--white);
+  font-size: 1vw;
+  width:100%;
+  position: absolute;
+  top: var(--header-height);
+  display: flex;
+  flex-direction: column;
+  height: 0;
+  transition: height 0.7s;
+  overflow: hidden;
+}
+
+.dropdown-content div {
+  padding: 20px 20px 20px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dropdown-content div:hover {
+  background-color: var(--header-hover-gray);
+  cursor: grab;
+}
+
+.button-dropdown i {
+  margin-right: 10px;
+}
+
+#toggle-legend{
+  display: flex;
+}
+
+#toggleHeaderButton {
+  position: absolute;
+  color: var(--white);
+  background-color: var(--header-dark-gray);
+  padding: 0px;
+  left: 50vw;
+  border: none;
+  bottom: -30px;
+  height: 40px;
+  width: 50px;
+  border-radius: 0 0 60px 60px;
+}
+
+.fill-available {
+  /* for some reason doing 100% makes the header wider than the page*/
+  /* width: 95%; */
+/* } */
 
 /* ----- Menu ----- */
 
-#menu-container {
+/* #menu-container {
   display: flex;
   flex-direction: column;
   background-color: #f2f2f2;
   border-right: 1px solid black;
   width: 20.2vw;
-}
+} */
 
+<<<<<<< HEAD
 #menu-buttons {
+=======
+/* #constructor-buttons {
+>>>>>>> b4298f420ad48fdae75705ca17d02e9ca3e3be01
   display:flex;
   flex-direction: row;
   justify-content: center;
-}
+} */
+
 
 #edit-container {
-  display:flex;
+  width: 100vw;
+  display: flex;
   flex-direction: column;
-  align-items:center;
-  padding: 10px;
+  margin-top: 3rem;
+  background-color: var(--bg);
+  transition: display var(--transition-speed);
+  display: none;
 }
 
 #edit-form {
@@ -55,43 +327,298 @@ i {
 }
 
 .menu-text {
-  font-size:20px;
+  margin: 1rem;
+  font-size:24px;
+  color: var(--accent-gray);
+}
+
+.model-text-rect {
+  margin: 0 1rem;
+  height: 9rem;
+  min-height: 1.5rem;
+  max-height: 21rem;
+  resize: vertical;
+
+  border: none;
+  background-color: var(--toolbar-bg);
+  color: var(--accent-gray);
+  font-size: 1.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 /* ------- Buttons -------- */
 
 .menu-button {
-  border-radius: 10px;
-  height:5vw;
-  width:5vw;
+  
+  /* height:5rem;
+  width:5rem; */
   text-align:center;
-  margin: 2vh;
-  box-shadow: 7px, 6px, 28px, 1px rgba(0,0,0,0.24);
-  cursor: pointer;
+  margin: 0 1rem;
+  
+  /* box-shadow: 7px, 6px, 28px, 1px rgba(0,0,0,0.24); */
+  /* display: none */
+}
+
+.edit-top {
+  display: flex;
+  align-items: center;
+}
+
+/* ------- Cancel Edits Button -------- */
+.fa-times {
+  position: absolute;
+  margin-right: 60%;
+  z-index: 2;
+  transition: var(--transition-speed);
+}
+.exit-button span {
+  position: absolute;
+  margin-left: 20%;
+  z-index: 2;
+  transition: var(--transition-speed) ;
+}
+
+.exit-button {
+  /* position: absolute; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 2rem;
+  width:6rem;
+  height:2.5rem;
+  font-size: 16px;
+  overflow: hidden;
+  margin-left: auto;
+
+  color: var(--accent-gray);
+  background-color: var(--accent-blue);
+  transition: var(--transition-speed);
+}
+
+.exit-button:after{
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  border-radius: 2rem;
+  height: 100%;
+  background: var(--accent-green);
+  transition: width var(--transition-speed);
+}
+
+.changed.exit-button:after{
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  border-radius: 2rem;
+  height: 100%;
+  background: var(--accent-pink);
+  transition: width var(--transition-speed);
+}
+
+.exit-button:hover{
+  color: var(--bg);
+  background-color: var(--bg);
+}
+.exit-button:hover > .fa-times{
+  margin-right: 0;
+}
+.exit-button:hover > span{
+  margin-left: 200%;
+}
+.exit-button:hover:after{
+  width: 100%;
+}
+
+/* ------- Save Edits Button -------- */
+
+.fa-save {
+  position: absolute;
+  margin-right: 50%;
+  z-index: 2;
+  transition: var(--transition-speed);
+}
+.save-button span {
+  position: absolute;
+  margin-left: 20%;
+  z-index: 2;
+  transition: var(--transition-speed) ;
 }
 
 .save-button {
-  background-color: var(--save-blue);
-  color: white;
-  width:120px;
-  height:60px;
-  font-size:1.5vw;
+  /* position: absolute; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: var(--accent-blue);
+  border-radius: 2rem;
+  color: var(--accent-gray);
+  width:6rem;
+  height:2.5rem;
+  font-size: 16px;
+  overflow: hidden;
+  transition: var(--transition-speed);
 }
 
-#new-argument-button {
+.save-button:after{
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  border-radius: 2rem;
+  height: 100%;
+  background: var(--accent-green);
+  transition: width var(--transition-speed);
+}
+
+.changed.save-button:after{
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  border-radius: 2rem;
+  height: 100%;
+  background: var(--accent-yellow);
+  transition: width var(--transition-speed);
+}
+
+.save-button:hover{
+  color: var(--bg);
+  background-color: var(--bg);
+}
+.save-button:hover > .fa-save{
+  margin-right: 0;
+}
+.save-button:hover > span{
+  margin-left: 200%;
+}
+.save-button:hover:after{
+  width: 100%;
+}
+.save-button:active:hover:after{
+  width: 100%;
+  background-color: var(--accent-green);
+}
+
+
+/* ------- Objection Edit Button -------- */
+
+.objection-label {
+  margin-left: auto;
+  color: var(--accent-gray);
+  font-size: 16px;
+}
+/* The switch - the box around the slider */
+.switch {
+  margin: 0 1rem;
+  position: relative;
+  display: inline-block;
+  width: 4rem;
+  height: 2rem;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--toolbar-bg);
+  transition: transform var(--transition-speed);
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1.8rem;
+  width: 1.8rem;
+  left: 0.1rem;
+  bottom: 0.1rem;
+  background-color: var(--accent-gray);
+  transition: transform var(--transition-speed);
+}
+
+input:checked + .slider {
+  background-color: var(--accent-orange);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 0.1rem var(--accent-orange);
+}
+
+input:checked + .slider:before {
+  transform: translateX(2rem);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 1rem;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* .save-button:focus:after {
+  color: var(--bg);
+  background-color: var(--accent-green);
+}
+.save-button:focus {
+  color: var(--bg);
+  background-color: var(--accent-green);
+}
+.save-button:visited {
+  color: var(--bg);
+  background-color: var(--accent-green);
+}
+.save-button:visited:after {
+  color: var(--bg);
+  background-color: var(--accent-green);
+} */
+
+/* #new-argument-button {
   font-size: 5vh; 
   background-color: RGB(145, 255, 149);
   color: RGB(85, 194, 89);
   border-color: RGB(85, 194, 89);
-}
+} */
 
-#objection-button {
+/* #objection-button {
   font-size: 5vh;
   background-color: #ff8585;
   color: #bf4e4e;
   border-color: #bf4e4e;
+<<<<<<< HEAD
 }
 
 #import-button, #export-button {
   height:3vw;
 }
+=======
+} */
+
+@media screen and (max-width: 28rem) {
+  .toolbar-item:not(:first-child) {
+    display: none;
+  }
+  .toolbar-item:last-child {
+    display: initial;
+  }
+}
+>>>>>>> b4298f420ad48fdae75705ca17d02e9ca3e3be01

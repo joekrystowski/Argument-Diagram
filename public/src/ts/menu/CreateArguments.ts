@@ -11,7 +11,7 @@ export function createArgument(x:number, y:number) {
   const new_rect = new Argument({
     x: x,
     y: y,
-    text: "Argument",
+    text: "New Argument",
     type: "argument",
     body_color: color.argument.bodyColor,
     text_color: color.argument.textColor, 
@@ -33,7 +33,7 @@ export function createObjection(x:number, y:number) {
   const new_rect = new Argument({
     x: x,
     y: y,
-    text: "Objection",
+    text: "New Objection",
     type: "objection",
     body_color: color.objection.bodyColor,
     text_color: color.objection.textColor,

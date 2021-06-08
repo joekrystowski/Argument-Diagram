@@ -1,10 +1,11 @@
 /* global joint addLinkTools graph */
 const joint = window.joint;
 
+import { color } from '../colors.js';
 import { graph } from '../graph.js';
 import { addLinkTools } from './ManageTools.js';
 
-let selected_links:joint.shapes.app.CustomRect[] = [];
+export let selected_links:joint.shapes.app.CustomRect[] = [];
 
 declare module "jointjs" {
   namespace elementTools {
@@ -22,7 +23,7 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
       selector: "button",
       attributes: {
         'r': 7,
-        'fill': "#698cff",
+        'fill': "#3B8EA5",
         'cursor': "pointer"
       }
     }, {
@@ -32,7 +33,7 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
         //genuinely no idea what this is called but I used it to draw the arrow on the button
         'd': 'M -4 -1 0 4 M 0 4 4 -1 M 0 4 0 -4',
         'fill': 'none',
-        'stroke': '#FFFFFF',
+        'stroke': '#EEF0F2',
         'stroke-width': 2,
         'pointer-events': 'none'
       }   
@@ -155,8 +156,13 @@ function createLink(model1:joint.shapes.app.CustomRect, model2:joint.shapes.app.
     {
       attrs: {
         text: {
+          class: model1.attributes.type+"-link-text",
           text: model1.attributes.weight,
-          stroke: model1.attributes.link_color
+          stroke: color.textColor
+        },
+        rect: {
+          class: model1.attributes.type+"-link-rect",
+          fill: color.argument.textColor
         }
       }
     }
