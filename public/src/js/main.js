@@ -1,6 +1,10 @@
 /* global joint createDependentPremise */
 // const joint = window.joint;
+<<<<<<< HEAD
 import { saveEdits, discardEdits } from "./menu/SaveEditsButton.js";
+=======
+import { saveEdits } from "./menu/SaveEditsButton.js";
+>>>>>>> 21debd1608471afdc66c6bfbc7ef8f7d55481528
 import { createArgument, createObjection, } from "./menu/CreateArguments.js";
 import { importGraph, exportGraph } from "./menu/ImportExport.js";
 // this is built on Joint.js, an open source library. It handles a lot of the
@@ -99,7 +103,13 @@ exportButton.addEventListener("click", exportGraph);
 // addDropdown.addEventListener('mouseleave', hoverDropdown.bind(null, addDropdown));
 // const toggleHeaderButton = document.getElementById('toggleHeaderButton') as HTMLElement;
 // toggleHeaderButton.addEventListener('click', toggleHeader);
+<<<<<<< HEAD
 let arg1 = createArgument(200, 100);
 let arg2 = createArgument(600, 100);
+=======
+console.log("creatingArguments");
+let arg1 = createArgument(100, 100);
+let arg2 = createArgument(300, 100);
+>>>>>>> 21debd1608471afdc66c6bfbc7ef8f7d55481528
 //testing
 //let test = createDependentPremise(arg1.rect, arg2.rect);

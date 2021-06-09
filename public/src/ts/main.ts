@@ -10,7 +10,6 @@ import { importGraph, exportGraph } from "./menu/ImportExport.js";
 import { Argument } from "./Argument.js";
 import { color } from "./colors.js";
 import { paper, graph } from "./graph.js";
-
 // this is built on Joint.js, an open source library. It handles a lot of the
 // fundamental pieces for us on the back end, we have to implement the front end / interface
 // to interact with it

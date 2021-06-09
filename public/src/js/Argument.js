@@ -21,6 +21,7 @@ const joint = window.joint;
 const CustomRect = joint.shapes.standard.Rectangle.define("app.CustomRect", {
     // markup: '<g class="rotatable"><g class="scalable"><rect/></g><text/></g>',
     attrs: {
+<<<<<<< HEAD
         body: {
             // class: "custom-rect",
             rx: 10,
@@ -30,6 +31,16 @@ const CustomRect = joint.shapes.standard.Rectangle.define("app.CustomRect", {
         label: {
             // class: "custom-rect-text",
             fontSize: 12
+=======
+        rect: { class: "argument-rect", width: 100, height: 100 },
+        text: { class: "argument-text",
+            "font-size": 12,
+            "ref-x": 0.5,
+            "ref-y": 0.5,
+            ref: "rect",
+            "y-alignment": "middle",
+            "x-alignment": "middle",
+>>>>>>> 21debd1608471afdc66c6bfbc7ef8f7d55481528
         },
     },
     link_color: "#222222",
