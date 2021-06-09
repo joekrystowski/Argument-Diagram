@@ -176,7 +176,6 @@ button:hover {
   width: clamp(45ch, 50%, 75ch);
   height: 4rem;
 }
-
 .argument-rect-text {
   fill: var(--accent-red);
   display: flex;
@@ -190,26 +189,21 @@ button:hover {
   z-index: 99;
   transition: height 1s;
   padding-left: 100px;
-
   display:flex;
   flex-direction: row;
   align-items: center;
 }
-
 #wrapper {
   display: flex;
 }
-
 .button-dropdown {
   background-color: inherit;
   color:var(--white);
   font-size: 30px;
 }
-
 #addDropdown {
   width:25%;
 }
-
 header .hover-dropdown {
   background-color: var(--header-dark-gray);
   height: 100%;
@@ -217,26 +211,21 @@ header .hover-dropdown {
   justify-content: center;
   position: relative;
 }
-
 header .wrapper{
   height: 100%;
   display: flex;
   justify-content: center;
   overflow: hidden;
 }
-
 header .hover-dropdown:hover {
   background-color: var(--header-hover-gray);
   cursor: pointer;
 }
-
 header .hover-dropdown:hover .dropdown-content {
   display: flex;
   height: 145px ;
   border-top: 1px solid var(--header-dark-gray);
-
 }
-
 .dropdown-content {
   background-color: var(--header-dark-gray);
   color: var(--white);
@@ -250,27 +239,22 @@ header .hover-dropdown:hover .dropdown-content {
   transition: height 0.7s;
   overflow: hidden;
 }
-
 .dropdown-content div {
   padding: 20px 20px 20px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-
 .dropdown-content div:hover {
   background-color: var(--header-hover-gray);
   cursor: grab;
 }
-
 .button-dropdown i {
   margin-right: 10px;
 }
-
 #toggle-legend{
   display: flex;
 }
-
 #toggleHeaderButton {
   position: absolute;
   color: var(--white);
@@ -283,7 +267,6 @@ header .hover-dropdown:hover .dropdown-content {
   width: 50px;
   border-radius: 0 0 60px 60px;
 }
-
 .fill-available {
   /* for some reason doing 100% makes the header wider than the page*/
   /* width: 95%; */
@@ -299,15 +282,7 @@ header .hover-dropdown:hover .dropdown-content {
   width: 20.2vw;
 } */
 
-<<<<<<< HEAD
 /* #constructor-buttons {
-=======
-<<<<<<< HEAD
-#menu-buttons {
-=======
-/* #constructor-buttons {
->>>>>>> 907a4b0cf01a5c3a9ba6d7a8d1315881615b75b3
->>>>>>> 21debd1608471afdc66c6bfbc7ef8f7d55481528
   display:flex;
   flex-direction: row;
   justify-content: center;
@@ -454,35 +429,6 @@ header .hover-dropdown:hover .dropdown-content {
 }
 
 .save-button {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-  background-color: var(--save-blue);
-  color: white;
-  width:120px;
-  height:60px;
-  font-size:1.5vw;
-}
-
-#new-argument-button {
-  font-size: 5vh; 
-  background-color: RGB(145, 255, 149);
-  color: RGB(85, 194, 89);
-  border-color: RGB(85, 194, 89);
-}
-
-#objection-button {
-  font-size: 5vh;
-  background-color: #ff8585;
-  color: #bf4e4e;
-  border-color: #bf4e4e;
-}
-
-#import-button, #export-button {
-  height:3vw;
-}
-=======
->>>>>>> 21debd1608471afdc66c6bfbc7ef8f7d55481528
   /* position: absolute; */
   display: flex;
   justify-content: center;
@@ -623,7 +569,6 @@ input:checked + .slider:before {
 .save-button:visited:after {
   color: var(--bg);
   background-color: var(--accent-green);
-<<<<<<< HEAD
 } */
 
 /* #new-argument-button {
@@ -640,22 +585,6 @@ input:checked + .slider:before {
   border-color: #bf4e4e;
 } */
 
-=======
-}
-
-/* header buttons */
-
-#toggle-legend-button {
-  font-size: 30px;
-  background-color: var(--header-dark-gray);
-  color: var(--white);
-  width: 100%;
-  height: 100%;
-  padding-left: 80px;
-  padding-right: 80px;
-  z-index: 3;
-}
->>>>>>> 21debd1608471afdc66c6bfbc7ef8f7d55481528
 @media screen and (max-width: 28rem) {
   .toolbar-item:not(:first-child) {
     display: none;
@@ -664,7 +593,3 @@ input:checked + .slider:before {
     display: initial;
   }
 }
-<<<<<<< HEAD
-=======
->>>>>>> 907a4b0cf01a5c3a9ba6d7a8d1315881615b75b3
->>>>>>> 21debd1608471afdc66c6bfbc7ef8f7d55481528
