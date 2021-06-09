@@ -129,17 +129,9 @@ joint.elementTools.EditDependentPremiseButton = joint.elementTools.Button.extend
             console.log("editModel", editModel);
             const form = $('#edit-form');
             form.empty();
-<<<<<<< HEAD
             // form.append(`<label class="menu-text">Edit Argument Text</label>`);
             form.append(`<textarea id="model-text-rect" name="model-text-rect" class="model-text-rect">${editModel.attributes.attrs.text.text}</textarea>`);
             form.append('<br/>');
-=======
-            editModel.attributes.props.forEach((propObj, index) => {
-                form.append(`<label class="menu-text">Edit Argument ${index + 1} Text</label>`);
-                form.append(`<textarea id="model-text-DP-${index}" name="model-text-DP-${index}" class="model-text-rect">${propObj.attrs.text.text}</textarea>`);
-                form.append('<br/>');
-            });
->>>>>>> 21debd1608471afdc66c6bfbc7ef8f7d55481528
             //TODO: remove loop and replace with objects
             //fix for dependent premises
             $(".model-text-rect").each(function () {
