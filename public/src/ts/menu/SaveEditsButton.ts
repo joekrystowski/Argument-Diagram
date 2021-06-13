@@ -32,15 +32,15 @@ export function saveEdits() {
   }
   else {
     const objectionSwitch = document.getElementById("objection-switch") as HTMLInputElement;
-    if(editModel.attributes.type === "argument" && objectionSwitch.checked) {
+    if(editModel.attributes.type === "claim" && objectionSwitch.checked) {
       editModel.attributes.type = "objection";
       editModel.attr("text/class","objection-text");
       editModel.attr("rect/class","objection-rect");
     }
     else if(editModel.attributes.type === "objection" && !objectionSwitch.checked) {
-      editModel.attributes.type = "argument";
-      editModel.attr("text/class","argument-text");
-      editModel.attr("rect/class","argument-rect");
+      editModel.attributes.type = "claim";
+      editModel.attr("text/class","claim-text");
+      editModel.attr("rect/class","claim-rect");
     }
 
     //just update the single model with the new text and size

@@ -2,21 +2,21 @@
 // const joint = window.joint;
 import { saveEdits, discardEdits } from "./menu/SaveEditsButton.js";
 import { createClaim, createObjection, } from "./menu/CreateClaim.js";
-const argumentImage = new Image();
-argumentImage.src = "src/img/Argument.jpg";
-let argCounter = 0; //TODO: temporary until we fix selecting arguments
-const newArgumentButton = document.getElementById("new-argument-button");
-newArgumentButton.addEventListener("click", () => {
+const claimImage = new Image();
+claimImage.src = "src/img/Claim.jpg";
+let argCounter = 0; //TODO: temporary until we fix selecting claims
+const newClaimButton = document.getElementById("new-claim-button");
+newClaimButton.addEventListener("click", () => {
     createClaim(100 + 10 * argCounter, 100 + 10 * argCounter);
     ++argCounter;
     if (argCounter > 29) {
         argCounter = 0;
     }
 });
-newArgumentButton.addEventListener("dragstart", (event) => {
+newClaimButton.addEventListener("dragstart", (event) => {
     var _a, _b;
-    (_a = event.dataTransfer) === null || _a === void 0 ? void 0 : _a.setDragImage(argumentImage, 0, 0);
-    (_b = event.dataTransfer) === null || _b === void 0 ? void 0 : _b.setData("type", "argument");
+    (_a = event.dataTransfer) === null || _a === void 0 ? void 0 : _a.setDragImage(claimImage, 0, 0);
+    (_b = event.dataTransfer) === null || _b === void 0 ? void 0 : _b.setData("type", "claim");
 });
 const saveEditButton = document.getElementById("save-edit-button");
 saveEditButton.addEventListener("click", saveEdits);
@@ -29,7 +29,7 @@ paperContainer.addEventListener("dragover", (event) => {
 paperContainer.addEventListener("drop", (event) => {
     var _a;
     const type = (_a = event.dataTransfer) === null || _a === void 0 ? void 0 : _a.getData("type");
-    if (type === "argument") {
+    if (type === "claim") {
         createClaim(event.clientX - paperContainer.getBoundingClientRect().left, event.clientY - paperContainer.getBoundingClientRect().top);
     }
     else if (type === "objection") {

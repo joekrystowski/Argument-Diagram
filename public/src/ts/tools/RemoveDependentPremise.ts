@@ -57,10 +57,10 @@ joint.elementTools.RemoveDependentPreimseButton = joint.elementTools.Button.exte
             y: spawn_pos.y,
             text: propObj.attrs.text.text,
             type: propObj.type,
-            body_color: color.argument.bodyColor,
-            text_color: color.argument.textColor, 
-            stroke: color.argument.stroke,
-            link_color: color.argument.linkColor,
+            body_color: color.claim.bodyColor,
+            text_color: color.claim.textColor, 
+            stroke: color.claim.stroke,
+            link_color: color.claim.linkColor,
             weight: "1.0"
           });
 

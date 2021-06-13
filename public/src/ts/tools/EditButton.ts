@@ -75,7 +75,7 @@ joint.elementTools.EditButton = joint.elementTools.Button.extend({
       const form = $('#edit-form');
       form.empty();
 
-      // form.append(`<label class="menu-text">Edit Argument Text</label>`);
+      // form.append(`<label class="menu-text">Edit Claim Text</label>`);
       form.append(`<textarea id="model-text-rect" name="model-text-rect" class="model-text-rect">${editModel.attributes.attrs.text.text}</textarea>`);
       form.append('<br/>');
       //TODO: remove loop and replace with object
@@ -162,7 +162,7 @@ joint.elementTools.EditDependentPremiseButton = joint.elementTools.Button.extend
       form.empty();
 
       editModel.attributes.props.forEach((propObj:any, index:number) => {
-        form.append(`<label class="menu-text">Edit Argument ${index+1} Text</label>`);
+        form.append(`<label class="menu-text">Edit Claim ${index+1} Text</label>`);
         form.append(`<textarea id="model-text-DP-${index}" name="model-text-DP-${index}" class="model-text-rect">${propObj.attrs.text.text}</textarea>`);
         form.append('<br/>');
       });

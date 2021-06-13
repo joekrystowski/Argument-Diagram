@@ -13,8 +13,8 @@ export function addRectTools(element) {
     let editButton = new joint.elementTools.EditButton();
     let combinedPremiseButton = new joint.elementTools.CombinePremiseButton();
     let rect_tools = [boundaryTool, removeButton, linkButton, editButton];
-    //only add dependent premise tool to argument type, not objection
-    if (element.attributes.type == "argument") {
+    //only add dependent premise tool to claim type, not objection
+    if (element.attributes.type == "claim") {
         console.log("adding dp button");
         rect_tools.push(combinedPremiseButton);
     }

@@ -88,7 +88,7 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
 //link two rects together
 function createLink(model1:joint.shapes.app.ClaimRect, model2:joint.shapes.app.ClaimRect) {
   console.log(model1.attributes.link_color);
-  //passes in Argument objects
+  //passes in Claim objects
   let link = new joint.shapes.standard.Link();
   link.source(model1);
   link.target(model2);
@@ -109,7 +109,7 @@ function createLink(model1:joint.shapes.app.ClaimRect, model2:joint.shapes.app.C
         },
         rect: {
           class: model1.attributes.type+"-link-rect",
-          fill: color.argument.textColor
+          fill: color.claim.textColor
         }
       }
     }

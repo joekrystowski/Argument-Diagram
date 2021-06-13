@@ -1,4 +1,3 @@
-/* global Argument DependentPremise graph paper addRectTools addDependentPremiseTools color*/
 const joint = window.joint;
 
 import { color } from '../colors.js';
@@ -7,18 +6,18 @@ import { graph, paper } from '../graph.js'
 import { Claim } from '../Claim.js'
 import { DependentPremise } from '../DependentPremise.js';
 
-//when new-argument-button is clicked
+//when new-claim-button is clicked
 export function createClaim(x:number, y:number) {
   //creating new rect (Joint.js object)
   const new_rect = new Claim({
     x: x,
     y: y,
-    text: "New Argument",
-    type: "argument",
-    body_color: color.argument.bodyColor,
-    text_color: color.argument.textColor, 
-    stroke: color.argument.stroke,
-    link_color: color.argument.linkColor,
+    text: "New Claim",
+    type: "claim",
+    body_color: color.claim.bodyColor,
+    text_color: color.claim.textColor, 
+    stroke: color.claim.stroke,
+    link_color: color.claim.linkColor,
     weight: "1.0"
   });
 

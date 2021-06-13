@@ -10,12 +10,12 @@ import { Claim } from "./Claim.js";
 import { color } from "./colors.js";
 import { paper, graph } from "./graph.js";
 
-const argumentImage = new Image();
-argumentImage.src = "src/img/Argument.jpg";
+const claimImage = new Image();
+claimImage.src = "src/img/Claim.jpg";
 
-let argCounter = 0; //TODO: temporary until we fix selecting arguments
-const newArgumentButton = document.getElementById("new-argument-button") as HTMLElement;
-newArgumentButton.addEventListener("click", () => {
+let argCounter = 0; //TODO: temporary until we fix selecting claims
+const newClaimButton = document.getElementById("new-claim-button") as HTMLElement;
+newClaimButton.addEventListener("click", () => {
   createClaim(100+10*argCounter, 100+10*argCounter);
   ++argCounter;
   if(argCounter > 29) {
@@ -23,9 +23,9 @@ newArgumentButton.addEventListener("click", () => {
   }
 });
 
-newArgumentButton.addEventListener("dragstart", (event) => {
-  event.dataTransfer?.setDragImage(argumentImage, 0, 0);
-  event.dataTransfer?.setData("type", "argument");
+newClaimButton.addEventListener("dragstart", (event) => {
+  event.dataTransfer?.setDragImage(claimImage, 0, 0);
+  event.dataTransfer?.setData("type", "claim");
 });
 
 const saveEditButton = document.getElementById("save-edit-button") as HTMLElement;
@@ -39,7 +39,7 @@ paperContainer.addEventListener("dragover", (event) => {
 });
 paperContainer.addEventListener("drop", (event) => {
   const type = event.dataTransfer?.getData("type");
-  if (type === "argument") {
+  if (type === "claim") {
     createClaim(
       event.clientX - paperContainer.getBoundingClientRect().left,
       event.clientY - paperContainer.getBoundingClientRect().top
