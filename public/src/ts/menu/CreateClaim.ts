@@ -4,13 +4,13 @@ const joint = window.joint;
 import { color } from '../colors.js';
 import { addRectTools, addDependentPremiseTools } from '../tools/ManageTools.js';
 import { graph, paper } from '../graph.js'
-import { Argument } from '../Argument.js'
+import { Claim } from '../Claim.js'
 import { DependentPremise } from '../DependentPremise.js';
 
 //when new-argument-button is clicked
-export function createArgument(x:number, y:number) {
+export function createClaim(x:number, y:number) {
   //creating new rect (Joint.js object)
-  const new_rect = new Argument({
+  const new_rect = new Claim({
     x: x,
     y: y,
     text: "New Argument",
@@ -32,7 +32,7 @@ export function createArgument(x:number, y:number) {
 //when objection-button is clicked
 export function createObjection(x:number, y:number) {
   //creating new rect (Joint.js object)
-  const new_rect = new Argument({
+  const new_rect = new Claim({
     x: x,
     y: y,
     text: "New Objection",
@@ -51,7 +51,7 @@ export function createObjection(x:number, y:number) {
 }
 
 // When DependentPremise is made
-export function createDependentPremise(rect1: joint.shapes.app.CustomRect, rect2: joint.shapes.app.CustomRect) {
+export function createDependentPremise(rect1: joint.shapes.app.ClaimRect, rect2: joint.shapes.app.ClaimRect) {
   //creating new rect (Joint.js object)
   //remove highlights from rect1 and rect2
   let modelView1 = rect1.findView(paper)

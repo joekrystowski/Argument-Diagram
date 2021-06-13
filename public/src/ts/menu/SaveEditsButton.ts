@@ -2,7 +2,7 @@
 const joint = window.joint;
 import { editModel } from '../tools/EditButton.js';
 import { combineText } from '../DependentPremise.js';
-import { Argument } from '../Argument.js';
+import { Claim } from '../Claim.js';
 
 export function saveEdits() {
   let texts:Array<HTMLElement> = $('[name^="model-text-"]').toArray();

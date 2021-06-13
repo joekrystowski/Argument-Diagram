@@ -6,73 +6,38 @@ const joint = window.joint;
 declare module "jointjs" {
   namespace shapes {
     namespace app {
-      class CustomRect extends joint.shapes.basic.Generic {
+      class ClaimRect extends joint.shapes.basic.Generic {
         //custom shape declaration
       }
     }
   }
 }
 
-// const CustomRect = joint.shapes.standard.Rectangle.define("app.CustomRect", {
-//   markup: '<g class="rotatable"><g class="scalable"><rect/></g><text/></g>',
-//   attrs: {
-//     rect: { class:"argument-rect", width: 100, height: 100}, //, fill: "white", stroke: "black", width: 100, height: 100 },
-//     text: { class:"argument-text" ,
-//       "font-size": 12,
-//       "ref-x": 0.5,
-//       "ref-y": 0.5,
-//       ref: "rect",
-//       "y-alignment": "middle",
-//       "x-alignment": "middle",
-//     },
-//   },
-//   link_color: "black",
-//   weight: "1",
-//   type: "none",
-// }); 
-const CustomRect = joint.shapes.standard.Rectangle.define("app.CustomRect", {
-  // markup: '<g class="rotatable"><g class="scalable"><rect/></g><text/></g>',
+const ClaimRect = joint.shapes.standard.Rectangle.define("app.ClaimRect", {
+  markup: '<g class="rotatable"><g class="scalable"><rect/></g><text/></g>',
   attrs: {
-    body: {
-        // class: "custom-rect",
-        rx: 10,
-        ry: 10,
-        fill: "#222222"
-      },
-    label: {
-      // class: "custom-rect-text",
-      fontSize: 12
+    rect: { class:"claim-rect", width: 100, height: 100}, //, fill: "white", stroke: "black", width: 100, height: 100 },
+    text: { class:"claim-text",
+      "font-size": 12,
+      "ref-x": 0.5,
+      "ref-y": 0.5,
+      ref: "rect",
+      "y-alignment": "middle",
+      "x-alignment": "middle",
     },
   },
   link_color: "#222222",
   weight: "1",
   type: "none",
 }); 
-// const CustomRect = joint.shapes.standard.Rectangle.define("app.CustomRect", {
-//   // markup: '<g class="rotatable"><g class="scalable"><rect/></g><text/></g>',
-//   attrs: {
-//     body: {
-//         class: "custom-rect",
-//         rx: 10,
-//         ry: 10,
-//         fill: '#ffffff'
-//       },
-//     label: {
-//       fontSize: 12
-//     },
-//   },
-//   link_color: "black",
-//   weight: "1",
-//   type: "none",
-// });
 
 (<any>Object).assign(joint.shapes, {
   app: {
-    CustomRect,
+    ClaimRect,
   },
 });
 
-interface ArgumentOptions {
+interface ClaimOptions {
   x: number;
   y: number;
   text: string;
@@ -84,14 +49,14 @@ interface ArgumentOptions {
   weight: string;
 }
 
-export class Argument {
+export class Claim {
   position: {
     x: number;
     y: number;
   };
-  rect: joint.shapes.app.CustomRect;
+  rect: joint.shapes.app.ClaimRect;
 
-  constructor(config: ArgumentOptions) {
+  constructor(config: ClaimOptions) {
     // not used
     this.position = {
       x: config.x,
@@ -108,7 +73,7 @@ export class Argument {
     let count = (text_wrap.match(/\n/g) || []).length;
     console.log(count);
     //custom rect configuration
-    this.rect = new CustomRect({
+    this.rect = new ClaimRect({
       position: {
         x: config.x,
         y: config.y,

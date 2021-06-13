@@ -1,9 +1,9 @@
-import { Argument } from "../Argument";
+import { Claim } from "../Claim";
 
 /* global joint */
 const joint = window.joint;
 
-export let editModel: joint.shapes.app.CustomRect | joint.shapes.app.DependentPremiseRect;
+export let editModel: joint.shapes.app.ClaimRect | joint.shapes.app.DependentPremiseRect;
 
 // custom edit tool definition
 declare module "jointjs" {

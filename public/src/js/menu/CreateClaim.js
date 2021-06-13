@@ -2,16 +2,11 @@
 const joint = window.joint;
 import { color } from '../colors.js';
 import { addRectTools, addDependentPremiseTools } from '../tools/ManageTools.js';
-<<<<<<< Updated upstream
 import { graph, paper } from '../graph.js';
-import { Argument } from '../Argument.js';
-=======
-import { graph } from '../graph.js';
 import { Claim } from '../Claim.js';
->>>>>>> Stashed changes
 import { DependentPremise } from '../DependentPremise.js';
 //when new-argument-button is clicked
-export function createArgument(x, y) {
+export function createClaim(x, y) {
     //creating new rect (Joint.js object)
     const new_rect = new Claim({
         x: x,

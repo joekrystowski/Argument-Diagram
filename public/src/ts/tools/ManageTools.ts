@@ -3,7 +3,7 @@ const joint = window.joint;
 import { paper } from '../graph.js'
 
 // adding tools (buttons) to rects
-export function addRectTools(element: joint.shapes.app.CustomRect) {
+export function addRectTools(element: joint.shapes.app.ClaimRect) {
   // boundary tool shows boundaries of element
   let boundaryTool = new joint.elementTools.Boundary();
   //remove tool deletes a rect

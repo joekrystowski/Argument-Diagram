@@ -2,7 +2,7 @@ import { ModelBase } from "backbone";
 import { elementTools } from "jointjs"
 import { graph } from "../graph.js"
 import { addRectTools, addDependentPremiseTools } from "./ManageTools.js"
-import { Argument } from "../Argument.js"
+import { Claim } from "../Claim.js"
 import { color } from "../colors.js" 
 
 const joint = window.joint
@@ -52,7 +52,7 @@ joint.elementTools.RemoveDependentPreimseButton = joint.elementTools.Button.exte
         let spawn_pos = Object.assign({}, model.attributes.position);
         const spawn_padding = 10;
         model.attributes.props.forEach((propObj:any, index:number) => {
-          const new_rect = new Argument({
+          const new_rect = new Claim({
             x: spawn_pos.x,
             y: spawn_pos.y,
             text: propObj.attrs.text.text,
