@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon ./server.js",
-    "sass": "sass ./public/src/css/style.scss ./public/src/css/style.css --style=compressed --embed-sources"
+    "sass": "sass ./public/src/css/style.scss ./public/src/css/style.css --style=compressed --no-source-map",
+    "build": "tsc --build public/tsconfig.json && sass ./public/src/css/style.scss ./public/src/css/style.css --style=compressed --no-source-map"
   },
   "repository": {
     "type": "git",
