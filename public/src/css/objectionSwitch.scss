@@ -1,0 +1,58 @@
+.objection-label {
+  margin-left: auto;
+  color: var(--accent-gray);
+  font-size: 16px;
+}
+
+.switch {
+  margin: 0 1rem;
+  position: relative;
+  display: inline-block;
+  width: 4rem;
+  height: 2rem;
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--toolbar-bg);
+  transition: transform var(--transition-speed);
+  &:before {
+    position: absolute;
+    content: "";
+    height: 1.8rem;
+    width: 1.8rem;
+    left: 0.1rem;
+    bottom: 0.1rem;
+    background-color: var(--accent-gray);
+    transition: transform var(--transition-speed);
+  }
+  &.round {
+    border-radius: 1rem;
+    &:before {
+      border-radius: 50%;
+    }
+  }
+}
+
+input:checked + .slider {
+  background-color: var(--accent-orange);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 0.1rem var(--accent-orange);
+}
+
+input:checked + .slider:before {
+  transform: translateX(2rem);
+}
