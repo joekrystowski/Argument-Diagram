@@ -139,7 +139,7 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
 // })
 
 //link two rects together
-function createLink(model1:joint.shapes.app.CustomRect, model2:joint.shapes.app.CustomRect) {
+export function createLink(model1:joint.shapes.app.CustomRect, model2:joint.shapes.app.CustomRect) {
   console.log(model1.attributes.link_color);
   //passes in Argument objects
   let link = new joint.shapes.standard.Link();

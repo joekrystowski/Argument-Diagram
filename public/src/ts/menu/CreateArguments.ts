@@ -6,12 +6,12 @@ import { Argument } from '../Argument.js'
 import { DependentPremise } from '../DependentPremise.js';
 
 //when new-argument-button is clicked
-export function createArgument(x:number, y:number) {
+export function createArgument(x:number, y:number, text?:string) {
   //creating new rect (Joint.js object)
   const new_rect = new Argument({
     x: x,
     y: y,
-    text: "New Argument",
+    text: text ?? "New Argument",
     type: "argument",
     body_color: color.argument.bodyColor,
     text_color: color.argument.textColor, 
@@ -28,12 +28,12 @@ export function createArgument(x:number, y:number) {
 }
 
 //when objection-button is clicked
-export function createObjection(x:number, y:number) {
+export function createObjection(x:number, y:number, text?:string) {
   //creating new rect (Joint.js object)
   const new_rect = new Argument({
     x: x,
     y: y,
-    text: "New Objection",
+    text: text ?? "New Objection",
     type: "objection",
     body_color: color.objection.bodyColor,
     text_color: color.objection.textColor,

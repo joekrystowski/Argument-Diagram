@@ -5,12 +5,12 @@ import { graph } from '../graph.js';
 import { Argument } from '../Argument.js';
 import { DependentPremise } from '../DependentPremise.js';
 //when new-argument-button is clicked
-export function createArgument(x, y) {
+export function createArgument(x, y, text) {
     //creating new rect (Joint.js object)
     const new_rect = new Argument({
         x: x,
         y: y,
-        text: "New Argument",
+        text: text !== null && text !== void 0 ? text : "New Argument",
         type: "argument",
         body_color: color.argument.bodyColor,
         text_color: color.argument.textColor,
@@ -25,12 +25,12 @@ export function createArgument(x, y) {
     return new_rect;
 }
 //when objection-button is clicked
-export function createObjection(x, y) {
+export function createObjection(x, y, text) {
     //creating new rect (Joint.js object)
     const new_rect = new Argument({
         x: x,
         y: y,
-        text: "New Objection",
+        text: text !== null && text !== void 0 ? text : "New Objection",
         type: "objection",
         body_color: color.objection.bodyColor,
         text_color: color.objection.textColor,
