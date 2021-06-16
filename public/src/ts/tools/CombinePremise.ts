@@ -1,7 +1,8 @@
 /* global color joint createDependentPremise*/
 const joint = window.joint;
-import { createDependentPremise } from '../menu/CreateArguments.js'
+import { createDependentPremise } from '../menu/CreateClaim.js'
 import { color } from '../colors.js';
+import { paper } from '../graph.js'
 
 declare module "jointjs" {
   namespace elementTools {
@@ -11,7 +12,7 @@ declare module "jointjs" {
   }
 }
 
-export let selected_premises: (joint.shapes.app.DependentPremiseRect | joint.shapes.app.CustomRect)[] = []
+export let selected_premises: (joint.shapes.app.DependentPremiseRect | joint.shapes.app.ClaimRect)[] = []
 //custom link tool definition
 joint.elementTools.CombinePremiseButton = joint.elementTools.Button.extend({
   name: "combine-premise-button",
@@ -44,13 +45,24 @@ joint.elementTools.CombinePremiseButton = joint.elementTools.Button.extend({
     },
     rotate: true,
     action: function(this: any) {
+      let elementView = this.model.findView(paper);
       // this is where the actual function of the button goes (onclick event basically)
       console.log('premise mode active')
       selected_premises.push(this.model);
-      console.log(this.model.id);
-      console.log("currently selected: " + selected_premises)
+
+      //add highlight
+      joint.highlighters.mask.add(elementView, { selector: 'root' }, 'dp-highlight', {
+        padding: 9,
+        layer: "back",
+
+        attrs: {
+            'stroke': '#66ff7d',
+            'stroke-opacity': 1,
+            'stroke-width': 3,
+        }
+      });
+      
       if (selected_premises.length === 2) {
-        console.log("length of 2")
         //check if two models are the same model
         if (selected_premises[0].id === selected_premises[1].id) {
           console.log("duplicate model detected")

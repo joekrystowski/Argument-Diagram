@@ -3,7 +3,7 @@ const joint = window.joint;
 import { paper } from '../graph.js'
 
 // adding tools (buttons) to rects
-export function addRectTools(element: joint.shapes.app.CustomRect) {
+export function addRectTools(element: joint.shapes.app.ClaimRect) {
   // boundary tool shows boundaries of element
   let boundaryTool = new joint.elementTools.Boundary();
   //remove tool deletes a rect
@@ -17,8 +17,8 @@ export function addRectTools(element: joint.shapes.app.CustomRect) {
   
   let rect_tools = [boundaryTool, removeButton, linkButton, editButton]
 
-  //only add dependent premise tool to argument type, not objection
-  if (element.attributes.type == "argument") {
+  //only add dependent premise tool to claim type, not objection
+  if (element.attributes.type == "claim") {
     console.log("adding dp button");
     rect_tools.push(combinedPremiseButton);
   }
