@@ -12,8 +12,6 @@ export interface HashMap {
 
 // not fully working
 function parseJSON(cells: any[]): void {
-	let argCount = 0;
-	let objCount = 0;
 	let ids: HashMap = {};
 	for (let i = 0; i < cells.length; i++) {
 		const type = cells[i].type;

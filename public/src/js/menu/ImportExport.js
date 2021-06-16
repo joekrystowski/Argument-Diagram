@@ -3,8 +3,6 @@ import { createArgument, createObjection, } from "../menu/CreateArguments.js";
 import { createLink } from "../tools/LinkButton.js";
 // not fully working
 function parseJSON(cells) {
-    let argCount = 0;
-    let objCount = 0;
     let ids = {};
     for (let i = 0; i < cells.length; i++) {
         const type = cells[i].type;
