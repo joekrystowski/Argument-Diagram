@@ -1,22 +1,23 @@
-/* global Argument DependentPremise graph paper addRectTools addDependentPremiseTools color*/
+const joint = window.joint;
+
 import { color } from '../colors.js';
 import { addRectTools, addDependentPremiseTools } from '../tools/ManageTools.js';
 import { graph, paper } from '../graph.js'
-import { Argument } from '../Argument.js'
+import { Claim } from '../Claim.js'
 import { DependentPremise } from '../DependentPremise.js';
 
-//when new-argument-button is clicked
-export function createArgument(x:number, y:number, text?:string) {
+//when new-claim-button is clicked
+export function createClaim(x:number, y:number) {
   //creating new rect (Joint.js object)
-  const new_rect = new Argument({
+  const new_rect = new Claim({
     x: x,
     y: y,
-    text: text ?? "New Argument",
-    type: "argument",
-    body_color: color.argument.bodyColor,
-    text_color: color.argument.textColor, 
-    stroke: color.argument.stroke,
-    link_color: color.argument.linkColor,
+    text: "New Claim",
+    type: "claim",
+    body_color: color.claim.bodyColor,
+    text_color: color.claim.textColor, 
+    stroke: color.claim.stroke,
+    link_color: color.claim.linkColor,
     weight: "1.0"
   });
 
@@ -30,7 +31,7 @@ export function createArgument(x:number, y:number, text?:string) {
 //when objection-button is clicked
 export function createObjection(x:number, y:number, text?:string) {
   //creating new rect (Joint.js object)
-  const new_rect = new Argument({
+  const new_rect = new Claim({
     x: x,
     y: y,
     text: text ?? "New Objection",
@@ -49,8 +50,14 @@ export function createObjection(x:number, y:number, text?:string) {
 }
 
 // When DependentPremise is made
-export function createDependentPremise(rect1: joint.shapes.app.CustomRect, rect2: joint.shapes.app.CustomRect) {
+export function createDependentPremise(rect1: joint.shapes.app.ClaimRect, rect2: joint.shapes.app.ClaimRect) {
   //creating new rect (Joint.js object)
+  //remove highlights from rect1 and rect2
+  let modelView1 = rect1.findView(paper)
+  joint.dia.HighlighterView.remove(modelView1, 'dp-highlight')
+  let modelView2 = rect2.findView(paper)
+  joint.dia.HighlighterView.remove(modelView2, 'dp-highlight')
+
   let new_dependent_premise = new DependentPremise({
     props1: rect1.attributes,
     props2: rect2.attributes,
