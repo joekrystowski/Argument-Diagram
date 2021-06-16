@@ -1,24 +1,25 @@
 import { graph } from '../graph.js'
 import {
-  createArgument,
+  createClaim,
   createObjection,
   createDependentPremise,
-} from "../menu/CreateArguments.js";
+} from "../menu/CreateClaim.js";
 import {createLink} from "../tools/LinkButton.js"
 
 export interface HashMap {
-	[details: string] : joint.shapes.app.CustomRect;
+	[details: string] : joint.shapes.app.ClaimRect;
 } 
 
 // not fully working
 function parseJSON(cells: any[]): void {
+	console.log(cells);
 	let ids: HashMap = {};
 	for (let i = 0; i < cells.length; i++) {
 		const type = cells[i].type;
 		const pos = cells[i].position;
 		const text = cells[i].text;
-		if (type === "argument") {
-			const arg = createArgument(pos.x, pos.y, text);
+		if (type === "claim") {
+			const arg = createClaim(pos.x, pos.y, text);
 			ids[cells[i].id] = arg.rect;	
 		}
 		else if (type === "objection") {

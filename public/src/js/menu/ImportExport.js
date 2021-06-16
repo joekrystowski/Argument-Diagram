@@ -1,15 +1,16 @@
 import { graph } from '../graph.js';
-import { createArgument, createObjection, } from "../menu/CreateArguments.js";
+import { createClaim, createObjection, } from "../menu/CreateClaim.js";
 import { createLink } from "../tools/LinkButton.js";
 // not fully working
 function parseJSON(cells) {
+    console.log(cells);
     let ids = {};
     for (let i = 0; i < cells.length; i++) {
         const type = cells[i].type;
         const pos = cells[i].position;
         const text = cells[i].text;
-        if (type === "argument") {
-            const arg = createArgument(pos.x, pos.y, text);
+        if (type === "claim") {
+            const arg = createClaim(pos.x, pos.y, text);
             ids[cells[i].id] = arg.rect;
         }
         else if (type === "objection") {

@@ -2,6 +2,7 @@
 // const joint = window.joint;
 import { saveEdits, discardEdits } from "./menu/SaveEditsButton.js";
 import { createClaim, createObjection, } from "./menu/CreateClaim.js";
+import { importGraph, exportGraph } from "./menu/ImportExport.js";
 const claimImage = new Image();
 claimImage.src = "src/img/Claim.jpg";
 let argCounter = 0; //TODO: temporary until we fix selecting claims

@@ -5,12 +5,12 @@ import { graph, paper } from '../graph.js';
 import { Claim } from '../Claim.js';
 import { DependentPremise } from '../DependentPremise.js';
 //when new-claim-button is clicked
-export function createClaim(x, y) {
+export function createClaim(x, y, text) {
     //creating new rect (Joint.js object)
     const new_rect = new Claim({
         x: x,
         y: y,
-        text: "New Claim",
+        text: text !== null && text !== void 0 ? text : "New Claim",
         type: "claim",
         body_color: color.claim.bodyColor,
         text_color: color.claim.textColor,

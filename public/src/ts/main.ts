@@ -6,6 +6,7 @@ import {
   createObjection,
   createDependentPremise,
 } from "./menu/CreateClaim.js";
+import { importGraph, exportGraph } from "./menu/ImportExport.js";
 import { Claim } from "./Claim.js";
 import { color } from "./colors.js";
 import { paper, graph } from "./graph.js";
