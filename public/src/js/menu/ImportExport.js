@@ -7,20 +7,23 @@ function parseJSON(cells) {
     let ids = {};
     for (let i = 0; i < cells.length; i++) {
         const type = cells[i].type;
-        const pos = cells[i].position;
-        const text = cells[i].text;
-        if (type === "claim") {
-            const arg = createClaim(pos.x, pos.y, text);
-            ids[cells[i].id] = arg.rect;
-        }
-        else if (type === "objection") {
-            const obj = createObjection(pos.x, pos.y, text);
-            ids[cells[i].id] = obj.rect;
-        }
-        else if (type === "standard.Link") {
+        if (type === "standard.Link") {
             const source = cells[i].source.id;
             const target = cells[i].target.id;
             createLink(ids[source], ids[target]);
+        }
+        else {
+            const pos = cells[i].position;
+            const text = cells[i].attrs.text.text;
+            if (type === "claim") {
+                const arg = createClaim(pos.x, pos.y, text);
+                ids[cells[i].id] = arg.rect;
+            }
+            else if (type === "objection") {
+                const obj = createObjection(pos.x, pos.y, text);
+                ids[cells[i].id] = obj.rect;
+            }
+            // insert dependent premise here
         }
     }
 }
