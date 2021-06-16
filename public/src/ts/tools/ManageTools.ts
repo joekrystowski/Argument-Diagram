@@ -1,6 +1,8 @@
 /* global joint paper */
 const joint = window.joint;
+import { elementTools } from 'jointjs';
 import { paper } from '../graph.js'
+import { graph } from '../graph.js'
 
 // adding tools (buttons) to rects
 export function addRectTools(element: joint.shapes.app.ClaimRect) {
@@ -33,7 +35,7 @@ export function addRectTools(element: joint.shapes.app.ClaimRect) {
   //start with tools hidden
   elementView.hideTools();
 
-  element.on("change:position", function () {
+  element.on("change:position", function (eventView) {
     paper.hideTools();
     elementView.showTools();
   })

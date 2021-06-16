@@ -1,6 +1,9 @@
 /* global joint */
 const joint = window.joint;
 
+import { color } from "./colors.js"
+import { paper } from "./graph.js";
+
 declare module "jointjs" {
   namespace shapes {
     namespace app {
@@ -42,8 +45,8 @@ const DependentPremiseRect = joint.shapes.standard.Rectangle.define(
 });
 
 interface DependentPremiseOptions {
-  props1: any,
-  props2: any,
+  rect1: any,
+  rect2: any,
   x: number,
   y: number,
   text: string,
@@ -60,41 +63,37 @@ interface DependentPremiseOptions {
 export class DependentPremise {
   rect: joint.shapes.app.DependentPremiseRect
   constructor(config: DependentPremiseOptions) {
-    let props1 = Object.assign({}, config.props1);
-    let props2 = Object.assign({}, config.props2);
+    let rect1 = config.rect1
+    let rect2 = config.rect2
 
-    let props: Array<any> = [];
-    if (props1.type === "dependent-premise") {
-      props.push(...props1.props);
+    let models: Array<any> = [];
+    if (rect1.attributes.type === "dependent-premise") {
+      console.log("combining dependent premise!")
+      let embeds = rect1.getEmbeddedCells()
+      console.log(embeds)
+      models.push(...embeds);
     }
     else {
-      props.push(props1);
+      models.push(rect1);
     }
-    if (props2.type === "dependent-premise") {
-      props.push(...props2.props);
+    if (rect2.attributes.type === "dependent-premise") {
+      console.log("combining dependent premise!")
+      let embeds = rect2.getEmbeddedCells();
+      console.log(embeds)
+      models.push(...embeds);
     }
     else {
-      props.push(props2);
+      models.push(rect2);
     }
 
-    console.log("props", props);
+    console.log("models", models);
 
     //set size
-    let width = props1.size.width + props2.size.width;
-    let height = Math.max(
-      props1.size.height,
-      props2.size.height
-    );
+    let width = rect1.attributes.size.width + rect2.attributes.size.width;
+    let height = Math.max(rect1.attributes.size.height, rect2.attributes.size.height);
     // set position (average position of two rects)
-    let x = (props1.position.x + props2.position.x) / 2;
-    let y = (props1.position.y + props2.position.y) / 2;
-    //text wrap for both
-    let text_wrap1 = props1.attrs.text.text;
-    let text_wrap2 = props2.attrs.text.text;
-
-    //generate new text string for display
-    let combined_text = combineText(text_wrap1, text_wrap2);
-
+    let x = (rect1.attributes.position.x + rect2.attributes.position.x) / 2;
+    let y = (rect1.attributes.position.y + rect2.attributes.position.y) / 2;
     // define weight
 
     // Needs to be implemented, not sure how we want to do this
@@ -113,30 +112,47 @@ export class DependentPremise {
       },
       attrs: {
         rect: {
-          filter: {
-            name: "highlight",
-            args: {
-              color: "green",
-              width: 5,
-              opacity: 0.4,
-              blur: 0,
-            },
-          },
-          fill: config.body_color,
-          stroke: config.stroke,
-        },
-        text: {
-          text: combined_text,
-          fill: config.text_color,
-        },
+          fill: color.dependentPremise.bodyColor
+        }
+
       },
       // set custom attributes here:
       link_color: config.link_color,
       weight: config.weight,
       type: config.type,
-      props: props
     });
+
+    //align position of models
+    let center = this.rect.attributes.position
+    let current_x = center.x + 12//- (this.rect.attributes.size.width / 2);
+    for (let i = 0; i < models.length; i++) {
+      let cell = models[i]
+      console.log(cell);
+      cell.set('position', {
+        x: current_x,// + (cell.attributes.size.width / 2),
+        y: center.y + 6
+      })
+      current_x += cell.attributes.size.width + 12
+    }
+    
+    //embed models
+    for (let i = 0; i < models.length; i++) {
+      this.rect.embed(models[i]);
+      //disable user movement
+      models[i].findView(paper).options.interactive = {
+        elementMove: false
+      }
+    }
+
     console.log("NEW DEPENDENT PREMISE", this.rect);
+    if (rect1.attributes.type === "dependent-premise") {
+      rect1.unembed(...rect1.getEmbeddedCells())
+      rect1.remove();
+    }
+    if (rect2.attributes.type === "dependent-premise") {
+      rect2.unembed(...rect2.getEmbeddedCells())
+      rect2.remove();
+    }
   }
 }
 

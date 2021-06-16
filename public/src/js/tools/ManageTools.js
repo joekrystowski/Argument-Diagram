@@ -26,7 +26,7 @@ export function addRectTools(element) {
     elementView.addTools(toolsView);
     //start with tools hidden
     elementView.hideTools();
-    element.on("change:position", function () {
+    element.on("change:position", function (eventView) {
         paper.hideTools();
         elementView.showTools();
     });
