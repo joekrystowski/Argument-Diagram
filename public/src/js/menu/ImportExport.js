@@ -3,9 +3,9 @@ import { createClaim, createObjection, } from "../menu/CreateClaim.js";
 import { createLink } from "../tools/LinkButton.js";
 // not fully working
 function parseJSON(cells) {
-    console.log(cells);
     let ids = {};
-    for (let i = 0; i < cells.length; i++) {
+    var i = 0, len = cells.length;
+    while (i < len) {
         const type = cells[i].type;
         if (type === "standard.Link") {
             const source = cells[i].source.id;
@@ -25,6 +25,7 @@ function parseJSON(cells) {
             }
             // insert dependent premise here
         }
+        i++;
     }
 }
 export function importGraph() {
