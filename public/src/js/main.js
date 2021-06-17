@@ -2,6 +2,7 @@
 // const joint = window.joint;
 import { saveEdits, discardEdits } from "./menu/SaveEditsButton.js";
 import { createClaim, createObjection, } from "./menu/CreateClaim.js";
+import { importGraph, exportGraph } from "./menu/ImportExport.js";
 const claimImage = new Image();
 claimImage.src = "src/img/Claim.jpg";
 let argCounter = 0; //TODO: temporary until we fix selecting claims
@@ -39,5 +40,11 @@ paperContainer.addEventListener("drop", (event) => {
         throw new Error("Something went wrong when determining dataTransfer type.");
     }
 });
+const importButton = document.getElementById("import-button");
+importButton.addEventListener("click", importGraph);
+const exportButton = document.getElementById("export-button");
+exportButton.addEventListener("click", exportGraph);
+//testing
+//let test = createDependentPremise(arg1.rect, arg2.rect);
 let arg1 = createClaim(100, 100);
 let arg2 = createClaim(300, 100);
