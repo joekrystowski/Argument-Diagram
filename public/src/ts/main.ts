@@ -6,6 +6,7 @@ import {
   createObjection,
   createDependentPremise,
 } from "./menu/CreateClaim.js";
+import { importGraph, exportGraph } from "./menu/ImportExport.js";
 import { Claim } from "./Claim.js";
 import { color } from "./colors.js";
 import { paper, graph } from "./graph.js";
@@ -54,5 +55,13 @@ paperContainer.addEventListener("drop", (event) => {
   }
 });
 
+const importButton = document.getElementById("import-button") as HTMLElement;
+importButton.addEventListener("click", importGraph);
+
+const exportButton = document.getElementById("export-button") as HTMLElement;
+exportButton.addEventListener("click", exportGraph);
+
+//testing
+//let test = createDependentPremise(arg1.rect, arg2.rect);
 let arg1 = createClaim(100, 100);
 let arg2 = createClaim(300, 100);

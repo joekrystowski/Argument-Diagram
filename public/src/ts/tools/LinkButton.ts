@@ -78,7 +78,7 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
 });
 
 //link two rects together
-function createLink(model1:joint.shapes.app.ClaimRect, model2:joint.shapes.app.ClaimRect) {
+export function createLink(model1:joint.shapes.app.ClaimRect, model2:joint.shapes.app.ClaimRect) {
   console.log(model1.attributes.link_color);
   //passes in Claim objects
   let link = new joint.shapes.standard.Link();
