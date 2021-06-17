@@ -4,7 +4,8 @@ import {
   createObjection,
   createDependentPremise,
 } from "../menu/CreateClaim.js";
-import {createLink} from "../tools/LinkButton.js"
+import { createLink } from "../tools/LinkButton.js"
+import { save } from '../util.js';
 
 export interface HashMap {
 	[details: string] : joint.shapes.app.ClaimRect;
@@ -66,19 +67,5 @@ export function importGraph(): void {
 export function exportGraph(): void {
 	const data = JSON.stringify(graph.toJSON(), null, 2);
 	const filename = "myDiagram.json"; // default name
-	const file = new Blob([data], {type: "application/json"});    
-  if (window.navigator.msSaveOrOpenBlob) {// IE10+
-    window.navigator.msSaveOrOpenBlob(file, filename);
-  } else { // Others
-		const a = document.createElement("a");
-		const url = URL.createObjectURL(file);
-		a.href = url;
-		a.download = filename;
-		document.body.appendChild(a);
-		a.click();
-		setTimeout(function() {
-			document.body.removeChild(a);
-			window.URL.revokeObjectURL(url);  
-		}, 0); 
-	} 
+	save(data, "application/json", filename);
 }
