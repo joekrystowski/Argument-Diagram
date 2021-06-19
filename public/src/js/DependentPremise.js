@@ -2,6 +2,7 @@
 const joint = window.joint;
 import { color } from "./colors.js";
 import { paper } from "./graph.js";
+import { addRectTools } from "./tools/ManageTools.js";
 //custom shape declaration for DependentPremise
 const DependentPremiseRect = joint.shapes.standard.Rectangle.define("app.DependentPremise", {
     markup: '<g class="rotatable"><g class="scalable"><rect/></g><text/></g>',
@@ -101,6 +102,8 @@ export class DependentPremise {
             models[i].findView(paper).options.interactive = {
                 elementMove: false
             };
+            //update tools
+            addRectTools(models[i]);
         }
         console.log("NEW DEPENDENT PREMISE", this.rect);
         if (rect1.attributes.type === "dependent-premise") {

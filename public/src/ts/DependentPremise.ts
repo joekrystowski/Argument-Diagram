@@ -3,6 +3,7 @@ const joint = window.joint;
 
 import { color } from "./colors.js"
 import { paper } from "./graph.js";
+import { addRectTools } from "./tools/ManageTools.js"
 
 declare module "jointjs" {
   namespace shapes {
@@ -142,6 +143,8 @@ export class DependentPremise {
       models[i].findView(paper).options.interactive = {
         elementMove: false
       }
+      //update tools
+      addRectTools(models[i]);
     }
 
     console.log("NEW DEPENDENT PREMISE", this.rect);

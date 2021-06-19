@@ -1,4 +1,5 @@
 import { paper } from "../graph.js";
+import { addRectTools } from "./ManageTools.js";
 const joint = window.joint;
 joint.elementTools.RemoveDependentPreimseButton = joint.elementTools.Button.extend({
     name: "remove-dependent-premise-button",
@@ -38,6 +39,8 @@ joint.elementTools.RemoveDependentPreimseButton = joint.elementTools.Button.exte
                 model.unembed(embeds[i]);
                 //re-enable drag
                 embeds[i].findView(paper).options.interactive = { elementMove: true };
+                //update tools
+                addRectTools(embeds[i]);
             }
             //remove this dependent premise
             model.remove();
