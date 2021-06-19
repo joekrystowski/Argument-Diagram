@@ -7,12 +7,12 @@ import { Claim } from '../Claim.js'
 import { DependentPremise } from '../DependentPremise.js';
 
 //when new-claim-button is clicked
-export function createClaim(x:number, y:number) {
+export function createClaim(x:number, y:number, text?:string) {
   //creating new rect (Joint.js object)
   const new_rect = new Claim({
     x: x,
     y: y,
-    text: "New Claim",
+    text: text ?? "New Claim",
     type: "claim",
     body_color: color.claim.bodyColor,
     text_color: color.claim.textColor, 
@@ -29,12 +29,12 @@ export function createClaim(x:number, y:number) {
 }
 
 //when objection-button is clicked
-export function createObjection(x:number, y:number) {
+export function createObjection(x:number, y:number, text?:string) {
   //creating new rect (Joint.js object)
   const new_rect = new Claim({
     x: x,
     y: y,
-    text: "New Objection",
+    text: text ?? "New Objection",
     type: "objection",
     body_color: color.objection.bodyColor,
     text_color: color.objection.textColor,

@@ -1,0 +1,66 @@
+.fa-times {
+  position: absolute;
+  margin-right: 60%;
+  z-index: 2;
+  transition: var(--transition-speed);
+}
+
+.exit-button {
+  /* position: absolute; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 2rem;
+  width: 6rem;
+  height: 2.5rem;
+  font-size: 16px;
+  overflow: hidden;
+  margin-left: auto !important;
+
+  color: var(--accent-gray);
+  background-color: var(--accent-blue);
+  transition: var(--transition-speed);
+
+  span {
+    position: absolute;
+    margin-left: 20%;
+    z-index: 2;
+    transition: var(--transition-speed);
+  }
+  &:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 0;
+    border-radius: 2rem;
+    height: 100%;
+    background: var(--accent-green);
+    transition: width var(--transition-speed);
+  }
+  &.changed:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 0;
+    border-radius: 2rem;
+    height: 100%;
+    background: var(--accent-pink);
+    transition: width var(--transition-speed);
+  }
+  &:hover {
+    color: var(--bg);
+    background-color: var(--bg);
+    &:after {
+      width: 100%;
+    }
+    > .fa-times {
+      margin-right: 0;
+    }
+    > span {
+      margin-left: 200%;
+    }
+  }
+}

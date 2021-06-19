@@ -75,19 +75,13 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
       });
 
       if (selected_links.length === 2) {
-        console.log("length of 2")
         //check if two models are the same model
-        if (selected_links[0].id === selected_links[1].id) {
-          console.log("duplicate model detected")
-          //duplicate
-          selected_links.pop();
-        } else {
-          //two elements ready for linking
+        if (selected_links[0].id !== selected_links[1].id) {
           createLink(selected_links[0], selected_links[1]);
           console.log("link made")
-          //empty array
-          selected_links = [];
         }
+        joint.dia.HighlighterView.remove(elementView, 'link-highlight')
+        selected_links = [];
       }
       return;
     }
@@ -95,7 +89,7 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
 });
 
 //link two rects together
-function createLink(model1:joint.shapes.app.ClaimRect, model2:joint.shapes.app.ClaimRect) {
+export function createLink(model1:joint.shapes.app.ClaimRect, model2:joint.shapes.app.ClaimRect) {
   console.log(model1.attributes.link_color);
   //passes in Claim objects
   let link = new joint.shapes.standard.Link();
