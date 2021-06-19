@@ -64,20 +64,17 @@ joint.elementTools.CombinePremiseButton = joint.elementTools.Button.extend({
       
       if (selected_premises.length === 2) {
         //check if two models are the same model
-        if (selected_premises[0].id === selected_premises[1].id) {
-          console.log("duplicate model detected")
-          //duplicate
-          selected_premises.pop();
-        } else {
+        if (selected_premises[0].id !== selected_premises[1].id) {
           //two elements ready for combining
           createDependentPremise(selected_premises[0], selected_premises[1]);
-          console.log("dependent premise made")
+          console.log("dependent premise made");
           // remove original rects
           selected_premises[0].remove();
           selected_premises[1].remove();
-          //empty array
-          selected_premises = [];
         }
+        joint.dia.HighlighterView.remove(elementView, 'dp-highlight')
+        //empty array
+        selected_premises = [];
       }
     }  
   }

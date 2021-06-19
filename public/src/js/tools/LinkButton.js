@@ -37,11 +37,7 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
         action: function () {
             let elementView = this.model.findView(paper);
             // this is where the actual function of the button goes (onclick event basically)
-            console.log('linking mode active');
-            //linking mode active
             selected_links.push(this.model);
-            console.log(this.model.id);
-            console.log("currently selected: " + selected_links);
             //add highlight
             joint.highlighters.mask.add(elementView, { selector: 'root' }, 'link-highlight', {
                 padding: 5,
@@ -53,27 +49,20 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
                 }
             });
             if (selected_links.length === 2) {
-                console.log("length of 2");
                 //check if two models are the same model
-                if (selected_links[0].id === selected_links[1].id) {
-                    console.log("duplicate model detected");
-                    //duplicate
-                    selected_links.pop();
-                }
-                else {
-                    //two elements ready for linking
+                if (selected_links[0].id !== selected_links[1].id) {
                     createLink(selected_links[0], selected_links[1]);
                     console.log("link made");
-                    //empty array
-                    selected_links = [];
                 }
+                joint.dia.HighlighterView.remove(elementView, 'link-highlight');
+                selected_links = [];
             }
             return;
         }
     }
 });
 //link two rects together
-function createLink(model1, model2) {
+export function createLink(model1, model2) {
     console.log(model1.attributes.link_color);
     //passes in Claim objects
     let link = new joint.shapes.standard.Link();
