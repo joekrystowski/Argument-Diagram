@@ -69,12 +69,6 @@ export function createDependentPremise(rect1, rect2) {
     new_dependent_premise.rect.addTo(graph);
     //adds the buttons to each rect
     addDependentPremiseTools(new_dependent_premise.rect);
-    //set position for embed components
-    //bring claims to front
-    let embeds = new_dependent_premise.rect.getEmbeddedCells();
-    for (let i = 0; i < embeds.length; i++) {
-        embeds[i].toFront();
-    }
     new_dependent_premise.rect.toBack();
     return new_dependent_premise;
 }

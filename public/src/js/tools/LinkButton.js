@@ -40,6 +40,12 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
             console.log('linking mode active');
             //linking mode active
             selected_links.push(this.model);
+            if (selected_links.length === 1) {
+                if (selected_links[0].get('parent')) {
+                    selected_links = [];
+                    throw new Error("Can not set dependent premise claim as link source");
+                }
+            }
             console.log(this.model.id);
             console.log("currently selected: " + selected_links);
             //add highlight
