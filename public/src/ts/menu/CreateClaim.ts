@@ -86,5 +86,7 @@ export function createDependentPremise(rect1: joint.shapes.app.ClaimRect, rect2:
     embeds[i].toFront()
   }
 
+  new_dependent_premise.rect.toBack()
+
   return new_dependent_premise;
 }

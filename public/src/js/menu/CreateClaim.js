@@ -75,5 +75,6 @@ export function createDependentPremise(rect1, rect2) {
     for (let i = 0; i < embeds.length; i++) {
         embeds[i].toFront();
     }
+    new_dependent_premise.rect.toBack();
     return new_dependent_premise;
 }
