@@ -25,11 +25,6 @@ Object.assign(joint.shapes, {
 });
 export class Claim {
     constructor(config) {
-        // not used
-        this.position = {
-            x: config.x,
-            y: config.y,
-        };
         //creates a string of text, attempting to fit as many characters as possible
         //into a line of size width, before separating with newline character and repeating
         //90 is default width

@@ -1,6 +1,7 @@
 import { graph } from "./graph.js"
 import { selected_links } from "./tools/LinkButton.js"
 import { selected_premises } from "./tools/CombinePremise.js"
+import { legend } from "./menu/Legend.js";
 
 export function calcHeight(num_lines:number) {
     return 16 + 13 * num_lines;
@@ -19,5 +20,8 @@ graph.on('remove', function(cell) {
         if (selected_premises.length == 1 ) {
             selected_premises.pop();
         }
+
+        console.log('cell', cell);
+        legend.remove(cell);
     }
 })
