@@ -1,6 +1,6 @@
 import { ModelBase } from "backbone";
 import { elementTools } from "jointjs"
-import { graph } from "../graph.js"
+import { graph, paper } from "../graph.js"
 import { addRectTools, addDependentPremiseTools } from "./ManageTools.js"
 import { Claim } from "../Claim.js"
 import { color } from "../colors.js" 
@@ -49,27 +49,14 @@ joint.elementTools.RemoveDependentPreimseButton = joint.elementTools.Button.exte
       action: function (this:any) {
         let model = this.model;
 
-        let spawn_pos = Object.assign({}, model.attributes.position);
-        const spawn_padding = 10;
-        model.attributes.props.forEach((propObj:any, index:number) => {
-          const new_rect = new Claim({
-            x: spawn_pos.x,
-            y: spawn_pos.y,
-            text: propObj.attrs.text.text,
-            type: propObj.type,
-            body_color: color.claim.bodyColor,
-            text_color: color.claim.textColor, 
-            stroke: color.claim.stroke,
-            link_color: color.claim.linkColor,
-            weight: "1.0"
-          });
-
-          new_rect.rect.addTo(graph);
-          addRectTools(new_rect.rect);
-
-          spawn_pos.x += propObj.size.width + spawn_padding;
-          
-        });
+        let embeds = model.getEmbeddedCells();
+        for (let i = 0; i < embeds.length; i++) {
+          model.unembed(embeds[i]);
+          //re-enable drag
+          embeds[i].findView(paper).options.interactive = {elementMove: true}
+          //update tools
+          addRectTools(embeds[i])
+        }
 
         //remove this dependent premise
         model.remove();
