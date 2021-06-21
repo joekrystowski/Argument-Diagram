@@ -22,7 +22,6 @@ export function createClaim(x:number, y:number, text?:string) {
     weight: "1.0"
   });
 
-  console.log('legend from outside', legend);
   legend.add(new_rect);
 
   //add new rect to the graph for displaying
