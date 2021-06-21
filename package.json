@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./server.js"
+    "start": "nodemon ./server.js",
+    "sass": "sass ./public/src/css/style.scss ./public/src/css/style.css --style=compressed --no-source-map",
+    "build": "tsc --build public/tsconfig.json && sass ./public/src/css/style.scss ./public/src/css/style.css --style=compressed --no-source-map"
   },
   "repository": {
     "type": "git",
@@ -26,6 +28,7 @@
     "@types/backbone": "^1.4.10",
     "@types/jointjs": "^2.0.0",
     "nodemon": "^2.0.7",
+    "sass": "^1.34.1",
     "typescript": "^4.3.2"
   }
 }

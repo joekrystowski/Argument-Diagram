@@ -1,0 +1,68 @@
+.fa-save {
+  position: absolute;
+  margin-right: 50%;
+  z-index: 2;
+  transition: var(--transition-speed);
+}
+
+.save-button {
+  /* position: absolute; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: var(--accent-blue);
+  border-radius: 2rem;
+  color: var(--accent-gray);
+  width: 6rem;
+  height: 2.5rem;
+  font-size: 16px;
+  overflow: hidden;
+  transition: var(--transition-speed);
+
+  span {
+    position: absolute;
+    margin-left: 20%;
+    z-index: 2;
+    transition: var(--transition-speed);
+  }
+  &:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 0;
+    border-radius: 2rem;
+    height: 100%;
+    background: var(--accent-green);
+    transition: width var(--transition-speed);
+  }
+  &.changed:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 0;
+    border-radius: 2rem;
+    height: 100%;
+    background: var(--accent-yellow);
+    transition: width var(--transition-speed);
+  }
+  &:hover {
+    color: var(--bg);
+    background-color: var(--bg);
+    > .fa-save {
+      margin-right: 0;
+    }
+    > span {
+      margin-left: 200%;
+    }
+    &:after {
+      width: 100%;
+      &:active {
+        width: 100%;
+        background-color: var(--accent-green);
+      }
+    }
+  }
+}
