@@ -55,8 +55,8 @@ export function createDependentPremise(rect1, rect2) {
     let modelView2 = rect2.findView(paper);
     joint.dia.HighlighterView.remove(modelView2, 'dp-highlight');
     let new_dependent_premise = new DependentPremise({
-        props1: rect1.attributes,
-        props2: rect2.attributes,
+        rect1: rect1,
+        rect2: rect2,
         x: 100,
         y: 100,
         text: "A dependent premise",
@@ -72,5 +72,6 @@ export function createDependentPremise(rect1, rect2) {
     new_dependent_premise.rect.addTo(graph);
     //adds the buttons to each rect
     addDependentPremiseTools(new_dependent_premise.rect);
+    new_dependent_premise.rect.toBack();
     return new_dependent_premise;
 }
