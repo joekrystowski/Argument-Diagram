@@ -55,9 +55,9 @@ function parseJSON(cells: any[]): void {
 				for (let j = 1; j < rects.length; j++) {
 					const second_child = rects[j];
 					//create dependent premise
-					first_child = createDependentPremise(first_child, second_child)
+					first_child = createDependentPremise(first_child, second_child).rect
 				}
-				ids[cells[i].id] = first_child.rect
+				ids[cells[i].id] = first_child
 			}
 
 		}

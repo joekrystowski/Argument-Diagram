@@ -44,19 +44,9 @@ function parseJSON(cells) {
                 for (let j = 1; j < rects.length; j++) {
                     const second_child = rects[j];
                     //create dependent premise
-                    console.log("i");
-                    first_child = createDependentPremise(first_child, second_child);
+                    first_child = createDependentPremise(first_child, second_child).rect;
                 }
-                ids[cells[i].id] = first_child.rect;
-                // let first_child = createClaim(embeds[0].attributes.position.x, embeds[0].attributes.position.y, embeds[0].attributes.attrs.text.text);
-                // ids[embeds[0].id] = first_child.rect;
-                // for (let j = 0; j < embeds.length - 1; j++) {
-                // 	const second_child = createClaim(embeds[j+1].attributes.position.x, embeds[j+1].attributes.position.y, embeds[j+1].attributes.attrs.text.text)
-                // 	ids[embeds[j+1].id] = second_child.rect;
-                // 	const obj = createDependentPremise(first_child.rect, second_child.rect)
-                // 	ids[cells[i].id] = obj.rect;
-                // 	first_child = second_child;
-                // }
+                ids[cells[i].id] = first_child;
             }
         }
         i++;
