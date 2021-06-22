@@ -58,8 +58,8 @@ export class DependentPremise {
         let width = rect1.attributes.size.width + rect2.attributes.size.width;
         let height = Math.max(rect1.attributes.size.height, rect2.attributes.size.height);
         // set position (average position of two rects)
-        let x = (rect1.attributes.position.x + rect2.attributes.position.x) / 2;
-        let y = (rect1.attributes.position.y + rect2.attributes.position.y) / 2;
+        let x = rect1.attributes.position.x;
+        let y = rect1.attributes.position.y;
         // define weight
         // Needs to be implemented, not sure how we want to do this
         //

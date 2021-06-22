@@ -37,6 +37,8 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
         action: function () {
             let elementView = this.model.findView(paper);
             // this is where the actual function of the button goes (onclick event basically)
+            console.log('linking mode active');
+            //linking mode active
             selected_links.push(this.model);
             if (selected_links.length === 1) {
                 if (selected_links[0].get('parent')) {
