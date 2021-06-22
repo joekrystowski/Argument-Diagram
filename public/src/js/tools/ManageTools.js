@@ -22,13 +22,11 @@ export function addRectTools(element) {
     let editButton = new joint.elementTools.EditButton();
     let combinedPremiseButton = new joint.elementTools.CombinePremiseButton();
     let rect_tools;
-    console.log('element', element);
     if (element.get('parent')) {
         //inside dependent premise
         rect_tools = [linkButton];
     }
     else if (element.attributes.inLegendForm) {
-        console.log('inLegendForm');
         rect_tools = [boundaryTool, removeButton, linkButton, combinedPremiseButton];
     }
     else {
