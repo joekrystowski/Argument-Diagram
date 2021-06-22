@@ -95,6 +95,14 @@ export class DependentPremise {
             });
             current_x += cell.attributes.size.width + 12;
         }
+        if (rect1.attributes.type === "dependent-premise") {
+            rect1.unembed(...rect1.getEmbeddedCells());
+            rect1.remove();
+        }
+        if (rect2.attributes.type === "dependent-premise") {
+            rect2.unembed(...rect2.getEmbeddedCells());
+            rect2.remove();
+        }
         //embed models
         for (let i = 0; i < models.length; i++) {
             this.rect.embed(models[i]);
@@ -106,14 +114,6 @@ export class DependentPremise {
             addRectTools(models[i]);
         }
         console.log("NEW DEPENDENT PREMISE", this.rect);
-        if (rect1.attributes.type === "dependent-premise") {
-            rect1.unembed(...rect1.getEmbeddedCells());
-            rect1.remove();
-        }
-        if (rect2.attributes.type === "dependent-premise") {
-            rect2.unembed(...rect2.getEmbeddedCells());
-            rect2.remove();
-        }
     }
 }
 // export function combineText(text1: string, text2: string) {

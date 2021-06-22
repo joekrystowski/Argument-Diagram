@@ -29,6 +29,7 @@ function parseJSON(cells: any[]): void {
 				continue;
 			}
 			if (type === "claim") {
+				console.log("importing claim", cells[i].attrs.text.text)
 				importClaim(cells[i], ids)
 			}
 			else if (type === "objection") {
