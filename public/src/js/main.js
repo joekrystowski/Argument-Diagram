@@ -3,6 +3,7 @@
 import { saveEdits, discardEdits } from "./menu/SaveEditsButton.js";
 import { createClaim, createObjection, } from "./menu/CreateClaim.js";
 import { importGraph, exportGraph } from "./menu/ImportExport.js";
+import { toggleLegend } from './menu/Legend.js';
 const claimImage = new Image();
 claimImage.src = "src/img/Claim.jpg";
 let argCounter = 0; //TODO: temporary until we fix selecting claims
@@ -44,6 +45,8 @@ const importButton = document.getElementById("import-button");
 importButton.addEventListener("click", importGraph);
 const exportButton = document.getElementById("export-button");
 exportButton.addEventListener("click", exportGraph);
+const legendButton = document.getElementById('legend-button');
+legendButton.addEventListener('click', toggleLegend);
 //testing
 //let test = createDependentPremise(arg1.rect, arg2.rect);
 let arg1 = createClaim(100, 100);

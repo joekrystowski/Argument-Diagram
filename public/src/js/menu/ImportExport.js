@@ -14,7 +14,13 @@ function parseJSON(cells) {
         }
         else {
             const pos = cells[i].position;
-            const text = cells[i].attrs.text.text;
+            let text;
+            if (cells[i].inLegendForm) {
+                text = cells[i].storedInfo.initialText;
+            }
+            else {
+                text = cells[i].attrs.text.text;
+            }
             if (type === "claim") {
                 const arg = createClaim(pos.x, pos.y, text);
                 ids[cells[i].id] = arg.rect;
