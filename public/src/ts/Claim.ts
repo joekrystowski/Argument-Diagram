@@ -1,4 +1,6 @@
 import { calcHeight } from "./util.js";
+import { paper } from "./graph.js";
+import { refreshTools } from "./tools/ManageTools.js";
 
 /* global joint */
 const joint = window.joint;
@@ -170,5 +172,6 @@ export class Claim {
 
     //update form boolean
     this.rect.attributes.inLegendForm = !this.rect.attributes.inLegendForm;
+    refreshTools(this.rect);
   }
 }

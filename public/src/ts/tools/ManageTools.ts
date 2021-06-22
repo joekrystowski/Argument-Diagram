@@ -4,6 +4,11 @@ import { elementTools } from 'jointjs';
 import { paper } from '../graph.js'
 import { graph } from '../graph.js'
 
+export function refreshTools (element: joint.shapes.app.ClaimRect) {
+  const view = element.findView(paper);
+  view.hideTools();
+  addRectTools(element);
+}
 // adding tools (buttons) to rects
 export function addRectTools(element: joint.shapes.app.ClaimRect) {
   //element view is in charge of rendering the elements on the paper
@@ -23,13 +28,16 @@ export function addRectTools(element: joint.shapes.app.ClaimRect) {
   let combinedPremiseButton = new joint.elementTools.CombinePremiseButton();
   
   let rect_tools;
+  console.log('element', element);
   if (element.get('parent')) {
     //inside dependent premise
     rect_tools = [linkButton]
+  } else if (element.attributes.inLegendForm) {
+    console.log('inLegendForm');
+    rect_tools = [boundaryTool, removeButton, linkButton, combinedPremiseButton];
   } else {
     //outside dependent premise
-    rect_tools = [boundaryTool, removeButton, linkButton, editButton, combinedPremiseButton
-    ]
+    rect_tools = [boundaryTool, removeButton, linkButton, editButton, combinedPremiseButton];
   }
 
   let toolsView = new joint.dia.ToolsView({

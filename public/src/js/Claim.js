@@ -1,4 +1,5 @@
 import { calcHeight } from "./util.js";
+import { refreshTools } from "./tools/ManageTools.js";
 /* global joint */
 const joint = window.joint;
 const ClaimRect = joint.shapes.standard.Rectangle.define("app.ClaimRect", {
@@ -135,5 +136,6 @@ export class Claim {
         }
         //update form boolean
         this.rect.attributes.inLegendForm = !this.rect.attributes.inLegendForm;
+        refreshTools(this.rect);
     }
 }
