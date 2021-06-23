@@ -1,16 +1,18 @@
 import { graph } from '../graph.js';
 import { createClaim, createDependentPremise, } from "../menu/CreateClaim.js";
 import { createLink } from "../tools/LinkButton.js";
+import { legend } from './Legend.js';
 // not fully working
-function parseJSON(cells) {
+function parseJSON(cells, legend_import) {
     let ids = {};
     var i = 0, len = cells.length;
+    //parse cells
     while (i < len) {
         const type = cells[i].type;
         if (type === "standard.Link") {
             const source = cells[i].source.id;
             const target = cells[i].target.id;
-            createLink(ids[source], ids[target]);
+            createLink(ids[source].rect, ids[target].rect);
         }
         else {
             //skip if has parent, will be added when dp is added
@@ -20,7 +22,6 @@ function parseJSON(cells) {
                 continue;
             }
             if (type === "claim") {
-                console.log("importing claim", cells[i].attrs.text.text);
                 importClaim(cells[i], ids);
             }
             else if (type === "objection") {
@@ -45,12 +46,20 @@ function parseJSON(cells) {
                 for (let j = 1; j < rects.length; j++) {
                     const second_child = rects[j];
                     //create dependent premise
-                    first_child = createDependentPremise(first_child, second_child).rect;
+                    first_child = createDependentPremise(first_child, second_child);
                 }
                 ids[cells[i].id] = first_child;
             }
         }
         i++;
+    }
+    //build legend
+    legend.enable();
+    for (let id in ids) {
+        legend.insert(ids[id], legend_import[id], true);
+    }
+    if (legend.active) {
+        $('#legend-button').trigger('click');
     }
 }
 export function importGraph() {
@@ -71,14 +80,21 @@ export function importGraph() {
             const erase = window.confirm("Erase your current workspace?");
             if (erase) {
                 graph.clear();
-                parseJSON(JSON.parse(content).cells);
+                legend.clear();
+                legend.disable();
+                const dataObj = JSON.parse(content);
+                parseJSON(dataObj.cells, dataObj.legend);
             }
         };
     };
     input.click();
 }
 export function exportGraph() {
-    const data = JSON.stringify(graph.toJSON(), null, 2);
+    let graph_data = JSON.stringify(graph.toJSON(), null, 2);
+    let dataObj = JSON.parse(graph_data);
+    dataObj.legend = legend.toExportForm();
+    console.log(dataObj);
+    const data = JSON.stringify(dataObj, null, 2);
     const filename = "myDiagram.json"; // default name
     const file = new Blob([data], { type: "application/json" });
     if (window.navigator.msSaveOrOpenBlob) { // IE10+
@@ -108,8 +124,14 @@ function getCellById(id, cells) {
 }
 function importClaim(cell, ids) {
     const pos = cell.position;
-    const text = cell.attrs.text.text;
+    let text;
+    if (cell.inLegendForm) {
+        text = cell.storedInfo.initialText;
+    }
+    else {
+        text = cell.attrs.text.text;
+    }
     const arg = createClaim(pos.x, pos.y, text);
-    ids[cell.id] = arg.rect;
+    ids[cell.id] = arg;
     return arg.rect;
 }

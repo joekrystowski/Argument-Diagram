@@ -5,6 +5,7 @@ import { addRectTools, addDependentPremiseTools } from '../tools/ManageTools.js'
 import { graph, paper } from '../graph.js'
 import { Claim } from '../Claim.js'
 import { DependentPremise } from '../DependentPremise.js';
+import { legend } from './Legend.js';
 
 //when new-claim-button is clicked
 export function createClaim(x:number, y:number, text?:string) {
@@ -20,6 +21,8 @@ export function createClaim(x:number, y:number, text?:string) {
     link_color: color.claim.linkColor,
     weight: "1.0"
   });
+
+  legend.add(new_rect);
 
   //add new rect to the graph for displaying
   new_rect.rect.addTo(graph);
