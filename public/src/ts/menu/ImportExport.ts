@@ -58,7 +58,7 @@ function parseJSON(cells: any[], legend_import:LegendMap): void {
 				for (let j = 1; j < rects.length; j++) {
 					const second_child = rects[j];
 					//create dependent premise
-					first_child = createDependentPremise(first_child, second_child).rect
+					first_child = createDependentPremise(first_child, second_child)
 				}
 				ids[cells[i].id] = first_child
 			}
