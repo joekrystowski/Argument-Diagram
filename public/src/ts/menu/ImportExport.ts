@@ -53,8 +53,11 @@ function parseJSON(cells: any[], legend_import:LegendMap): void {
 	for(let id in ids) {
 		legend.insert(ids[id], legend_import[id], true);
 	}
-	
 
+	if(legend.active) {
+		$('#legend-button').trigger('click');
+	}
+	
 }
 
 export function importGraph(): void {
