@@ -2,8 +2,10 @@
 const joint = window.joint;
 
 import { color } from "./colors.js"
-import { paper } from "./graph.js";
+import { graph, paper } from "./graph.js";
 import { addRectTools } from "./tools/ManageTools.js"
+import { selected_links } from "./tools/LinkButton.js"
+import { selected_premises } from "./tools/CombinePremise.js";
 
 declare module "jointjs" {
   namespace shapes {
@@ -145,6 +147,21 @@ export class DependentPremise {
       }
       //update tools
       addRectTools(models[i]);
+
+      //remove outgoing links
+      let links = graph.getConnectedLinks(models[i], {outbound: true})
+      links.forEach(link => {
+        link.remove();
+      });
+
+      //remove from link selection if applicable
+      if (selected_links[0]) {
+        if (selected_links[0] === models[i]) {
+          joint.dia.HighlighterView.remove(models[i].findView(paper), 'link-highlight')
+          //alternate way to clear array that gets around typescript import restrictions
+          selected_links.splice(0,selected_links.length);
+        }
+      }
     }
 
     console.log("NEW DEPENDENT PREMISE", this.rect);
