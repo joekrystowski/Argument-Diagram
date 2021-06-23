@@ -48,6 +48,9 @@ joint.elementTools.EditButton = joint.elementTools.Button.extend({
             const switchLabel = document.getElementById("switch-label");
             objectionLabel.style.visibility = "visible";
             switchLabel.style.visibility = "visible";
+            if (!$('#legend-info').hasClass('collapsed')) {
+                $('#toggle-legend-info-button').trigger('click');
+            }
             const editView = $('#edit-container');
             editView.show(200);
             const form = $('#edit-form');

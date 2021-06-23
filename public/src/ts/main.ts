@@ -7,7 +7,7 @@ import {
   createDependentPremise,
 } from "./menu/CreateClaim.js";
 import { importGraph, exportGraph } from "./menu/ImportExport.js";
-import { toggleLegend } from './menu/Legend.js';
+import { legend, toggleLegend } from './menu/Legend.js';
 import { Claim } from "./Claim.js";
 import { color } from "./colors.js";
 import { paper, graph } from "./graph.js";
@@ -65,7 +65,41 @@ exportButton.addEventListener("click", exportGraph);
 const legendButton = document.getElementById('legend-button') as HTMLElement;
 legendButton.addEventListener('click', toggleLegend);
 
+$('#toggle-legend-info-button').on('click', function() {
+  const legend_info = $('#legend-info');
+  if (legend_info.hasClass('collapsed')) {
+    legend_info.css('width', '20%');
+    legend_info.css('border-right', '1px solid white');
+    $(this).html('<i class="fa fa-chevron-left fa-2x"></i>');
+    legend_info.find('.collapsed-content').show();
+  }
+  else {
+    legend_info.css('width', '0px');
+    legend_info.css('border-right', '1px solid transparent');
+    $(this).html('<i class="fa fa-chevron-right fa-2x"></i>');
+    legend_info.find('.collapsed-content').hide();
+  }
+
+  legend_info.toggleClass('collapsed');
+});
+
+let sort_start = 0;
+$('.sortable').sortable({
+  placeholder: 'sortable-placeholder',
+  start: function(event:Event, ui:any) {
+    sort_start = ui.item.index();
+  },
+  stop: function(event:Event, ui:any) {
+    console.log('start:', sort_start);
+    console.log('stop:', ui.item.index());
+    legend.reorder(sort_start, ui.item.index());
+  }
+});
+
 //testing
 //let test = createDependentPremise(arg1.rect, arg2.rect);
-let arg1 = createClaim(100, 100);
-let arg2 = createClaim(300, 100);
+createClaim(100, 100, 'Claim 1 aaaaaaaaaaaaadjklajsdlkajsdlkajsdlaksjdlkajsdlasjdlkj');
+createClaim(300, 100, 'Claim 2');
+createClaim(500, 100, 'Claim 3');
+createClaim(700, 100, 'Claim 4');
+createClaim(900, 100, 'Claim 5');

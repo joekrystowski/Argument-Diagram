@@ -43,7 +43,11 @@ class Legend {
         // Loop through legend
         //   Detect discrepancies/gaps
         //   depending on the state of the legend (active or not) set text of claims appropriately
-        
+        // update DOM legend list
+
+        const legend_list = $('#legend-list');
+        legend_list.empty();
+
         let prevIndex = -1;
         this.legend.forEach( (claim:Claim, index:number) => {
             if(Math.abs(index-prevIndex) !== 1) {
@@ -59,9 +63,25 @@ class Legend {
                 //make sure the legend number is correct
                 claim.rect.attr('text/text', index+1);
             }
-
+            
+            //update text on legend list to make sure it is the most recent
+            legend_list.append(generateLegendListItem(claim.retrieveFromStorage('initialText'), index+1));
+        
             prevIndex = index;
         });
+    }
+
+    insert (claim:Claim, index:number) {
+        this.legend = [...this.legend.slice(0, index), claim, ...this.legend.slice(index)];
+        this.refresh();
+    }
+
+    reorder (from:number, to:number) {
+        console.log('reordering...');
+        const claim = this.legend[from];
+        this.removeAtIndex(from);
+        this.insert(claim, to);
+        this.refresh();
     }
 }
 
@@ -77,3 +97,6 @@ export function toggleLegend(this: JQuery) {
     legend.toggle();
 }
 
+function generateLegendListItem(text:string, number:number) {
+    return `<li class="legend-list-item">${number}. ${text}</li>`
+}
