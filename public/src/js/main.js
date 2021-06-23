@@ -50,14 +50,10 @@ legendButton.addEventListener('click', toggleLegend);
 $('#toggle-legend-info-button').on('click', function () {
     const legend_info = $('#legend-info');
     if (legend_info.hasClass('collapsed')) {
-        legend_info.css('width', '20%');
-        legend_info.css('border-right', '1px solid white');
         $(this).html('<i class="fa fa-chevron-left fa-2x"></i>');
         legend_info.find('.collapsed-content').show();
     }
     else {
-        legend_info.css('width', '0px');
-        legend_info.css('border-right', '1px solid transparent');
         $(this).html('<i class="fa fa-chevron-right fa-2x"></i>');
         legend_info.find('.collapsed-content').hide();
     }
@@ -77,7 +73,7 @@ $('.sortable').sortable({
 });
 //testing
 //let test = createDependentPremise(arg1.rect, arg2.rect);
-createClaim(100, 100, 'Claim 1 aaaaaaaaaaaaadjklajsdlkajsdlkajsdlaksjdlkajsdlasjdlkj');
+createClaim(100, 100, 'Claim 1 aaaaaaaaaaaaadjklajsdlkajsdlkaj sdlaksjdlkajsdlasjdlkj');
 createClaim(300, 100, 'Claim 2');
 createClaim(500, 100, 'Claim 3');
 createClaim(700, 100, 'Claim 4');

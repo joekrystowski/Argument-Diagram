@@ -1,20 +1,24 @@
 import { graph } from '../graph.js';
 import { createClaim, createObjection, } from "../menu/CreateClaim.js";
 import { createLink } from "../tools/LinkButton.js";
+import { legend } from './Legend.js';
 // not fully working
-function parseJSON(cells) {
+function parseJSON(cells, legend_import) {
     let ids = {};
     var i = 0, len = cells.length;
+    //parse cells
     while (i < len) {
         const type = cells[i].type;
         if (type === "standard.Link") {
             const source = cells[i].source.id;
             const target = cells[i].target.id;
-            createLink(ids[source], ids[target]);
+            createLink(ids[source].rect, ids[target].rect);
         }
         else {
             const pos = cells[i].position;
             let text;
+            //if the graph was saved in legend mode, we need to retrieve the actual text
+            //of the cell, not the legend number
             if (cells[i].inLegendForm) {
                 text = cells[i].storedInfo.initialText;
             }
@@ -23,15 +27,20 @@ function parseJSON(cells) {
             }
             if (type === "claim") {
                 const arg = createClaim(pos.x, pos.y, text);
-                ids[cells[i].id] = arg.rect;
+                ids[cells[i].id] = arg;
             }
             else if (type === "objection") {
                 const obj = createObjection(pos.x, pos.y, text);
-                ids[cells[i].id] = obj.rect;
+                ids[cells[i].id] = obj;
             }
             // insert dependent premise here
         }
         i++;
+    }
+    //build legend
+    legend.enable();
+    for (let id in ids) {
+        legend.insert(ids[id], legend_import[id], true);
     }
 }
 export function importGraph() {
@@ -52,14 +61,21 @@ export function importGraph() {
             const erase = window.confirm("Erase your current workspace?");
             if (erase) {
                 graph.clear();
-                parseJSON(JSON.parse(content).cells);
+                legend.clear();
+                legend.disable();
+                const dataObj = JSON.parse(content);
+                parseJSON(dataObj.cells, dataObj.legend);
             }
         };
     };
     input.click();
 }
 export function exportGraph() {
-    const data = JSON.stringify(graph.toJSON(), null, 2);
+    let graph_data = JSON.stringify(graph.toJSON(), null, 2);
+    let dataObj = JSON.parse(graph_data);
+    dataObj.legend = legend.toExportForm();
+    console.log(dataObj);
+    const data = JSON.stringify(dataObj, null, 2);
     const filename = "myDiagram.json"; // default name
     const file = new Blob([data], { type: "application/json" });
     if (window.navigator.msSaveOrOpenBlob) { // IE10+

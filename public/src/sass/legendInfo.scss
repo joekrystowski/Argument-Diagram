@@ -7,11 +7,36 @@
     left: 0px;
     top: 0px;
     height: 100%;
-    width: 0px;
     transition: width 0.3s;
+
+    &.collapsed {
+        width: 0px;
+        border-right: 1px solid transparent;
+    }
+
+    &:not(.collapsed) {
+        width: 320px;
+        border-right: 1px solid white;
+    }
+
+    #toggle-legend-info-button {
+        position: absolute;
+        color: white;
+        background-color: var(--toolbar-bg);
+        padding: 0px;
+        top: 50%;
+        right: -30px;
+        border: 1px solid white;
+        border-left: none;
+        height: 50px;
+        width: 40px;
+        border-radius: 0 60px 60px 0;
+    }
 
     .collapsed-content {
         padding: 5px;
+        overflow-y: scroll;
+        height: 100%;
     }
 
     h1 {
@@ -29,38 +54,29 @@
         margin-inline-start: 0;
         margin-inline-end: 0;
         padding-inline-start: 0;
+
+        .legend-list-item {
+            width: 90%;
+            padding: 10px;
+            text-align: left;
+    
+            &:hover {
+                background-color: var(--toolbar-hover);
+                cursor: grab;
+            }
+        }
+
+        .legend-list-item:not(:last-child) {
+            border-bottom: 0.5px dashed white;
+        }
     }
 
-    .legend-list-item {
-        width: 90%;
-        padding: 10px;
-        text-align: left;
-    }
-
-    .legend-list-item:hover {
-        background-color: var(--toolbar-hover);
-        cursor: grab;
-    }
 }
 
 .sortable-placeholder {
     background-color: black;
     border: 2px dotted white;
     height: 40px;
-}
-
-#toggle-legend-info-button {
-    position: absolute;
-    color: white;
-    background-color: var(--toolbar-bg);
-    padding: 0px;
-    top: 50%;
-    right: -30px;
-    border: 1px solid white;
-    border-left: none;
-    height: 50px;
-    width: 40px;
-    border-radius: 0 60px 60px 0;
 }
 
 .collapsed-content {
