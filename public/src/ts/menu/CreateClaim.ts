@@ -53,6 +53,8 @@ export function createObjection(x:number, y:number, text?:string) {
 export function createDependentPremise(rect1: joint.shapes.app.ClaimRect, rect2: joint.shapes.app.ClaimRect) {
   //creating new rect (Joint.js object)
   //remove highlights from rect1 and rect2
+  console.log("rect1",rect1)
+  console.log("rect2",rect2)
   let modelView1 = rect1.findView(paper)
   joint.dia.HighlighterView.remove(modelView1, 'dp-highlight')
   let modelView2 = rect2.findView(paper)

@@ -1,5 +1,5 @@
 import { graph } from '../graph.js';
-import { createClaim, createObjection, } from "../menu/CreateClaim.js";
+import { createClaim, createDependentPremise, } from "../menu/CreateClaim.js";
 import { createLink } from "../tools/LinkButton.js";
 // not fully working
 function parseJSON(cells) {
@@ -13,17 +13,42 @@ function parseJSON(cells) {
             createLink(ids[source], ids[target]);
         }
         else {
-            const pos = cells[i].position;
-            const text = cells[i].attrs.text.text;
+            //skip if has parent, will be added when dp is added
+            if (cells[i].parent) {
+                console.log("imported cell has parent");
+                i++;
+                continue;
+            }
             if (type === "claim") {
-                const arg = createClaim(pos.x, pos.y, text);
-                ids[cells[i].id] = arg.rect;
+                console.log("importing claim", cells[i].attrs.text.text);
+                importClaim(cells[i], ids);
             }
             else if (type === "objection") {
-                const obj = createObjection(pos.x, pos.y, text);
-                ids[cells[i].id] = obj.rect;
+                importClaim(cells[i], ids);
             }
             // insert dependent premise here
+            else if (type === "dependent-premise") {
+                //get list of embed ids
+                let embeds;
+                embeds = cells[i].embeds;
+                //create all embeded children
+                let rects;
+                rects = [];
+                embeds.forEach(id => {
+                    let child = getCellById(id, cells);
+                    //create child
+                    let rect = importClaim(child, ids);
+                    rects.push(rect);
+                });
+                //embed children
+                let first_child = rects[0];
+                for (let j = 1; j < rects.length; j++) {
+                    const second_child = rects[j];
+                    //create dependent premise
+                    first_child = createDependentPremise(first_child, second_child).rect;
+                }
+                ids[cells[i].id] = first_child;
+            }
         }
         i++;
     }
@@ -71,4 +96,20 @@ export function exportGraph() {
             window.URL.revokeObjectURL(url);
         }, 0);
     }
+}
+function getCellById(id, cells) {
+    for (let cell of cells) {
+        if (cell.id == id) {
+            return cell;
+        }
+    }
+    ;
+    throw new Error("Cell id not found");
+}
+function importClaim(cell, ids) {
+    const pos = cell.position;
+    const text = cell.attrs.text.text;
+    const arg = createClaim(pos.x, pos.y, text);
+    ids[cell.id] = arg.rect;
+    return arg.rect;
 }
