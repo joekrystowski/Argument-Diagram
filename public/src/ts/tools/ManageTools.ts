@@ -1,9 +1,21 @@
 /* global joint paper */
 const joint = window.joint;
+import { elementTools } from 'jointjs';
 import { paper } from '../graph.js'
+import { graph } from '../graph.js'
 
+export function refreshTools (element: joint.shapes.app.ClaimRect) {
+  const view = element.findView(paper);
+  view.hideTools();
+  addRectTools(element);
+}
 // adding tools (buttons) to rects
 export function addRectTools(element: joint.shapes.app.ClaimRect) {
+  //element view is in charge of rendering the elements on the paper
+  let elementView = element.findView(paper);
+  //clear any old tools
+  elementView.removeTools();
+
   // boundary tool shows boundaries of element
   let boundaryTool = new joint.elementTools.Boundary();
   //remove tool deletes a rect
@@ -15,25 +27,25 @@ export function addRectTools(element: joint.shapes.app.ClaimRect) {
 
   let combinedPremiseButton = new joint.elementTools.CombinePremiseButton();
   
-  let rect_tools = [boundaryTool, removeButton, linkButton, editButton]
-
-  //only add dependent premise tool to claim type, not objection
-  if (element.attributes.type == "claim") {
-    console.log("adding dp button");
-    rect_tools.push(combinedPremiseButton);
+  let rect_tools;
+  if (element.get('parent')) {
+    //inside dependent premise
+    rect_tools = [linkButton]
+  } else if (element.attributes.inLegendForm) {
+    rect_tools = [boundaryTool, removeButton, linkButton, combinedPremiseButton];
+  } else {
+    //outside dependent premise
+    rect_tools = [boundaryTool, removeButton, linkButton, editButton, combinedPremiseButton];
   }
 
   let toolsView = new joint.dia.ToolsView({
     tools: rect_tools
   });
-
-  //element view is in charge of rendering the elements on the paper
-  let elementView = element.findView(paper);
   elementView.addTools(toolsView);
   //start with tools hidden
   elementView.hideTools();
 
-  element.on("change:position", function () {
+  element.on("change:position", function (eventView) {
     paper.hideTools();
     elementView.showTools();
   })

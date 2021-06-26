@@ -37,7 +37,17 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
         action: function () {
             let elementView = this.model.findView(paper);
             // this is where the actual function of the button goes (onclick event basically)
+            console.log('linking mode active');
+            //linking mode active
             selected_links.push(this.model);
+            if (selected_links.length === 1) {
+                if (selected_links[0].get('parent')) {
+                    selected_links = [];
+                    throw new Error("Can not set dependent premise claim as link source");
+                }
+            }
+            console.log(this.model.id);
+            console.log("currently selected: " + selected_links);
             //add highlight
             joint.highlighters.mask.add(elementView, { selector: 'root' }, 'link-highlight', {
                 padding: 5,
@@ -52,7 +62,6 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
                 //check if two models are the same model
                 if (selected_links[0].id !== selected_links[1].id) {
                     createLink(selected_links[0], selected_links[1]);
-                    console.log("link made");
                 }
                 joint.dia.HighlighterView.remove(elementView, 'link-highlight');
                 selected_links = [];
@@ -64,6 +73,11 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
 //link two rects together
 export function createLink(model1, model2) {
     console.log(model1.attributes.link_color);
+    //prevent dp from linking to one of its children
+    if (model2.get('parent') && graph.getCell(model2.get("parent")) === model1) {
+        console.log("ERROR: Dependent premise can not link to one of its own embeded children");
+        return;
+    }
     //passes in Claim objects
     let link = new joint.shapes.standard.Link();
     link.source(model1);
@@ -93,6 +107,7 @@ export function createLink(model1, model2) {
     //link rects on graph
     console.log(link);
     link.addTo(graph);
+    console.log("link made");
     addLinkTools(link);
     //remove highlights from models
     let linkView1 = model1.findView(paper);

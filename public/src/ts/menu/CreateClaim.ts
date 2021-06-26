@@ -5,6 +5,7 @@ import { addRectTools, addDependentPremiseTools } from '../tools/ManageTools.js'
 import { graph, paper } from '../graph.js'
 import { Claim } from '../Claim.js'
 import { DependentPremise } from '../DependentPremise.js';
+import { legend } from './Legend.js';
 
 //when new-claim-button is clicked
 export function createClaim(x:number, y:number, text?:string) {
@@ -20,6 +21,8 @@ export function createClaim(x:number, y:number, text?:string) {
     link_color: color.claim.linkColor,
     weight: "1.0"
   });
+
+  legend.add(new_rect);
 
   //add new rect to the graph for displaying
   new_rect.rect.addTo(graph);
@@ -53,14 +56,16 @@ export function createObjection(x:number, y:number, text?:string) {
 export function createDependentPremise(rect1: joint.shapes.app.ClaimRect, rect2: joint.shapes.app.ClaimRect) {
   //creating new rect (Joint.js object)
   //remove highlights from rect1 and rect2
+  console.log("rect1",rect1)
+  console.log("rect2",rect2)
   let modelView1 = rect1.findView(paper)
   joint.dia.HighlighterView.remove(modelView1, 'dp-highlight')
   let modelView2 = rect2.findView(paper)
   joint.dia.HighlighterView.remove(modelView2, 'dp-highlight')
 
   let new_dependent_premise = new DependentPremise({
-    props1: rect1.attributes,
-    props2: rect2.attributes,
+    rect1: rect1,
+    rect2: rect2,
     x: 100,
     y: 100,
     text: "A dependent premise",
@@ -77,6 +82,8 @@ export function createDependentPremise(rect1: joint.shapes.app.ClaimRect, rect2:
   new_dependent_premise.rect.addTo(graph);
   //adds the buttons to each rect
   addDependentPremiseTools(new_dependent_premise.rect);
+
+  new_dependent_premise.rect.toBack()
 
   return new_dependent_premise;
 }
