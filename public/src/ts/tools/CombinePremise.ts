@@ -69,8 +69,10 @@ joint.elementTools.CombinePremiseButton = joint.elementTools.Button.extend({
           createDependentPremise(selected_premises[0], selected_premises[1]);
           console.log("dependent premise made");
           // remove original rects
-          selected_premises[0].remove();
-          selected_premises[1].remove();
+          //selected_premises[0].remove();
+          //selected_premises[1].remove();
+          //empty array
+          selected_premises = [];
         }
         joint.dia.HighlighterView.remove(elementView, 'dp-highlight')
         //empty array

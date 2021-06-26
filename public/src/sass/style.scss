@@ -6,6 +6,7 @@
 @use 'objectionSwitch';
 @use 'toolbar';
 @use 'claim';
+@use 'legendInfo';
 
 :root {
   font-size: 16px;
@@ -22,6 +23,7 @@
 
   --bg: #222222;
   --toolbar-bg: #363434;
+  --toolbar-hover: #5e5a5a;
 }
 
 body,
