@@ -3,6 +3,7 @@
 import { saveEdits, discardEdits } from "./menu/SaveEditsButton.js";
 import { createClaim, createObjection, } from "./menu/CreateClaim.js";
 import { importGraph, exportGraph } from "./menu/ImportExport.js";
+import { savePNG } from "./menu/saveAs.js";
 import { legend, toggleLegend } from './menu/Legend.js';
 const claimImage = new Image();
 claimImage.src = "src/img/Claim.jpg";
@@ -45,6 +46,8 @@ const importButton = document.getElementById("import-button");
 importButton.addEventListener("click", importGraph);
 const exportButton = document.getElementById("export-button");
 exportButton.addEventListener("click", exportGraph);
+const downloadButton = document.getElementById("download-button");
+downloadButton.addEventListener("click", savePNG);
 const legendButton = document.getElementById('legend-button');
 legendButton.addEventListener('click', toggleLegend);
 $('#toggle-legend-info-button').on('click', function () {
