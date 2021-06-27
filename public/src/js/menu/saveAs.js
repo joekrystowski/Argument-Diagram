@@ -1,8 +1,19 @@
 import { paper } from '../graph.js';
 import { save } from '../util.js';
+import { legend } from './Legend.js';
+/*
+function createCanvas(): string {
+
+} */
 export function savePNG() {
     const svg = paper.svg;
-    // serialize our node
+    paper.hideTools();
+    let toggleBack = false;
+    if (legend.active) {
+        legend.toggle();
+        toggleBack = true;
+    }
+    // serialize
     const svgData = (new XMLSerializer()).serializeToString(svg);
     // encode special chars
     const svgURL = 'data:image/svg+xml; charset=utf8, ' + encodeURIComponent(svgData);
@@ -10,7 +21,6 @@ export function savePNG() {
     const svgImg = new Image();
     const canvas = document.createElement('canvas');
     svgImg.onload = function () {
-        // IE11 doesn't set a width on svg images...
         const bound = svg.getBoundingClientRect();
         canvas.width = bound.width;
         canvas.height = bound.height;
@@ -20,8 +30,30 @@ export function savePNG() {
         ctx.drawImage(svgImg, 0, 0, canvas.width, canvas.height);
         const data = canvas.toDataURL("image/png", 1.0);
         save(data, "image/png", "myDiagram.png");
+        if (toggleBack)
+            $('#legend-button').trigger('click');
     };
     svgImg.src = svgURL;
 }
 export function savePDF() {
+    /*
+    const width  = canvas.width;
+    const height = canvas.height;
+  
+    const data = canvas.toDataURL("image/png", 1.0);
+    const pdf = new jsPDF("l", "px", [width, height]);
+  
+    // Get name
+    if (projectName.replace(/\s+/g, "") === "")
+        projectName = "Untitled Circuit";
+  
+    // Fill background
+    pdf.setFillColor("#CCC");
+    pdf.rect(0, 0, width, height, "F");
+  
+    const pdfWidth  = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+  
+    pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight);
+    pdf.save(projectName + ".pdf"); */
 }

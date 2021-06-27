@@ -70,11 +70,11 @@ function parseJSON(cells: any[], legend_import:LegendMap): void {
 
 	//build legend
 	legend.enable();
-	for(let id in ids) {
+	for (let id in ids) {
 		legend.insert(ids[id], legend_import[id], true);
 	}
 
-	if(legend.active) {
+	if (legend.active) {
 		$('#legend-button').trigger('click');
 	}
 	
