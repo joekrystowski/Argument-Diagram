@@ -4,9 +4,8 @@ import { selected_premises } from "./tools/CombinePremise.js";
 import { legend } from "./menu/Legend.js";
 export function save(data, filetype, filename) {
     const file = new Blob([data], { type: filetype });
-    if (window.navigator.msSaveOrOpenBlob) { // IE10+
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
         window.navigator.msSaveOrOpenBlob(file, filename);
-    }
     else { // Others
         const a = document.createElement("a");
         //const url = URL.createObjectURL(file);
