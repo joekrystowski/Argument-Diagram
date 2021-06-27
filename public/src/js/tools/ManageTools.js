@@ -1,6 +1,11 @@
 /* global joint paper */
 const joint = window.joint;
 import { paper } from '../graph.js';
+export function refreshTools(element) {
+    const view = element.findView(paper);
+    view.hideTools();
+    addRectTools(element);
+}
 // adding tools (buttons) to rects
 export function addRectTools(element) {
     //element view is in charge of rendering the elements on the paper
@@ -21,10 +26,12 @@ export function addRectTools(element) {
         //inside dependent premise
         rect_tools = [linkButton];
     }
+    else if (element.attributes.inLegendForm) {
+        rect_tools = [boundaryTool, removeButton, linkButton, combinedPremiseButton];
+    }
     else {
         //outside dependent premise
-        rect_tools = [boundaryTool, removeButton, linkButton, editButton, combinedPremiseButton
-        ];
+        rect_tools = [boundaryTool, removeButton, linkButton, editButton, combinedPremiseButton];
     }
     let toolsView = new joint.dia.ToolsView({
         tools: rect_tools

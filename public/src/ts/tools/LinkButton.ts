@@ -78,7 +78,6 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
         //check if two models are the same model
         if (selected_links[0].id !== selected_links[1].id) {
           createLink(selected_links[0], selected_links[1]);
-          console.log("link made")
         }
         joint.dia.HighlighterView.remove(elementView, 'link-highlight')
         selected_links = [];
@@ -91,10 +90,18 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
 //link two rects together
 export function createLink(model1:joint.shapes.app.ClaimRect, model2:joint.shapes.app.ClaimRect) {
   console.log(model1.attributes.link_color);
+
+  //prevent dp from linking to one of its children
+  if (model2.get('parent') && graph.getCell(model2.get("parent")) === model1 ) {
+    console.log("ERROR: Dependent premise can not link to one of its own embeded children")
+    return;
+  }
+
   //passes in Claim objects
   let link = new joint.shapes.standard.Link();
   link.source(model1);
   link.target(model2);
+
   //link attributes based on arg1/rect1 (source)
   link.attr({
     line: {
@@ -120,6 +127,7 @@ export function createLink(model1:joint.shapes.app.ClaimRect, model2:joint.shape
   //link rects on graph
   console.log(link);
   link.addTo(graph);
+  console.log("link made")
   addLinkTools(link);
 
   //remove highlights from models

@@ -1,6 +1,7 @@
 /* global joint editModel */
 const joint = window.joint;
 import { editModel } from '../tools/EditButton.js';
+import { legend } from './Legend.js';
 export function saveEdits() {
     let texts = $('[name^="model-text-"]').toArray();
     let text_wraps = texts.map((element) => joint.util.breakText(element.value, { width: 90 }));
@@ -45,12 +46,14 @@ export function saveEdits() {
         }
         //just update the single model with the new text and size
         editModel.attr('text/text', text_wraps[0]);
+        editModel.attributes.storedInfo.initialText = text_wraps[0];
         editModel.resize(editModel.attributes.size.width, heights[0]);
     }
     const saveButton = document.getElementById("save-edit-button");
     saveButton === null || saveButton === void 0 ? void 0 : saveButton.classList.remove("changed");
     const editContainer = $('#edit-container');
     editContainer.hide(200);
+    legend.refresh();
 }
 export function discardEdits() {
     const editContainer = $('#edit-container');

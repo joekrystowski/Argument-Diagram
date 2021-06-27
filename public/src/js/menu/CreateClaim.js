@@ -4,6 +4,7 @@ import { addRectTools, addDependentPremiseTools } from '../tools/ManageTools.js'
 import { graph, paper } from '../graph.js';
 import { Claim } from '../Claim.js';
 import { DependentPremise } from '../DependentPremise.js';
+import { legend } from './Legend.js';
 //when new-claim-button is clicked
 export function createClaim(x, y, text) {
     //creating new rect (Joint.js object)
@@ -18,6 +19,7 @@ export function createClaim(x, y, text) {
         link_color: color.claim.linkColor,
         weight: "1.0"
     });
+    legend.add(new_rect);
     //add new rect to the graph for displaying
     new_rect.rect.addTo(graph);
     //adds the buttons to each rect
@@ -47,6 +49,8 @@ export function createObjection(x, y, text) {
 export function createDependentPremise(rect1, rect2) {
     //creating new rect (Joint.js object)
     //remove highlights from rect1 and rect2
+    console.log("rect1", rect1);
+    console.log("rect2", rect2);
     let modelView1 = rect1.findView(paper);
     joint.dia.HighlighterView.remove(modelView1, 'dp-highlight');
     let modelView2 = rect2.findView(paper);

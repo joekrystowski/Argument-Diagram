@@ -2,6 +2,7 @@
 const joint = window.joint;
 import { editModel } from '../tools/EditButton.js';
 import { Claim } from '../Claim.js';
+import { legend } from './Legend.js';
 
 export function saveEdits() {
   let texts:Array<HTMLElement> = $('[name^="model-text-"]').toArray();
@@ -51,6 +52,7 @@ export function saveEdits() {
 
     //just update the single model with the new text and size
     editModel.attr('text/text', text_wraps[0]);
+    editModel.attributes.storedInfo.initialText = text_wraps[0];
     editModel.resize(editModel.attributes.size.width, heights[0]);
   }
   
@@ -59,6 +61,8 @@ export function saveEdits() {
 
   const editContainer = $('#edit-container');
   editContainer.hide(200);
+
+  legend.refresh();
 }
 
 

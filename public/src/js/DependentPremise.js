@@ -1,8 +1,9 @@
 /* global joint */
 const joint = window.joint;
 import { color } from "./colors.js";
-import { paper } from "./graph.js";
+import { graph, paper } from "./graph.js";
 import { addRectTools } from "./tools/ManageTools.js";
+import { selected_links } from "./tools/LinkButton.js";
 //custom shape declaration for DependentPremise
 const DependentPremiseRect = joint.shapes.standard.Rectangle.define("app.DependentPremise", {
     markup: '<g class="rotatable"><g class="scalable"><rect/></g><text/></g>',
@@ -58,8 +59,8 @@ export class DependentPremise {
         let width = rect1.attributes.size.width + rect2.attributes.size.width;
         let height = Math.max(rect1.attributes.size.height, rect2.attributes.size.height);
         // set position (average position of two rects)
-        let x = (rect1.attributes.position.x + rect2.attributes.position.x) / 2;
-        let y = (rect1.attributes.position.y + rect2.attributes.position.y) / 2;
+        let x = rect1.attributes.position.x;
+        let y = rect1.attributes.position.y;
         // define weight
         // Needs to be implemented, not sure how we want to do this
         //
@@ -95,6 +96,14 @@ export class DependentPremise {
             });
             current_x += cell.attributes.size.width + 12;
         }
+        if (rect1.attributes.type === "dependent-premise") {
+            rect1.unembed(...rect1.getEmbeddedCells());
+            rect1.remove();
+        }
+        if (rect2.attributes.type === "dependent-premise") {
+            rect2.unembed(...rect2.getEmbeddedCells());
+            rect2.remove();
+        }
         //embed models
         for (let i = 0; i < models.length; i++) {
             this.rect.embed(models[i]);
@@ -104,16 +113,21 @@ export class DependentPremise {
             };
             //update tools
             addRectTools(models[i]);
+            //remove outgoing links
+            let links = graph.getConnectedLinks(models[i], { outbound: true });
+            links.forEach(link => {
+                link.remove();
+            });
+            //remove from link selection if applicable
+            if (selected_links[0]) {
+                if (selected_links[0] === models[i]) {
+                    joint.dia.HighlighterView.remove(models[i].findView(paper), 'link-highlight');
+                    //alternate way to clear array that gets around typescript import restrictions
+                    selected_links.splice(0, selected_links.length);
+                }
+            }
         }
         console.log("NEW DEPENDENT PREMISE", this.rect);
-        if (rect1.attributes.type === "dependent-premise") {
-            rect1.unembed(...rect1.getEmbeddedCells());
-            rect1.remove();
-        }
-        if (rect2.attributes.type === "dependent-premise") {
-            rect2.unembed(...rect2.getEmbeddedCells());
-            rect2.remove();
-        }
     }
 }
 // export function combineText(text1: string, text2: string) {
