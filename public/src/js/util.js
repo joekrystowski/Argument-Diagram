@@ -9,7 +9,12 @@ export function save(data, filetype, filename) {
     }
     else { // Others
         const a = document.createElement("a");
-        const url = URL.createObjectURL(file);
+        //const url = URL.createObjectURL(file);
+        let url;
+        if (filetype === "application/json")
+            url = URL.createObjectURL(file);
+        else
+            url = data;
         a.href = url;
         a.download = filename;
         document.body.appendChild(a);

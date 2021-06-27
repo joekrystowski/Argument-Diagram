@@ -9,7 +9,10 @@ export function save(data: string, filetype: string, filename: string): void {
     window.navigator.msSaveOrOpenBlob(file, filename);
   } else { // Others
 		const a = document.createElement("a");
-		const url = URL.createObjectURL(file);
+		//const url = URL.createObjectURL(file);
+    let url: string;
+    if (filetype === "application/json") url = URL.createObjectURL(file);
+    else url = data;
 		a.href = url;
 		a.download = filename;
 		document.body.appendChild(a);

@@ -112,7 +112,6 @@ export function exportGraph(): void {
 	let graph_data = JSON.stringify(graph.toJSON(), null, 2);
 	let dataObj = JSON.parse(graph_data);
 	dataObj.legend = legend.toExportForm();
-	console.log(dataObj);
 	const data = JSON.stringify(dataObj, null, 2);
 	const filename = "myDiagram.json"; // default name
 	save(data, "application/json", filename);

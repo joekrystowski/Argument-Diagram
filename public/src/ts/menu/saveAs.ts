@@ -2,26 +2,27 @@ import { graph, paper } from '../graph.js'
 import { save } from '../util.js';
 
 export function savePNG(): void {
-  const filename = "myDiagram.png";
   const svg = paper.svg;
-  const svgAsXML = (new XMLSerializer).serializeToString(svg);
-  const dataURL = "data:image/svg+xml," + encodeURIComponent(svgAsXML);
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
-  const img = new Image();
-  img.onload = function(e) {
-    ctx!.drawImage(img, 0, 0);
+  // serialize our node
+  const svgData = (new XMLSerializer()).serializeToString(svg);
+  // encode special chars
+  const svgURL = 'data:image/svg+xml; charset=utf8, ' + encodeURIComponent(svgData);
+  // create image and canvas
+  const svgImg = new Image();
+  const canvas =  document.createElement('canvas');
+  svgImg.onload = function () {
+    // IE11 doesn't set a width on svg images...
+    const bound = svg.getBoundingClientRect();
+    canvas.width = bound.width;
+    canvas.height = bound.height;
+    const ctx = canvas.getContext('2d');
+    ctx!.fillStyle = "gray";
+    ctx!.fillRect(0, 0, canvas.width, canvas.height);
+    ctx!.drawImage(svgImg, 0, 0, canvas.width, canvas.height);
+    const data = canvas.toDataURL("image/png", 1.0);
+    save(data, "image/png", "myDiagram.png");
   };
-  img.src = dataURL;
-  const data = canvas.toDataURL("image/png");
-  save(data, "image/png", filename); 
-  /*
-  // save as svg only - need to get styling to work
-  var dl = document.createElement("a");
-  document.body.appendChild(dl); // This line makes it work in Firefox.
-  dl.setAttribute("href", dataURL);
-  dl.setAttribute("download", "test.svg");
-  dl.click(); */
+  svgImg.src = svgURL
 }
 
 export function savePDF(): void {
