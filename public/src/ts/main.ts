@@ -61,6 +61,22 @@ importButton.addEventListener("click", importGraph);
 const exportButton = document.getElementById("export-button") as HTMLElement;
 exportButton.addEventListener("click", exportGraph);
 
+const sidePanel = document.getElementById("side-panel") as HTMLElement;
+const wrapper = document.getElementById("wrapper") as HTMLElement;
+const sidePanelButton = document.getElementById("side-panel-button") as HTMLElement;
+sidePanelButton.addEventListener("click", () => {
+  if($('#side-panel').css('display') == 'none') {
+    wrapper.style.width= "50%";
+    sidePanel.style.width= "50%";
+    sidePanel.style.display = "block";
+  }
+  else {
+    wrapper.style.width= "100%";
+    sidePanel.style.width= "0%";
+    sidePanel.style.display = "none";
+  }
+})
+
 //testing
 //let test = createDependentPremise(arg1.rect, arg2.rect);
 let arg1 = createClaim(100, 100);

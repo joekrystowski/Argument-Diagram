@@ -44,6 +44,21 @@ const importButton = document.getElementById("import-button");
 importButton.addEventListener("click", importGraph);
 const exportButton = document.getElementById("export-button");
 exportButton.addEventListener("click", exportGraph);
+const sidePanel = document.getElementById("side-panel");
+const wrapper = document.getElementById("wrapper");
+const sidePanelButton = document.getElementById("side-panel-button");
+sidePanelButton.addEventListener("click", () => {
+    if ($('#side-panel').css('display') == 'none') {
+        wrapper.style.width = "50%";
+        sidePanel.style.width = "50%";
+        sidePanel.style.display = "block";
+    }
+    else {
+        wrapper.style.width = "100%";
+        sidePanel.style.width = "0%";
+        sidePanel.style.display = "none";
+    }
+});
 //testing
 //let test = createDependentPremise(arg1.rect, arg2.rect);
 let arg1 = createClaim(100, 100);
