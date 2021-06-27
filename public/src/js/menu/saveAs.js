@@ -36,24 +36,4 @@ export function savePNG() {
     svgImg.src = svgURL;
 }
 export function savePDF() {
-    /*
-    const width  = canvas.width;
-    const height = canvas.height;
-  
-    const data = canvas.toDataURL("image/png", 1.0);
-    const pdf = new jsPDF("l", "px", [width, height]);
-  
-    // Get name
-    if (projectName.replace(/\s+/g, "") === "")
-        projectName = "Untitled Circuit";
-  
-    // Fill background
-    pdf.setFillColor("#CCC");
-    pdf.rect(0, 0, width, height, "F");
-  
-    const pdfWidth  = pdf.internal.pageSize.getWidth();
-    const pdfHeight = pdf.internal.pageSize.getHeight();
-  
-    pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight);
-    pdf.save(projectName + ".pdf"); */
 }
