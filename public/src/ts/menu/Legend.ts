@@ -7,11 +7,13 @@ class Legend {
     legend: Array<Claim>
     active: boolean
     disabled: boolean
+    compact: boolean
 
     constructor(){
         this.legend = [];
         this.active = false;
         this.disabled = false;
+        this.compact = true;
     }
 
     disable() {
@@ -70,7 +72,11 @@ class Legend {
         const legend_list = $('#legend-list');
         legend_list.empty();
 
+        const legend_compact = $('#legend-compact');
+        legend_compact.empty();
+
         let prevIndex = -1;
+        var prevClaim: Claim|null = null;
         this.legend.forEach( (claim:Claim, index:number) => {
             //if we find gaps, we are probably making large modifications to the legend somewhere / it is incomplete
             // (such as importing), so just exit early
@@ -92,8 +98,30 @@ class Legend {
             //update text on legend list to make sure it is the most recent
             legend_list.append(generateLegendListItem(claim.retrieveFromStorage('initialText'), index+1));
         
+            if(this.compact) {
+                if(prevClaim) {
+                    if(claim.isDependent(prevClaim)){
+                        legend_compact.append(", and " + claim.retrieveFromStorage('initialText'));
+                    }
+                    else if(claim.isDependentCausedBy(prevClaim)) {
+                        legend_compact.append(". Therefore, " + claim.retrieveFromStorage('initialText'));
+                    }
+                    else if(claim.isCausedBy(prevClaim)){
+                        legend_compact.append(", so " + claim.retrieveFromStorage('initialText'));
+                    }
+                    else {
+                        legend_compact.append(".<br><br>Next, " + claim.retrieveFromStorage('initialText'));  
+                    }
+                }
+                else {
+                    legend_compact.append("First, " + claim.retrieveFromStorage('initialText')); 
+                }
+            }
+
             prevIndex = index;
+            prevClaim = claim;
         });
+        legend_compact.append(".");
     }
 
     insert(claim:Claim, index:number, direct?:boolean) {

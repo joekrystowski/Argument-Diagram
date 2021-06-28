@@ -1,6 +1,37 @@
-.side-panel {
+#side-panel {
     display: none;
     width: 0%;
     color: var(--accent-gray);
     padding: 0 1rem;
+}
+
+#legend-compact {
+    // display: none;
+}
+
+#legend-list {
+    position: relative;
+    list-style: none;
+    font-size: 20px;
+    margin: 0;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    padding-inline-start: 0;
+
+    .legend-list-item {
+        width: 90%;
+        padding: 10px;
+        text-align: left;
+
+        &:hover {
+            background-color: var(--toolbar-hover);
+            cursor: grab;
+        }
+    }
+
+    .legend-list-item:not(:last-child) {
+        border-bottom: 0.5px dashed white;
+    }
 }

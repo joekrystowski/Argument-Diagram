@@ -1,4 +1,5 @@
 import { calcHeight } from "./util.js";
+import { graph } from "./graph.js";
 import { refreshTools } from "./tools/ManageTools.js";
 /* global joint */
 const joint = window.joint;
@@ -31,7 +32,7 @@ export class Claim {
         //creates a string of text, attempting to fit as many characters as possible
         //into a line of size width, before separating with newline character and repeating
         //90 is default width
-        let text_wrap = joint.util.breakText(config.text, { width: 90 });
+        let text_wrap = joint.util.breakText(config.text, { width: 190 });
         // regular expression to find number of lines in text_wrap
         // searching for all instances (g-> global) of \n in text_wrap string
         // if none are found, instead of attempting to read .length of undefined,
@@ -45,7 +46,7 @@ export class Claim {
                 y: config.y,
             },
             size: {
-                width: 100,
+                width: 200,
                 height: calcHeight(count),
             },
             attrs: {
@@ -73,6 +74,52 @@ export class Claim {
             }
         });
         console.log(this.rect);
+    }
+    isDependent(other) {
+        // console.log("isDependent");
+        if (!this.rect.get("parent") || !other.rect.get("parent")) {
+            return false;
+        }
+        return this.rect.get("parent") === other.rect.get("parent");
+    }
+    isDependentCausedBy(other) {
+        if (!other.rect.get("parent")) {
+            return false;
+        }
+        const dp = graph.getCell(other.rect.get("parent"));
+        const outLinks = graph.getConnectedLinks(dp, { outbound: true });
+        const inLinks = graph.getConnectedLinks(this.rect, { inbound: true });
+        var obj = {};
+        var result = false;
+        outLinks.forEach((value) => {
+            const index = value.id;
+            obj[index] = true;
+        });
+        inLinks.forEach((value) => {
+            const index = value.id;
+            if (obj[index]) {
+                result = true;
+            }
+        });
+        return result;
+    }
+    isCausedBy(other) {
+        // console.log("isCausedBy");
+        const outLinks = graph.getConnectedLinks(other.rect, { outbound: true });
+        const inLinks = graph.getConnectedLinks(this.rect, { inbound: true });
+        var obj = {};
+        var result = false;
+        outLinks.forEach((value) => {
+            const index = value.id;
+            obj[index] = true;
+        });
+        inLinks.forEach((value) => {
+            const index = value.id;
+            if (obj[index]) {
+                result = true;
+            }
+        });
+        return result;
     }
     /**
      * Sets a specific (or all) values on the `Claim.rect.attributes.storedInfo` object.

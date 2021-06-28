@@ -1,5 +1,5 @@
 import { calcHeight } from "./util.js";
-import { paper } from "./graph.js";
+import { graph, paper } from "./graph.js";
 import { refreshTools } from "./tools/ManageTools.js";
 
 /* global joint */
@@ -60,7 +60,7 @@ export class Claim {
     //creates a string of text, attempting to fit as many characters as possible
     //into a line of size width, before separating with newline character and repeating
     //90 is default width
-    let text_wrap = joint.util.breakText(config.text, { width: 90 } );
+    let text_wrap = joint.util.breakText(config.text, { width: 190 } );
     // regular expression to find number of lines in text_wrap
     // searching for all instances (g-> global) of \n in text_wrap string
     // if none are found, instead of attempting to read .length of undefined,
@@ -74,7 +74,7 @@ export class Claim {
         y: config.y,
       },
       size: {
-        width: 100,
+        width: 200,
         height: calcHeight(count),
       },
       attrs: {
@@ -103,6 +103,54 @@ export class Claim {
     });
 
     console.log(this.rect);
+  }
+
+  isDependent(other: Claim) {
+    // console.log("isDependent");
+    if(!this.rect.get("parent") || !other.rect.get("parent")) { 
+      return false;
+    }
+    return this.rect.get("parent") === other.rect.get("parent");
+  }
+  isDependentCausedBy(other: Claim) {
+    if(!other.rect.get("parent")) {
+      return false;
+    }
+    const dp = graph.getCell(other.rect.get("parent"));
+    const outLinks = graph.getConnectedLinks(dp, {outbound: true});
+    const inLinks = graph.getConnectedLinks(this.rect, {inbound: true});
+    var obj: {[key: string]: boolean} = {};
+    var result = false;
+    outLinks.forEach( (value) => {
+      const index = value.id as string;
+      obj[index] = true;
+    })
+    inLinks.forEach( (value) => {
+      const index = value.id as string;
+      if(obj[index]) {
+        result = true;
+      }
+    })
+    return result;
+  }
+
+  isCausedBy(other: Claim) {
+    // console.log("isCausedBy");
+    const outLinks = graph.getConnectedLinks(other.rect, {outbound: true});
+    const inLinks = graph.getConnectedLinks(this.rect, {inbound: true});
+    var obj: {[key: string]: boolean} = {};
+    var result = false;
+    outLinks.forEach( (value) => {
+      const index = value.id as string;
+      obj[index] = true;
+    })
+    inLinks.forEach( (value) => {
+      const index = value.id as string;
+      if(obj[index]) {
+        result = true;
+      }
+    })
+    return result;
   }
 
   /**
