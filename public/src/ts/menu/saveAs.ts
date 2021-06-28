@@ -2,12 +2,7 @@ import { graph, paper } from '../graph.js'
 import { save } from '../util.js';
 import { legend } from './Legend.js';
 
-/*
-function createCanvas(): string {
-
-} */
-
-export function savePNG(): void {
+function createCanvas(callback: Function): void {
   const svg = paper.svg;
   paper.hideTools();
   let toggleBack = false;
@@ -31,10 +26,16 @@ export function savePNG(): void {
     ctx!.fillRect(0, 0, canvas.width, canvas.height);
     ctx!.drawImage(svgImg, 0, 0, canvas.width, canvas.height);
     const data = canvas.toDataURL("image/png", 1.0);
-    save(data, "image/png", "myDiagram.png");
     if (toggleBack) $('#legend-button').trigger('click');
+    callback(data);
   };
   svgImg.src = svgURL;
+}
+
+export function savePNG(): void {
+  createCanvas(function(data: string) {
+    save(data, "image/png", "myDiagram.png");
+  });
 }
 
 export function savePDF(): void {

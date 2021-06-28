@@ -5,10 +5,6 @@ import { legend } from "./menu/Legend.js";
 
 export function save(data: string, filetype: string, filename: string): void {
 	const file = new Blob([data], {type: filetype}); 
-  /*  internet explorer: deprecated
-  if (window.navigator.msSaveOrOpenBlob) // IE10+
-    window.navigator.msSaveOrOpenBlob(file, filename);
-  else { */// Others
   const a = document.createElement("a");
   let url: string;
   if (filetype === "application/json") url = URL.createObjectURL(file);
