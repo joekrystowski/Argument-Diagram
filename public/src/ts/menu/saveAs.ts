@@ -39,5 +39,7 @@ export function savePNG(): void {
 }
 
 export function savePDF(): void {
-  
+  createCanvas(function(data: string) {
+
+  });
 }

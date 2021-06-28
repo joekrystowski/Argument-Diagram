@@ -37,4 +37,6 @@ export function savePNG() {
     });
 }
 export function savePDF() {
+    createCanvas(function (data) {
+    });
 }

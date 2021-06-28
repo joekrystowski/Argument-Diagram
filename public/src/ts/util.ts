@@ -17,7 +17,6 @@ export function save(data: string, filetype: string, filename: string): void {
     document.body.removeChild(a);
     window.URL.revokeObjectURL(url);  
   }, 0); 
-	//}
 }
 
 export function calcHeight(num_lines:number) {

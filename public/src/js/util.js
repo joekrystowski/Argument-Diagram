@@ -18,7 +18,6 @@ export function save(data, filetype, filename) {
         document.body.removeChild(a);
         window.URL.revokeObjectURL(url);
     }, 0);
-    //}
 }
 export function calcHeight(num_lines) {
     return 16 + 13 * num_lines;
