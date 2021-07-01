@@ -1,6 +1,7 @@
 import { paper } from '../graph.js';
 import { save } from '../util.js';
 import { legend } from './Legend.js';
+import jsPDF from 'jspdf';
 function createCanvas(callback) {
     const svg = paper.svg;
     paper.hideTools();
@@ -38,5 +39,6 @@ export function savePNG() {
 }
 export function savePDF() {
     createCanvas(function (data) {
+        const pdf = new jsPDF();
     });
 }

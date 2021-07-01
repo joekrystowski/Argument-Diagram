@@ -1,6 +1,7 @@
 import { graph, paper } from '../graph.js'
 import { save } from '../util.js';
 import { legend } from './Legend.js';
+import jsPDF  from 'jspdf';
 
 function createCanvas(callback: Function): void {
   const svg = paper.svg;
@@ -40,6 +41,6 @@ export function savePNG(): void {
 
 export function savePDF(): void {
   createCanvas(function(data: string) {
-
+    const pdf = new jsPDF();
   });
 }
