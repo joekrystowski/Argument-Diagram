@@ -1,7 +1,7 @@
 import { graph, paper } from '../graph.js'
 import { save } from '../util.js';
 import { legend } from './Legend.js';
-import jsPDF  from 'jspdf';
+import jsPDF from 'jspdf';
 
 function createCanvas(callback: Function): void {
   const svg = paper.svg;
@@ -22,10 +22,10 @@ function createCanvas(callback: Function): void {
     const bound = svg.getBoundingClientRect();
     canvas.width = bound.width;
     canvas.height = bound.height;
-    const ctx = canvas.getContext('2d');
-    ctx!.fillStyle = "gray";
-    ctx!.fillRect(0, 0, canvas.width, canvas.height);
-    ctx!.drawImage(svgImg, 0, 0, canvas.width, canvas.height);
+    const ctx = canvas.getContext('2d')!;
+    ctx.fillStyle = "gray";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(svgImg, 0, 0, canvas.width, canvas.height);
     const data = canvas.toDataURL("image/png", 1.0);
     if (toggleBack) $('#legend-button').trigger('click');
     callback(data);
@@ -41,6 +41,6 @@ export function savePNG(): void {
 
 export function savePDF(): void {
   createCanvas(function(data: string) {
-    const pdf = new jsPDF();
+    //const pdf = new jsPDF();
   });
 }
