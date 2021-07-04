@@ -56,6 +56,10 @@ paperContainer.addEventListener("drop", (event) => {
   }
 });
 
+const undoButton = document.getElementById("undo-button") as HTMLElement;
+
+const redoButton = document.getElementById("redo-button") as HTMLElement;
+
 const importButton = document.getElementById("import-button") as HTMLElement;
 importButton.addEventListener("click", importGraph);
 

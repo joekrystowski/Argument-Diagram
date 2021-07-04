@@ -41,6 +41,8 @@ paperContainer.addEventListener("drop", (event) => {
         throw new Error("Something went wrong when determining dataTransfer type.");
     }
 });
+const undoButton = document.getElementById("undo-button");
+const redoButton = document.getElementById("redo-button");
 const importButton = document.getElementById("import-button");
 importButton.addEventListener("click", importGraph);
 const exportButton = document.getElementById("export-button");
