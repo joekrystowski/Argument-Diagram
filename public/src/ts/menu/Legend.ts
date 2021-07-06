@@ -51,6 +51,10 @@ class Legend {
         this.legend.forEach( (claim:Claim, index:number) => {
             claim.toggleLegendForm(index+1);
         });
+        const legend_compact = $('#legend-compact'); 
+        if(this.compact) { legend_compact.hide(); }
+        else { legend_compact.show(); }
+        this.compact = !this.compact;
 
         this.active = !this.active;
     }

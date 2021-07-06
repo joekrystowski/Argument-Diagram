@@ -1,12 +1,10 @@
 #side-panel {
     display: none;
-    width: 0%;
+    width: 30%;
     color: var(--accent-gray);
     padding: 0 1rem;
-}
-
-#legend-compact {
-    // display: none;
+    overflow-y: scroll;
+    resize: horizontal;
 }
 
 #legend-list {

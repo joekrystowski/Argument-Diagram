@@ -68,13 +68,13 @@ const wrapper = document.getElementById("wrapper") as HTMLElement;
 const sidePanelButton = document.getElementById("side-panel-button") as HTMLElement;
 sidePanelButton.addEventListener("click", () => {
   if($('#side-panel').css('display') == 'none') {
-    wrapper.style.width= "50%";
-    sidePanel.style.width= "50%";
-    sidePanel.style.display = "block";
+    // wrapper.style.width= "50%";
+    // sidePanel.style.width= "50%";
+    sidePanel.style.display = "inline-block";
   }
   else {
-    wrapper.style.width= "100%";
-    sidePanel.style.width= "0%";
+    // wrapper.style.width= "100%";
+    // sidePanel.style.width= "0%";
     sidePanel.style.display = "none";
   }
 })

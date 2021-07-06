@@ -4,6 +4,7 @@ import { refreshTools } from "./tools/ManageTools.js";
 
 /* global joint */
 const joint = window.joint;
+const legend_form_size = 40;
 
 declare module "jointjs" {
   namespace shapes {
@@ -207,13 +208,17 @@ export class Claim {
       this.store();
       //change attributes to legend form style
       this.rect.attr('text/text', legendNumber?.toString());
-      this.rect.resize(50, 50);
+      this.rect.translate((this.rect.attributes.size.width-legend_form_size)/2,
+        (this.rect.attributes.size.height-legend_form_size)/2);
+      this.rect.resize(legend_form_size, legend_form_size);
       this.rect.attr('rect/rx', 50);
     } 
     //convert from legend to normal form
     else {
       this.rect.attr('text/text', this.retrieveFromStorage('initialText'));
       const old_size = this.retrieveFromStorage('size');
+      this.rect.translate(-(old_size.width-legend_form_size)/2,
+        -(old_size.height-legend_form_size)/2);
       this.rect.resize(old_size.width, old_size.height);
       this.rect.attr('rect/rx', this.retrieveFromStorage('rx'));
     }
