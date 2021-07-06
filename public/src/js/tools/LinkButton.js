@@ -60,7 +60,7 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
             });
             if (selected_links.length === 2) {
                 //check if two models are the same model
-                if (selected_links[0].id !== selected_links[1].id) {
+                if (isValidLink(selected_links[0], selected_links[1])) {
                     createLink(selected_links[0], selected_links[1]);
                 }
                 joint.dia.HighlighterView.remove(elementView, 'link-highlight');
@@ -70,6 +70,44 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
         }
     }
 });
+function isValidLink(source, target) {
+    if (source.id === target.id)
+        return false;
+    let disallowed_ids = [source.id];
+    let path = [source.id];
+    // if(target.get('parent')) {
+    //   disallowed_ids.push(target.get('parent'))
+    // }
+    if (isCircularArgument(graph.getCell(target.id), disallowed_ids, path))
+        return false;
+    return true;
+}
+function isCircularArgument(current, disallowed_ids, path) {
+    disallowed_ids.push(current.get('id'));
+    path.push(current.get('id'));
+    if (current.get('embeds')) {
+        disallowed_ids.push(...current.get('embeds'));
+    }
+    if (current.get('parent')) {
+        disallowed_ids.push(current.get('parent'));
+        current = graph.getCell(current.get('parent'));
+    }
+    console.log('current', current);
+    console.log('disallowed_ids', disallowed_ids);
+    console.log('------------------------------');
+    const outLinks = graph.getConnectedLinks(current, { outbound: true });
+    let found_circular = false;
+    for (let outLink of outLinks) {
+        if (disallowed_ids.includes(outLink.attributes.target.id)) {
+            console.error(`Circular argument detected, path is: \n\t${path.join('\n\t')}\n>>> ${outLink.attributes.target.id}`);
+            return true;
+        }
+        const outCell = graph.getCell(outLink.attributes.target.id);
+        found_circular = isCircularArgument(outCell, disallowed_ids, path);
+        console.log('outlink', outLink);
+    }
+    return found_circular;
+}
 //link two rects together
 export function createLink(model1, model2) {
     console.log(model1.attributes.link_color);
