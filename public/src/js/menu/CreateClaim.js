@@ -19,11 +19,11 @@ export function createClaim(x, y, text) {
         link_color: color.claim.linkColor,
         weight: "1.0"
     });
-    legend.add(new_rect);
     //add new rect to the graph for displaying
     new_rect.rect.addTo(graph);
     //adds the buttons to each rect
     addRectTools(new_rect.rect);
+    legend.add(new_rect);
     return new_rect;
 }
 //when objection-button is clicked
