@@ -54,18 +54,19 @@ export function addRectTools(element) {
 // adding tools to links
 export function addLinkTools(link) {
     let removeButton = new joint.linkTools.Remove();
+    let editLinkButton = new joint.linkTools.EditLinkButton();
     let toolsView = new joint.dia.ToolsView({
-        tools: [removeButton]
+        tools: [removeButton, editLinkButton]
     });
     let linkView = link.findView(paper);
     linkView.addTools(toolsView);
     //start with tools hidden
     linkView.hideTools();
     // ------ paper events -------
-    paper.on("link:mouseenter", function (linkView) {
+    paper.on("link:pointerclick", function (linkView) {
         linkView.showTools();
     });
-    paper.on("link:mouseleave", function (linkView) {
+    paper.on("link:pointerdblclick", function (linkView) {
         linkView.hideTools();
     });
     // --- end of paper events -----

@@ -4,6 +4,7 @@ import { saveEdits, discardEdits } from "./menu/SaveEditsButton.js";
 import { createClaim, createObjection, } from "./menu/CreateClaim.js";
 import { importGraph, exportGraph } from "./menu/ImportExport.js";
 import { legend, toggleLegend } from './menu/Legend.js';
+import { evaluateArgument } from "./menu/EvaluateArgument.js";
 const claimImage = new Image();
 claimImage.src = "src/img/Claim.jpg";
 let argCounter = 0; //TODO: temporary until we fix selecting claims
@@ -45,6 +46,8 @@ const importButton = document.getElementById("import-button");
 importButton.addEventListener("click", importGraph);
 const exportButton = document.getElementById("export-button");
 exportButton.addEventListener("click", exportGraph);
+const evaluateButton = document.getElementById('evaluate-button');
+evaluateButton.addEventListener('click', evaluateArgument);
 const legendButton = document.getElementById('legend-button');
 legendButton.addEventListener('click', toggleLegend);
 $('#toggle-legend-info-button').on('click', function () {
