@@ -3,6 +3,7 @@ const joint = window.joint;
 
 import { color } from '../colors.js';
 import { graph, paper } from '../graph.js';
+import { legend } from '../menu/Legend.js';
 import { addLinkTools } from './ManageTools.js';
 
 export let selected_links:joint.shapes.app.ClaimRect[] = [];
@@ -129,6 +130,8 @@ export function createLink(model1:joint.shapes.app.ClaimRect, model2:joint.shape
   link.addTo(graph);
   console.log("link made")
   addLinkTools(link);
+
+  legend.refresh();
 
   //remove highlights from models
   let linkView1 = model1.findView(paper);
