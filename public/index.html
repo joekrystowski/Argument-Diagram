@@ -42,7 +42,7 @@
         <div class="toolbar">
           <ul class="toolbar-list">
             <li class="toolbar-item">
-              <button class="toolbar-button">
+              <button class="toolbar-button" id="side-panel-button">
                 <svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="0 0 24 24">
                   <path d="M0 0h24v24H0V0z" fill="none"/>
                   <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
@@ -105,36 +105,44 @@
           </ul>
         </div>
       </header>
-      <div id="wrapper">
-        <div id="menu-container">
-          <div id="edit-container" class="edit-container">
-            <div id="edit-top" class="edit-top">
-              <label class="menu-text">Edit Claim Text</label>`
-              <button id="exit-edit-button" class="menu-button exit-button">
-                <i class="fas fa-times"></i></i><span>Cancel</span>
-              </button>
-            </div>
-            <form id="edit-form"></form>
-            <div id="edit-bottom" class="edit-bottom">
-              <button id="save-edit-button" class="menu-button save-button">
-                <i class="fa fa-save"></i><span>Save</span>
-              </button>
-              <span id="objection-label" class="objection-label">Objection</span>
-              <label id="switch-label" class="switch">
-                <input id="objection-switch" type="checkbox">
-                <span class="slider round"></span>
-              </label>
+      <div id="main-panel">
+        <div id="side-panel">
+          <p id="legend-compact"></p>
+          <ul id="legend-list" class="sortable"></ul>
+        </div>      
+        <div id="wrapper">    
+          <div id="menu-container">
+            <div id="edit-container" class="edit-container">
+              <div id="edit-top" class="edit-top">
+                <label class="menu-text">Edit Claim Text</label>`
+                <button id="exit-edit-button" class="menu-button exit-button">
+                  <i class="fas fa-times"></i></i><span>Cancel</span>
+                </button>
+              </div>
+              <form id="edit-form"></form>
+              <div id="edit-bottom" class="edit-bottom">
+                <button id="save-edit-button" class="menu-button save-button">
+                  <i class="fa fa-save"></i><span>Save</span>
+                </button>
+                <span id="objection-label" class="objection-label">Objection</span>
+                <label id="switch-label" class="switch">
+                  <input id="objection-switch" type="checkbox">
+                  <span class="slider round"></span>
+                </label>
+              </div>
             </div>
           </div>
+          <div id="myholder" class="joint-style-default">
+          </div>
         </div>
-        <div id="myholder" class="joint-style-default"></div>
-        <div id="legend-info" class="collapsed">
+
+        <!-- <div id="legend-info" class="collapsed">
           <div class="collapsed-content">
             <h1>Legend Info</h1>
-            <ul id="legend-list" class="sortable"></ul>
+            
           </div>
-          <button id="toggle-legend-info-button"><i class="fa fa-chevron-right fa-2x"></i></button>
-        </div>
+          
+        </div> -->
       </div>
     </div>
   </body>

@@ -22,12 +22,12 @@ export function createClaim(x:number, y:number, text?:string) {
     weight: "1.0"
   });
 
-  legend.add(new_rect);
-
   //add new rect to the graph for displaying
   new_rect.rect.addTo(graph);
   //adds the buttons to each rect
   addRectTools(new_rect.rect);
+  legend.add(new_rect);
+  
   return new_rect;
 }
 
@@ -84,6 +84,7 @@ export function createDependentPremise(rect1: joint.shapes.app.ClaimRect, rect2:
   addDependentPremiseTools(new_dependent_premise.rect);
 
   new_dependent_premise.rect.toBack()
+  legend.refresh();
 
   return new_dependent_premise;
 }
