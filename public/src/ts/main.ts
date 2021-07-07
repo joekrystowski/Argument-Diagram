@@ -7,7 +7,7 @@ import {
   createDependentPremise,
 } from "./menu/CreateClaim.js";
 import { importGraph, exportGraph } from "./menu/ImportExport.js";
-import { savePNG } from "./menu/saveAs.js";
+import { savePNG, savePDF } from "./menu/saveAs.js";
 import { legend, toggleLegend } from './menu/Legend.js';
 import { Claim } from "./Claim.js";
 import { color } from "./colors.js";
@@ -64,8 +64,11 @@ importButton.addEventListener("click", importGraph);
 const exportButton = document.getElementById("export-button") as HTMLElement;
 exportButton.addEventListener("click", exportGraph);
 
-const downloadButton = document.getElementById("download-button") as HTMLElement;
-downloadButton.addEventListener("click", savePNG);
+const PNGButton = document.getElementById("png-button") as HTMLElement;
+PNGButton.addEventListener("click", savePNG);
+
+const PDFButton = document.getElementById("pdf-button") as HTMLElement;
+PDFButton.addEventListener("click", savePDF);
 
 const sidePanel = document.getElementById("side-panel") as HTMLElement;
 const wrapper = document.getElementById("wrapper") as HTMLElement;

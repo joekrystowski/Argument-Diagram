@@ -85,9 +85,15 @@
               </button>
             </li>
             <li class="toolbar-item">
-              <button id="download-button" class="toolbar-button">
-              <i class="fa fa-2x fa-download"></i>
-              </button>
+              <div class="dropdown">
+                <button id="download-dropdown" class="toolbar-button">
+                <i class="fa fa-2x fa-download"></i>
+                </button>
+                <div class="dropdown-content">
+                  <button id="png-button">Download as PNG</button>
+                  <button id="pdf-button">Download as PDF</button>
+                </div>
+              </div>
             </li>
             <li class="toolbar-item">
               <button id="legend-button" class="toolbar-button">
