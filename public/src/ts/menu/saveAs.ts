@@ -4,8 +4,14 @@ import { legend } from './Legend.js';
 import jsPDF from 'jspdf';
 
 function createCanvas(callback: Function): void {
-  const svg = paper.svg;
   paper.hideTools();
+  const svg = paper.svg;
+  const svgWidth = window.screen.width;
+  const svgHeight = window.screen.height;
+  // fix firefox problem
+  svg.setAttribute("width", svgWidth.toString() + "px");
+  svg.setAttribute("height", svgHeight.toString() + "px");
+  // toggle legend
   let toggleBack = false;
   if (legend.active) {
     legend.toggle();
@@ -19,9 +25,8 @@ function createCanvas(callback: Function): void {
   const svgImg = new Image();
   const canvas =  document.createElement('canvas');
   svgImg.onload = function() {
-    const bound = svg.getBoundingClientRect();
-    canvas.width = bound.width;
-    canvas.height = bound.height;
+    canvas.width = svgWidth;
+    canvas.height = svgHeight;
     const ctx = canvas.getContext('2d')!;
     ctx.fillStyle = "gray";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
