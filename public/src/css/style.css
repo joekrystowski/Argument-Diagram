@@ -406,6 +406,9 @@ input:checked + .slider:before {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+.dropdown:hover #download-dropdown {
+  filter: opacity(1);
+}
 
 .dropdown-content {
   top: 34px;
@@ -416,12 +419,26 @@ input:checked + .slider:before {
   z-index: 1;
 }
 .dropdown-content button {
-  min-width: 130px;
+  min-width: 150px;
   background-color: var(--toolbar-bg);
-  color: white;
   padding: 12px 16px;
+  color: var(--accent-gray);
+  filter: opacity(0.75);
+  transition: var(--transition-speed);
   display: block;
 }
+.dropdown-content button:first-of-type {
+  border-bottom: 0.1rem solid var(--accent-gray);
+}
+.dropdown-content button:hover {
+  background-color: var(--toolbar-hover);
+}
+.dropdown-content button i {
+  padding-bottom: -5px;
+  padding-left: 25px;
+  position: absolute;
+}
+
 :root {
   font-size: 16px;
   --transition-speed: 200ms;

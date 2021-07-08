@@ -1,7 +1,12 @@
 .dropdown {
   height: 0px;
-  &:hover .dropdown-content {
-    display: block;
+  &:hover {
+    .dropdown-content {
+      display: block;
+    }
+    #download-dropdown {
+      filter: opacity(1);
+    }
   }
 }
 
@@ -13,13 +18,23 @@
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
   button {
-    min-width: 130px;
+    min-width: 150px;
     background-color: var(--toolbar-bg);
-    color: white;
     padding: 12px 16px;
+    color: var(--accent-gray);
+    filter: opacity(0.75);
+    transition: var(--transition-speed);
     display: block;
+    &:first-of-type {
+      border-bottom: 0.1rem solid var(--accent-gray);
+    }
     &:hover {
-      
+      background-color: var(--toolbar-hover);
+    }
+    i {
+      padding-bottom: -5px;
+      padding-left: 25px;
+      position: absolute;
     }
   }
 }

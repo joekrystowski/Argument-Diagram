@@ -3,14 +3,18 @@ import { save } from '../util.js';
 import { legend } from './Legend.js';
 import jsPDF from 'jspdf';
 
+declare const InstallTrigger: any;
+
 function createCanvas(callback: Function): void {
   paper.hideTools();
   const svg = paper.svg;
-  const svgWidth = window.screen.width;
-  const svgHeight = window.screen.height;
-  // fix firefox problem
-  svg.setAttribute("width", svgWidth.toString() + "px");
-  svg.setAttribute("height", svgHeight.toString() + "px");
+  const width = svg.clientWidth;
+  const height = svg.clientHeight;
+  // supposed to check for firefox browser
+  if (typeof InstallTrigger !== "undefined") {
+    svg.setAttribute("width", width.toString());
+    svg.setAttribute("height", height.toString());
+  }
   // toggle legend
   let toggleBack = false;
   if (legend.active) {
@@ -18,15 +22,15 @@ function createCanvas(callback: Function): void {
     toggleBack = true;
   }
   // serialize
-  const svgData = (new XMLSerializer()).serializeToString(svg);
+  const svgString = new XMLSerializer().serializeToString(svg);
   // encode special chars
-  const svgURL = 'data:image/svg+xml; charset=utf8, ' + encodeURIComponent(svgData);
+  const svgURL = 'data:image/svg+xml; charset=utf8, ' + encodeURIComponent(svgString);
   // create image and canvas
   const svgImg = new Image();
   const canvas =  document.createElement('canvas');
   svgImg.onload = function() {
-    canvas.width = svgWidth;
-    canvas.height = svgHeight;
+    canvas.width = width;
+    canvas.height = height;
     const ctx = canvas.getContext('2d')!;
     ctx.fillStyle = "gray";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
