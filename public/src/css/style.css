@@ -426,17 +426,17 @@ input:checked + .slider:before {
   filter: opacity(0.75);
   transition: var(--transition-speed);
   display: block;
+  /*i {
+    padding-bottom: -5px;
+    padding-left: 25px;
+    position: absolute;
+  }*/
 }
 .dropdown-content button:first-of-type {
   border-bottom: 0.1rem solid var(--accent-gray);
 }
 .dropdown-content button:hover {
   background-color: var(--toolbar-hover);
-}
-.dropdown-content button i {
-  padding-bottom: -5px;
-  padding-left: 25px;
-  position: absolute;
 }
 
 :root {
