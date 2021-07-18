@@ -2,6 +2,7 @@
 const joint = window.joint;
 import { color } from '../colors.js';
 import { graph, paper } from '../graph.js';
+import { legend } from '../menu/Legend.js';
 import { addLinkTools } from './ManageTools.js';
 export let selected_links = [];
 joint.elementTools.LinkButton = joint.elementTools.Button.extend({
@@ -181,6 +182,7 @@ export function createLink(model1, model2) {
     link.addTo(graph);
     console.log("link made");
     addLinkTools(link);
+    legend.refresh();
     //remove highlights from models
     let linkView1 = model1.findView(paper);
     joint.dia.HighlighterView.remove(linkView1, 'link-highlight');
