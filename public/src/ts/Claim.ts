@@ -212,6 +212,13 @@ export class Claim {
         (this.rect.attributes.size.height-legend_form_size)/2);
       this.rect.resize(legend_form_size, legend_form_size);
       this.rect.attr('rect/rx', 50);
+      
+      //if this claim has a parent (Dependent premise), resize it
+      const parent = this.rect.getParentCell();
+      console.log('PARENT', parent);
+      if (parent) {
+        parent.attributes.setHeightBasedOnChildren();
+      }
     } 
     //convert from legend to normal form
     else {
