@@ -161,7 +161,7 @@ function generateCircularAlertString(path:Array<string>, final_id:string) {
       }
     }
   }
-  output += `\n>>>> ${graph.getCell(final_id).attributes.storedInfo.initialText.replace(/\n/g, '\n        ')}`
+  output += `\n>>>> ${graph.getCell(final_id).attributes.storedInfo ? graph.getCell(final_id).attributes.storedInfo.initialText.replace(/\n/g, '\n    ') : 'Dependent Premise'}`;
   return output;
 }
 

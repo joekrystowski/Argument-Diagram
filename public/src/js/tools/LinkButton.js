@@ -140,7 +140,7 @@ function generateCircularAlertString(path, final_id) {
             }
         }
     }
-    output += `\n>>>> ${graph.getCell(final_id).attributes.storedInfo.initialText.replace(/\n/g, '\n        ')}`;
+    output += `\n>>>> ${graph.getCell(final_id).attributes.storedInfo ? graph.getCell(final_id).attributes.storedInfo.initialText.replace(/\n/g, '\n    ') : 'Dependent Premise'}`;
     return output;
 }
 //link two rects together
