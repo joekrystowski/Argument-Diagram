@@ -132,6 +132,15 @@ button {
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
+.ui-dialog {
+  overflow-y: scroll;
+  background-color: #ffdddd !important;
+}
+
+.ui-dialog-titlebar {
+  background-color: #ffaaaa !important;
+}
+
 /* ------- Buttons -------- */
 
 .menu-button {

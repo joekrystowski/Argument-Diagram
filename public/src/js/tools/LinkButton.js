@@ -61,16 +61,88 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
             });
             if (selected_links.length === 2) {
                 //check if two models are the same model
-                if (selected_links[0].id !== selected_links[1].id) {
+                if (isValidLink(selected_links[0], selected_links[1])) {
                     createLink(selected_links[0], selected_links[1]);
                 }
                 joint.dia.HighlighterView.remove(elementView, 'link-highlight');
+                joint.dia.HighlighterView.remove(selected_links[1].findView(paper), 'link-highlight');
                 selected_links = [];
             }
             return;
         }
     }
 });
+function isValidLink(source, target) {
+    if (source.id === target.id)
+        return false;
+    let disallowed_ids = [source.id];
+    let path = [source.id];
+    if (isCircularArgument(graph.getCell(target.id), disallowed_ids, path))
+        return false;
+    return true;
+}
+function isCircularArgument(current, disallowed_ids, path) {
+    disallowed_ids.push(current.get('id'));
+    path.push(current.get('id'));
+    if (current.get('embeds')) {
+        disallowed_ids.push(...current.get('embeds'));
+    }
+    if (current.get('parent')) {
+        disallowed_ids.push(current.get('parent'));
+        current = graph.getCell(current.get('parent'));
+    }
+    console.log('current', current);
+    console.log('disallowed_ids', disallowed_ids);
+    console.log('------------------------------');
+    const outLinks = graph.getConnectedLinks(current, { outbound: true });
+    let found_circular = false;
+    for (let outLink of outLinks) {
+        if (disallowed_ids.includes(outLink.attributes.target.id)) {
+            const alert_text = generateCircularAlertString(path, outLink.attributes.target.id);
+            const alert_dialog = document.createElement('div');
+            alert_dialog.innerHTML = `<pre>${alert_text}</pre>`;
+            document.body.append(alert_dialog);
+            $(alert_dialog).dialog({
+                autoOpen: true,
+                title: 'ERROR',
+                resizable: true,
+                width: 500,
+                height: 500,
+                close: function (event, ui) {
+                    $(this).dialog('destroy').remove();
+                }
+            });
+            return true;
+        }
+        const outCell = graph.getCell(outLink.attributes.target.id);
+        found_circular = isCircularArgument(outCell, disallowed_ids, path);
+        console.log('outlink', outLink);
+    }
+    return found_circular;
+}
+function generateCircularAlertString(path, final_id) {
+    const first_cell = graph.getCell(path[0]);
+    const first_text = first_cell.attributes.storedInfo ? first_cell.attributes.storedInfo.initialText.replace(/\n/g, '\n    ') : 'Dependent Premise';
+    // const first_text = graph.getCell(path[0]).attributes.storedInfo.initialText.replace(/\n/g, '\n    ');
+    const first_target_cell = graph.getCell(path[1]);
+    const first_target_text = first_target_cell.attributes.storedInfo ? first_target_cell.attributes.storedInfo.initialText.replace(/\n/g, '\n    ') : 'Dependent Premise';
+    //const first_target_text = graph.getCell(path[1]).attributes.storedInfo.initialText.replace(/\n/g, '\n    ');
+    const cells = path.map(id => graph.getCell(id));
+    let output = `Failed to create link.\nReason: Circular argument detected.\n\nLink from\n   '${first_text}'\nto\n    '${first_target_text}'\nis illegal since\n   '${first_text}'\nis reachable from\n    '${first_target_text}'.\n\nPath:`;
+    for (let cell of cells) {
+        if (cell.get('embeds')) {
+            output += '\n---- Dependent Premise';
+        }
+        else {
+            output += `\n---- ${cell.attributes.storedInfo.initialText.replace(/\n/g, '\n        ')}`;
+            if (cell.get('parent')) {
+                output += '\n(continuing from parent...)';
+            }
+        }
+    }
+    output += `\n>>>> ${graph.getCell(final_id).attributes.storedInfo ? graph.getCell(final_id).attributes.storedInfo.initialText.replace(/\n/g, '\n    ') : 'Dependent Premise'}`;
+    return output;
+}
 //link two rects together
 export function createLink(model1, model2) {
     console.log(model1.attributes.link_color);
