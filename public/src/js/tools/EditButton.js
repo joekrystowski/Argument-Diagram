@@ -61,6 +61,14 @@ joint.elementTools.EditButton = joint.elementTools.Button.extend({
             form.append(`<label for="model-validity-rect" class="menu-text">Claim Validity</label>`);
             form.append(`<input type="number" id="model-validity-rect" name="model-validity-rect" class="edit-number-form" min="0" max="1" step="0.1" value="${parseFloat(editModel.attributes.validity)}"></input>`);
             form.append('<br/>');
+            $('#model-validity-rect').on('input', function () {
+                const value = parseFloat($(this).val());
+                if (isNaN(value)) {
+                    return;
+                }
+                const constrained = Math.max(0, Math.min(value, 1));
+                $(this).val(constrained);
+            });
             //TODO: remove loop and replace with object
             $(".model-text-rect").each(function () {
                 const elem = $(this);
