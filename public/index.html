@@ -87,6 +87,11 @@
               </button>
             </li>
             <li class="toolbar-item">
+              <button id="evaluate-button" class="toolbar-button">
+                <i class="fa fa-calculator fa-2x"></i>
+              </button>
+            </li>
+            <li class="toolbar-item">
               <button id="legend-button" class="toolbar-button">
                 <i class="far fa-map fa-2x"></i>
               </button>
@@ -116,7 +121,7 @@
                   <i class="fas fa-times"></i></i><span>Cancel</span>
                 </button>
               </div>
-              <form id="edit-form"></form>
+              <form id="edit-form" onsubmit="event.preventDefault(); return false;"></form>
               <div id="edit-bottom" class="edit-bottom">
                 <button id="save-edit-button" class="menu-button save-button">
                   <i class="fa fa-save"></i><span>Save</span>

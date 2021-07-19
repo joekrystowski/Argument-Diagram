@@ -3,6 +3,7 @@ const joint = window.joint;
 import { elementTools } from 'jointjs';
 import { paper } from '../graph.js'
 import { graph } from '../graph.js'
+import { editModel } from './EditButton.js';
 
 export function refreshTools (element: joint.shapes.app.ClaimRect) {
   const view = element.findView(paper);
@@ -63,18 +64,19 @@ export function addRectTools(element: joint.shapes.app.ClaimRect) {
 // adding tools to links
 export function addLinkTools(link: joint.shapes.standard.Link) {
   let removeButton = new joint.linkTools.Remove();
+  let editLinkButton = new joint.linkTools.EditLinkButton()
   let toolsView = new joint.dia.ToolsView({
-    tools: [removeButton]
+    tools: [removeButton, editLinkButton]
   });
   let linkView = link.findView(paper);
   linkView.addTools(toolsView)
   //start with tools hidden
   linkView.hideTools();
     // ------ paper events -------
-  paper.on("link:mouseenter", function(linkView) {
+  paper.on("link:pointerclick", function(linkView) {
     linkView.showTools();
   });
-  paper.on("link:mouseleave", function(linkView) {
+  paper.on("link:pointerdblclick", function(linkView) {
     linkView.hideTools();
   });
 
@@ -104,10 +106,10 @@ export function addDependentPremiseTools(element: joint.shapes.app.DependentPrem
   //start with tools hidden
   elementView.hideTools();
 
-  element.on("change:position", function () {
-    paper.hideTools();
-    elementView.showTools();
-  })
+  // element.on("change:position", function () {
+  //   paper.hideTools();
+  //   elementView.showTools();
+  // })
 
   // ------ paper events -------
   paper.on("element:pointerclick", function(eventView){

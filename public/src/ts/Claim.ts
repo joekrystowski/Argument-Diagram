@@ -1,6 +1,7 @@
 import { calcHeight } from "./util.js";
 import { graph, paper } from "./graph.js";
 import { refreshTools } from "./tools/ManageTools.js";
+import { createColor } from "./colors.js"
 
 /* global joint */
 const joint = window.joint;
@@ -19,7 +20,7 @@ declare module "jointjs" {
 const ClaimRect = joint.shapes.standard.Rectangle.define("app.ClaimRect", {
   markup: '<g class="rotatable"><g class="scalable"><rect/></g><text/></g>',
   attrs: {
-    rect: { class:"claim-rect", width: 100, height: 100}, //, fill: "white", stroke: "black", width: 100, height: 100 },
+    rect: { class:"claim-rect", width: 100, height: 100, fill: "white", stroke: "black", strokeWidth: 5},//, width: 100, height: 100 },
     text: { class:"claim-text",
       "font-size": 12,
       "ref-x": 0.5,
@@ -52,6 +53,7 @@ interface ClaimOptions {
   stroke: string;
   link_color: string;
   weight: string;
+  validity: number;
 }
 
 export class Claim {
@@ -80,11 +82,13 @@ export class Claim {
       },
       attrs: {
         rect: {
-          class: config.type+"-rect",
-          fill: config.body_color,
+          fill: createColor(config.validity, config.type),
+          stroke: config.stroke,
+          strokeWidth: getStrokeWidth(config.validity)
         },
+          //class: config.type+"-rect",
         text: {
-          class: config.type+"-text",
+          //class: config.type+"-text",
           text: text_wrap,
           fill: config.text_color,
         },
@@ -92,6 +96,7 @@ export class Claim {
       // set custom attributes here:
       link_color: config.link_color,
       weight: config.weight,
+      validity: config.validity,
       type: config.type,
       inLegendForm: false,
       storedInfo: {
@@ -232,4 +237,9 @@ export class Claim {
     this.rect.attributes.inLegendForm = !this.rect.attributes.inLegendForm;
     refreshTools(this.rect);
   }
+}
+
+
+export function getStrokeWidth(value:number) {
+  return 2 + ( 3 * value )
 }

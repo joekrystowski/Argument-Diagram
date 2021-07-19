@@ -168,6 +168,15 @@ function generateCircularAlertString(path:Array<string>, final_id:string) {
 //link two rects together
 export function createLink(model1:joint.shapes.app.ClaimRect, model2:joint.shapes.app.ClaimRect) {
   console.log(model1.attributes.link_color);
+  let link_color;
+  if (model1.attributes.type === "claim") {
+    link_color = color.claim.dark.stroke
+  } else if (model1.attributes.type === "objection") {
+    link_color = color.objection.dark.stroke
+  } else if (model1.attributes.type === "dependent-premise") {
+    link_color = color.dependentPremise.stroke
+  }
+  console.log("link color", link_color)
 
   //prevent dp from linking to one of its children
   if (model2.get('parent') && graph.getCell(model2.get("parent")) === model1 ) {
@@ -183,7 +192,7 @@ export function createLink(model1:joint.shapes.app.ClaimRect, model2:joint.shape
   //link attributes based on arg1/rect1 (source)
   link.attr({
     line: {
-      stroke: model1.attributes.link_color
+      stroke: link_color
     }
   });
   //link text (maybe implement weights later?) for now everything has weight of 1.0 and the weights themselves do nothing
@@ -191,13 +200,14 @@ export function createLink(model1:joint.shapes.app.ClaimRect, model2:joint.shape
     {
       attrs: {
         text: {
-          class: model1.attributes.type+"-link-text",
+          //class: model1.attributes.type+"-link-text",
           text: model1.attributes.weight,
-          stroke: color.textColor
+          stroke: link_color,
+          fill:link_color
         },
         rect: {
-          class: model1.attributes.type+"-link-rect",
-          fill: color.claim.textColor
+          //class: model1.attributes.type+"-link-rect",
+          fill: "#222222" //background color
         }
       }
     }
