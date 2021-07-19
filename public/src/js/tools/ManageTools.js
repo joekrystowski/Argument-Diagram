@@ -91,10 +91,10 @@ export function addDependentPremiseTools(element) {
     elementView.addTools(toolsView);
     //start with tools hidden
     elementView.hideTools();
-    element.on("change:position", function () {
-        paper.hideTools();
-        elementView.showTools();
-    });
+    // element.on("change:position", function () {
+    //   paper.hideTools();
+    //   elementView.showTools();
+    // })
     // ------ paper events -------
     paper.on("element:pointerclick", function (eventView) {
         if (eventView !== elementView) {

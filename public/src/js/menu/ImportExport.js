@@ -2,6 +2,7 @@ import { graph } from '../graph.js';
 import { createClaim, createDependentPremise, } from "../menu/CreateClaim.js";
 import { createLink } from "../tools/LinkButton.js";
 import { legend } from './Legend.js';
+import { ClaimToObjection } from "../ToggleTypes.js";
 // not fully working
 function parseJSON(cells, legend_import) {
     let ids = {};
@@ -25,7 +26,8 @@ function parseJSON(cells, legend_import) {
                 importClaim(cells[i], ids);
             }
             else if (type === "objection") {
-                importClaim(cells[i], ids);
+                let cell = importClaim(cells[i], ids);
+                ClaimToObjection(cell);
             }
             // insert dependent premise here
             else if (type === "dependent-premise") {
@@ -131,7 +133,7 @@ function importClaim(cell, ids) {
     else {
         text = cell.attrs.text.text;
     }
-    const arg = createClaim(pos.x, pos.y, text);
+    const arg = createClaim(pos.x, pos.y, text, cell.validity);
     ids[cell.id] = arg;
     return arg.rect;
 }

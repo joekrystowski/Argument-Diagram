@@ -3,7 +3,8 @@ const joint = window.joint;
 import { editModel } from '../tools/EditButton.js';
 import { getStrokeWidth } from '../Claim.js';
 import { legend } from './Legend.js';
-import { color, createColor } from '../colors.js';
+import { createColor } from '../colors.js';
+import { ObjectionToClaim, ClaimToObjection } from "../ToggleTypes.js";
 export function saveEdits() {
     let texts = $('[name^="model-text-"]').toArray();
     console.log($('[name^="model-validity-"]').toArray());
@@ -57,19 +58,6 @@ export function saveEdits() {
         //console.log("new_text", editModel.attributes.attrs.text.text)
     }
     else {
-        const objectionSwitch = document.getElementById("objection-switch");
-        if (editModel.attributes.type === "claim" && objectionSwitch.checked) {
-            editModel.attributes.type = "objection";
-            // editModel.attr("text/class","objection-text");
-            // editModel.attr("rect/class","objection-rect");
-            editModel.attr("rect/stroke", color.objection.dark.stroke);
-        }
-        else if (editModel.attributes.type === "objection" && !objectionSwitch.checked) {
-            editModel.attributes.type = "claim";
-            // editModel.attr("text/class","claim-text");
-            // editModel.attr("rect/class","claim-rect");
-            editModel.attr("rect/stroke", "#ffffff");
-        }
         //just update the single model with the new text and size
         editModel.attr('text/text', text_wraps[0]);
         //console.log(validities)
@@ -78,6 +66,13 @@ export function saveEdits() {
         editModel.resize(editModel.attributes.size.width, heights[0]);
         editModel.attr("rect/fill", createColor(editModel.attributes.validity, editModel.attributes.type));
         editModel.attr("rect/strokeWidth", getStrokeWidth(editModel.attributes.validity));
+        const objectionSwitch = document.getElementById("objection-switch");
+        if (editModel.attributes.type === "claim" && objectionSwitch.checked) {
+            ClaimToObjection(editModel);
+        }
+        else if (editModel.attributes.type === "objection" && !objectionSwitch.checked) {
+            ObjectionToClaim(editModel);
+        }
         console.log(editModel);
     }
     const saveButton = document.getElementById("save-edit-button");

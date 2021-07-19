@@ -124,7 +124,8 @@ export function createLink(model1:joint.shapes.app.ClaimRect, model2:joint.shape
         text: {
           //class: model1.attributes.type+"-link-text",
           text: model1.attributes.weight,
-          stroke: link_color
+          stroke: link_color,
+          fill:link_color
         },
         rect: {
           //class: model1.attributes.type+"-link-rect",
