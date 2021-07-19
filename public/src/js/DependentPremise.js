@@ -25,11 +25,9 @@ const DependentPremiseRect = joint.shapes.standard.Rectangle.define("app.Depende
     props: [],
     setHeightBasedOnChildren: function () {
         const children = this.embeds;
-        console.log('CHILDREN', children);
         const height = Math.max(...children.map((child) => graph.getCell(child).get('size').height));
         graph.getCell(this.id).set({ size: { width: this.size.width, height: height + 13 } });
     }
-    // ---
 });
 Object.assign(joint.shapes, {
     app: {

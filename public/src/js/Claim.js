@@ -144,6 +144,7 @@ export class Claim {
             //use Object.assign to make an actual copy of the object (not a reference)
             this.rect.attributes.storedInfo.size = Object.assign({}, this.rect.attributes.size);
             this.rect.attributes.storedInfo.rx = this.rect.attributes.attrs.rect.rx || 0;
+            this.rect.attributes.storedInfo.position = Object.assign({}, this.rect.attributes.position);
         }
     }
     /**
@@ -172,23 +173,22 @@ export class Claim {
             this.store();
             //change attributes to legend form style
             this.rect.attr('text/text', legendNumber === null || legendNumber === void 0 ? void 0 : legendNumber.toString());
-            this.rect.translate((this.rect.attributes.size.width - legend_form_size) / 2, (this.rect.attributes.size.height - legend_form_size) / 2);
+            this.rect.translate((this.rect.attributes.size.width - legend_form_size) / 2, 0);
             this.rect.resize(legend_form_size, legend_form_size);
             this.rect.attr('rect/rx', 50);
-            //if this claim has a parent (Dependent premise), resize it
-            const parent = this.rect.getParentCell();
-            console.log('PARENT', parent);
-            if (parent) {
-                parent.attributes.setHeightBasedOnChildren();
-            }
         }
         //convert from legend to normal form
         else {
             this.rect.attr('text/text', this.retrieveFromStorage('initialText'));
             const old_size = this.retrieveFromStorage('size');
-            this.rect.translate(-(old_size.width - legend_form_size) / 2, -(old_size.height - legend_form_size) / 2);
+            this.rect.translate(-(old_size.width - legend_form_size) / 2, 0);
             this.rect.resize(old_size.width, old_size.height);
             this.rect.attr('rect/rx', this.retrieveFromStorage('rx'));
+        }
+        //if this claim has a parent (Dependent premise), resize it
+        const parent = this.rect.getParentCell();
+        if (parent) {
+            parent.attributes.setHeightBasedOnChildren();
         }
         //update form boolean
         this.rect.attributes.inLegendForm = !this.rect.attributes.inLegendForm;
