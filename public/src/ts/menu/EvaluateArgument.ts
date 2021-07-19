@@ -36,7 +36,7 @@ export function evaluateArgument() {
             console.log(sum)
         }
     }
-    console.log("The evaluation of this argument is:", sum)
+    alert("The evaluation of this argument is: " + sum )
 }
 
 interface ObjectionInfo {
