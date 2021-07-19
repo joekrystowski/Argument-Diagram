@@ -41,12 +41,7 @@ class Legend {
             claim.toggleLegendForm(index + 1);
         });
         const legend_compact = $('#legend-compact');
-        if (this.compact) {
-            legend_compact.hide();
-        }
-        else {
-            legend_compact.show();
-        }
+        legend_compact.toggle(!this.compact);
         this.compact = !this.compact;
         this.active = !this.active;
     }
