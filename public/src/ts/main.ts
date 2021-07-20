@@ -13,6 +13,7 @@ import { Claim } from "./Claim.js";
 import { color } from "./colors.js";
 import { paper, graph } from "./graph.js";
 import { evaluateArgument } from "./menu/EvaluateArgument.js"
+import { AutomaticCleanUp } from "./menu/CleanUp/AutomaticCleanUp.js"
 import { createLink } from "./tools/LinkButton.js";
 
 const claimImage = new Image();
@@ -65,14 +66,17 @@ importButton.addEventListener("click", importGraph);
 const exportButton = document.getElementById("export-button") as HTMLElement;
 exportButton.addEventListener("click", exportGraph);
 
+const evaluateButton = document.getElementById('evaluate-button') as HTMLElement;
+evaluateButton.addEventListener('click', evaluateArgument);
+
+const CleanArgumentButton = document.getElementById('clean-argument-button') as HTMLElement;
+CleanArgumentButton.addEventListener('click', AutomaticCleanUp)
+
 const PNGButton = document.getElementById("png-button") as HTMLElement;
 PNGButton.addEventListener("click", savePNG);
 
 const PDFButton = document.getElementById("pdf-button") as HTMLElement;
 PDFButton.addEventListener("click", savePDF);
-
-const evaluateButton = document.getElementById('evaluate-button') as HTMLElement;
-evaluateButton.addEventListener('click', evaluateArgument);
 
 const sidePanel = document.getElementById("side-panel") as HTMLElement;
 const wrapper = document.getElementById("wrapper") as HTMLElement;
