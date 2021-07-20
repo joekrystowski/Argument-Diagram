@@ -1,15 +1,40 @@
 /* global joint editModel */
 const joint = window.joint;
 import { editModel } from '../tools/EditButton.js';
+import { getStrokeWidth } from '../Claim.js';
 import { legend } from './Legend.js';
+import { createColor } from '../colors.js';
+import { ObjectionToClaim, ClaimToObjection } from "../ToggleTypes.js";
 export function saveEdits() {
     let texts = $('[name^="model-text-"]').toArray();
+    console.log($('[name^="model-validity-"]').toArray());
+    let validities = $('[name^="model-validity-"]').toArray().map((element) => parseFloat(element.value));
+    console.log('validities', validities);
     let text_wraps = texts.map((element) => joint.util.breakText(element.value, { width: 90 }));
     let num_lines = text_wraps.map(wrap => (wrap.match(/\n/g) || []).length);
     //magic numbers have to do with font size... ask Joe
     let heights = num_lines.map(lines => 16 + 13 * lines);
     console.log(heights);
-    if (editModel.attributes.type === "dependent-premise") {
+    if (editModel.isLink()) {
+        console.log("saving link edits");
+        let weight = $('#link-weight-rect').val();
+        let oldLabel = editModel.attributes.labels[0];
+        editModel.label(0, {
+            attrs: {
+                text: {
+                    class: oldLabel.attrs.text.class,
+                    text: weight,
+                    stroke: oldLabel.attrs.text.stroke
+                },
+                rect: {
+                    class: oldLabel.attrs.rect.class,
+                    fill: oldLabel.attrs.rect.fill
+                }
+            }
+        });
+        console.log(weight);
+    }
+    else if (editModel.attributes.type === "dependent-premise") {
         console.log("saving dependent premise");
         //save new text and adjust size on each model in dependent premise
         editModel.getEmbeddedCells().forEach((cell, index) => {
@@ -33,21 +58,22 @@ export function saveEdits() {
         //console.log("new_text", editModel.attributes.attrs.text.text)
     }
     else {
-        const objectionSwitch = document.getElementById("objection-switch");
-        if (editModel.attributes.type === "claim" && objectionSwitch.checked) {
-            editModel.attributes.type = "objection";
-            editModel.attr("text/class", "objection-text");
-            editModel.attr("rect/class", "objection-rect");
-        }
-        else if (editModel.attributes.type === "objection" && !objectionSwitch.checked) {
-            editModel.attributes.type = "claim";
-            editModel.attr("text/class", "claim-text");
-            editModel.attr("rect/class", "claim-rect");
-        }
         //just update the single model with the new text and size
         editModel.attr('text/text', text_wraps[0]);
+        //console.log(validities)
+        editModel.attributes.validity = validities[0];
         editModel.attributes.storedInfo.initialText = text_wraps[0];
         editModel.resize(editModel.attributes.size.width, heights[0]);
+        editModel.attr("rect/fill", createColor(editModel.attributes.validity, editModel.attributes.type));
+        editModel.attr("rect/strokeWidth", getStrokeWidth(editModel.attributes.validity));
+        const objectionSwitch = document.getElementById("objection-switch");
+        if (editModel.attributes.type === "claim" && objectionSwitch.checked) {
+            ClaimToObjection(editModel);
+        }
+        else if (editModel.attributes.type === "objection" && !objectionSwitch.checked) {
+            ObjectionToClaim(editModel);
+        }
+        console.log(editModel);
     }
     const saveButton = document.getElementById("save-edit-button");
     saveButton === null || saveButton === void 0 ? void 0 : saveButton.classList.remove("changed");

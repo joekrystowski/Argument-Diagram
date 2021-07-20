@@ -7,5 +7,6 @@ export let paper = new joint.dia.Paper({
     height: window.innerHeight,
     gridSize: 10,
     drawGrid: true,
-    preventContextMenu: false
+    preventContextMenu: false,
+    clickThreshold: 1,
 });

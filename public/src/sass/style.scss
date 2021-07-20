@@ -132,6 +132,29 @@ button {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
+.edit-number-form {
+  margin: 0 1rem;
+  height: 1.5rem;
+  min-height: 1.5rem;
+  max-height: 1.5rem;
+  resize: vertical;
+
+  border: none;
+  background-color: var(--toolbar-bg);
+  color: var(--accent-gray);
+  font-size: 1.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.ui-dialog {
+  overflow-y: scroll;
+  background-color: #ffdddd !important;
+}
+
+.ui-dialog-titlebar {
+  background-color: #ffaaaa !important;
+}
 
 /* ------- Buttons -------- */
 
