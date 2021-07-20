@@ -12,6 +12,7 @@ import { Claim } from "./Claim.js";
 import { color } from "./colors.js";
 import { paper, graph } from "./graph.js";
 import { evaluateArgument } from "./menu/EvaluateArgument.js"
+import { AutomaticCleanUp } from "./menu/CleanUp/AutomaticCleanUp.js"
 
 const claimImage = new Image();
 claimImage.src = "src/img/Claim.jpg";
@@ -68,6 +69,9 @@ evaluateButton.addEventListener('click', evaluateArgument);
 
 const legendButton = document.getElementById('legend-button') as HTMLElement;
 legendButton.addEventListener('click', toggleLegend);
+
+const CleanArgumentButton = document.getElementById('clean-argument-button') as HTMLElement;
+CleanArgumentButton.addEventListener('click', AutomaticCleanUp)
 
 $('#toggle-legend-info-button').on('click', function() {
   const legend_info = $('#legend-info');

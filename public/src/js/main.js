@@ -5,6 +5,7 @@ import { createClaim, createObjection, } from "./menu/CreateClaim.js";
 import { importGraph, exportGraph } from "./menu/ImportExport.js";
 import { legend, toggleLegend } from './menu/Legend.js';
 import { evaluateArgument } from "./menu/EvaluateArgument.js";
+import { AutomaticCleanUp } from "./menu/CleanUp/AutomaticCleanUp.js";
 const claimImage = new Image();
 claimImage.src = "src/img/Claim.jpg";
 let argCounter = 0; //TODO: temporary until we fix selecting claims
@@ -50,6 +51,8 @@ const evaluateButton = document.getElementById('evaluate-button');
 evaluateButton.addEventListener('click', evaluateArgument);
 const legendButton = document.getElementById('legend-button');
 legendButton.addEventListener('click', toggleLegend);
+const CleanArgumentButton = document.getElementById('clean-argument-button');
+CleanArgumentButton.addEventListener('click', AutomaticCleanUp);
 $('#toggle-legend-info-button').on('click', function () {
     const legend_info = $('#legend-info');
     if (legend_info.hasClass('collapsed')) {
