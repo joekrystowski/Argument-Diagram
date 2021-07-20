@@ -108,7 +108,7 @@ function isCircularArgument(current, disallowed_ids, path) {
                 resizable: true,
                 width: 500,
                 height: 500,
-                close: function (event, ui) {
+                close: function () {
                     $(this).dialog('destroy').remove();
                 }
             });

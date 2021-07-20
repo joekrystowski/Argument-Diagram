@@ -1,0 +1,68 @@
+#settings-title {
+    padding: 1rem;
+    padding-bottom: 0;
+}
+
+#settings-dropdown {
+    font-size: 20px;
+    z-index: 6;
+    user-select: none;
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    top: 0;
+    right: 0;
+    width: 16rem;
+    // padding: 1rem;
+
+    border-radius: var(--border-radius);
+    border: 1px solid var(--toolbar-hover);
+
+    color: var(--accent-gray);
+    background-color: var(--toolbar-bg);
+    overflow: hidden;
+
+    transition: height var(--transition-speed) ease-in-out;
+}
+
+#settings-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.settings-button {
+    visibility: hidden;
+}
+
+.settings-item {
+    display: flex;
+    padding: 0.5rem;
+    margin: 1rem;
+    align-items: center;
+    border-radius: var(--border-radius);
+    &.button {
+        transition: background var(--transition-speed);
+        &:hover {
+            background-color: var(--toolbar-hover);
+        }
+    }
+}
+
+.settings-menu {
+    margin: 0;
+    padding: 0;
+    // padding-top: 0.5rem;
+    width: 100%;
+    transition: all var(--transition-speed) ease-in-out;
+}
+
+#log-in-menu {
+    position: absolute;
+    transform: translateX(110%);
+}
+
+#log-in-input {
+    display: flex;
+    align-items: center;
+}

@@ -5,6 +5,7 @@ import { createClaim, createObjection, createDependentPremise, } from "./menu/Cr
 import { importGraph, exportGraph } from "./menu/ImportExport.js";
 import { legend, toggleLegend } from './menu/Legend.js';
 import { createLink } from "./tools/LinkButton.js";
+import { toggleSettings } from "./Settings.js";
 const claimImage = new Image();
 claimImage.src = "src/img/Claim.jpg";
 let argCounter = 0; //TODO: temporary until we fix selecting claims
@@ -63,6 +64,8 @@ sidePanelButton.addEventListener("click", () => {
 });
 const legendButton = document.getElementById('legend-button');
 legendButton.addEventListener('click', toggleLegend);
+const settingsButton = document.getElementById('settings-button');
+settingsButton.addEventListener('click', toggleSettings);
 // $('#toggle-legend-info-button').on('click', function() {
 //   const legend_info = $('#legend-info');
 //   if (legend_info.hasClass('collapsed')) {

@@ -119,14 +119,14 @@ function isCircularArgument(current:joint.dia.Cell, disallowed_ids:Array<string>
       const alert_dialog = document.createElement('div');
       alert_dialog.innerHTML = `<pre>${alert_text}</pre>`;
       document.body.append(alert_dialog);
-      $(alert_dialog).dialog({
+      (<any>$(alert_dialog)).dialog({
         autoOpen: true, 
         title: 'ERROR', 
         resizable: true, 
         width: 500, 
         height: 500,
-        close: function(event, ui) {
-          $(this).dialog('destroy').remove()
+        close: function() {
+          (<any>$(this)).dialog('destroy').remove()
         }
       });
 

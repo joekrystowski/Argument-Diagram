@@ -8,10 +8,12 @@
 @use 'claim';
 @use 'sidePanel';
 @use 'legendInfo';
+@use 'settings';
 
 :root {
   font-size: 16px;
   --transition-speed: 200ms;
+  --border-radius: 1rem;
   /* temp colors */
   --accent-pink: #ff6b6b;
   --accent-red: #ff206e;

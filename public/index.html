@@ -60,7 +60,7 @@
               </button>
             </li>
             <li class="toolbar-item">
-              <button class="toolbar-button">
+              <button id="undo-button" class="toolbar-button">
                 <svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="0 0 24 24">
                   <path d="M0 0h24v24H0V0z" fill="none"/>
                   <path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"/>
@@ -68,7 +68,7 @@
               </button>
             </li>
             <li class="toolbar-item">
-              <button class="toolbar-button">
+              <button id="redo-button" class="toolbar-button">
                 <svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="0 0 24 24">
                   <path d="M0 0h24v24H0V0z" fill="none"/>
                   <path d="M18.4 10.6C16.55 8.99 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.9 16c1.05-3.19 4.05-5.5 7.6-5.5 1.95 0 3.73.72 5.12 1.88L13 16h9V7l-3.6 3.6z"/>
@@ -92,7 +92,7 @@
               </button>
             </li>
             <li class="toolbar-item">
-              <button class="toolbar-button">
+              <button class="toolbar-button" id="settings-button">
                 <svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="0 0 24 24">
                   <path d="M0 0h24v24H0V0z" fill="none"/>
                   <path d="M19.43 12.98c.04-.32.07-.64.07-.98 0-.34-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.09-.16-.26-.25-.44-.25-.06 0-.12.01-.17.03l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.06-.02-.12-.03-.18-.03-.17 0-.34.09-.43.25l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98 0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.09.16.26.25.44.25.06 0 .12-.01.17-.03l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.06.02.12.03.18.03.17 0 .34-.09.43-.25l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zm-1.98-1.71c.04.31.05.52.05.73 0 .21-.02.43-.05.73l-.14 1.13.89.7 1.08.84-.7 1.21-1.27-.51-1.04-.42-.9.68c-.43.32-.84.56-1.25.73l-1.06.43-.16 1.13-.2 1.35h-1.4l-.19-1.35-.16-1.13-1.06-.43c-.43-.18-.83-.41-1.23-.71l-.91-.7-1.06.43-1.27.51-.7-1.21 1.08-.84.89-.7-.14-1.13c-.03-.31-.05-.54-.05-.74s.02-.43.05-.73l.14-1.13-.89-.7-1.08-.84.7-1.21 1.27.51 1.04.42.9-.68c.43-.32.84-.56 1.25-.73l1.06-.43.16-1.13.2-1.35h1.39l.19 1.35.16 1.13 1.06.43c.43.18.83.41 1.23.71l.91.7 1.06-.43 1.27-.51.7 1.21-1.07.85-.89.7.14 1.13zM12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
@@ -107,7 +107,8 @@
           <p id="legend-compact"></p>
           <ul id="legend-list" class="sortable"></ul>
         </div>      
-        <div id="wrapper">    
+        <div id="wrapper">
+          <div id='firebaseui-auth-container'></div>
           <div id="menu-container">
             <div id="edit-container" class="edit-container">
               <div id="edit-top" class="edit-top">
@@ -141,6 +142,54 @@
           
         </div> -->
       </div>
+      <div id="settings-dropdown">
+        <label id="settings-title">Settings</label>
+        <div id="settings-container">
+          <ul id="settings-menu" class="settings-menu">
+            <li id="log-in-button" class="settings-item button">
+              <i class="fas fa-user-circle"></i>
+              Account
+            </li>
+          </ul>
+          <ul id="log-in-menu" class="settings-menu">
+            <li id="log-in-back" class="settings-item button">
+              <i class="fas fa-arrow-left"></i>
+            </li>
+            <li id="log-in-enter" class="settings-item button">
+              <i class="fas fa-sign-in-alt"></i>
+              Log in
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+
+
+    <script>
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      var firebaseConfig = {
+        apiKey: "AIzaSyDGTYeCiursNm1CIBNDd5eH5dECxdk_oTs",
+        authDomain: "argumentdiagrams.firebaseapp.com",
+        projectId: "argumentdiagrams",
+        storageBucket: "argumentdiagrams.appspot.com",
+        messagingSenderId: "274536986513",
+        appId: "1:274536986513:web:3a78a16c3f1fe150180c30",
+        measurementId: "G-QRK0L21V84"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
+    <script type="module" src="src/js/Settings.js"></script>
   </body>
 </html>

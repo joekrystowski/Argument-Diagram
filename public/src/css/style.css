@@ -197,6 +197,7 @@ input:checked + .slider:before {
   z-index: 5;
   position: fixed;
   background-color: var(--toolbar-bg);
+  border: 1px solid var(--toolbar-hover);
 }
 
 .toolbar-list {
@@ -242,6 +243,22 @@ input:checked + .slider:before {
 }
 .toolbar-button svg {
   fill: var(--accent-gray);
+}
+
+#settings-button:active {
+  transform: rotate(180deg);
+}
+
+#undo-button:active {
+  transform: rotate(-10deg);
+}
+
+#redo-button:active {
+  transform: rotate(10deg);
+}
+
+#legend-button:active {
+  transform: translateY(-4px);
 }
 
 .claim-rect {
@@ -400,9 +417,74 @@ input:checked + .slider:before {
   display: none;
 }
 
+#settings-title {
+  padding: 1rem;
+  padding-bottom: 0;
+}
+
+#settings-dropdown {
+  font-size: 20px;
+  z-index: 6;
+  user-select: none;
+  display: none;
+  position: absolute;
+  flex-direction: column;
+  top: 0;
+  right: 0;
+  width: 16rem;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--toolbar-hover);
+  color: var(--accent-gray);
+  background-color: var(--toolbar-bg);
+  overflow: hidden;
+  transition: height var(--transition-speed) ease-in-out;
+}
+
+#settings-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.settings-button {
+  visibility: hidden;
+}
+
+.settings-item {
+  display: flex;
+  padding: 0.5rem;
+  margin: 1rem;
+  align-items: center;
+  border-radius: var(--border-radius);
+}
+.settings-item.button {
+  transition: background var(--transition-speed);
+}
+.settings-item.button:hover {
+  background-color: var(--toolbar-hover);
+}
+
+.settings-menu {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  transition: all var(--transition-speed) ease-in-out;
+}
+
+#log-in-menu {
+  position: absolute;
+  transform: translateX(110%);
+}
+
+#log-in-input {
+  display: flex;
+  align-items: center;
+}
+
 :root {
   font-size: 16px;
   --transition-speed: 200ms;
+  --border-radius: 1rem;
   /* temp colors */
   --accent-pink: #ff6b6b;
   --accent-red: #ff206e;

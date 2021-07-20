@@ -12,6 +12,7 @@ import { Claim } from "./Claim.js";
 import { color } from "./colors.js";
 import { paper, graph } from "./graph.js";
 import { createLink } from "./tools/LinkButton.js";
+import { toggleSettings } from "./Settings.js";
 
 const claimImage = new Image();
 claimImage.src = "src/img/Claim.jpg";
@@ -81,6 +82,8 @@ sidePanelButton.addEventListener("click", () => {
 const legendButton = document.getElementById('legend-button') as HTMLElement;
 legendButton.addEventListener('click', toggleLegend);
 
+const settingsButton = document.getElementById('settings-button') as HTMLElement;
+settingsButton.addEventListener('click',toggleSettings);
 // $('#toggle-legend-info-button').on('click', function() {
 //   const legend_info = $('#legend-info');
 //   if (legend_info.hasClass('collapsed')) {
