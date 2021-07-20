@@ -48,15 +48,12 @@ const importButton = document.getElementById("import-button");
 importButton.addEventListener("click", importGraph);
 const exportButton = document.getElementById("export-button");
 exportButton.addEventListener("click", exportGraph);
-<<<<<<< HEAD
 const PNGButton = document.getElementById("png-button");
 PNGButton.addEventListener("click", savePNG);
 const PDFButton = document.getElementById("pdf-button");
 PDFButton.addEventListener("click", savePDF);
-=======
 const evaluateButton = document.getElementById('evaluate-button');
 evaluateButton.addEventListener('click', evaluateArgument);
->>>>>>> dce8ed81627974dcadcb1a4fc86819b74b118aeb
 const sidePanel = document.getElementById("side-panel");
 const wrapper = document.getElementById("wrapper");
 const sidePanelButton = document.getElementById("side-panel-button");
