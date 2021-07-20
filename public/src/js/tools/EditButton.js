@@ -154,9 +154,6 @@ joint.elementTools.EditDependentPremiseButton = joint.elementTools.Button.extend
           <label for="model-text-rect" class="menu-text">${index + 1}. </label>
           <textarea id="model-text-DP-${index}" name="model-text-DP-${index}" class="model-text-rect">${cell.attributes.attrs.text.text}</textarea>
         </div>`);
-                // form.append(`<label class="menu-text">Edit Claim ${index+1} Text</label>`);
-                // form.append(`<textarea id="model-text-DP-${index}" name="model-text-DP-${index}" class="model-text-rect">${cell.attributes.attrs.text.text}</textarea>`);
-                // form.append('<br/>');
             });
             //TODO: remove loop and replace with objects
             //fix for dependent premises

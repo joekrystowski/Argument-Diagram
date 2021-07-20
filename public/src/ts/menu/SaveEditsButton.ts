@@ -15,7 +15,7 @@ export function saveEdits() {
   let validities:Array<number> = $('[name^="model-validity-"]').toArray().map((element:HTMLElement) => parseFloat((<HTMLInputElement>element).value));
   console.log('validities', validities)
   
-  let text_wraps:Array<string> = texts.map((element:HTMLElement) => joint.util.breakText((<HTMLTextAreaElement>element).value, {width: 90}));
+  let text_wraps:Array<string> = texts.map((element:HTMLElement) => joint.util.breakText((<HTMLTextAreaElement>element).value, {width: 190}));
   let num_lines:Array<number> = text_wraps.map(wrap => (wrap.match(/\n/g) || []).length);
   //magic numbers have to do with font size... ask Joe
   let heights:Array<number> = num_lines.map(lines => 16 + 13 * lines);
@@ -90,8 +90,9 @@ export function saveEdits() {
   const saveButton = document.getElementById("save-edit-button");
   saveButton?.classList.remove("changed");
 
-  const editContainer = $('#edit-container');
-  editContainer.hide(200);
+  // const editContainer = $('#edit-container');
+  // editContainer.hide(200);
+  $('#edit-dialog').dialog('close');
 
   legend.refresh();
 }

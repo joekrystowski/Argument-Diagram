@@ -11,7 +11,7 @@ export function saveEdits() {
     console.log($('[name^="model-validity-"]').toArray());
     let validities = $('[name^="model-validity-"]').toArray().map((element) => parseFloat(element.value));
     console.log('validities', validities);
-    let text_wraps = texts.map((element) => joint.util.breakText(element.value, { width: 90 }));
+    let text_wraps = texts.map((element) => joint.util.breakText(element.value, { width: 190 }));
     let num_lines = text_wraps.map(wrap => (wrap.match(/\n/g) || []).length);
     //magic numbers have to do with font size... ask Joe
     let heights = num_lines.map(lines => 16 + 13 * lines);
@@ -78,8 +78,9 @@ export function saveEdits() {
     }
     const saveButton = document.getElementById("save-edit-button");
     saveButton === null || saveButton === void 0 ? void 0 : saveButton.classList.remove("changed");
-    const editContainer = $('#edit-container');
-    editContainer.hide(200);
+    // const editContainer = $('#edit-container');
+    // editContainer.hide(200);
+    $('#edit-dialog').dialog('close');
     legend.refresh();
 }
 export function discardEdits() {
