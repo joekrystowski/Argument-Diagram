@@ -32,10 +32,25 @@ newClaimButton.addEventListener("dragstart", (event) => {
   event.dataTransfer?.setData("type", "claim");
 });
 
+
+const edit_template = $('#edit-form-template').html();
+$(edit_template).dialog({ 
+  autoOpen: true, 
+  title: 'Edit Claim', 
+  resizable: true, 
+  width: 500, 
+  height: 500,
+  dialogClass: 'edit unusable',
+  close: function(event, ui) {
+    console.log($('.ui-dialog.edit'));
+    $('.ui-dialog.edit').addClass('unusable');
+  }
+});
+
 const saveEditButton = document.getElementById("save-edit-button") as HTMLElement;
 saveEditButton.addEventListener("click", saveEdits);
-const exitEditButton = document.getElementById("exit-edit-button") as HTMLElement;
-exitEditButton.addEventListener("click", discardEdits);
+// const exitEditButton = document.getElementById("exit-edit-button") as HTMLElement;
+// exitEditButton.addEventListener("click", discardEdits);
 
 const paperContainer = document.getElementById("myholder") as HTMLElement;
 paperContainer.addEventListener("dragover", (event) => {

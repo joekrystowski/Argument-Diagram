@@ -7,10 +7,14 @@ import { color, createColor } from '../colors.js';
 import { ObjectionToClaim, ClaimToObjection } from "../ToggleTypes.js"
 
 export function saveEdits() {
+  console.log('saving edits...');
+
   let texts:Array<HTMLElement> = $('[name^="model-text-"]').toArray();
   console.log($('[name^="model-validity-"]').toArray());
+
   let validities:Array<number> = $('[name^="model-validity-"]').toArray().map((element:HTMLElement) => parseFloat((<HTMLInputElement>element).value));
   console.log('validities', validities)
+  
   let text_wraps:Array<string> = texts.map((element:HTMLElement) => joint.util.breakText((<HTMLTextAreaElement>element).value, {width: 90}));
   let num_lines:Array<number> = text_wraps.map(wrap => (wrap.match(/\n/g) || []).length);
   //magic numbers have to do with font size... ask Joe

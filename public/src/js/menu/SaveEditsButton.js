@@ -6,6 +6,7 @@ import { legend } from './Legend.js';
 import { createColor } from '../colors.js';
 import { ObjectionToClaim, ClaimToObjection } from "../ToggleTypes.js";
 export function saveEdits() {
+    console.log('saving edits...');
     let texts = $('[name^="model-text-"]').toArray();
     console.log($('[name^="model-validity-"]').toArray());
     let validities = $('[name^="model-validity-"]').toArray().map((element) => parseFloat(element.value));

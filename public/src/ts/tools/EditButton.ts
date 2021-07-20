@@ -79,23 +79,30 @@ joint.elementTools.EditButton = joint.elementTools.Button.extend({
         $('#toggle-legend-info-button').trigger('click');
       }
 
-      const editView = $('#edit-container');
-      editView.show(200);
+      // const editView = $('#edit-container');
+      // editView.show(200);
 
       
 
-      const form = $('#edit-form');
-      form.empty();
+      // const form = $('#edit-form');
+      // form.empty();
 
-      form.append(`<label for="model-text-rect" class="menu-text">Claim Text</label>`);
-      form.append(`<textarea id="model-text-rect" name="model-text-rect" class="model-text-rect">${editModel.attributes.attrs.text.text}</textarea>`);
-      form.append('<br/>');
-      form.append(`<label for="model-validity-rect" class="menu-text">Claim Validity</label>`)
-      form.append(`<input type="number" id="model-validity-rect" name="model-validity-rect" class="edit-number-form" min="0" max="1" step="0.1" value="${parseFloat(editModel.attributes.validity)}"></input>`)
-      form.append('<br/>')
+      // form.append(`<label for="model-text-rect" class="menu-text">Claim Text</label>`);
+      // form.append(`<textarea id="model-text-rect" name="model-text-rect" class="model-text-rect">${editModel.attributes.attrs.text.text}</textarea>`);
+      // form.append('<br/>');
+      // form.append(`<label for="model-validity-rect" class="menu-text">Claim Validity</label>`)
+      // form.append(`<input type="number" id="model-validity-rect" name="model-validity-rect" class="edit-number-form" min="0" max="1" step="0.1" value="${parseFloat(editModel.attributes.validity)}"></input>`)
+      // form.append('<br/>')
 
+      $('.ui-dialog.edit').removeClass('unusable');
+      $('.ui-dialog.edit').show();
+      $('#model-text-container').empty();
+      $('#model-text-container').append(`<label for="model-text-rect" class="menu-text"></label>
+                                        <textarea id="model-text-rect" name="model-text-rect" class="model-text-rect">${editModel.attributes.attrs.text.text}</textarea>`);
+      $('#model-validity-rect').val(parseFloat(editModel.attributes.validity));
       $('#model-validity-rect').on('input', function() {
         const value = parseFloat(<string>$(this).val());
+        console.log('value', $(this).val());
         if (isNaN(value)) {
           return;
         }
