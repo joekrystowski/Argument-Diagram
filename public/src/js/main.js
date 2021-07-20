@@ -3,6 +3,7 @@
 import { saveEdits, discardEdits } from "./menu/SaveEditsButton.js";
 import { createClaim, createObjection, createDependentPremise, } from "./menu/CreateClaim.js";
 import { importGraph, exportGraph } from "./menu/ImportExport.js";
+import { savePNG, savePDF } from "./menu/saveAs.js";
 import { legend, toggleLegend } from './menu/Legend.js';
 import { evaluateArgument } from "./menu/EvaluateArgument.js";
 import { createLink } from "./tools/LinkButton.js";
@@ -47,6 +48,10 @@ const importButton = document.getElementById("import-button");
 importButton.addEventListener("click", importGraph);
 const exportButton = document.getElementById("export-button");
 exportButton.addEventListener("click", exportGraph);
+const PNGButton = document.getElementById("png-button");
+PNGButton.addEventListener("click", savePNG);
+const PDFButton = document.getElementById("pdf-button");
+PDFButton.addEventListener("click", savePDF);
 const evaluateButton = document.getElementById('evaluate-button');
 evaluateButton.addEventListener('click', evaluateArgument);
 const sidePanel = document.getElementById("side-panel");

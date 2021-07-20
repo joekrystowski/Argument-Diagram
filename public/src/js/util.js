@@ -2,6 +2,23 @@ import { graph } from "./graph.js";
 import { selected_links } from "./tools/LinkButton.js";
 import { selected_premises } from "./tools/CombinePremise.js";
 import { legend } from "./menu/Legend.js";
+export function save(data, filetype, filename) {
+    const file = new Blob([data], { type: filetype });
+    const a = document.createElement("a");
+    let url;
+    if (filetype === "application/json")
+        url = URL.createObjectURL(file);
+    else
+        url = data;
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () {
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+    }, 0);
+}
 export function calcHeight(num_lines) {
     return 16 + 13 * num_lines;
 }
