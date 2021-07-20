@@ -7,6 +7,7 @@ import {
 } from "../menu/CreateClaim.js";
 import {createLink} from "../tools/LinkButton.js"
 import { legend, LegendMap, toggleLegend } from './Legend.js';
+import { ClaimToObjection } from "../ToggleTypes.js"
 
 export interface HashMap {
 	[details: string] : Claim;
@@ -35,7 +36,8 @@ function parseJSON(cells: any[], legend_import:LegendMap): void {
 				importClaim(cells[i], ids)
 			}
 			else if (type === "objection") {
-				importClaim(cells[i], ids)
+				let cell = importClaim(cells[i], ids)
+				ClaimToObjection(cell);
 			}
 			// insert dependent premise here
 			else if ( type === "dependent-premise" ){
@@ -149,7 +151,7 @@ function importClaim(cell:any, ids:HashMap) {
 	else {
 		text = cell.attrs.text.text;
 	}
-	const arg = createClaim(pos.x, pos.y, text); 
+	const arg = createClaim(pos.x, pos.y, text, cell.validity); 
 	ids[cell.id] = arg;
 	return arg.rect
 }
