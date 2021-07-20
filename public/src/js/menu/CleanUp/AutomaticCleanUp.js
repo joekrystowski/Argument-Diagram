@@ -86,8 +86,6 @@ export function AutomaticCleanUp() {
             widest_level = i;
         }
     }
-    //find center for diagram
-    let center = widest / 2;
     //build argument
     let start_x = increment;
     let y = increment;
@@ -101,7 +99,6 @@ export function AutomaticCleanUp() {
         }
         y += dimensions[i].height + increment;
     }
-    alert("Argument clean-up complete");
 }
 function findLeaves() {
     let cells = graph.getElements();

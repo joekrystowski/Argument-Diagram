@@ -114,8 +114,6 @@ export function AutomaticCleanUp() {
         }
         y += dimensions[i].height + increment
     }
-
-    alert("Argument clean-up complete")
 }
 
 

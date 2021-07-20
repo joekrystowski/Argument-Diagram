@@ -86,6 +86,7 @@ export function createDependentPremise(rect1: joint.shapes.app.ClaimRect, rect2:
   addDependentPremiseTools(new_dependent_premise.rect);
 
   new_dependent_premise.rect.toBack()
+  legend.refresh();
 
   return new_dependent_premise;
 }

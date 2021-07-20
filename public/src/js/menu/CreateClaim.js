@@ -76,5 +76,6 @@ export function createDependentPremise(rect1, rect2) {
     //adds the buttons to each rect
     addDependentPremiseTools(new_dependent_premise.rect);
     new_dependent_premise.rect.toBack();
+    legend.refresh();
     return new_dependent_premise;
 }
