@@ -79,26 +79,15 @@ joint.elementTools.EditButton = joint.elementTools.Button.extend({
         $('#toggle-legend-info-button').trigger('click');
       }
 
-      // const editView = $('#edit-container');
-      // editView.show(200);
-
-      
-
-      // const form = $('#edit-form');
-      // form.empty();
-
-      // form.append(`<label for="model-text-rect" class="menu-text">Claim Text</label>`);
-      // form.append(`<textarea id="model-text-rect" name="model-text-rect" class="model-text-rect">${editModel.attributes.attrs.text.text}</textarea>`);
-      // form.append('<br/>');
-      // form.append(`<label for="model-validity-rect" class="menu-text">Claim Validity</label>`)
-      // form.append(`<input type="number" id="model-validity-rect" name="model-validity-rect" class="edit-number-form" min="0" max="1" step="0.1" value="${parseFloat(editModel.attributes.validity)}"></input>`)
-      // form.append('<br/>')
-
-      $('.ui-dialog.edit').removeClass('unusable');
-      $('.ui-dialog.edit').show();
+      $('#edit-dialog').dialog('open');
       $('#model-text-container').empty();
-      $('#model-text-container').append(`<label for="model-text-rect" class="menu-text"></label>
-                                        <textarea id="model-text-rect" name="model-text-rect" class="model-text-rect">${editModel.attributes.attrs.text.text}</textarea>`);
+      $('#model-text-container').append(`
+      <div class="edit-item">
+        <label for="model-text-rect" class="menu-text"></label>
+        <textarea id="model-text-rect" name="model-text-rect" class="model-text-rect">${editModel.attributes.attrs.text.text}</textarea>
+      </div>
+      `);
+      
       $('#model-validity-rect').val(parseFloat(editModel.attributes.validity));
       $('#model-validity-rect').on('input', function() {
         const value = parseFloat(<string>$(this).val());
@@ -180,23 +169,34 @@ joint.elementTools.EditDependentPremiseButton = joint.elementTools.Button.extend
       saveButton?.classList.remove("changed");
       const objectionLabel = document.getElementById("objection-label") as HTMLInputElement;
       const switchLabel = document.getElementById("switch-label") as HTMLInputElement;
-      objectionLabel.style.visibility = "hidden";
-      switchLabel.style.visibility = "hidden";
+      // objectionLabel.style.visibility = "hidden";
+      // switchLabel.style.visibility = "hidden";
+      $(objectionLabel).hide()
+      $(switchLabel).hide()
 
-      const editView = $('#edit-container');
-      editView.show(200);
+      //const editView = $('#edit-container');
+      //editView.show(200);
       
       editModel = this.model;
 
       console.log("editModel", editModel);
 
-      const form = $('#edit-form');
-      form.empty();
+      // const form = $('#edit-form');
+      // form.empty();
+      $('#edit-dialog').dialog('open');
+      $('#model-text-container').empty();
+
+      $('.single-claim').hide();
 
       editModel.getEmbeddedCells().forEach((cell:any, index:number) => {
-        form.append(`<label class="menu-text">Edit Claim ${index+1} Text</label>`);
-        form.append(`<textarea id="model-text-DP-${index}" name="model-text-DP-${index}" class="model-text-rect">${cell.attributes.attrs.text.text}</textarea>`);
-        form.append('<br/>');
+        $('#model-text-container').append(`
+        <div class="edit-item">
+          <label for="model-text-rect" class="menu-text">${index + 1}. </label>
+          <textarea id="model-text-DP-${index}" name="model-text-DP-${index}" class="model-text-rect">${cell.attributes.attrs.text.text}</textarea>
+        </div>`);
+        // form.append(`<label class="menu-text">Edit Claim ${index+1} Text</label>`);
+        // form.append(`<textarea id="model-text-DP-${index}" name="model-text-DP-${index}" class="model-text-rect">${cell.attributes.attrs.text.text}</textarea>`);
+        // form.append('<br/>');
       });
       //TODO: remove loop and replace with objects
       //fix for dependent premises
