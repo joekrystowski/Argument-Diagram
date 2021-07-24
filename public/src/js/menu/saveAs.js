@@ -28,7 +28,11 @@ function createCanvas(callback) {
         canvas.width = width;
         canvas.height = height;
         const ctx = canvas.getContext('2d');
+<<<<<<< HEAD
         ctx.fillStyle = "white";
+=======
+        ctx.fillStyle = "gray";
+>>>>>>> 7fc22a042055adff8aa0e42bff50066d502587c1
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(svgImg, 0, 0, canvas.width, canvas.height);
         const data = canvas.toDataURL("image/png", 1.0);
