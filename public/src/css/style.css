@@ -351,6 +351,45 @@ input:checked + .slider:before {
   display: none;
 }
 
+.dropdown {
+  height: 0px;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.dropdown:hover #download-dropdown {
+  filter: opacity(1);
+}
+
+.dropdown-content {
+  top: 34px;
+  display: none;
+  position: absolute;
+  background-color: var(--toolbar-bg);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.dropdown-content button {
+  min-width: 150px;
+  background-color: var(--toolbar-bg);
+  padding: 12px 16px;
+  color: var(--accent-gray);
+  filter: opacity(0.75);
+  transition: var(--transition-speed);
+  display: block;
+  /*i {
+    padding-bottom: -5px;
+    padding-left: 25px;
+    position: absolute;
+  }*/
+}
+.dropdown-content button:first-of-type {
+  border-bottom: 0.1rem solid var(--accent-gray);
+}
+.dropdown-content button:hover {
+  background-color: var(--toolbar-hover);
+}
+
 :root {
   font-size: 16px;
   --transition-speed: 200ms;
