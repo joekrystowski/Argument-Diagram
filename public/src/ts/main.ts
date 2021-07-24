@@ -66,12 +66,6 @@ importButton.addEventListener("click", importGraph);
 const exportButton = document.getElementById("export-button") as HTMLElement;
 exportButton.addEventListener("click", exportGraph);
 
-const PNGButton = document.getElementById("png-button") as HTMLElement;
-PNGButton.addEventListener("click", savePNG);
-
-const PDFButton = document.getElementById("pdf-button") as HTMLElement;
-PDFButton.addEventListener("click", savePDF);
-
 const evaluateButton = document.getElementById('evaluate-button') as HTMLElement;
 evaluateButton.addEventListener('click', evaluateArgument);
 
