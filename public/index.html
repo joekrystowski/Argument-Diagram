@@ -87,6 +87,28 @@
               </button>
             </li>
             <li class="toolbar-item">
+              <div class="dropdown">
+                <button id="download-dropdown" class="toolbar-button">
+                <i class="fa fa-2x fa-download"></i>
+                </button>
+                <div class="dropdown-content">
+                  <button id="png-button">
+                    <!--<i class="far fa-file-image"></i>-->
+                    Download as PNG
+                  </button>
+                  <button id="pdf-button">
+                    <!--<i class="far fa-file-pdf"></i>-->
+                    Download as PDF
+                  </button>
+                </div>
+              </div>
+            </li>
+            <li class="toolbar-item">
+              <button id="evaluate-button" class="toolbar-button">
+                <i class="fa fa-calculator fa-2x"></i>
+              </button>
+            </li>
+            <li class="toolbar-item">
               <button id="legend-button" class="toolbar-button">
                 <i class="far fa-map fa-2x"></i>
               </button>
@@ -102,6 +124,11 @@
             <li class="toolbar-item">
               <button id="files-button" class="toolbar-button">
                 <svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/></svg>
+              </button>
+            </li>
+            <li class="toolbar-item">
+              <button id="clean-argument-button" class="toolbar-button">
+                <i class="fas fa-broom fa-2x"></i>
               </button>
             </li>
             <li class="toolbar-item">
@@ -131,7 +158,7 @@
                   <i class="fas fa-times"></i></i><span>Cancel</span>
                 </button>
               </div>
-              <form id="edit-form"></form>
+              <form id="edit-form" onsubmit="event.preventDefault(); return false;"></form>
               <div id="edit-bottom" class="edit-bottom">
                 <button id="save-edit-button" class="menu-button save-button">
                   <i class="fa fa-save"></i><span>Save</span>

@@ -7,10 +7,13 @@ import {
   createDependentPremise,
 } from "./menu/CreateClaim.js";
 import { importGraph, exportGraph, saveGraph, openGraph } from "./menu/ImportExport.js";
+import { savePNG, savePDF } from "./menu/saveAs.js";
 import { legend, toggleLegend } from './menu/Legend.js';
 import { Claim } from "./Claim.js";
 import { color } from "./colors.js";
 import { paper, graph } from "./graph.js";
+import { evaluateArgument } from "./menu/EvaluateArgument.js"
+import { AutomaticCleanUp } from "./menu/CleanUp/AutomaticCleanUp.js"
 import { createLink } from "./tools/LinkButton.js";
 import { toggleSettings } from "./Settings.js";
 
@@ -67,19 +70,27 @@ saveButton.addEventListener("click", saveGraph);
 const filesButton = document.getElementById("files-button") as HTMLElement;
 filesButton.addEventListener("click", openGraph);
 
+const evaluateButton = document.getElementById('evaluate-button') as HTMLElement;
+evaluateButton.addEventListener('click', evaluateArgument);
+
+const CleanArgumentButton = document.getElementById('clean-argument-button') as HTMLElement;
+CleanArgumentButton.addEventListener('click', AutomaticCleanUp)
+
+const PNGButton = document.getElementById("png-button") as HTMLElement;
+PNGButton.addEventListener("click", savePNG);
+
+const PDFButton = document.getElementById("pdf-button") as HTMLElement;
+PDFButton.addEventListener("click", savePDF);
+
 const sidePanel = document.getElementById("side-panel") as HTMLElement;
 const wrapper = document.getElementById("wrapper") as HTMLElement;
 const sidePanelButton = document.getElementById("side-panel-button") as HTMLElement;
 
 sidePanelButton.addEventListener("click", () => {
   if($('#side-panel').css('display') == 'none') {
-    // wrapper.style.width= "50%";
-    // sidePanel.style.width= "50%";
     sidePanel.style.display = "inline-block";
   }
   else {
-    // wrapper.style.width= "100%";
-    // sidePanel.style.width= "0%";
     sidePanel.style.display = "none";
   }
 })
@@ -116,12 +127,6 @@ let sort_start = 0;
 });
 
 //testing
-//let test = createDependentPremise(arg1.rect, arg2.rect);
-// createClaim(100, 100, 'This is Claim 1.');
-// createClaim(300, 100, 'This is Claim 2.');
-// createClaim(500, 100, 'This is Claim 3.');
-// createClaim(700, 100, 'This is Claim 4.');
-// createClaim(900, 100, 'This is Claim 5.');
 const claim1 = createClaim(0, 100, "the past does not exist");
 const claim2 = createClaim(200, 100, "the future does not exist");
 const claim3 = createClaim(200, 300, "only the present exists");
