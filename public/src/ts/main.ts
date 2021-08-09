@@ -6,7 +6,7 @@ import {
   createObjection,
   createDependentPremise,
 } from "./menu/CreateClaim.js";
-import { importGraph, exportGraph } from "./menu/ImportExport.js";
+import { importGraph, exportGraph, saveGraph, openGraph } from "./menu/ImportExport.js";
 import { legend, toggleLegend } from './menu/Legend.js';
 import { Claim } from "./Claim.js";
 import { color } from "./colors.js";
@@ -60,13 +60,17 @@ paperContainer.addEventListener("drop", (event) => {
 
 const importButton = document.getElementById("import-button") as HTMLElement;
 importButton.addEventListener("click", importGraph);
-
 const exportButton = document.getElementById("export-button") as HTMLElement;
 exportButton.addEventListener("click", exportGraph);
+const saveButton = document.getElementById("save-button") as HTMLElement;
+saveButton.addEventListener("click", saveGraph);
+const filesButton = document.getElementById("files-button") as HTMLElement;
+filesButton.addEventListener("click", openGraph);
 
 const sidePanel = document.getElementById("side-panel") as HTMLElement;
 const wrapper = document.getElementById("wrapper") as HTMLElement;
 const sidePanelButton = document.getElementById("side-panel-button") as HTMLElement;
+
 sidePanelButton.addEventListener("click", () => {
   if($('#side-panel').css('display') == 'none') {
     // wrapper.style.width= "50%";

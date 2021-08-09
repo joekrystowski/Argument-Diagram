@@ -92,6 +92,19 @@
               </button>
             </li>
             <li class="toolbar-item">
+              <button id="save-button" class="toolbar-button">           
+                <svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="0 0 24 24">
+                  <path d="M0 0h24v24H0V0z" fill="none"/>
+                  <path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm2 16H5V5h11.17L19 7.83V19zm-7-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zM6 6h9v4H6z"/>
+                </svg>
+              </button>
+            </li>
+            <li class="toolbar-item">
+              <button id="files-button" class="toolbar-button">
+                <svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/></svg>
+              </button>
+            </li>
+            <li class="toolbar-item">
               <button class="toolbar-button" id="settings-button">
                 <svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="0 0 24 24">
                   <path d="M0 0h24v24H0V0z" fill="none"/>
@@ -109,6 +122,7 @@
         </div>      
         <div id="wrapper">
           <div id='firebaseui-auth-container'></div>
+          <ul id="firebase-diagrams-container"></ul>
           <div id="menu-container">
             <div id="edit-container" class="edit-container">
               <div id="edit-top" class="edit-top">
@@ -159,6 +173,19 @@
               <i class="fas fa-sign-in-alt"></i>
               Log in
             </li>
+            <li id="user-profile" class="settings-item user-profile">
+              <img id="user-profile-pic" src="" alt="profile picture">
+              <p id="user-profile-name"></p>
+            </li>
+            <li id="edit-username" class="settings-item button user-profile">
+              Edit Username
+            </li>
+            <li id="edit-pfp" class="settings-item button user-profile">
+              Edit Profile Picture
+            </li>
+            <li id="logout" class="settings-item button user-profile">
+              Log out
+            </li>
           </ul>
         </div>
       </div>
@@ -169,6 +196,8 @@
     <!-- TODO: Add SDKs for Firebase products that you want to use
         https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-storage.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
@@ -181,6 +210,7 @@
         apiKey: "AIzaSyDGTYeCiursNm1CIBNDd5eH5dECxdk_oTs",
         authDomain: "argumentdiagrams.firebaseapp.com",
         projectId: "argumentdiagrams",
+        databaseURL: "https://argumentdiagrams-default-rtdb.firebaseio.com/",
         storageBucket: "argumentdiagrams.appspot.com",
         messagingSenderId: "274536986513",
         appId: "1:274536986513:web:3a78a16c3f1fe150180c30",

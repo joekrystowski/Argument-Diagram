@@ -8,6 +8,9 @@ import {
 import {createLink} from "../tools/LinkButton.js"
 import { legend, LegendMap, toggleLegend } from './Legend.js';
 
+var firebase = window.firebase.default;
+var database = firebase.database();
+
 export interface HashMap {
 	[details: string] : Claim;
 } 
@@ -129,6 +132,62 @@ export function exportGraph(): void {
 			window.URL.revokeObjectURL(url);  
 		}, 0); 
 	} 
+}
+
+export function saveGraph(): void {
+	const user = firebase.auth().currentUser;
+	if(user===null){ return; }
+	const userRef = firebase.database().ref('users/' + user.uid);
+
+	let graph_data = JSON.stringify(graph.toJSON(), null, 2);
+	let dataObj = JSON.parse(graph_data);
+	dataObj.legend = legend.toExportForm();
+	const data = JSON.stringify(dataObj, null, 2);
+
+	userRef.child('myDiagram').once('value', (snapshot) => {
+		if (snapshot.exists()) {
+			console.log('exists, rename file');
+		}
+		else {
+			console.log('does not exist, saving');
+			userRef.child('myDiagram').set(data);
+		}
+	});
+}
+
+export function openGraph(): void {
+	const user = firebase.auth().currentUser;
+	if(user===null){ return; }
+	const userRef = firebase.database().ref('users/' + user.uid);
+	const diagramsContainer = document.getElementById('firebase-diagrams-container') as HTMLElement;
+	userRef.on('value', (snapshot) => {
+		const data = snapshot.val();
+		// console.log(data);
+		while(diagramsContainer.firstChild) { //TODO: make more efficient
+			diagramsContainer.removeChild(diagramsContainer.firstChild);
+		}
+		for(const diagram in data) {
+			console.log('diagram');
+			const diagramItem:HTMLLIElement = document.createElement('li');
+			diagramItem.classList.add('diagram-item');
+			diagramItem.textContent = diagram;
+			diagramItem.addEventListener('click', () => {
+				const erase = window.confirm("Erase your current workspace?");
+				if (erase) {
+					graph.clear();
+					legend.clear();
+					legend.disable();
+					const dataObj = JSON.parse(data[diagram]);
+					parseJSON(dataObj.cells, dataObj.legend);
+					diagramsContainer.style.display = 'none';
+				}
+			});
+			diagramsContainer.appendChild(diagramItem);
+			diagramsContainer.style.display = 'flex';	
+		}
+	});
+
+	
 }
 
 function getCellById(id:string, cells:any[]){

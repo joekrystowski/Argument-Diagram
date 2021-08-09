@@ -261,6 +261,14 @@ input:checked + .slider:before {
   transform: translateY(-4px);
 }
 
+#save-button:active {
+  transform: translateY(-4px);
+}
+
+#files-button:active {
+  transform: translateY(-4px);
+}
+
 .claim-rect {
   fill: var(--accent-gray);
   /* border-radius: 100rem; */
@@ -443,6 +451,7 @@ input:checked + .slider:before {
 #settings-container {
   display: flex;
   flex-direction: column;
+  padding: 1rem 0;
   width: 100%;
 }
 
@@ -453,7 +462,7 @@ input:checked + .slider:before {
 .settings-item {
   display: flex;
   padding: 0.5rem;
-  margin: 1rem;
+  margin: 0 1rem;
   align-items: center;
   border-radius: var(--border-radius);
 }
@@ -479,6 +488,28 @@ input:checked + .slider:before {
 #log-in-input {
   display: flex;
   align-items: center;
+}
+
+.user-profile {
+  display: none;
+}
+
+#user-profile-name {
+  margin: 0;
+  font-size: 24px;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+}
+
+#user-profile-pic {
+  max-width: 100%;
+  max-height: 100%;
+  height: 3rem;
+  margin-right: 1rem;
+  border-radius: 1.5rem;
+  object-fit: contain;
 }
 
 :root {
@@ -623,6 +654,16 @@ button:hover {
   .toolbar-item:last-child {
     display: initial;
   }
+}
+#firebase-diagrams-container {
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.diagram-item {
+  color: var(--accent-gray);
+  user-select: none;
 }
 
 /*# sourceMappingURL=style.css.map */

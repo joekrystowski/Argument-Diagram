@@ -76,3 +76,13 @@
     transform: translateY(-4px);
   }
 }
+#save-button {
+  &:active {
+    transform: translateY(-4px);
+  }
+}
+#files-button {
+  &:active {
+    transform: translateY(-4px);
+  }
+}
