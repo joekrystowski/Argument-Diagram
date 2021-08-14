@@ -12,6 +12,11 @@ interface argument_data {
     dimensions: Array<dimensions>
 }
 
+interface position {
+    x: number,
+    y: number
+}
+
 //can be adjusted to change spacing between cells in cleanup
 let increment = {
     x:50,
@@ -41,10 +46,21 @@ export function AutomaticCleanUp(argument:Array<joint.dia.Cell>) {
         parents = []
         for (const node of current) {
             let parent_links = graph.getConnectedLinks(node.cell, {inbound:true})
+            if (node.cell.get("embeds")) {
+                let children = node.cell.getEmbeddedCells()
+                //get embed children for parent links as well
+                for (const child of children) {
+                    let links = graph.getConnectedLinks(child, {inbound:true})
+                    parent_links.push(...links)
+                }
+            }
             console.log("parent_links", parent_links)
             for (const link of parent_links) {
                 let parentid = link.attributes.source.id
                 let parent = graph.getCell(parentid)
+                if (parent.get("parent")) {
+                    parent = graph.getCell(parent.get("parent"))
+                }
                 let parent_index = findCell(parents, parent)
                 let parent_node:Node;
                 if (parent_index === -1) {
@@ -144,8 +160,24 @@ function buildGraph(arg_data:Array<argument_data>) {
             let buffer = ( widest - dimensions[i].width ) / 2
             let x = start_x + buffer;
             for (const node of levels[i]) {
+                let current_position:position = 
+                {  
+                    x: node.cell.attributes.position.x,
+                    y: node.cell.attributes.position.y
+                }
                 //change position of node
                 node.cell.set("position", {x: x, y: y})
+                let difference_x = x - current_position.x
+                let difference_y = y - current_position.y
+                //move embeds as well
+                if (node.cell.get("embeds")) {
+                    let embeds = node.cell.getEmbeddedCells();
+                    for (const embed of embeds) {
+                        let new_x = embed.attributes.position.x +difference_x;
+                        let new_y = embed.attributes.position.y +difference_y
+                        embed.set("position", {x:new_x, y:new_y})
+                    }
+                }
                 x += node.cell.attributes.size.width + increment.x
             }
             y += dimensions[i].height + increment.y
@@ -160,7 +192,10 @@ function buildGraph(arg_data:Array<argument_data>) {
 
 function findLeaves(cells:Array<joint.dia.Cell>) {
     let leaves:Array<Node> = []
-    for (const cell of cells) {
+    for (let cell of cells) {
+        if (cell.get("parent")) {
+            cell = graph.getCell(cell.get("parent"))
+        }
         let outbound_links = graph.getConnectedLinks(cell, {outbound:true})
         if (outbound_links.length === 0) {
             //leaf cell
@@ -242,13 +277,30 @@ function searchArgument(head:joint.dia.Cell, cells:Array<joint.dia.Cell>) {
             return argument
         }
         console.log("current",current)
-        for (const cell of current) {
+        for (let cell of current) {
+            if (cell.get("parent")) {
+                let parent = graph.getCell(cell.get("parent"))
+                if (cells.filter(c => c.id === parent.id).length > 0) {
+                    let index = findCellIndex(parent.id, cells)
+                    cells.splice(index, 1)
+                    argument.push(parent)
+                    next.push(parent)
+                }
+            }
             if (cell.get("embeds")) {
                 //include embeds
-                let children = cell.getEmbeddedCells()
+                let children = cell.getEmbeddedCells();
+                for (const child of children) {
+                    if (cells.filter(c => c.id === child.id).length > 0) {
+                        let index = findCellIndex(child.id, cells)
+                        cells.splice(index, 1);
+                        argument.push(child)
+                        next.push(child)
+                    }
+                }
             }
             let connections = graph.getConnectedLinks(cell);
-            if (connections.length === 0) {
+            if (connections.length === 0 && next.length === 0) {
                 //cell by itself
                 argument.push(cell);
                 //find cell index in cells array
@@ -267,6 +319,9 @@ function searchArgument(head:joint.dia.Cell, cells:Array<joint.dia.Cell>) {
                     connected_cell = graph.getCell(connection.attributes.source.id)
                 }
                 console.log("connected cell", connected_cell)
+                if (connected_cell.get("parent")) {
+                    next.push(graph.getCell(connected_cell.get("parent")))
+                }
                 //check if connection is new to argument
                 if (cells.filter(c => c.id === connected_cell.id).length > 0) {
                     //cells array contains this connection, which means it is new
