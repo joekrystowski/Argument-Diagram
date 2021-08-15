@@ -1,5 +1,6 @@
 import { graph } from '../graph.js';
 import { createClaim, createDependentPremise, } from "../menu/CreateClaim.js";
+import { save } from '../util.js';
 import { createLink } from "../tools/LinkButton.js";
 import { legend } from './Legend.js';
 import { ClaimToObjection } from "../ToggleTypes.js";
@@ -95,25 +96,9 @@ export function exportGraph() {
     let graph_data = JSON.stringify(graph.toJSON(), null, 2);
     let dataObj = JSON.parse(graph_data);
     dataObj.legend = legend.toExportForm();
-    console.log(dataObj);
     const data = JSON.stringify(dataObj, null, 2);
     const filename = "myDiagram.json"; // default name
-    const file = new Blob([data], { type: "application/json" });
-    if (window.navigator.msSaveOrOpenBlob) { // IE10+
-        window.navigator.msSaveOrOpenBlob(file, filename);
-    }
-    else { // Others
-        const a = document.createElement("a");
-        const url = URL.createObjectURL(file);
-        a.href = url;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        setTimeout(function () {
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
-        }, 0);
-    }
+    save(data, "application/json", filename);
 }
 function getCellById(id, cells) {
     for (let cell of cells) {
