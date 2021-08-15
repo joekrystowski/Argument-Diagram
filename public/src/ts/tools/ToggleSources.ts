@@ -49,7 +49,31 @@ joint.elementTools.ToggleSourceButton = joint.elementTools.Button.extend({
     rotate: true,
     //cast this context to any type, not sure what type it would be otherwise
     action: function (this:any) {
-        
+        let model = this.model
+        let cell = graph.getCell(model.id) 
+        toggleSources(cell);
+       
     }
     }
 });
+
+export function toggleSources(element:joint.dia.Cell) {
+    let embeds = element.getEmbeddedCells()
+    if (embeds.length === 0) {
+        //no sources
+        return;
+    }
+    console.log(embeds[0].attr("./display"))
+    if (embeds[0].attr("./display") !== "none") {
+        //a source is visible, turn them all off
+        for (const child of embeds) {
+            child.attr("./display", "none") 
+        }
+    } else {
+        //one is not visisble, turn all on
+        for (const child of embeds) {
+            child.attr("./display", "visible");
+        }
+    }
+    console.log("embeds", embeds)
+}
