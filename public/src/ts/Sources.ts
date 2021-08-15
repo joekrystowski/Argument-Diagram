@@ -1,6 +1,7 @@
 import { createClaim } from "./menu/CreateClaim.js";
 import { paper } from "./graph.js"
 import { any } from "underscore";
+import { toggleSources } from "./tools/ToggleSources.js";
 
 const joint = window.joint;
 
@@ -24,6 +25,10 @@ export function addSource(claim:joint.dia.Element) {
     let embeds = claim.getEmbeddedCells()
     let x_offset = claim.attributes.size.width;
     if (embeds.length > 1) {
+        //check for correct visibility settings
+        if (embeds[0].attr("./display") === "none") {
+            toggleSources(claim)
+        }
         x_offset = 0;
         for (const child of embeds) {
             x_offset += child.attributes.size.width

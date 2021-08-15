@@ -1,5 +1,6 @@
 import { createClaim } from "./menu/CreateClaim.js";
 import { paper } from "./graph.js";
+import { toggleSources } from "./tools/ToggleSources.js";
 const joint = window.joint;
 export function addSource(claim) {
     //check that claim is somehow a dependent premise, sources should be added to individual claims not a whole premise. 
@@ -19,6 +20,10 @@ export function addSource(claim) {
     let embeds = claim.getEmbeddedCells();
     let x_offset = claim.attributes.size.width;
     if (embeds.length > 1) {
+        //check for correct visibility settings
+        if (embeds[0].attr("./display") === "none") {
+            toggleSources(claim);
+        }
         x_offset = 0;
         for (const child of embeds) {
             x_offset += child.attributes.size.width;
