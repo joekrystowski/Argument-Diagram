@@ -34,18 +34,20 @@ export function addRectTools(element: joint.shapes.app.ClaimRect) {
     x: "20%",
     y: -15
   });
+
+  let toggleSourceButton = new joint.elementTools.ToggleSourceButton();
   
   let rect_tools;
   if (element.get('parent')) {
     //inside dependent premise
-    rect_tools = [linkButton]
+    rect_tools = [linkButton, toggleSourceButton, addSourceButton]
   } else if (element.attributes.inLegendForm) {
     rect_tools = [boundaryTool, removeButton, linkButton, combinedPremiseButton, addSourceButton];
   } else if (element.attributes.type === "source") {
     rect_tools = [removeSourceButton, editButton]
   } else {
        //outside dependent premise
-    rect_tools = [boundaryTool, removeButton, linkButton, editButton, combinedPremiseButton, addSourceButton];
+    rect_tools = [boundaryTool, removeButton, linkButton, editButton, combinedPremiseButton, addSourceButton, toggleSourceButton];
   }
 
   let toolsView = new joint.dia.ToolsView({

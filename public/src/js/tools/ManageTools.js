@@ -26,10 +26,11 @@ export function addRectTools(element) {
         x: "20%",
         y: -15
     });
+    let toggleSourceButton = new joint.elementTools.ToggleSourceButton();
     let rect_tools;
     if (element.get('parent')) {
         //inside dependent premise
-        rect_tools = [linkButton];
+        rect_tools = [linkButton, toggleSourceButton, addSourceButton];
     }
     else if (element.attributes.inLegendForm) {
         rect_tools = [boundaryTool, removeButton, linkButton, combinedPremiseButton, addSourceButton];
@@ -39,7 +40,7 @@ export function addRectTools(element) {
     }
     else {
         //outside dependent premise
-        rect_tools = [boundaryTool, removeButton, linkButton, editButton, combinedPremiseButton, addSourceButton];
+        rect_tools = [boundaryTool, removeButton, linkButton, editButton, combinedPremiseButton, addSourceButton, toggleSourceButton];
     }
     let toolsView = new joint.dia.ToolsView({
         tools: rect_tools
