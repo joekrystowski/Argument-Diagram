@@ -27,16 +27,20 @@ export function addRectTools(element: joint.shapes.app.ClaimRect) {
   let editButton = new joint.elementTools.EditButton();
 
   let combinedPremiseButton = new joint.elementTools.CombinePremiseButton();
+
+  let addSourceButton = new joint.elementTools.AddSourceButton();
   
   let rect_tools;
   if (element.get('parent')) {
     //inside dependent premise
     rect_tools = [linkButton]
   } else if (element.attributes.inLegendForm) {
-    rect_tools = [boundaryTool, removeButton, linkButton, combinedPremiseButton];
+    rect_tools = [boundaryTool, removeButton, linkButton, combinedPremiseButton, addSourceButton];
+  } else if (element.attributes.type === "source") {
+    rect_tools = [removeButton, editButton]
   } else {
-    //outside dependent premise
-    rect_tools = [boundaryTool, removeButton, linkButton, editButton, combinedPremiseButton];
+       //outside dependent premise
+    rect_tools = [boundaryTool, removeButton, linkButton, editButton, combinedPremiseButton, addSourceButton];
   }
 
   let toolsView = new joint.dia.ToolsView({
