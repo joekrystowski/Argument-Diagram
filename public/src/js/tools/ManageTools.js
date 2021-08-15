@@ -17,21 +17,37 @@ export function addRectTools(element) {
     //remove tool deletes a rect
     let removeButton = new joint.elementTools.Remove({
         x: "20%",
-        y: "-30%"
+        y: "0%",
+        offset: {
+            x: 0,
+            y: -15
+        }
     });
     // link button
     let linkButton = new joint.elementTools.LinkButton({
         x: "40%",
-        y: "-30%"
+        y: "0%",
+        offset: {
+            x: 0,
+            y: -15
+        }
     });
     //edit button
     let editButton = new joint.elementTools.EditButton({
         x: "60%",
-        y: "-30%"
+        y: "0%",
+        offset: {
+            x: 0,
+            y: -15
+        }
     });
     let combinedPremiseButton = new joint.elementTools.CombinePremiseButton({
         x: "80%",
-        y: "-30%"
+        y: "0%",
+        offset: {
+            x: 0,
+            y: -15
+        }
     });
     let rect_tools;
     if (element.get('parent')) {
@@ -90,22 +106,38 @@ export function addDependentPremiseTools(element) {
     //remove tool deletes a rect
     let removeDependentPremiseButton = new joint.elementTools.RemoveDependentPreimseButton({
         x: "20%",
-        y: "-30%"
+        y: "0%",
+        offset: {
+            x: 0,
+            y: -15
+        }
     });
     // link button
     let linkButton = new joint.elementTools.LinkButton({
         x: "40%",
-        y: "-30%"
+        y: "0%",
+        offset: {
+            x: 0,
+            y: -15
+        }
     });
     // dependent premise button
     let combinePremiseButton = new joint.elementTools.CombinePremiseButton({
-        x: "60%",
-        y: "-30%"
+        x: "80%",
+        y: "0%",
+        offset: {
+            x: 0,
+            y: -15
+        }
     });
     //the edit button is specific to dependent premise
     let editDependentPremiseButton = new joint.elementTools.EditDependentPremiseButton({
-        x: "80%",
-        y: "-30%"
+        x: "60%",
+        y: "0%",
+        offset: {
+            x: 0,
+            y: -15
+        }
     });
     let toolsView = new joint.dia.ToolsView({
         tools: [boundaryTool, removeDependentPremiseButton, linkButton, editDependentPremiseButton, combinePremiseButton]
