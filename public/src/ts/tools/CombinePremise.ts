@@ -37,8 +37,8 @@ joint.elementTools.CombinePremiseButton = joint.elementTools.Button.extend({
         'pointer-events': 'none'
       }   
     }],
-    x: '100%',
-    y: '4',
+    x: '0',
+    y: '0',
     offset: {
       x: 0,
       y: 0,

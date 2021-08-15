@@ -12,18 +12,18 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
                 tagName: "circle",
                 selector: "button",
                 attributes: {
-                    'r': 7,
-                    'fill': "#3B8EA5",
+                    'r': 10,
+                    'fill': "black",
                     'cursor': "pointer"
                 }
             }, {
-                tagName: 'path',
+                tagName: 'image',
                 selector: 'icon',
                 attributes: {
                     //genuinely no idea what this is called but I used it to draw the arrow on the button
-                    'd': 'M -4 -1 0 4 M 0 4 4 -1 M 0 4 0 -4',
-                    'fill': 'none',
-                    'stroke': '#EEF0F2',
+                    'href': "https://icons8.com/icon/59826/link",
+                    'fill': 'white',
+                    'stroke': 'white',
                     'stroke-width': 2,
                     'pointer-events': 'none'
                 }
