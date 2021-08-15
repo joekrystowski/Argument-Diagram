@@ -22,6 +22,10 @@ export function addRectTools(element) {
     let editButton = new joint.elementTools.EditButton();
     let combinedPremiseButton = new joint.elementTools.CombinePremiseButton();
     let addSourceButton = new joint.elementTools.AddSourceButton();
+    let removeSourceButton = new joint.elementTools.RemoveSourceButton({
+        x: "20%",
+        y: -15
+    });
     let rect_tools;
     if (element.get('parent')) {
         //inside dependent premise
@@ -31,7 +35,7 @@ export function addRectTools(element) {
         rect_tools = [boundaryTool, removeButton, linkButton, combinedPremiseButton, addSourceButton];
     }
     else if (element.attributes.type === "source") {
-        rect_tools = [removeButton, editButton];
+        rect_tools = [removeSourceButton, editButton];
     }
     else {
         //outside dependent premise
