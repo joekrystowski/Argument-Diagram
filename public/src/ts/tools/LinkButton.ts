@@ -25,6 +25,7 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
       attributes: {
         'r': 10,
         'fill': "#222222",
+        "fill-opacity": 0,
         'cursor': "pointer"
       }
     }, {
@@ -76,7 +77,7 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
         layer: "back",
 
         attrs: {
-            'stroke': '#6696ff',
+            'stroke': '#6696ffff',
             'stroke-opacity': 1,
             'stroke-width': 3,
         }

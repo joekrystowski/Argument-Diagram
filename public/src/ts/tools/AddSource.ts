@@ -22,13 +22,14 @@ joint.elementTools.AddSourceButton = joint.elementTools.Button.extend({
       attributes: {
         'r': 10,
         'fill': "#222222",
+        "fill-opacity": 0,
         'cursor': "pointer"
       }
     }, {
       tagName: "g",
       selector: "g-tag",
       attributes: {
-        transform: "translate(-12, -8.5) scale(0.8, 0.8)"
+        transform: "translate(-10, -8.5) scale(0.8, 0.8)"
       },
       children: [{
       tagName: 'path',

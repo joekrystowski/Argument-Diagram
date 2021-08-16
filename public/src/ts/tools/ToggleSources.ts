@@ -19,13 +19,14 @@ joint.elementTools.ToggleSourceButton = joint.elementTools.Button.extend({
         attributes: {
           'r': 12,
           'fill': "#222222",
+          "fill-opacity": 0,
           'cursor': "pointer"
         }
       }, {
         tagName: "g",
         selector: "g-tag",
         attributes: {
-            transform: "translate(-20, -15) scale(1.5, 1.5)",
+            transform: "translate(-18, -15) scale(1.5, 1.5)",
         },
         children: [{
             tagName: 'path',
