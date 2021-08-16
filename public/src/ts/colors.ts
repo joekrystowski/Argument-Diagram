@@ -4,17 +4,17 @@ export let color = {
   claim: {
     dark: {
       textColor: "#222222",
-      stroke: "#ebebeb",
+      stroke: "#bababa"// "#46db6e",
     }
   },
   objection: {
     dark: {
       textColor: "#222222",
-      stroke: "#db5246"
+      stroke: "bababa" //"#db5246"
     }
   },
   dependentPremise: {
-    bodyColor: "#7aff7d",
+    bodyColor:  "#ccf5c9",//"#222222ff" ,//"#7aff7d",
     textColor: "#222222",
     stroke: "#ababab",
     linkColor: "#61E786"
@@ -32,6 +32,11 @@ export let color = {
 }
 
 export function createColor(value:number, type:string) {
+  if (type === "source") {
+    return "#c9e4f5"
+  }
+  return "#ebebeb"
+
   console.log("value",value)
   if (type === "claim") {
     let hue = 136
