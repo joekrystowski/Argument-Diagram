@@ -21,12 +21,7 @@ export function saveEdits() {
     console.log("saving link edits")
     let link_color = "#bbbbbb"
     const objectionSwitch = document.getElementById("objection-switch") as HTMLInputElement;
-    if(objectionSwitch.checked) {
-      link_color = color.link.dark.objection.stroke
-    }
-    else if(!(objectionSwitch.checked)) {
-      link_color = color.link.dark.claim.stroke
-    }
+    link_color = objectionSwitch.checked ? color.link.dark.objection.stroke : color.link.dark.claim.stroke;
     let weight = $('#link-weight-rect').val()
     let oldLabel = editModel.attributes.labels[0]
     editModel.label(0, {
