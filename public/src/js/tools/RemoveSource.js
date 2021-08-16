@@ -1,8 +1,7 @@
-import { paper } from "../graph.js";
-import { addRectTools } from "./ManageTools.js";
+import { graph } from "../graph.js";
 const joint = window.joint;
-joint.elementTools.RemoveDependentPreimseButton = joint.elementTools.Button.extend({
-    name: "remove-dependent-premise-button",
+joint.elementTools.RemoveSourceButton = joint.elementTools.Button.extend({
+    name: "remove-source-button",
     options: {
         markup: [{
                 tagName: "circle",
@@ -16,7 +15,7 @@ joint.elementTools.RemoveDependentPreimseButton = joint.elementTools.Button.exte
                 tagName: "g",
                 selector: "g-tag",
                 attributes: {
-                    transform: "translate(-4.25, -4) scale(0.4, 0.4)",
+                    transform: "translate(-5.5, -5) scale(0.5 0.5)",
                 },
                 children: [{
                         tagName: 'path',
@@ -41,16 +40,17 @@ joint.elementTools.RemoveDependentPreimseButton = joint.elementTools.Button.exte
         //cast this context to any type, not sure what type it would be otherwise
         action: function () {
             let model = this.model;
-            let embeds = model.getEmbeddedCells();
-            for (let i = 0; i < embeds.length; i++) {
-                model.unembed(embeds[i]);
-                //re-enable drag
-                embeds[i].findView(paper).options.interactive = { elementMove: true };
-                //update tools
-                addRectTools(embeds[i]);
-            }
-            //remove this dependent premise
+            let parent = graph.getCell(model.get("parent"));
             model.remove();
+            //adjust position of other models
+            let embeds = parent.getEmbeddedCells();
+            console.log("embeds", embeds);
+            let x_offset = parent.attributes.size.width;
+            for (let i = 0; i < embeds.length; i++) {
+                let child = embeds[i];
+                child.set("position", { x: parent.attributes.position.x + x_offset, y: parent.attributes.position.y });
+                x_offset += child.attributes.size.width;
+            }
         }
     }
 });

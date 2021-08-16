@@ -16,7 +16,7 @@ export function addRectTools(element) {
     let boundaryTool = new joint.elementTools.Boundary();
     //remove tool deletes a rect
     let removeButton = new joint.elementTools.Remove({
-        x: "20%",
+        x: "5%",
         y: "0%",
         offset: {
             x: 0,
@@ -25,7 +25,7 @@ export function addRectTools(element) {
     });
     // link button
     let linkButton = new joint.elementTools.LinkButton({
-        x: "40%",
+        x: "23%",
         y: "0%",
         offset: {
             x: 0,
@@ -34,7 +34,31 @@ export function addRectTools(element) {
     });
     //edit button
     let editButton = new joint.elementTools.EditButton({
-        x: "60%",
+        x: "59%",
+        y: "0%",
+        offset: {
+            x: 0,
+            y: -15
+        }
+    });
+    let addSourceButton = new joint.elementTools.AddSourceButton({
+        x: "77%",
+        y: "0%",
+        offset: {
+            x: 0,
+            y: -15
+        }
+    });
+    let removeSourceButton = new joint.elementTools.RemoveSourceButton({
+        x: "20%",
+        y: "0%",
+        offset: {
+            x: 0,
+            y: -15
+        }
+    });
+    let toggleSourceButton = new joint.elementTools.ToggleSourceButton({
+        x: "95%",
         y: "0%",
         offset: {
             x: 0,
@@ -42,7 +66,7 @@ export function addRectTools(element) {
         }
     });
     let combinedPremiseButton = new joint.elementTools.CombinePremiseButton({
-        x: "80%",
+        x: "41%",
         y: "0%",
         offset: {
             x: 0,
@@ -52,14 +76,17 @@ export function addRectTools(element) {
     let rect_tools;
     if (element.get('parent')) {
         //inside dependent premise
-        rect_tools = [linkButton];
+        rect_tools = [linkButton, toggleSourceButton, addSourceButton];
     }
     else if (element.attributes.inLegendForm) {
-        rect_tools = [removeButton, linkButton, combinedPremiseButton];
+        rect_tools = [removeButton, linkButton, combinedPremiseButton, addSourceButton];
+    }
+    else if (element.attributes.type === "source") {
+        rect_tools = [removeSourceButton, editButton];
     }
     else {
-        //outside dependent premise
-        rect_tools = [removeButton, linkButton, editButton, combinedPremiseButton];
+        //regular claim (not in dependent premise)
+        rect_tools = [removeButton, linkButton, editButton, combinedPremiseButton, addSourceButton, toggleSourceButton];
     }
     let toolsView = new joint.dia.ToolsView({
         tools: rect_tools

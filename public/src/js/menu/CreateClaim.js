@@ -6,13 +6,13 @@ import { Claim } from '../Claim.js';
 import { DependentPremise } from '../DependentPremise.js';
 import { legend } from './Legend.js';
 //when new-claim-button is clicked
-export function createClaim(x, y, text, validity) {
+export function createClaim(x, y, text, validity, type) {
     //creating new rect (Joint.js object)
     const new_rect = new Claim({
         x: x,
         y: y,
         text: text !== null && text !== void 0 ? text : "New Claim",
-        type: "claim",
+        type: type !== null && type !== void 0 ? type : "claim",
         body_color: "ffffff",
         text_color: "#222222",
         stroke: color.claim.dark.stroke,
@@ -24,7 +24,9 @@ export function createClaim(x, y, text, validity) {
     new_rect.rect.addTo(graph);
     //adds the buttons to each rect
     addRectTools(new_rect.rect);
-    legend.add(new_rect);
+    if (type != "source") {
+        legend.add(new_rect);
+    }
     return new_rect;
 }
 //when objection-button is clicked
