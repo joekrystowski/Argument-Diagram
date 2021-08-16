@@ -55,11 +55,11 @@ export function addRectTools(element) {
         rect_tools = [linkButton];
     }
     else if (element.attributes.inLegendForm) {
-        rect_tools = [boundaryTool, removeButton, linkButton, combinedPremiseButton];
+        rect_tools = [removeButton, linkButton, combinedPremiseButton];
     }
     else {
         //outside dependent premise
-        rect_tools = [boundaryTool, removeButton, linkButton, editButton, combinedPremiseButton];
+        rect_tools = [removeButton, linkButton, editButton, combinedPremiseButton];
     }
     let toolsView = new joint.dia.ToolsView({
         tools: rect_tools
