@@ -13,7 +13,7 @@ import { Claim } from "./Claim.js";
 import { color } from "./colors.js";
 import { paper, graph } from "./graph.js";
 import { evaluateArgument } from "./menu/EvaluateArgument.js"
-import { AutomaticCleanUp } from "./menu/CleanUp/AutomaticCleanUp.js"
+import { AutomaticCleanUp, findArguments } from "./menu/CleanUp/AutomaticCleanUp.js"
 import { createLink } from "./tools/LinkButton.js";
 
 const claimImage = new Image();
@@ -70,7 +70,7 @@ const evaluateButton = document.getElementById('evaluate-button') as HTMLElement
 evaluateButton.addEventListener('click', evaluateArgument);
 
 const CleanArgumentButton = document.getElementById('clean-argument-button') as HTMLElement;
-CleanArgumentButton.addEventListener('click', AutomaticCleanUp)
+CleanArgumentButton.addEventListener('click', findArguments)
 
 const PNGButton = document.getElementById("png-button") as HTMLElement;
 PNGButton.addEventListener("click", savePNG);
