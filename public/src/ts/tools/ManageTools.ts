@@ -89,12 +89,12 @@ export function addRectTools(element: joint.shapes.app.ClaimRect) {
     //inside dependent premise
     rect_tools = [linkButton, toggleSourceButton, addSourceButton]
   } else if (element.attributes.inLegendForm) {
-    rect_tools = [boundaryTool, removeButton, linkButton, combinedPremiseButton, addSourceButton];
+    rect_tools = [removeButton, linkButton, combinedPremiseButton, addSourceButton];
   } else if (element.attributes.type === "source") {
     rect_tools = [removeSourceButton, editButton]
   } else {
-       //outside dependent premise
-    rect_tools = [boundaryTool, removeButton, linkButton, editButton, combinedPremiseButton, addSourceButton, toggleSourceButton];
+    //regular claim (not in dependent premise)
+    rect_tools = [removeButton, linkButton, editButton, combinedPremiseButton, addSourceButton, toggleSourceButton];
   }
 
   let toolsView = new joint.dia.ToolsView({
