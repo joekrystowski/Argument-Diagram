@@ -20,7 +20,7 @@ export function createClaim(x:number, y:number, text?:string, validity?:number, 
     stroke: color.claim.dark.stroke,
     link_color: color.claim.dark.stroke,
     weight: "1.0",
-    validity: validity ?? 1.0
+    validity: validity ?? 0.5
   });
 
   //add new rect to the graph for displaying
@@ -46,7 +46,7 @@ export function createObjection(x:number, y:number, text?:string, validity?:numb
     stroke: color.objection.dark.stroke, 
     link_color: color.objection.dark.stroke,
     weight: "-1.0",
-    validity: validity ?? 1.0
+    validity: validity ?? 0.5
   });
   
   new_rect.rect.addTo(graph);

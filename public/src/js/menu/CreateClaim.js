@@ -18,7 +18,7 @@ export function createClaim(x, y, text, validity, type) {
         stroke: color.claim.dark.stroke,
         link_color: color.claim.dark.stroke,
         weight: "1.0",
-        validity: validity !== null && validity !== void 0 ? validity : 1.0
+        validity: validity !== null && validity !== void 0 ? validity : 0.5
     });
     //add new rect to the graph for displaying
     new_rect.rect.addTo(graph);
@@ -42,7 +42,7 @@ export function createObjection(x, y, text, validity) {
         stroke: color.objection.dark.stroke,
         link_color: color.objection.dark.stroke,
         weight: "-1.0",
-        validity: validity !== null && validity !== void 0 ? validity : 1.0
+        validity: validity !== null && validity !== void 0 ? validity : 0.5
     });
     new_rect.rect.addTo(graph);
     //adds the buttons to each rect

@@ -176,14 +176,14 @@ function generateCircularAlertString(path:Array<string>, final_id:string) {
 //link two rects together
 export function createLink(model1:joint.shapes.app.ClaimRect, model2:joint.shapes.app.ClaimRect) {
   console.log(model1.attributes.link_color);
-  let link_color;
-  if (model1.attributes.type === "claim") {
-    link_color = color.claim.dark.stroke
-  } else if (model1.attributes.type === "objection") {
-    link_color = color.objection.dark.stroke
-  } else if (model1.attributes.type === "dependent-premise") {
-    link_color = color.dependentPremise.stroke
-  }
+  let link_color = color.link.dark.claim.stroke
+  // if (model1.attributes.type === "claim") {
+  //   link_color = color.claim.dark.stroke
+  // } else if (model1.attributes.type === "objection") {
+  //   link_color = color.objection.dark.stroke
+  // } else if (model1.attributes.type === "dependent-premise") {
+  //   link_color = color.dependentPremise.stroke
+  // }
   console.log("link color", link_color)
 
   //prevent dp from linking to one of its children

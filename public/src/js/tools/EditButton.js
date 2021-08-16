@@ -53,8 +53,8 @@ joint.elementTools.EditButton = joint.elementTools.Button.extend({
             objectionSwitch.checked = editModel.attributes.type === "objection";
             const objectionLabel = document.getElementById("objection-label");
             const switchLabel = document.getElementById("switch-label");
-            objectionLabel.style.visibility = "visible";
-            switchLabel.style.visibility = "visible";
+            objectionLabel.style.visibility = "hidden";
+            switchLabel.style.visibility = "hidden";
             if (!$('#legend-info').hasClass('collapsed')) {
                 $('#toggle-legend-info-button').trigger('click');
             }
@@ -226,8 +226,8 @@ joint.linkTools.EditLinkButton = joint.elementTools.Button.extend({
             saveButton === null || saveButton === void 0 ? void 0 : saveButton.classList.remove("changed");
             const objectionLabel = document.getElementById("objection-label");
             const switchLabel = document.getElementById("switch-label");
-            objectionLabel.style.visibility = "hidden";
-            switchLabel.style.visibility = "hidden";
+            objectionLabel.style.visibility = "visible";
+            switchLabel.style.visibility = "visible";
             const editView = $('#edit-container');
             editView.show(200);
             editModel = this.model;
