@@ -3,7 +3,7 @@ export let color = {
     claim: {
         dark: {
             textColor: "#222222",
-            stroke: "#46db6e",
+            stroke: "#ebebeb",
         }
     },
     objection: {
@@ -15,8 +15,18 @@ export let color = {
     dependentPremise: {
         bodyColor: "#7aff7d",
         textColor: "#222222",
-        stroke: "#7aff7d",
+        stroke: "#ababab",
         linkColor: "#61E786"
+    },
+    link: {
+        dark: {
+            claim: {
+                stroke: "#7aff7d"
+            },
+            objection: {
+                stroke: "#db5246"
+            }
+        }
     }
 };
 export function createColor(value, type) {
