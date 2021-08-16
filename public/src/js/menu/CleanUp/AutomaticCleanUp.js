@@ -143,6 +143,13 @@ function buildGraph(arg_data) {
                         let new_x = embed.attributes.position.x + difference_x;
                         let new_y = embed.attributes.position.y + difference_y;
                         embed.set("position", { x: new_x, y: new_y });
+                        //check if claims inside dp also have sources embeded
+                        let source_embeds = embed.getEmbeddedCells();
+                        for (const source of source_embeds) {
+                            let source_x = source.attributes.position.x + difference_x;
+                            let source_y = source.attributes.position.y + difference_y;
+                            source.set("position", { x: source_x, y: source_y });
+                        }
                     }
                 }
                 x += node.cell.attributes.size.width + increment.x;
@@ -175,15 +182,14 @@ function findCell(nodes, cell) {
 }
 export function findArguments() {
     //array of all elements (excludes links) on graph
-    let cells = graph.getElements();
-    // //filter out embeded cells (cells with parents)
-    // let cells:Array <joint.dia.Cell> = []
-    // for (const cell of all_cells) {
-    //     if (!(cell.get("parent"))) {
-    //         cells.push(cell)
-    //         console.log("pushed", cell)
-    //     }
-    // }
+    let all_cells = graph.getElements();
+    //filter out sources
+    let cells = [];
+    for (const cell of all_cells) {
+        if (!(cell.attributes.type === "source")) {
+            cells.push(cell);
+        }
+    }
     //array of arguments (arguments are arrays of nodes)
     //cant name a variable "arguments" in typescript
     let all_arguments = [];
