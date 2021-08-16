@@ -22,20 +22,27 @@ $(document).on('mousedown', function(event) {
   interval = setInterval(function(){
     console.log('interval');
     if(moving_rect && window.innerWidth - mouse_position.x < 40) {
-      console.log('scrolling x...');
       paper.fitToContent({
         minWidth: mainPaperSize.width,
         minHeight: mainPaperSize.height
       });
       $('#paper-wrapper').scrollLeft(9999999999);
     }
+    if(moving_rect && window.innerHeight - mouse_position.y < 40) {
+      paper.fitToContent({
+        minWidth: mainPaperSize.width,
+        minHeight: mainPaperSize.height
+      });
+      $('#paper-wrapper').scrollTop(9999999999);
+    }
     if(moving_rect && mouse_position.x < 40) {
-      console.log('scrolling x...');
       $('#paper-wrapper')[0].scrollLeft -= 50;
     }
     if(moving_rect && window.innerHeight - mouse_position.y < 40) {
-      console.log('scrolling y...');
       $('#paper-wrapper').scrollTop(9999999999);
+    }
+    if(moving_rect && mouse_position.y < 40) {
+      $('#paper-wrapper')[0].scrollTop -= 50;
     }
   }, 100);
 });
@@ -60,6 +67,7 @@ graph.on('change:position', function(rect, position) {
   //   $('#paper-wrapper').scrollLeft(9999999999);
   // }
   const x_direction = (mouse_position.x - previous_mouse.x) / Math.abs(mouse_position.x - previous_mouse.x);
+  const y_direction = (mouse_position.y - previous_mouse.y) / Math.abs(mouse_position.y - previous_mouse.y);
   if (rect.attributes.position.x + rect.attributes.size.width - <number>$('#paper-wrapper').scrollLeft() >= window.innerWidth && x_direction >= 0){
     paper.fitToContent({
       minWidth: mainPaperSize.width,
@@ -67,13 +75,20 @@ graph.on('change:position', function(rect, position) {
     });
     $('#paper-wrapper').scrollLeft(99999999999)
   }
-   else if (rect.attributes.position.x - <number>$('#paper-wrapper').scrollLeft() <= 0 && x_direction <= 0){
-    // paper.fitToContent({
-    //   minWidth: <number>$('#myholder').width() * 0.9,
-    //   minHeight: <number>$('#myholder').height() * 0.9
-    // });
-    $('#paper-wrapper')[0].scrollLeft -= 5;
+  if (rect.attributes.position.y + rect.attributes.size.height - <number>$('#paper-wrapper').scrollTop() >= window.innerHeight && y_direction >= 0){
+    paper.fitToContent({
+      minWidth: mainPaperSize.width,
+      minHeight: mainPaperSize.height
+    });
+    $('#paper-wrapper').scrollTop(99999999999)
   }
+  //  else if (rect.attributes.position.x - <number>$('#paper-wrapper').scrollLeft() <= 0 && x_direction <= 0){
+  //   // paper.fitToContent({
+  //   //   minWidth: <number>$('#myholder').width() * 0.9,
+  //   //   minHeight: <number>$('#myholder').height() * 0.9
+  //   // });
+  //   $('#paper-wrapper')[0].scrollLeft -= 5;
+  // }
 }); 
 
 // the paper renders the image of the graph
