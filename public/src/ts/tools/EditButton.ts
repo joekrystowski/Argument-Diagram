@@ -80,6 +80,7 @@ joint.elementTools.EditButton = joint.elementTools.Button.extend({
       const objectionLabel = document.getElementById("objection-label") as HTMLInputElement;
       const switchLabel = document.getElementById("switch-label") as HTMLInputElement;
       $('.single-claim').show();
+      $('.edit-link').hide();
       objectionLabel.style.display = "none";
       switchLabel.style.display = "none";
 
@@ -189,6 +190,7 @@ joint.elementTools.EditDependentPremiseButton = joint.elementTools.Button.extend
       $('#model-text-container').empty();
 
       $('.single-claim').hide();
+      $('.edit-link').hide();
 
       editModel.getEmbeddedCells().forEach((cell:any, index:number) => {
         $('#model-text-container').append(`
@@ -263,24 +265,32 @@ joint.linkTools.EditLinkButton = joint.elementTools.Button.extend({
       exitButton?.classList.remove("changed");
       const saveButton = document.getElementById("save-edit-button");
       saveButton?.classList.remove("changed");
+      const objectionSwitch = document.getElementById("objection-switch") as HTMLInputElement;
       const objectionLabel = document.getElementById("objection-label") as HTMLInputElement;
       const switchLabel = document.getElementById("switch-label") as HTMLInputElement;
-       objectionLabel.style.visibility = "visible";
-      switchLabel.style.visibility = "visible";
-
-      const editView = $('#edit-container');
-      editView.show(200);
+      $('.single-claim').show();
+      objectionLabel.style.display = "revert";
+      switchLabel.style.display = "revert";
       
       editModel = this.model;
 
+      objectionSwitch.checked = editModel.attributes.type === "objection";
+
       console.log("editModel (link)", editModel);
 
-      const form = $('#edit-form');
-      form.empty();
+      $('#edit-dialog').dialog('open');
+      $('#model-text-container').empty();
+      $('.single-claim').hide();
+      $('.edit-link').show();
 
-      form.append(`<label for="link-weight-rect" class="menu-text">Link Weight</label>`)
-      form.append(`<input type="number" id="link-weight-rect" name="link-weight-rect" class="edit-number-form" min="0" max="1" step="0.1" value="${parseFloat(editModel.attributes.labels[0].attrs.text.text)}"></input>`)
-      form.append('<br/>')
+      $('#link-weight-rect').val(editModel.attributes.labels[0].attrs.text.text);
+
+      // const form = $('#edit-form');
+      // form.empty();
+
+      // form.append(`<label for="link-weight-rect" class="menu-text">Link Weight</label>`)
+      // form.append(`<input type="number" id="link-weight-rect" name="link-weight-rect" class="edit-number-form" min="0" max="1" step="0.1" value="${parseFloat(editModel.attributes.labels[0].attrs.text.text)}"></input>`)
+      // form.append('<br/>')
      }  
   }  
 });

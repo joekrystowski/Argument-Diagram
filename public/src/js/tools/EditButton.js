@@ -54,9 +54,9 @@ joint.elementTools.EditButton = joint.elementTools.Button.extend({
             const objectionLabel = document.getElementById("objection-label");
             const switchLabel = document.getElementById("switch-label");
             $('.single-claim').show();
+            $('.edit-link').hide();
             objectionLabel.style.display = "none";
             switchLabel.style.display = "none";
-          
             if (!$('#legend-info').hasClass('collapsed')) {
                 $('#toggle-legend-info-button').trigger('click');
             }
@@ -98,7 +98,6 @@ joint.elementTools.EditButton = joint.elementTools.Button.extend({
         }
     }
 });
-
 joint.elementTools.EditDependentPremiseButton = joint.elementTools.Button.extend({
     name: "edit-dependent-premise-button",
     options: {
@@ -147,10 +146,6 @@ joint.elementTools.EditDependentPremiseButton = joint.elementTools.Button.extend
             saveButton === null || saveButton === void 0 ? void 0 : saveButton.classList.remove("changed");
             const objectionLabel = document.getElementById("objection-label");
             const switchLabel = document.getElementById("switch-label");
-            // objectionLabel.style.visibility = "hidden";
-            // switchLabel.style.visibility = "hidden";
-            //const editView = $('#edit-container');
-            //editView.show(200);
             editModel = this.model;
             console.log("editModel", editModel);
             // const form = $('#edit-form');
@@ -158,6 +153,7 @@ joint.elementTools.EditDependentPremiseButton = joint.elementTools.Button.extend
             $('#edit-dialog').dialog('open');
             $('#model-text-container').empty();
             $('.single-claim').hide();
+            $('.edit-link').hide();
             editModel.getEmbeddedCells().forEach((cell, index) => {
                 $('#model-text-container').append(`
         <div class="edit-item">
@@ -227,19 +223,25 @@ joint.linkTools.EditLinkButton = joint.elementTools.Button.extend({
             exitButton === null || exitButton === void 0 ? void 0 : exitButton.classList.remove("changed");
             const saveButton = document.getElementById("save-edit-button");
             saveButton === null || saveButton === void 0 ? void 0 : saveButton.classList.remove("changed");
+            const objectionSwitch = document.getElementById("objection-switch");
             const objectionLabel = document.getElementById("objection-label");
             const switchLabel = document.getElementById("switch-label");
-            objectionLabel.style.visibility = "visible";
-            switchLabel.style.visibility = "visible";
-            const editView = $('#edit-container');
-            editView.show(200);
+            $('.single-claim').show();
+            objectionLabel.style.display = "revert";
+            switchLabel.style.display = "revert";
             editModel = this.model;
+            objectionSwitch.checked = editModel.attributes.type === "objection";
             console.log("editModel (link)", editModel);
-            const form = $('#edit-form');
-            form.empty();
-            form.append(`<label for="link-weight-rect" class="menu-text">Link Weight</label>`);
-            form.append(`<input type="number" id="link-weight-rect" name="link-weight-rect" class="edit-number-form" min="0" max="1" step="0.1" value="${parseFloat(editModel.attributes.labels[0].attrs.text.text)}"></input>`);
-            form.append('<br/>');
+            $('#edit-dialog').dialog('open');
+            $('#model-text-container').empty();
+            $('.single-claim').hide();
+            $('.edit-link').show();
+            $('#link-weight-rect').val(editModel.attributes.labels[0].attrs.text.text);
+            // const form = $('#edit-form');
+            // form.empty();
+            // form.append(`<label for="link-weight-rect" class="menu-text">Link Weight</label>`)
+            // form.append(`<input type="number" id="link-weight-rect" name="link-weight-rect" class="edit-number-form" min="0" max="1" step="0.1" value="${parseFloat(editModel.attributes.labels[0].attrs.text.text)}"></input>`)
+            // form.append('<br/>')
         }
     }
 });

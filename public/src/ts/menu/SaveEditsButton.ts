@@ -12,7 +12,7 @@ export function saveEdits() {
   let texts:Array<HTMLElement> = $('[name^="model-text-"]').toArray();
   console.log($('[name^="model-validity-"]').toArray());
 
-  let validities:Array<number> = $('[name^="model-validity-"]').toArray().map((element:HTMLElement) => parseFloat((<HTMLInputElement>element).value));
+  let validities:Array<number> = $('[name^="model-validity-"]').toArray().map((element:HTMLElement) => +(Math.min(Math.max(0, parseFloat((<HTMLInputElement>element).value)), 1).toFixed(1)));
   console.log('validities', validities)
   
   let text_wraps:Array<string> = texts.map((element:HTMLElement) => joint.util.breakText((<HTMLTextAreaElement>element).value, {width: 190}));
@@ -26,7 +26,7 @@ export function saveEdits() {
     let link_color = "#bbbbbb"
     const objectionSwitch = document.getElementById("objection-switch") as HTMLInputElement;
     link_color = objectionSwitch.checked ? color.link.dark.objection.stroke : color.link.dark.claim.stroke;
-    let weight = $('#link-weight-rect').val()
+    let weight = Math.min(Math.max(0, <number>$('#link-weight-rect').val()), 1).toFixed(1);
     let oldLabel = editModel.attributes.labels[0]
     editModel.label(0, {
         attrs: {

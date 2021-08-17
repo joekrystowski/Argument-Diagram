@@ -525,6 +525,7 @@ button:hover {
   min-height: 1.5rem;
   max-height: 1.5rem;
   resize: vertical;
+  width: 4em;
   border: none;
   background-color: var(--toolbar-bg);
   color: var(--accent-gray);
