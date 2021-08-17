@@ -34,6 +34,7 @@ joint.elementTools.EditButton = joint.elementTools.Button.extend({
       attributes: {
         'r': 10,
         'fill': "#222222",
+        "fill-opacity": 0,
         'cursor': "pointer",
       }
     }, {
@@ -79,6 +80,8 @@ joint.elementTools.EditButton = joint.elementTools.Button.extend({
       const objectionLabel = document.getElementById("objection-label") as HTMLInputElement;
       const switchLabel = document.getElementById("switch-label") as HTMLInputElement;
       $('.single-claim').show();
+      objectionLabel.style.display = "none";
+      switchLabel.style.display = "none";
 
       if(!$('#legend-info').hasClass('collapsed')){
         $('#toggle-legend-info-button').trigger('click');
@@ -126,12 +129,6 @@ joint.elementTools.EditButton = joint.elementTools.Button.extend({
     }  
   }
 });
-
-// (<any>Object).assign(joint.elementTools, {
-//   app: {
-//     EditButton,
-//   }
-// })
 
 joint.elementTools.EditDependentPremiseButton = joint.elementTools.Button.extend({
   name: "edit-dependent-premise-button",
@@ -181,11 +178,6 @@ joint.elementTools.EditDependentPremiseButton = joint.elementTools.Button.extend
       saveButton?.classList.remove("changed");
       const objectionLabel = document.getElementById("objection-label") as HTMLInputElement;
       const switchLabel = document.getElementById("switch-label") as HTMLInputElement;
-      // objectionLabel.style.visibility = "hidden";
-      // switchLabel.style.visibility = "hidden";
-
-      //const editView = $('#edit-container');
-      //editView.show(200);
       
       editModel = this.model;
 
@@ -237,24 +229,31 @@ joint.linkTools.EditLinkButton = joint.elementTools.Button.extend({
       tagName: "circle",
       selector: "button",
       attributes: {
-        'r': 7,
-        'fill': "#F5EE9E",
+        'r': 10,
+        'fill': "#222222",
         'cursor': "pointer",
-        'outline': 'black',
       }
     }, {
-      tagName: 'path',
-      selector: 'icon',
+      tagName: "g",
+      selector: "g-tag",
       attributes: {
-        //genuinely no idea what this is called but I used it to draw the arrow on the button
-        'd': "M18.303,4.742l-1.454-1.455c-0.171-0.171-0.475-0.171-0.646,0l-3.061,3.064H2.019c-0.251,0-0.457,0.205-0.457,0.456v9.578c0,0.251,0.206,0.456,0.457,0.456h13.683c0.252,0,0.457-0.205,0.457-0.456V7.533l2.144-2.146C18.481,5.208,18.483,4.917,18.303,4.742 M15.258,15.929H2.476V7.263h9.754L9.695,9.792c-0.057,0.057-0.101,0.13-0.119,0.212L9.18,11.36h-3.98c-0.251,0-0.457,0.205-0.457,0.456c0,0.253,0.205,0.456,0.457,0.456h4.336c0.023,0,0.899,0.02,1.498-0.127c0.312-0.077,0.55-0.137,0.55-0.137c0.08-0.018,0.155-0.059,0.212-0.118l3.463-3.443V15.929z M11.241,11.156l-1.078,0.267l0.267-1.076l6.097-6.091l0.808,0.808L11.241,11.156z",
-        'fill': 'black',
-        'stroke': 'black',
-        'stroke-width': .5,
-        'pointer-events': 'none'
-      }
+        transform: "translate(-10,-10)"
+      },
+      children: [{
+        tagName: 'path',
+        selector: 'icon',
+        attributes: {
+          //2.1 -1.9
+          //genuinely no idea what this is called but I used it to draw the arrow on the button
+          'd': "M18.303,4.742l-1.454-1.455c-0.171-0.171-0.475-0.171-0.646,0l-3.061,3.064H2.019c-0.251,0-0.457,0.205-0.457,0.456v9.578c0,0.251,0.206,0.456,0.457,0.456h13.683c0.252,0,0.457-0.205,0.457-0.456V7.533l2.144-2.146C18.481,5.208,18.483,4.917,18.303,4.742 M15.258,15.929H2.476V7.263h9.754L9.695,9.792c-0.057,0.057-0.101,0.13-0.119,0.212L9.18,11.36h-3.98c-0.251,0-0.457,0.205-0.457,0.456c0,0.253,0.205,0.456,0.457,0.456h4.336c0.023,0,0.899,0.02,1.498-0.127c0.312-0.077,0.55-0.137,0.55-0.137c0.08-0.018,0.155-0.059,0.212-0.118l3.463-3.443V15.929z M11.241,11.156l-1.078,0.267l0.267-1.076l6.097-6.091l0.808,0.808L11.241,11.156z",
+          'fill': 'white',
+          'stroke': 'white',
+          'stroke-width': 1,
+          'pointer-events': 'none'
+        }   
+      }],
     }],
-    distance: "25%",
+    distance: "75%",
     offset: 0,
     rotate: true,
     action: function(this: any) {
@@ -266,8 +265,8 @@ joint.linkTools.EditLinkButton = joint.elementTools.Button.extend({
       saveButton?.classList.remove("changed");
       const objectionLabel = document.getElementById("objection-label") as HTMLInputElement;
       const switchLabel = document.getElementById("switch-label") as HTMLInputElement;
-      objectionLabel.style.visibility = "hidden";
-      switchLabel.style.visibility = "hidden";
+       objectionLabel.style.visibility = "visible";
+      switchLabel.style.visibility = "visible";
 
       const editView = $('#edit-container');
       editView.show(200);
@@ -282,27 +281,6 @@ joint.linkTools.EditLinkButton = joint.elementTools.Button.extend({
       form.append(`<label for="link-weight-rect" class="menu-text">Link Weight</label>`)
       form.append(`<input type="number" id="link-weight-rect" name="link-weight-rect" class="edit-number-form" min="0" max="1" step="0.1" value="${parseFloat(editModel.attributes.labels[0].attrs.text.text)}"></input>`)
       form.append('<br/>')
-
-  //     //TODO: remove loop and replace with objects
-  //     //fix for dependent premises
-  //     $(".model-text-rect").each(function () {
-  //       const elem = $(this);
-      
-  //       let val = elem.val() as string;
-  //       elem.data("oldVal", val);
-      
-  //       elem.on("propertychange change click keyup input paste", function () {
-  //         let newVal = elem.val();
-  //         if (elem.data("oldVal") != newVal) {
-  //           exitButton?.classList.add("changed");
-  //           saveButton?.classList.add("changed");
-  //         }
-  //         if (elem.data("oldVal") === newVal) {
-  //           exitButton?.classList.remove("changed");
-  //           saveButton?.classList.remove("changed");
-  //         }
-  //       });
-  //     });
      }  
   }  
 });

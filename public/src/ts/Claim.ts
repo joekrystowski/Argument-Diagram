@@ -241,5 +241,5 @@ export class Claim {
 
 
 export function getStrokeWidth(value:number) {
-  return 2 + ( 3 * value )
+  return 2 //+ ( 3 * value )
 }

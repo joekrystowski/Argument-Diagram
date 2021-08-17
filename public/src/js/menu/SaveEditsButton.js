@@ -1,10 +1,8 @@
 /* global joint editModel */
 const joint = window.joint;
 import { editModel } from '../tools/EditButton.js';
-import { getStrokeWidth } from '../Claim.js';
 import { legend } from './Legend.js';
-import { createColor } from '../colors.js';
-import { ObjectionToClaim, ClaimToObjection } from "../ToggleTypes.js";
+import { color } from '../colors.js';
 export function saveEdits() {
     console.log('saving edits...');
     let texts = $('[name^="model-text-"]').toArray();
@@ -18,6 +16,9 @@ export function saveEdits() {
     console.log(heights);
     if (editModel.isLink()) {
         console.log("saving link edits");
+        let link_color = "#bbbbbb";
+        const objectionSwitch = document.getElementById("objection-switch");
+        link_color = objectionSwitch.checked ? color.link.dark.objection.stroke : color.link.dark.claim.stroke;
         let weight = $('#link-weight-rect').val();
         let oldLabel = editModel.attributes.labels[0];
         editModel.label(0, {
@@ -25,7 +26,7 @@ export function saveEdits() {
                 text: {
                     class: oldLabel.attrs.text.class,
                     text: weight,
-                    stroke: oldLabel.attrs.text.stroke
+                    stroke: link_color
                 },
                 rect: {
                     class: oldLabel.attrs.rect.class,
@@ -33,6 +34,7 @@ export function saveEdits() {
                 }
             }
         });
+        editModel.attr("line/stroke", link_color);
         console.log(weight);
     }
     else if (editModel.attributes.type === "dependent-premise") {
@@ -65,15 +67,15 @@ export function saveEdits() {
         editModel.attributes.validity = validities[0];
         editModel.attributes.storedInfo.initialText = text_wraps[0];
         editModel.resize(editModel.attributes.size.width, heights[0]);
-        editModel.attr("rect/fill", createColor(editModel.attributes.validity, editModel.attributes.type));
-        editModel.attr("rect/strokeWidth", getStrokeWidth(editModel.attributes.validity));
-        const objectionSwitch = document.getElementById("objection-switch");
-        if (editModel.attributes.type === "claim" && objectionSwitch.checked) {
-            ClaimToObjection(editModel);
-        }
-        else if (editModel.attributes.type === "objection" && !objectionSwitch.checked) {
-            ObjectionToClaim(editModel);
-        }
+        //editModel.attr("rect/fill", createColor(editModel.attributes.validity, editModel.attributes.type))
+        //editModel.attr("rect/strokeWidth", getStrokeWidth(editModel.attributes.validity))
+        // const objectionSwitch = document.getElementById("objection-switch") as HTMLInputElement;
+        // if(editModel.attributes.type === "claim" && objectionSwitch.checked) {
+        //   ClaimToObjection(editModel)
+        // }
+        // else if(editModel.attributes.type === "objection" && !objectionSwitch.checked) {
+        //   ObjectionToClaim(editModel)
+        // }
         console.log(editModel);
     }
     const saveButton = document.getElementById("save-edit-button");

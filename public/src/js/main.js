@@ -6,10 +6,12 @@ import { importGraph, exportGraph } from "./menu/ImportExport.js";
 import { savePNG, savePDF } from "./menu/saveAs.js";
 import { legend, toggleLegend } from './menu/Legend.js';
 import { evaluateArgument } from "./menu/EvaluateArgument.js";
-import { AutomaticCleanUp } from "./menu/CleanUp/AutomaticCleanUp.js";
+import { findArguments } from "./menu/CleanUp/AutomaticCleanUp.js";
 import { createLink } from "./tools/LinkButton.js";
+import { initializeContainerDrag } from "./util.js";
 const claimImage = new Image();
 claimImage.src = "src/img/Claim.jpg";
+initializeContainerDrag('paper-wrapper');
 let argCounter = 0; //TODO: temporary until we fix selecting claims
 const newClaimButton = document.getElementById("new-claim-button");
 newClaimButton.addEventListener("click", () => {
@@ -64,7 +66,7 @@ exportButton.addEventListener("click", exportGraph);
 const evaluateButton = document.getElementById('evaluate-button');
 evaluateButton.addEventListener('click', evaluateArgument);
 const CleanArgumentButton = document.getElementById('clean-argument-button');
-CleanArgumentButton.addEventListener('click', AutomaticCleanUp);
+CleanArgumentButton.addEventListener('click', findArguments);
 const PNGButton = document.getElementById("png-button");
 PNGButton.addEventListener("click", savePNG);
 const PDFButton = document.getElementById("pdf-button");

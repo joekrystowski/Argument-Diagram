@@ -24,7 +24,10 @@
     <script type="module" src="src/js/tools/ManageTools.js"></script>
     <script type="module" src="src/js/tools/LinkButton.js"></script>
     <script type="module" src="src/js/tools/RemoveDependentPremise.js"></script>
-    
+    <script type="module" src="src/js/tools/addSource.js"></script>
+    <script type="module" src="src/js/tools/RemoveSource.js"></script>
+    <script type="module" src="src/js/tools/ToggleSources.js"></script>
+
     <!-- MENU SCRIPTS -->
     <script type="module" src="src/js/menu/CreateClaim.js"></script>
     <script type="module" src="src/js/menu/SaveEditsButton.js"></script>
@@ -135,38 +138,10 @@
           <ul id="legend-list" class="sortable"></ul>
         </div>      
         <div id="wrapper">    
-          <!-- <div id="menu-container">
-            <div id="edit-container" class="edit-container">
-              <div id="edit-top" class="edit-top">
-                <label class="menu-text">Edit Claim Text</label>`
-                <button id="exit-edit-button" class="menu-button exit-button">
-                  <i class="fas fa-times"></i></i><span>Cancel</span>
-                </button>
-              </div>
-              <form id="edit-form" onsubmit="event.preventDefault(); return false;"></form>
-              <div id="edit-bottom" class="edit-bottom">
-                <button id="save-edit-button" class="menu-button save-button" onclick="saveEdits()">
-                  <i class="fa fa-save"></i><span>Save</span>
-                </button>
-                <span id="objection-label" class="objection-label">Objection</span>
-                <label id="switch-label" class="switch">
-                  <input id="objection-switch" type="checkbox">
-                  <span class="slider round"></span>
-                </label>
-              </div>
-            </div>
-          </div> -->
-          <div id="myholder" class="joint-style-default">
+          <div id="paper-wrapper">
+            <div id="myholder" class="joint-style-default"></div>
           </div>
         </div>
-
-        <!-- <div id="legend-info" class="collapsed">
-          <div class="collapsed-content">
-            <h1>Legend Info</h1>
-            
-          </div>
-          
-        </div> -->
       </div>
     </div>
 
