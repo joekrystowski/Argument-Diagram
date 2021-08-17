@@ -152,9 +152,9 @@ function generateCircularAlertString(path, final_id) {
     return output;
 }
 //link two rects together
-export function createLink(model1, model2) {
+export function createLink(model1, model2, _color) {
     console.log(model1.attributes.link_color);
-    let link_color = color.link.dark.claim.stroke;
+    let link_color = _color !== null && _color !== void 0 ? _color : color.link.dark.claim.stroke;
     // if (model1.attributes.type === "claim") {
     //   link_color = color.claim.dark.stroke
     // } else if (model1.attributes.type === "objection") {

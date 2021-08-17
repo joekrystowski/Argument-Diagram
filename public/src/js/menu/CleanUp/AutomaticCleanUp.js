@@ -299,7 +299,7 @@ function searchArgument(head, cells) {
         console.log("next", next);
     }
 }
-function findCellIndex(id, cells) {
+export function findCellIndex(id, cells) {
     for (let i = 0; i < cells.length; i++) {
         if (cells[i].id === id) {
             return i;

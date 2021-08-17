@@ -8,7 +8,7 @@ export function saveEdits() {
     console.log($('[name^="model-validity-"]').toArray());
     let validities = $('[name^="model-validity-"]').toArray().map((element) => parseFloat(element.value));
     console.log('validities', validities);
-    let text_wraps = texts.map((element) => joint.util.breakText(element.value, { width: 90 }));
+    let text_wraps = texts.map((element) => joint.util.breakText(element.value, { width: 190 }));
     let num_lines = text_wraps.map(wrap => (wrap.match(/\n/g) || []).length);
     //magic numbers have to do with font size... ask Joe
     let heights = num_lines.map(lines => 16 + 13 * lines);
@@ -17,7 +17,7 @@ export function saveEdits() {
         console.log("saving link edits");
         let link_color = "#bbbbbb";
         const objectionSwitch = document.getElementById("objection-switch");
-       link_color = objectionSwitch.checked ? color.link.dark.objection.stroke : color.link.dark.claim.stroke;
+        link_color = objectionSwitch.checked ? color.link.dark.objection.stroke : color.link.dark.claim.stroke;
         let weight = $('#link-weight-rect').val();
         let oldLabel = editModel.attributes.labels[0];
         editModel.label(0, {

@@ -14,7 +14,8 @@ import { color } from "./colors.js";
 import { paper, graph } from "./graph.js";
 import { evaluateArgument } from "./menu/EvaluateArgument.js"
 import { AutomaticCleanUp, findArguments } from "./menu/CleanUp/AutomaticCleanUp.js"
-import { createLink } from "./tools/LinkButton.js";
+import { createLink, selected_links } from "./tools/LinkButton.js";
+import { selected_element } from "./tools/ManageTools.js";
 
 const claimImage = new Image();
 claimImage.src = "src/img/Claim.jpg";

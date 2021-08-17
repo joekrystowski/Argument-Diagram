@@ -1,40 +1,62 @@
 const joint = window.joint;
 import { graph } from "../graph.js";
+import { selected_element } from "../tools/ManageTools.js";
+function buildTree(head, cell, leaves) {
+    let parents = graph.getConnectedLinks(cell, { incoming: true });
+    if (parents.length === 0) {
+        console.log("leaf reached", cell);
+        leaves[cell.id] = true;
+        return [cell];
+    }
+    let tree = [];
+    for (const parent of parents) {
+        tree.push(...buildTree(head, parent, leaves));
+    }
+    return tree;
+}
 export function evaluateArgument() {
     let sum = 0;
-    let elements = graph.getElements();
-    console.log("elements", elements);
-    for (let i = 0; i < elements.length; i++) {
-        let cell = elements[i];
-        let validity;
-        if (cell.attributes.type === "dependent-premise") {
-            let arr = [];
-            let children = cell.getEmbeddedCells();
-            for (let j = 0; j < children.length; j++) {
-                arr.push(children[j].attributes.validity);
-            }
-            validity = arr.reduce((accumulated, current) => accumulated * current, 1);
-        }
-        else if (cell.attributes.type === "objection") {
-            continue;
-            //validity = cell.attributes.validity * factorObjections(cell, cell)
-        }
-        else {
-            validity = cell.attributes.validity * factorObjections(cell, cell);
-        }
-        let outbound_links = graph.getConnectedLinks(cell, { outbound: true });
-        console.log("outbound_links", outbound_links);
-        for (let link = 0; link < outbound_links.length; link++) {
-            let weight = parseFloat(outbound_links[link].attributes.labels[0].attrs.text.text);
-            let link_sum = validity * weight;
-            if (cell.attributes.type === "objection") {
-                link_sum *= -1;
-            }
-            sum += link_sum;
-            console.log(sum);
-        }
+    let head = selected_element;
+    if (head === undefined || graph.getCell(head.id) === undefined) {
+        alert("Please select a cell to sum");
+        return;
     }
+    console.log("head", head);
+    //first collect all cells relevant to this summation (upside down tree)
+    let leaves = {};
+    let tree = buildTree(head, head, leaves);
+    console.log("leaves", leaves);
     alert("The evaluation of this argument is: " + sum);
+    // let elements = graph.getElements()
+    // console.log("elements",elements)
+    // for (let i = 0; i < elements.length; i++) {
+    //     let cell = elements[i]
+    //     let validity
+    //     if (cell.attributes.type === "dependent-premise") {
+    //         let arr = []
+    //         let children = cell.getEmbeddedCells()
+    //         for (let j = 0; j < children.length; j++) {
+    //             arr.push(children[j].attributes.validity)
+    //         }
+    //         validity = arr.reduce( (accumulated, current) => accumulated * current, 1)
+    //     } else if (cell.attributes.type === "objection") {
+    //         continue;
+    //         //validity = cell.attributes.validity * factorObjections(cell, cell)
+    //     } else { 
+    //         validity = cell.attributes.validity * factorObjections(cell, cell)
+    //     }
+    //     let outbound_links = graph.getConnectedLinks(cell, {outbound:true})
+    //     console.log("outbound_links",outbound_links)
+    //     for (let link = 0; link < outbound_links.length; link++) {
+    //         let weight = parseFloat(outbound_links[link].attributes.labels[0].attrs.text.text)
+    //         let link_sum = validity * weight;
+    //         if (cell.attributes.type === "objection") {
+    //             link_sum *= -1;
+    //         }
+    //         sum += link_sum;
+    //         console.log(sum)
+    //     }
+    // }
 }
 function checkObjections(cell) {
     let objections = [];
