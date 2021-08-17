@@ -1,4 +1,5 @@
 const joint = window.joint;
+import { color } from "../colors.js";
 import { graph } from "../graph.js";
 import { selected_element } from "../tools/ManageTools.js";
 function buildTree(head, cell, leaves, tree) {
@@ -19,13 +20,33 @@ function buildTree(head, cell, leaves, tree) {
     return;
 }
 function calculateSum(head, cell, leaves, tree) {
-    let sum = cell.attributes.validity;
+    let sum;
+    let validity;
+    if (cell.attributes.type != "dependent-premise") {
+        validity = cell.attributes.validity;
+    }
+    else {
+        let embeds = cell.getEmbeddedCells();
+        validity = embeds[0].attributes.validity;
+        for (let i = 1; i < embeds.length; i++) {
+            validity *= embeds[i].attributes.validity;
+        }
+    }
+    console.log("validity", validity, cell);
+    sum = validity;
     console.log("cell validity", cell.attributes.validity);
     let parent_links = graph.getConnectedLinks(cell, { inbound: true });
+    //check if dependent premise, if it is, must also look for parent links for its children
+    if (cell.attributes.type === "dependent-premise") {
+        let embeds = cell.getEmbeddedCells();
+        for (const embed of embeds) {
+            parent_links.push(...graph.getConnectedLinks(embed, { inbound: true }));
+        }
+    }
     if (parent_links.length === 0) {
         console.log("leaf reached", cell);
         leaves[cell.id] = true;
-        cell.attr("text/text", sum);
+        cell.attr("text/text", sum.toString());
         return sum;
     }
     let parents = [];
@@ -38,12 +59,19 @@ function calculateSum(head, cell, leaves, tree) {
     }
     let parent_sum = 0;
     for (const parent of parents) {
-        parent_sum += calculateSum(head, parent.parent, leaves, tree) * parseFloat(parent.link.attributes.labels[0].attrs.text.text);
+        let value = calculateSum(head, parent.parent, leaves, tree) * parseFloat(parent.link.attributes.labels[0].attrs.text.text);
+        if (parent.link.attributes.attrs.line.stroke === color.link.dark.objection.stroke) {
+            //parent is objection 
+            value *= -1;
+            //objection can not take away more than a cell contributes to the argument
+            value = (Math.abs(value) > validity) ? validity * value / (Math.abs(value)) : value;
+        }
+        parent_sum += value;
     }
     let average = parent_sum / parents.length;
     sum += average;
     tree[cell.id] = true;
-    cell.attr("text/text", sum);
+    cell.attr("text/text", sum.toString());
     return sum;
 }
 export function evaluateArgument() {
