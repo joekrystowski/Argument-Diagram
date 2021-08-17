@@ -15,9 +15,12 @@ import { paper, graph } from "./graph.js";
 import { evaluateArgument } from "./menu/EvaluateArgument.js"
 import { AutomaticCleanUp, findArguments } from "./menu/CleanUp/AutomaticCleanUp.js"
 import { createLink } from "./tools/LinkButton.js";
+import { initializeContainerDrag } from "./util.js";
 
 const claimImage = new Image();
 claimImage.src = "src/img/Claim.jpg";
+
+initializeContainerDrag('paper-wrapper');
 
 let argCounter = 0; //TODO: temporary until we fix selecting claims
 const newClaimButton = document.getElementById("new-claim-button") as HTMLElement;

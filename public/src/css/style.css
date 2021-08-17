@@ -432,11 +432,11 @@ button:hover {
   cursor: pointer;
 }
 
-/* !important to override default styling */
-#myholder {
-  height: 100000px !important;
-  width: 100000px !important;
-  margin-top: 3rem;
+#paper-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
 }
 
 #main-panel {
