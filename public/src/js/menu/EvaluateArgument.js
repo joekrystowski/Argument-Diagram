@@ -1,22 +1,54 @@
 const joint = window.joint;
 import { graph } from "../graph.js";
 import { selected_element } from "../tools/ManageTools.js";
-function buildTree(head, cell, leaves) {
-    let parents = graph.getConnectedLinks(cell, { incoming: true });
-    if (parents.length === 0) {
+function buildTree(head, cell, leaves, tree) {
+    let parent_links = graph.getConnectedLinks(cell, { inbound: true });
+    if (parent_links.length === 0) {
         console.log("leaf reached", cell);
         leaves[cell.id] = true;
-        return [cell];
+        return;
     }
-    let tree = [];
+    let parents = [];
+    for (const link of parent_links) {
+        parents.push(graph.getCell(link.attributes.source.id));
+    }
     for (const parent of parents) {
-        tree.push(...buildTree(head, parent, leaves));
+        buildTree(head, parent, leaves, tree);
     }
-    return tree;
+    tree[cell.id] = true;
+    return;
+}
+function EvaluateArg(head, cell, leaves, tree) {
+    let sum = cell.attributes.validity;
+    console.log("cell validity", cell.attributes.validity);
+    let parent_links = graph.getConnectedLinks(cell, { inbound: true });
+    if (parent_links.length === 0) {
+        console.log("leaf reached", cell);
+        leaves[cell.id] = true;
+        cell.attr("text/text", sum);
+        return sum;
+    }
+    let parents = [];
+    for (const link of parent_links) {
+        let info = {
+            parent: graph.getCell(link.attributes.source.id),
+            link: link
+        };
+        parents.push(info);
+    }
+    let parent_sum = 0;
+    for (const parent of parents) {
+        //                                                         
+        parent_sum += EvaluateArg(head, parent.parent, leaves, tree) * parseFloat(parent.link.attributes.labels[0].attrs.text.text);
+    }
+    sum += parent_sum;
+    tree[cell.id] = true;
+    cell.attr("text/text", sum);
+    return sum;
 }
 export function evaluateArgument() {
-    let sum = 0;
     let head = selected_element;
+    console.log("head of summation", head);
     if (head === undefined || graph.getCell(head.id) === undefined) {
         alert("Please select a cell to sum");
         return;
@@ -24,7 +56,9 @@ export function evaluateArgument() {
     console.log("head", head);
     //first collect all cells relevant to this summation (upside down tree)
     let leaves = {};
-    let tree = buildTree(head, head, leaves);
+    let tree = {};
+    //the + removes trailing 0s
+    let sum = +EvaluateArg(head, head, leaves, tree).toFixed(3);
     console.log("leaves", leaves);
     alert("The evaluation of this argument is: " + sum);
     // let elements = graph.getElements()
