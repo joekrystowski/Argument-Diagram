@@ -18,7 +18,7 @@ function buildTree(head, cell, leaves, tree) {
     tree[cell.id] = true;
     return;
 }
-function EvaluateArg(head, cell, leaves, tree) {
+function calculateSum(head, cell, leaves, tree) {
     let sum = cell.attributes.validity;
     console.log("cell validity", cell.attributes.validity);
     let parent_links = graph.getConnectedLinks(cell, { inbound: true });
@@ -38,10 +38,10 @@ function EvaluateArg(head, cell, leaves, tree) {
     }
     let parent_sum = 0;
     for (const parent of parents) {
-        //                                                         
-        parent_sum += EvaluateArg(head, parent.parent, leaves, tree) * parseFloat(parent.link.attributes.labels[0].attrs.text.text);
+        parent_sum += calculateSum(head, parent.parent, leaves, tree) * parseFloat(parent.link.attributes.labels[0].attrs.text.text);
     }
-    sum += parent_sum;
+    let average = parent_sum / parents.length;
+    sum += average;
     tree[cell.id] = true;
     cell.attr("text/text", sum);
     return sum;
@@ -58,7 +58,7 @@ export function evaluateArgument() {
     let leaves = {};
     let tree = {};
     //the + removes trailing 0s
-    let sum = +EvaluateArg(head, head, leaves, tree).toFixed(3);
+    let sum = +calculateSum(head, head, leaves, tree).toFixed(3);
     console.log("leaves", leaves);
     alert("The evaluation of this argument is: " + sum);
     // let elements = graph.getElements()

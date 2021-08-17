@@ -31,7 +31,7 @@ interface parentInfo {
     link:joint.dia.Link
 }
 
-function EvaluateArg(head:joint.dia.Cell, cell:joint.dia.Cell, leaves:idMap, tree:idMap) {
+function calculateSum(head:joint.dia.Cell, cell:joint.dia.Cell, leaves:idMap, tree:idMap) {
     let sum = cell.attributes.validity;
     console.log("cell validity", cell.attributes.validity)
     let parent_links = graph.getConnectedLinks(cell, {inbound: true})
@@ -50,11 +50,11 @@ function EvaluateArg(head:joint.dia.Cell, cell:joint.dia.Cell, leaves:idMap, tre
         parents.push(info)
     }
     let parent_sum:number = 0
-    for (const parent of parents) {
-        //                                                         
-        parent_sum += EvaluateArg(head, parent.parent, leaves, tree) * parseFloat( parent.link.attributes.labels[0].attrs.text.text ) ;
+    for (const parent of parents) {                                                        
+        parent_sum += calculateSum(head, parent.parent, leaves, tree) * parseFloat( parent.link.attributes.labels[0].attrs.text.text ) ;
     }
-    sum += parent_sum
+    let average = parent_sum / parents.length
+    sum += average
     tree[cell.id] = true;
     cell.attr("text/text", sum)
     return sum
@@ -72,7 +72,7 @@ export function evaluateArgument() {
     let leaves:idMap = {}
     let tree:idMap = {}
     //the + removes trailing 0s
-    let sum = +EvaluateArg(head, head, leaves, tree).toFixed(3)
+    let sum = +calculateSum(head, head, leaves, tree).toFixed(3)
 
     console.log("leaves", leaves)
 
