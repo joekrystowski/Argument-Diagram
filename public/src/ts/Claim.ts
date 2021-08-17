@@ -1,6 +1,7 @@
 import { calcHeight } from "./util.js";
 import { graph, paper } from "./graph.js";
 import { refreshTools } from "./tools/ManageTools.js";
+import { createColor } from "./colors.js"
 
 /* global joint */
 const joint = window.joint;
@@ -19,7 +20,7 @@ declare module "jointjs" {
 const ClaimRect = joint.shapes.standard.Rectangle.define("app.ClaimRect", {
   markup: '<g class="rotatable"><g class="scalable"><rect/></g><text/></g>',
   attrs: {
-    rect: { class:"claim-rect", width: 100, height: 100}, //, fill: "white", stroke: "black", width: 100, height: 100 },
+    rect: { class:"claim-rect", width: 100, height: 100, fill: "white", stroke: "black", strokeWidth: 5},//, width: 100, height: 100 },
     text: { class:"claim-text",
       "font-size": 12,
       "ref-x": 0.5,
@@ -52,6 +53,7 @@ interface ClaimOptions {
   stroke: string;
   link_color: string;
   weight: string;
+  validity: number;
 }
 
 export class Claim {
@@ -80,11 +82,13 @@ export class Claim {
       },
       attrs: {
         rect: {
-          class: config.type+"-rect",
-          fill: config.body_color,
+          fill: createColor(config.validity, config.type),
+          stroke: config.stroke,
+          strokeWidth: getStrokeWidth(config.validity)
         },
+          //class: config.type+"-rect",
         text: {
-          class: config.type+"-text",
+          //class: config.type+"-text",
           text: text_wrap,
           fill: config.text_color,
         },
@@ -92,6 +96,7 @@ export class Claim {
       // set custom attributes here:
       link_color: config.link_color,
       weight: config.weight,
+      validity: config.validity,
       type: config.type,
       inLegendForm: false,
       storedInfo: {
@@ -178,6 +183,7 @@ export class Claim {
       //use Object.assign to make an actual copy of the object (not a reference)
       this.rect.attributes.storedInfo.size = Object.assign({}, this.rect.attributes.size);
       this.rect.attributes.storedInfo.rx = this.rect.attributes.attrs.rect.rx || 0;
+      this.rect.attributes.storedInfo.position = Object.assign({}, this.rect.attributes.position);
     }
   }
 
@@ -208,8 +214,7 @@ export class Claim {
       this.store();
       //change attributes to legend form style
       this.rect.attr('text/text', legendNumber?.toString());
-      this.rect.translate((this.rect.attributes.size.width-legend_form_size)/2,
-        (this.rect.attributes.size.height-legend_form_size)/2);
+      this.rect.translate((this.rect.attributes.size.width-legend_form_size)/2, 0);
       this.rect.resize(legend_form_size, legend_form_size);
       this.rect.attr('rect/rx', 50);
     } 
@@ -217,14 +222,24 @@ export class Claim {
     else {
       this.rect.attr('text/text', this.retrieveFromStorage('initialText'));
       const old_size = this.retrieveFromStorage('size');
-      this.rect.translate(-(old_size.width-legend_form_size)/2,
-        -(old_size.height-legend_form_size)/2);
+      this.rect.translate(-(old_size.width-legend_form_size)/2, 0); 
       this.rect.resize(old_size.width, old_size.height);
       this.rect.attr('rect/rx', this.retrieveFromStorage('rx'));
+    }
+
+    //if this claim has a parent (Dependent premise), resize it
+    const parent = this.rect.getParentCell();
+    if (parent) {
+      parent.attributes.setHeightBasedOnChildren();
     }
 
     //update form boolean
     this.rect.attributes.inLegendForm = !this.rect.attributes.inLegendForm;
     refreshTools(this.rect);
   }
+}
+
+
+export function getStrokeWidth(value:number) {
+  return 2 //+ ( 3 * value )
 }

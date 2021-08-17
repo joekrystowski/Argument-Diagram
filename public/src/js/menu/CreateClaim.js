@@ -6,39 +6,43 @@ import { Claim } from '../Claim.js';
 import { DependentPremise } from '../DependentPremise.js';
 import { legend } from './Legend.js';
 //when new-claim-button is clicked
-export function createClaim(x, y, text) {
+export function createClaim(x, y, text, validity, type) {
     //creating new rect (Joint.js object)
     const new_rect = new Claim({
         x: x,
         y: y,
         text: text !== null && text !== void 0 ? text : "New Claim",
-        type: "claim",
-        body_color: color.claim.bodyColor,
-        text_color: color.claim.textColor,
-        stroke: color.claim.stroke,
-        link_color: color.claim.linkColor,
-        weight: "1.0"
+        type: type !== null && type !== void 0 ? type : "claim",
+        body_color: "ffffff",
+        text_color: "#222222",
+        stroke: color.claim.dark.stroke,
+        link_color: color.claim.dark.stroke,
+        weight: "1.0",
+        validity: validity !== null && validity !== void 0 ? validity : 0.5
     });
     //add new rect to the graph for displaying
     new_rect.rect.addTo(graph);
     //adds the buttons to each rect
     addRectTools(new_rect.rect);
-    legend.add(new_rect);
+    if (type != "source") {
+        legend.add(new_rect);
+    }
     return new_rect;
 }
 //when objection-button is clicked
-export function createObjection(x, y, text) {
+export function createObjection(x, y, text, validity) {
     //creating new rect (Joint.js object)
     const new_rect = new Claim({
         x: x,
         y: y,
         text: text !== null && text !== void 0 ? text : "New Objection",
         type: "objection",
-        body_color: color.objection.bodyColor,
-        text_color: color.objection.textColor,
-        stroke: color.objection.stroke,
-        link_color: color.objection.linkColor,
-        weight: "-1.0"
+        body_color: color.objection.dark.stroke,
+        text_color: color.objection.dark.textColor,
+        stroke: color.objection.dark.stroke,
+        link_color: color.objection.dark.stroke,
+        weight: "-1.0",
+        validity: validity !== null && validity !== void 0 ? validity : 0.5
     });
     new_rect.rect.addTo(graph);
     //adds the buttons to each rect

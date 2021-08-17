@@ -3,6 +3,7 @@ const joint = window.joint;
 import { elementTools } from 'jointjs';
 import { paper } from '../graph.js'
 import { graph } from '../graph.js'
+import { editModel } from './EditButton.js';
 
 export function refreshTools (element: joint.shapes.app.ClaimRect) {
   const view = element.findView(paper);
@@ -19,23 +20,81 @@ export function addRectTools(element: joint.shapes.app.ClaimRect) {
   // boundary tool shows boundaries of element
   let boundaryTool = new joint.elementTools.Boundary();
   //remove tool deletes a rect
-  let removeButton = new joint.elementTools.Remove();
+  let removeButton = new joint.elementTools.Remove({
+    x: "5%",
+    y: "0%",
+    offset: {
+      x: 0,
+      y: -15
+    }
+  });
   // link button
-  let linkButton = new joint.elementTools.LinkButton();
+  let linkButton = new joint.elementTools.LinkButton({
+    x: "23%",
+    y: "0%",
+    offset: {
+      x: 0,
+      y: -15
+    }
+  });
   //edit button
-  let editButton = new joint.elementTools.EditButton();
+  let editButton = new joint.elementTools.EditButton({
+    x: "59%",
+    y: "0%",
+    offset: {
+      x: 0,
+      y: -15
+    }
+  });
 
-  let combinedPremiseButton = new joint.elementTools.CombinePremiseButton();
+
+  let addSourceButton = new joint.elementTools.AddSourceButton({
+    x: "77%",
+    y: "0%",
+    offset: {
+      x: 0,
+      y: -15
+    }
+  });
+
+  let removeSourceButton = new joint.elementTools.RemoveSourceButton({
+    x: "20%",
+    y: "0%",
+    offset: {
+      x: 0,
+      y: -15
+    }
+  });
+
+  let toggleSourceButton = new joint.elementTools.ToggleSourceButton({
+    x: "95%",
+    y: "0%",
+    offset: {
+      x: 0,
+      y: -15
+    }
+  });
+
+  let combinedPremiseButton = new joint.elementTools.CombinePremiseButton({
+    x: "41%",
+    y: "0%",
+    offset: {
+      x: 0,
+      y: -15
+    }
+  });
   
   let rect_tools;
   if (element.get('parent')) {
     //inside dependent premise
-    rect_tools = [linkButton]
+    rect_tools = [linkButton, toggleSourceButton, addSourceButton]
   } else if (element.attributes.inLegendForm) {
-    rect_tools = [boundaryTool, removeButton, linkButton, combinedPremiseButton];
+    rect_tools = [removeButton, linkButton, combinedPremiseButton, addSourceButton];
+  } else if (element.attributes.type === "source") {
+    rect_tools = [removeSourceButton, editButton]
   } else {
-    //outside dependent premise
-    rect_tools = [boundaryTool, removeButton, linkButton, editButton, combinedPremiseButton];
+    //regular claim (not in dependent premise)
+    rect_tools = [removeButton, linkButton, editButton, combinedPremiseButton, addSourceButton, toggleSourceButton];
   }
 
   let toolsView = new joint.dia.ToolsView({
@@ -63,18 +122,19 @@ export function addRectTools(element: joint.shapes.app.ClaimRect) {
 // adding tools to links
 export function addLinkTools(link: joint.shapes.standard.Link) {
   let removeButton = new joint.linkTools.Remove();
+  let editLinkButton = new joint.linkTools.EditLinkButton()
   let toolsView = new joint.dia.ToolsView({
-    tools: [removeButton]
+    tools: [removeButton, editLinkButton]
   });
   let linkView = link.findView(paper);
   linkView.addTools(toolsView)
   //start with tools hidden
   linkView.hideTools();
     // ------ paper events -------
-  paper.on("link:mouseenter", function(linkView) {
+  paper.on("link:pointerclick", function(linkView) {
     linkView.showTools();
   });
-  paper.on("link:mouseleave", function(linkView) {
+  paper.on("link:pointerdblclick", function(linkView) {
     linkView.hideTools();
   });
 
@@ -86,13 +146,41 @@ export function addDependentPremiseTools(element: joint.shapes.app.DependentPrem
   // boundary tool shows boundaries of element
   let boundaryTool = new joint.elementTools.Boundary();
   //remove tool deletes a rect
-  let removeDependentPremiseButton = new joint.elementTools.RemoveDependentPreimseButton();
+  let removeDependentPremiseButton = new joint.elementTools.RemoveDependentPreimseButton({
+    x: "20%",
+    y: "0%",
+    offset: {
+      x: 0,
+      y: -15
+    }
+  });
   // link button
-  let linkButton = new joint.elementTools.LinkButton();
+  let linkButton = new joint.elementTools.LinkButton({
+    x: "40%",
+    y: "0%",
+    offset: {
+      x: 0,
+      y: -15
+    }
+  });
   // dependent premise button
-  let combinePremiseButton = new joint.elementTools.CombinePremiseButton();
+  let combinePremiseButton = new joint.elementTools.CombinePremiseButton({
+    x: "80%",
+    y: "0%",
+    offset: {
+      x: 0,
+      y: -15
+    }
+  });
   //the edit button is specific to dependent premise
-  let editDependentPremiseButton = new joint.elementTools.EditDependentPremiseButton();
+  let editDependentPremiseButton = new joint.elementTools.EditDependentPremiseButton({
+    x: "60%",
+    y: "0%",
+    offset: {
+      x: 0,
+      y: -15
+    }
+  });
 
   let toolsView = new joint.dia.ToolsView({
     tools: [boundaryTool, removeDependentPremiseButton, linkButton, editDependentPremiseButton, combinePremiseButton]
@@ -104,10 +192,10 @@ export function addDependentPremiseTools(element: joint.shapes.app.DependentPrem
   //start with tools hidden
   elementView.hideTools();
 
-  element.on("change:position", function () {
-    paper.hideTools();
-    elementView.showTools();
-  })
+  // element.on("change:position", function () {
+  //   paper.hideTools();
+  //   elementView.showTools();
+  // })
 
   // ------ paper events -------
   paper.on("element:pointerclick", function(eventView){

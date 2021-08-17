@@ -7,15 +7,6 @@ export let paper = new joint.dia.Paper({
     height: window.innerHeight,
     gridSize: 10,
     drawGrid: true,
-    preventContextMenu: false
+    preventContextMenu: false,
+    clickThreshold: 1,
 });
-
-// Bit of extra stuff to move the paper to start in the center.
-console.debug(document.getElementById("myholder")) ;
-console.debug(document.getElementById("wrapper")) ;
-console.debug("YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-console.debug($("myholder"));
-
-var middleishwidth = document.getElementById("myholder").clientWidth*2/5;
-var middleishheight = document.getElementById("myholder").clientHeight*2/5;
-document.getElementById("wrapper").scrollTo(middleishwidth ,middleishheight);

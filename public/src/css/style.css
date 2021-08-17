@@ -244,55 +244,6 @@ input:checked + .slider:before {
   fill: var(--accent-gray);
 }
 
-.claim-rect {
-  fill: var(--accent-gray);
-  /* border-radius: 100rem; */
-  stroke: var(--bg);
-}
-
-.claim-text {
-  width: 100%;
-  height: 100%;
-  font-size: 12px;
-  text-align: center;
-  fill: var(--bg);
-  padding: 1rem;
-}
-
-.claim-link-rect {
-  font-size: 12px;
-  fill: var(--bg);
-}
-
-.claim-link-text {
-  font-size: 12px;
-  stroke: var(--accent-gray);
-}
-
-.objection-rect {
-  fill: var(--accent-orange);
-  stroke: var(--bg);
-}
-
-.objection-text {
-  width: 100%;
-  height: 100%;
-  font-size: 12px;
-  text-align: center;
-  fill: var(--bg);
-  padding: 1rem;
-}
-
-.dependent-premise-link-rect {
-  font-size: 12px;
-  fill: var(--bg);
-}
-
-.dependent-premise-link-text {
-  font-size: 12px;
-  stroke: var(--accent-gray);
-}
-
 #side-panel {
   display: none;
   width: 30%;
@@ -400,6 +351,45 @@ input:checked + .slider:before {
   display: none;
 }
 
+.dropdown {
+  height: 0px;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.dropdown:hover #download-dropdown {
+  filter: opacity(1);
+}
+
+.dropdown-content {
+  top: 34px;
+  display: none;
+  position: absolute;
+  background-color: var(--toolbar-bg);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.dropdown-content button {
+  min-width: 150px;
+  background-color: var(--toolbar-bg);
+  padding: 12px 16px;
+  color: var(--accent-gray);
+  filter: opacity(0.75);
+  transition: var(--transition-speed);
+  display: block;
+  /*i {
+    padding-bottom: -5px;
+    padding-left: 25px;
+    position: absolute;
+  }*/
+}
+.dropdown-content button:first-of-type {
+  border-bottom: 0.1rem solid var(--accent-gray);
+}
+.dropdown-content button:hover {
+  background-color: var(--toolbar-hover);
+}
+
 :root {
   font-size: 16px;
   --transition-speed: 200ms;
@@ -444,8 +434,9 @@ button:hover {
 
 /* !important to override default styling */
 #myholder {
-  height: 100% !important;
-  width: 100% !important;
+  height: 100000px !important;
+  width: 100000px !important;
+  margin-top: 3rem;
 }
 
 #main-panel {
@@ -453,7 +444,20 @@ button:hover {
   width: 100% !important;
   margin-top: 3rem;
   display: flex;
-  flex-direction: row;
+  gap: 0;
+  background-color: #444422;
+}
+
+#main-panel div {
+  margin: 0;
+}
+
+#side-panel {
+  background-color: var(--bg);
+}
+
+#menu-container {
+  margin-top: 3rem;
 }
 
 #main {
@@ -467,6 +471,7 @@ button:hover {
 #wrapper {
   width: inherit;
   height: inherit;
+  overflow: scroll;
 }
 
 #edit-container {
@@ -512,6 +517,28 @@ button:hover {
   color: var(--accent-gray);
   font-size: 1.5rem;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.edit-number-form {
+  margin: 0 1rem;
+  height: 1.5rem;
+  min-height: 1.5rem;
+  max-height: 1.5rem;
+  resize: vertical;
+  border: none;
+  background-color: var(--toolbar-bg);
+  color: var(--accent-gray);
+  font-size: 1.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.ui-dialog {
+  overflow-y: scroll;
+  background-color: #ffdddd !important;
+}
+
+.ui-dialog-titlebar {
+  background-color: #ffaaaa !important;
 }
 
 /* ------- Buttons -------- */

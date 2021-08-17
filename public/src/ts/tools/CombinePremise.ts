@@ -21,24 +21,32 @@ joint.elementTools.CombinePremiseButton = joint.elementTools.Button.extend({
       tagName: "circle",
       selector: "button",
       attributes: {
-        'r': 7,
-        'fill': color.dependentPremise.linkColor,
+        'r': 10,
+        'fill': "#222222",
+        "fill-opacity": 0,
         'cursor': "pointer"
       }
     }, {
-      tagName: 'path',
-      selector: 'icon',
+      tagName: "g",
+      selector: "g-tag",
       attributes: {
-        //genuinely no idea what this is called but I used it to draw the arrow on the button
-        'd': 'M -4 -1 0 4 M 0 4 4 -1 M 0 4 0 -4',
-        'fill': 'none',
-        'stroke': '#EEF0F2',
-        'stroke-width': 2,
-        'pointer-events': 'none'
-      }   
+        transform: "translate(-10,-10)"
+      },
+      children: [{
+        tagName: 'path',
+        selector: 'icon',
+        attributes: {
+          //genuinely no idea what this is called but I used it to draw the arrow on the button
+          'd': "M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10",
+          'fill': 'white',
+          'stroke': 'white',
+          'stroke-width': 1,
+          'pointer-events': 'none'
+        }   
+      }],
     }],
-    x: '100%',
-    y: '4',
+    x: '0',
+    y: '0',
     offset: {
       x: 0,
       y: 0,
