@@ -34,7 +34,6 @@ function calculateSum(head, cell, leaves, tree) {
     }
     console.log("validity", validity, cell);
     sum = validity;
-    console.log("cell validity", cell.attributes.validity);
     let parent_links = graph.getConnectedLinks(cell, { inbound: true });
     //check if dependent premise, if it is, must also look for parent links for its children
     if (cell.attributes.type === "dependent-premise") {
@@ -44,9 +43,7 @@ function calculateSum(head, cell, leaves, tree) {
         }
     }
     if (parent_links.length === 0) {
-        console.log("leaf reached", cell);
-        leaves[cell.id] = true;
-        cell.attr("text/text", sum.toString());
+        //cell.attr("text/text", sum.toString())
         return sum;
     }
     let parents = [];
@@ -70,8 +67,7 @@ function calculateSum(head, cell, leaves, tree) {
     }
     let average = parent_sum / parents.length;
     sum += average;
-    tree[cell.id] = true;
-    cell.attr("text/text", sum.toString());
+    //cell.attr("text/text", sum.toString())
     return sum;
 }
 export function evaluateArgument() {
