@@ -43,6 +43,7 @@ function calculateSum(head, cell, leaves, tree) {
         }
     }
     if (parent_links.length === 0) {
+        addSumLabel(cell, sum);
         //cell.attr("text/text", sum.toString())
         return sum;
     }
@@ -67,6 +68,7 @@ function calculateSum(head, cell, leaves, tree) {
     }
     let average = parent_sum / parents.length;
     sum += average;
+    addSumLabel(cell, sum);
     //cell.attr("text/text", sum.toString())
     return sum;
 }
@@ -81,40 +83,11 @@ export function evaluateArgument() {
     //first collect all cells relevant to this summation (upside down tree)
     let leaves = {};
     let tree = {};
+    manageOldLabel();
     //the + removes trailing 0s
     let sum = +calculateSum(head, head, leaves, tree).toFixed(3);
     console.log("leaves", leaves);
     alert("The evaluation of this argument is: " + sum);
-    // let elements = graph.getElements()
-    // console.log("elements",elements)
-    // for (let i = 0; i < elements.length; i++) {
-    //     let cell = elements[i]
-    //     let validity
-    //     if (cell.attributes.type === "dependent-premise") {
-    //         let arr = []
-    //         let children = cell.getEmbeddedCells()
-    //         for (let j = 0; j < children.length; j++) {
-    //             arr.push(children[j].attributes.validity)
-    //         }
-    //         validity = arr.reduce( (accumulated, current) => accumulated * current, 1)
-    //     } else if (cell.attributes.type === "objection") {
-    //         continue;
-    //         //validity = cell.attributes.validity * factorObjections(cell, cell)
-    //     } else { 
-    //         validity = cell.attributes.validity * factorObjections(cell, cell)
-    //     }
-    //     let outbound_links = graph.getConnectedLinks(cell, {outbound:true})
-    //     console.log("outbound_links",outbound_links)
-    //     for (let link = 0; link < outbound_links.length; link++) {
-    //         let weight = parseFloat(outbound_links[link].attributes.labels[0].attrs.text.text)
-    //         let link_sum = validity * weight;
-    //         if (cell.attributes.type === "objection") {
-    //             link_sum *= -1;
-    //         }
-    //         sum += link_sum;
-    //         console.log(sum)
-    //     }
-    // }
 }
 function checkObjections(cell) {
     let objections = [];
@@ -155,4 +128,60 @@ function factorObjections(head, cell) {
         console.log("validity", validity);
     }
     return validity;
+}
+function addSumLabel(cell, sum) {
+    let child_links = graph.getConnectedLinks(cell, { outbound: true });
+    let sign_str = "";
+    for (const link of child_links) {
+        if (link.attributes.attrs.line.stroke === color.link.dark.claim.stroke) {
+            sign_str = "+";
+        }
+        else if (link.attributes.attrs.line.stroke === color.link.dark.objection.stroke) {
+            sign_str = "-";
+        }
+        let label = {
+            attrs: {
+                text: {
+                    text: sign_str + sum.toString(),
+                    stroke: link.attributes.attrs.line.stroke
+                },
+                rect: {
+                    fill: "#222222",
+                }
+            },
+            position: {
+                distance: 0.25,
+            }
+        };
+        if (link.labels().length === 1) {
+            link.appendLabel(label);
+        }
+        else {
+            link.label(1, label);
+        }
+        console.log("labels", link.labels);
+    }
+}
+function manageOldLabel() {
+    //set any old links to white stroke color
+    let all_links = graph.getLinks();
+    for (const link of all_links) {
+        if (link.labels().length > 1) {
+            let label = link.attributes.labels[1];
+            link.label(1, {
+                attrs: {
+                    text: {
+                        text: label.attrs.text.text,
+                        stroke: "white"
+                    },
+                    rect: {
+                        fill: "#222222",
+                    }
+                },
+                position: {
+                    distance: 0.25,
+                }
+            });
+        }
+    }
 }
