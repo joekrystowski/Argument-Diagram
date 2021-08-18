@@ -1,13 +1,12 @@
 /* global joint createDependentPremise */
 // const joint = window.joint;
 import { saveEdits, discardEdits } from "./menu/SaveEditsButton.js";
-import { createClaim, createObjection, createDependentPremise, } from "./menu/CreateClaim.js";
+import { createClaim, createObjection, } from "./menu/CreateClaim.js";
 import { importGraph, exportGraph } from "./menu/ImportExport.js";
 import { savePNG, savePDF } from "./menu/saveAs.js";
 import { legend, toggleLegend } from './menu/Legend.js';
 import { evaluateArgument } from "./menu/EvaluateArgument.js";
 import { findArguments } from "./menu/CleanUp/AutomaticCleanUp.js";
-import { createLink } from "./tools/LinkButton.js";
 const claimImage = new Image();
 claimImage.src = "src/img/Claim.jpg";
 let argCounter = 0; //TODO: temporary until we fix selecting claims
@@ -83,14 +82,14 @@ $('.sortable').sortable({
     }
 });
 //testing
-const claim1 = createClaim(0, 100, "the past does not exist");
-const claim2 = createClaim(200, 100, "the future does not exist");
-const claim3 = createClaim(200, 300, "only the present exists");
-const claim5 = createClaim(500, 100, "the present is always instantaneous");
-const claim4 = createClaim(300, 300, "during the present there can be no lapse of time");
-const claim6 = createClaim(300, 500, "time does not exist");
-const dp1 = createDependentPremise(claim1.rect, claim2.rect);
-const dp2 = createDependentPremise(claim3.rect, claim4.rect);
-createLink(dp1.rect, claim3.rect);
-createLink(claim5.rect, claim4.rect);
-createLink(dp2.rect, claim6.rect);
+// const claim1 = createClaim(0, 100, "the past does not exist");
+// const claim2 = createClaim(200, 100, "the future does not exist");
+// const claim3 = createClaim(200, 300, "only the present exists");
+// const claim5 = createClaim(500, 100, "the present is always instantaneous");
+// const claim4 = createClaim(300, 300, "during the present there can be no lapse of time");
+// const claim6 = createClaim(300, 500, "time does not exist");
+// const dp1 = createDependentPremise(claim1.rect, claim2.rect);
+// const dp2 = createDependentPremise(claim3.rect, claim4.rect);
+// createLink(dp1.rect, claim3.rect);
+// createLink(claim5.rect, claim4.rect);
+// createLink(dp2.rect, claim6.rect)
