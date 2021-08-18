@@ -1,7 +1,7 @@
 import { graph, paper } from '../graph.js'
 import { save } from '../util.js';
 import { legend } from './Legend.js';
-import jsPDF from 'jspdf';
+// import jsPDF from 'jspdf';
 
 declare const InstallTrigger: any;
 

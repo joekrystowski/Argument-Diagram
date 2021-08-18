@@ -148,6 +148,7 @@ export function openGraph(): void {
 	if(user===null){ return; }
 	const userRef = firebase.database().ref('users/' + user.uid);
 	const diagramsContainer = document.getElementById('firebase-diagrams-container') as HTMLElement;
+	$('#files-dialog').dialog('open');
 	userRef.on('value', (snapshot) => {
 		const data = snapshot.val();
 		// console.log(data);
@@ -168,6 +169,7 @@ export function openGraph(): void {
 					const dataObj = JSON.parse(data[diagram]);
 					parseJSON(dataObj.cells, dataObj.legend);
 					diagramsContainer.style.display = 'none';
+					$('#files-dialog').dialog('close');
 				}
 			});
 			diagramsContainer.appendChild(diagramItem);

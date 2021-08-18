@@ -151,9 +151,9 @@
           <ul id="legend-list" class="sortable"></ul>
         </div>      
         <div id="wrapper">
-          <div id='firebaseui-auth-container'></div>
-          <ul id="firebase-diagrams-container"></ul>
-          <div id="menu-container">
+          <!-- <div id='firebaseui-auth-container'></div>
+          <ul id="firebase-diagrams-container"></ul> -->
+          <!-- <div id="menu-container">
             <div id="edit-container" class="edit-container">
               <div id="edit-top" class="edit-top">
                 <label class="menu-text">Edit Claim Text</label>`
@@ -173,7 +173,7 @@
                 </label>
               </div>
             </div>
-          </div>
+          </div> -->
           <div id="paper-wrapper">
             <div id="myholder" class="joint-style-default"></div>
           </div>
@@ -203,9 +203,9 @@
             <li id="edit-username" class="settings-item button user-profile">
               Edit Username
             </li>
-            <li id="edit-pfp" class="settings-item button user-profile">
+            <!-- <li id="edit-pfp" class="settings-item button user-profile">
               Edit Profile Picture
-            </li>
+            </li> -->
             <li id="logout" class="settings-item button user-profile">
               Log out
             </li>
@@ -268,6 +268,20 @@
             <i class="fa fa-save"></i><span>Save</span>
           </button>
         </div>
+      </div>
+    </template>
+    <template id="login-form-template">
+      <div id="login-dialog">
+        <div id='firebaseui-auth-container'></div>
+        <input id='firebase-change-username' inputmode="verbatim"></input>
+        <button id="firebase-save-button" class="menu-button save-button">
+          <i class="fa fa-save"></i><span>Save</span>
+        </button>
+      </div>
+    </template>
+    <template id="files-form-template">
+      <div id="files-dialog">
+        <ul id="firebase-diagrams-container"></ul>
       </div>
     </template>
   </body>

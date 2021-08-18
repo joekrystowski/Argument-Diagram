@@ -62,7 +62,7 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
                 padding: 5,
                 layer: "back",
                 attrs: {
-                    'stroke': '#6696ffff',
+                    'stroke': '#6696ff',
                     'stroke-opacity': 1,
                     'stroke-width': 3,
                 }
@@ -117,7 +117,7 @@ function isCircularArgument(current, disallowed_ids, path) {
                 width: 500,
                 height: 500,
                 dialogClass: 'error',
-                close: function (event, ui) {
+                close: function () {
                     $(this).dialog('destroy').remove();
                 }
             });

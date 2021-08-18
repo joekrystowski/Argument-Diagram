@@ -30,11 +30,35 @@ newClaimButton.addEventListener("dragstart", (event) => {
 const edit_template = $('#edit-form-template').html();
 $(edit_template).dialog({
     autoOpen: false,
-    title: 'Edit Menu',
+    title: 'Edit Claim',
     resizable: true,
     width: 500,
     height: 500,
     dialogClass: 'edit',
+    close: function (event, ui) {
+        //$(this).dialog('close');
+    }
+});
+const login_template = $('#login-form-template').html();
+$(login_template).dialog({
+    autoOpen: false,
+    title: 'Log In',
+    resizable: true,
+    width: 500,
+    height: 500,
+    dialogClass: 'login',
+    close: function (event, ui) {
+        //$(this).dialog('close');
+    }
+});
+const files_template = $('#files-form-template').html();
+$(files_template).dialog({
+    autoOpen: false,
+    title: 'Select Diagram',
+    resizable: true,
+    width: 500,
+    height: 500,
+    dialogClass: 'files',
     close: function (event, ui) {
         //$(this).dialog('close');
     }
@@ -76,8 +100,6 @@ const PNGButton = document.getElementById("png-button");
 PNGButton.addEventListener("click", savePNG);
 const PDFButton = document.getElementById("pdf-button");
 PDFButton.addEventListener("click", savePDF);
-
-
 const sidePanel = document.getElementById("side-panel");
 const wrapper = document.getElementById("wrapper");
 const sidePanelButton = document.getElementById("side-panel-button");

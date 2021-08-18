@@ -23,38 +23,42 @@ var firebase = window.firebase.default;
 var firebaseui = window.firebaseui;
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
 var storage = firebase.storage();
-var defaultPfp;
 const loginEnterButton = document.getElementById('log-in-enter');
 const userProfile = document.getElementById('user-profile');
 const userProfileName = document.getElementById('user-profile-name');
 const userProfilePic = document.getElementById('user-profile-pic');
 const editUsername = document.getElementById('edit-username');
-const editPfp = document.getElementById('edit-pfp');
+// const editPfp = document.getElementById('edit-pfp') as HTMLElement;
 const logoutButton = document.getElementById('logout');
-storage.ref('profilepic.jpeg').getDownloadURL()
-    .then((url) => {
-    defaultPfp = url;
-    userProfilePic.src = url;
-});
 function login() {
     const user = firebase.auth().currentUser;
+    storage.ref('profilepic.jpeg').getDownloadURL()
+        .then((url) => {
+        userProfilePic.src = url;
+    });
     userProfileName.textContent = user === null || user === void 0 ? void 0 : user.displayName;
-    const photoUrl = user === null || user === void 0 ? void 0 : user.photoURL;
+    // const photoUrl = user?.photoURL;
     // if(photoUrl){ userProfilePic.src = photoUrl;}
     loginEnterButton.style.display = 'none';
     userProfile.style.display = 'flex';
     editUsername.style.display = 'flex';
-    editPfp.style.display = 'flex';
+    // editPfp.style.display = 'flex';
     logoutButton.style.display = 'flex';
-    // $("#settings-container").css("height",""+$("#log-in-menu").height()); 
+    if ($("#log-in-menu").css('transform') == "matrix(1, 0, 0, 1, 0, 0)") {
+        $("#settings-container").css("height", "" + $("#log-in-menu").height());
+    }
 }
 function logout() {
     loginEnterButton.style.display = 'flex';
     userProfile.style.display = 'none';
     editUsername.style.display = 'none';
-    editPfp.style.display = 'none';
+    // editPfp.style.display = 'none';
     logoutButton.style.display = 'none';
-    // $("#settings-container").css("height",""+$("#log-in-menu").height()); 
+    $('#firebase-change-username').css('display', 'none');
+    $('#firebase-save-button').css('display', 'none');
+    if ($("#log-in-menu").css('transform') == "matrix(1, 0, 0, 1, 0, 0)") {
+        $("#settings-container").css("height", "" + $("#log-in-menu").height());
+    }
 }
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
@@ -66,6 +70,7 @@ firebase.auth().onAuthStateChanged(function (user) {
     }
 });
 loginEnterButton.addEventListener('click', () => {
+    $('#login-dialog').dialog('open');
     ui.start('#firebaseui-auth-container', {
         signInOptions: [
             firebase.auth.EmailAuthProvider.PROVIDER_ID
@@ -73,6 +78,7 @@ loginEnterButton.addEventListener('click', () => {
         callbacks: {
             signInSuccessWithAuthResult: function (authResult, redirectUrl) {
                 // Handle the result
+                $('#login-dialog').dialog('close');
                 login();
                 return false;
             },
@@ -80,18 +86,38 @@ loginEnterButton.addEventListener('click', () => {
         // Other config options...
     });
 });
-// editUsername.addEventListener('click', () => {
-//   const user = firebase.auth().currentUser;
-//   user?.updateProfile({
-//     displayName: "Jane Q. User"
-//   }).then(() => {
-//     // Update successful
-//     // ...
-//   }).catch((error) => {
-//     // An error occurred
-//     // ...
-//   });  
-// });
+editUsername.addEventListener('click', () => {
+    const user = firebase.auth().currentUser;
+    $('#login-dialog').dialog('open');
+    $('#firebase-change-username').css('display', 'flex').val(user === null || user === void 0 ? void 0 : user.displayName);
+    const elem = $('#firebase-change-username');
+    let val = elem.val();
+    elem.data("oldVal", val);
+    const saveButton = document.getElementById('firebase-save-button');
+    elem.on("propertychange change click keyup input paste", function () {
+        let newVal = elem.val();
+        if (elem.data("oldVal") != newVal) {
+            saveButton === null || saveButton === void 0 ? void 0 : saveButton.classList.add("changed");
+        }
+        if (elem.data("oldVal") === newVal) {
+            saveButton === null || saveButton === void 0 ? void 0 : saveButton.classList.remove("changed");
+        }
+    });
+    $('#firebase-save-button').css('display', 'flex').on('click', () => {
+        $('#firebase-change-username').css('display', 'none');
+        $('#firebase-save-button').css('display', 'none');
+        $('#login-dialog').dialog('close');
+        user === null || user === void 0 ? void 0 : user.updateProfile({
+            displayName: $('#firebase-change-username').val()
+        }).then(() => {
+            // Update successful
+            userProfileName.textContent = user === null || user === void 0 ? void 0 : user.displayName;
+        }).catch((error) => {
+            // An error occurred
+            // ...
+        });
+    });
+});
 // editPfp.addEventListener('click', () => {
 //   const user = firebase.auth().currentUser;
 //   user?.updateProfile({

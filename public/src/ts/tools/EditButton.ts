@@ -109,6 +109,24 @@ joint.elementTools.EditButton = joint.elementTools.Button.extend({
       });
 
       //TODO: remove loop and replace with object
+      $("#model-validity-rect").each(function () {
+        const elem = $(this);
+      
+        let val = elem.val() as string;
+        elem.data("oldVal", val);
+      
+        elem.on("propertychange change click keyup input paste", function () {
+          let newVal = elem.val();
+          if (elem.data("oldVal") != newVal) {
+            exitButton?.classList.add("changed");
+            saveButton?.classList.add("changed");
+          }
+          if (elem.data("oldVal") === newVal) {
+            exitButton?.classList.remove("changed");
+            saveButton?.classList.remove("changed");
+          }
+        });
+      });
       $(".model-text-rect").each(function () {
         const elem = $(this);
       
@@ -201,6 +219,24 @@ joint.elementTools.EditDependentPremiseButton = joint.elementTools.Button.extend
       });
       //TODO: remove loop and replace with objects
       //fix for dependent premises
+      $("#model-validity-rect").each(function () {
+        const elem = $(this);
+      
+        let val = elem.val() as string;
+        elem.data("oldVal", val);
+      
+        elem.on("propertychange change click keyup input paste", function () {
+          let newVal = elem.val();
+          if (elem.data("oldVal") != newVal) {
+            exitButton?.classList.add("changed");
+            saveButton?.classList.add("changed");
+          }
+          if (elem.data("oldVal") === newVal) {
+            exitButton?.classList.remove("changed");
+            saveButton?.classList.remove("changed");
+          }
+        });
+      });
       $(".model-text-rect").each(function () {
         const elem = $(this);
       
@@ -277,13 +313,43 @@ joint.linkTools.EditLinkButton = joint.elementTools.Button.extend({
       objectionSwitch.checked = editModel.attributes.type === "objection";
 
       console.log("editModel (link)", editModel);
-
+      
+      //TODO: re implement exit button
+      // $('#edit-dialog')
+      // .dialog({
+      //   open: function(event, ui) {
+      //       $('.ui-dialog-titlebar-close')
+      //       .attr('id',"exit-edit-button")
+      //       .addClass("menu-button exit-button")
+      //       .html('<i class="fas fa-times"></i></i><span>Cancel</span>');
+      //   }
+      // })
       $('#edit-dialog').dialog('open');
       $('#model-text-container').empty();
       $('.single-claim').hide();
       $('.edit-link').show();
 
       $('#link-weight-rect').val(editModel.attributes.labels[0].attrs.text.text);
+
+
+      $("#link-weight-rect").each(function () {
+        const elem = $(this);
+      
+        let val = elem.val() as string;
+        elem.data("oldVal", val);
+      
+        elem.on("propertychange change click keyup input paste", function () {
+          let newVal = elem.val();
+          if (elem.data("oldVal") != newVal) {
+            exitButton?.classList.add("changed");
+            saveButton?.classList.add("changed");
+          }
+          if (elem.data("oldVal") === newVal) {
+            exitButton?.classList.remove("changed");
+            saveButton?.classList.remove("changed");
+          }
+        });
+      });
 
       // const form = $('#edit-form');
       // form.empty();

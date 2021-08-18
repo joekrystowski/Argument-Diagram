@@ -6,7 +6,6 @@ import { legend } from './Legend.js';
 import { ClaimToObjection } from "../ToggleTypes.js";
 var firebase = window.firebase.default;
 var database = firebase.database();
-
 // not fully working
 function parseJSON(cells, legend_import) {
     let ids = {};
@@ -130,6 +129,7 @@ export function openGraph() {
     }
     const userRef = firebase.database().ref('users/' + user.uid);
     const diagramsContainer = document.getElementById('firebase-diagrams-container');
+    $('#files-dialog').dialog('open');
     userRef.on('value', (snapshot) => {
         const data = snapshot.val();
         // console.log(data);
@@ -150,6 +150,7 @@ export function openGraph() {
                     const dataObj = JSON.parse(data[diagram]);
                     parseJSON(dataObj.cells, dataObj.legend);
                     diagramsContainer.style.display = 'none';
+                    $('#files-dialog').dialog('close');
                 }
             });
             diagramsContainer.appendChild(diagramItem);

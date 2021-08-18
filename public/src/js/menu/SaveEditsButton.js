@@ -19,6 +19,12 @@ export function saveEdits() {
         let link_color = "#bbbbbb";
         const objectionSwitch = document.getElementById("objection-switch");
         link_color = objectionSwitch.checked ? color.link.dark.objection.stroke : color.link.dark.claim.stroke;
+        if (objectionSwitch.checked) {
+            editModel.attributes.type = "objection";
+        }
+        else {
+            editModel.attributes.type = "";
+        }
         let weight = Math.min(Math.max(0, $('#link-weight-rect').val()), 1).toFixed(1);
         let oldLabel = editModel.attributes.labels[0];
         editModel.label(0, {

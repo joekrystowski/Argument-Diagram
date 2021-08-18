@@ -52,6 +52,33 @@ $(edit_template).dialog({
   }
 });
 
+const login_template = $('#login-form-template').html();
+$(login_template).dialog({
+  autoOpen: false, 
+  title: 'Log In', 
+  resizable: true, 
+  width: 500, 
+  height: 500,
+  dialogClass: 'login',
+  close: function(event, ui) {
+    //$(this).dialog('close');
+  } 
+});
+
+const files_template = $('#files-form-template').html();
+$(files_template).dialog({
+  autoOpen: false, 
+  title: 'Select Diagram',
+  resizable: true, 
+  width: 500, 
+  height: 500,
+  dialogClass: 'files',
+  close: function(event, ui) {
+    //$(this).dialog('close');
+  } 
+});
+
+
 const saveEditButton = document.getElementById("save-edit-button") as HTMLElement;
 saveEditButton.addEventListener("click", saveEdits);
 // const exitEditButton = document.getElementById("exit-edit-button") as HTMLElement;

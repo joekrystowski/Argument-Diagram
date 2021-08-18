@@ -77,7 +77,7 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
         layer: "back",
 
         attrs: {
-            'stroke': '#6696ffff',
+            'stroke': '#6696ff',
             'stroke-opacity': 1,
             'stroke-width': 3,
         }

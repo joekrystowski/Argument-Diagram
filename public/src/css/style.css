@@ -263,55 +263,6 @@ input:checked + .slider:before {
   transform: translateY(-4px);
 }
 
-.claim-rect {
-  fill: var(--accent-gray);
-  /* border-radius: 100rem; */
-  stroke: var(--bg);
-}
-
-.claim-text {
-  width: 100%;
-  height: 100%;
-  font-size: 12px;
-  text-align: center;
-  fill: var(--bg);
-  padding: 1rem;
-}
-
-.claim-link-rect {
-  font-size: 12px;
-  fill: var(--bg);
-}
-
-.claim-link-text {
-  font-size: 12px;
-  stroke: var(--accent-gray);
-}
-
-.objection-rect {
-  fill: var(--accent-orange);
-  stroke: var(--bg);
-}
-
-.objection-text {
-  width: 100%;
-  height: 100%;
-  font-size: 12px;
-  text-align: center;
-  fill: var(--bg);
-  padding: 1rem;
-}
-
-.dependent-premise-link-rect {
-  font-size: 12px;
-  fill: var(--bg);
-}
-
-.dependent-premise-link-text {
-  font-size: 12px;
-  stroke: var(--accent-gray);
-}
-
 #side-panel {
   display: none;
   width: 30%;
@@ -506,6 +457,20 @@ input:checked + .slider:before {
   object-fit: contain;
 }
 
+#firebase-change-username {
+  display: none;
+  margin-bottom: 1rem;
+  border: none;
+  background-color: var(--toolbar-bg);
+  color: var(--accent-gray);
+  font-size: 1.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+#firebase-save-button {
+  display: none;
+}
+
 .dropdown {
   height: 0px;
 }
@@ -603,7 +568,7 @@ button:hover {
   margin-top: 3rem;
   display: flex;
   gap: 0;
-  background-color: #444422;
+  background-color: var(--bg);
 }
 
 #main-panel div {
@@ -660,6 +625,7 @@ button:hover {
 .menu-text {
   font-size: 20px;
   color: var(--accent-gray);
+  margin-right: 1rem;
 }
 
 .model-text-rect {
@@ -707,19 +673,35 @@ button:hover {
   background-color: #ffaaaa !important;
 }
 
-.ui-dialog.edit {
+.ui-dialog {
   background-color: var(--edit-bg);
 }
 
-.ui-dialog.edit .ui-dialog-titlebar {
-  background-color: var(--bg);
+.ui-dialog-titlebar-close {
+  border: none;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+  background-color: var(--toolbar-bg);
   color: var(--text-black);
+  font-weight: normal;
+  border: none;
+  height: 2rem;
+  font-size: 1.3rem;
+}
+
+.ui-widget.ui-widget-content {
+  border: none;
+}
+
+.ui-widget-content {
+  border: none;
 }
 
 .edit-item {
   display: flex;
   align-items: center;
-  margin: 1em 0;
+  margin-top: 1rem;
 }
 
 /* ------- Buttons -------- */
@@ -727,7 +709,6 @@ button:hover {
   /* height:5rem;
     width:5rem; */
   text-align: center;
-  margin: 0 1rem;
   /* box-shadow: 7px, 6px, 28px, 1px rgba(0,0,0,0.24); */
   /* display: none */
 }
