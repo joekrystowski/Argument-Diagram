@@ -105,8 +105,7 @@ export function addRectTools(element: joint.shapes.app.ClaimRect) {
   elementView.hideTools();
 
   element.on("change:position", function (eventView) {
-    paper.hideTools();
-    elementView.showTools();
+    element.toFront()
   })
 
   // deselects elements that were not clicked on.
@@ -192,11 +191,9 @@ export function addDependentPremiseTools(element: joint.shapes.app.DependentPrem
   //start with tools hidden
   elementView.hideTools();
 
-  // element.on("change:position", function () {
-  //   paper.hideTools();
-  //   elementView.showTools();
-  // })
-
+  element.on("change:position", function (eventView) {
+    element.toFront()
+  })
   // ------ paper events -------
   paper.on("element:pointerclick", function(eventView){
     if (eventView !== elementView){

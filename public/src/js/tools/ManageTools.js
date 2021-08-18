@@ -95,8 +95,7 @@ export function addRectTools(element) {
     //start with tools hidden
     elementView.hideTools();
     element.on("change:position", function (eventView) {
-        paper.hideTools();
-        elementView.showTools();
+        element.toFront();
     });
     // deselects elements that were not clicked on.
     paper.on("element:pointerclick", function (eventView) {
@@ -174,10 +173,9 @@ export function addDependentPremiseTools(element) {
     elementView.addTools(toolsView);
     //start with tools hidden
     elementView.hideTools();
-    // element.on("change:position", function () {
-    //   paper.hideTools();
-    //   elementView.showTools();
-    // })
+    element.on("change:position", function (eventView) {
+        element.toFront();
+    });
     // ------ paper events -------
     paper.on("element:pointerclick", function (eventView) {
         if (eventView !== elementView) {
