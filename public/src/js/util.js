@@ -39,3 +39,54 @@ graph.on('remove', function (cell) {
         legend.remove(cell);
     }
 });
+const keys = {};
+$(document).on('keydown', function (e) {
+    keys[e.which] = true;
+    const paper_element = $('#paper-wrapper')[0];
+    if (e.which === 16) {
+        paper_element.style.cursor = 'grab';
+    }
+});
+$(document).on('keyup', function (e) {
+    keys[e.which] = false;
+    $('#paper-wrapper')[0].style.cursor = 'default';
+});
+//Div drag functionality taken from: 
+//https://github.com/phuoc-ng/html-dom/blob/master/demo/drag-to-scroll/index.html
+//adapted for conditional use based on shift key
+export function initializeContainerDrag(container_id) {
+    const ele = document.getElementById(container_id);
+    ele.style.cursor = 'default';
+    let pos = { top: 0, left: 0, x: 0, y: 0 };
+    const mouseDownHandler = function (e) {
+        if (!keys[16])
+            return;
+        ele.style.cursor = 'grabbing';
+        ele.style.userSelect = 'none';
+        pos = {
+            left: ele.scrollLeft,
+            top: ele.scrollTop,
+            // Get the current mouse position
+            x: e.clientX,
+            y: e.clientY,
+        };
+        ele.addEventListener('mousemove', mouseMoveHandler);
+        ele.addEventListener('mouseup', mouseUpHandler);
+    };
+    const mouseMoveHandler = function (e) {
+        // How far the mouse has been moved
+        const dx = e.clientX - pos.x;
+        const dy = e.clientY - pos.y;
+        // Scroll the element
+        ele.scrollTop = pos.top - dy;
+        ele.scrollLeft = pos.left - dx;
+    };
+    const mouseUpHandler = function () {
+        ele.style.cursor = 'default';
+        ele.style.removeProperty('user-select');
+        ele.removeEventListener('mousemove', mouseMoveHandler);
+        ele.removeEventListener('mouseup', mouseUpHandler);
+    };
+    // Attach the handler
+    ele.addEventListener('mousedown', mouseDownHandler);
+}

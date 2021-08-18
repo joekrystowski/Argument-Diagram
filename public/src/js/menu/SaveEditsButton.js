@@ -1,30 +1,32 @@
 /* global joint editModel */
 const joint = window.joint;
 import { editModel } from '../tools/EditButton.js';
-import { getStrokeWidth } from '../Claim.js';
 import { legend } from './Legend.js';
-import { createColor } from '../colors.js';
-import { ObjectionToClaim, ClaimToObjection } from "../ToggleTypes.js";
+import { color } from '../colors.js';
 export function saveEdits() {
+    console.log('saving edits...');
     let texts = $('[name^="model-text-"]').toArray();
     console.log($('[name^="model-validity-"]').toArray());
-    let validities = $('[name^="model-validity-"]').toArray().map((element) => parseFloat(element.value));
+    let validities = $('[name^="model-validity-"]').toArray().map((element) => +(Math.min(Math.max(0, parseFloat(element.value)), 1).toFixed(1)));
     console.log('validities', validities);
-    let text_wraps = texts.map((element) => joint.util.breakText(element.value, { width: 90 }));
+    let text_wraps = texts.map((element) => joint.util.breakText(element.value, { width: 190 }));
     let num_lines = text_wraps.map(wrap => (wrap.match(/\n/g) || []).length);
     //magic numbers have to do with font size... ask Joe
     let heights = num_lines.map(lines => 16 + 13 * lines);
     console.log(heights);
     if (editModel.isLink()) {
         console.log("saving link edits");
-        let weight = $('#link-weight-rect').val();
+        let link_color = "#bbbbbb";
+        const objectionSwitch = document.getElementById("objection-switch");
+        link_color = objectionSwitch.checked ? color.link.dark.objection.stroke : color.link.dark.claim.stroke;
+        let weight = Math.min(Math.max(0, $('#link-weight-rect').val()), 1).toFixed(1);
         let oldLabel = editModel.attributes.labels[0];
         editModel.label(0, {
             attrs: {
                 text: {
                     class: oldLabel.attrs.text.class,
                     text: weight,
-                    stroke: oldLabel.attrs.text.stroke
+                    stroke: link_color
                 },
                 rect: {
                     class: oldLabel.attrs.rect.class,
@@ -32,6 +34,7 @@ export function saveEdits() {
                 }
             }
         });
+        editModel.attr("line/stroke", link_color);
         console.log(weight);
     }
     else if (editModel.attributes.type === "dependent-premise") {
@@ -64,21 +67,22 @@ export function saveEdits() {
         editModel.attributes.validity = validities[0];
         editModel.attributes.storedInfo.initialText = text_wraps[0];
         editModel.resize(editModel.attributes.size.width, heights[0]);
-        editModel.attr("rect/fill", createColor(editModel.attributes.validity, editModel.attributes.type));
-        editModel.attr("rect/strokeWidth", getStrokeWidth(editModel.attributes.validity));
-        const objectionSwitch = document.getElementById("objection-switch");
-        if (editModel.attributes.type === "claim" && objectionSwitch.checked) {
-            ClaimToObjection(editModel);
-        }
-        else if (editModel.attributes.type === "objection" && !objectionSwitch.checked) {
-            ObjectionToClaim(editModel);
-        }
+        //editModel.attr("rect/fill", createColor(editModel.attributes.validity, editModel.attributes.type))
+        //editModel.attr("rect/strokeWidth", getStrokeWidth(editModel.attributes.validity))
+        // const objectionSwitch = document.getElementById("objection-switch") as HTMLInputElement;
+        // if(editModel.attributes.type === "claim" && objectionSwitch.checked) {
+        //   ClaimToObjection(editModel)
+        // }
+        // else if(editModel.attributes.type === "objection" && !objectionSwitch.checked) {
+        //   ObjectionToClaim(editModel)
+        // }
         console.log(editModel);
     }
     const saveButton = document.getElementById("save-edit-button");
     saveButton === null || saveButton === void 0 ? void 0 : saveButton.classList.remove("changed");
-    const editContainer = $('#edit-container');
-    editContainer.hide(200);
+    // const editContainer = $('#edit-container');
+    // editContainer.hide(200);
+    $('#edit-dialog').dialog('close');
     legend.refresh();
 }
 export function discardEdits() {

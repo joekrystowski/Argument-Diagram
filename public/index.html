@@ -24,7 +24,10 @@
     <script type="module" src="src/js/tools/ManageTools.js"></script>
     <script type="module" src="src/js/tools/LinkButton.js"></script>
     <script type="module" src="src/js/tools/RemoveDependentPremise.js"></script>
-    
+    <script type="module" src="src/js/tools/addSource.js"></script>
+    <script type="module" src="src/js/tools/RemoveSource.js"></script>
+    <script type="module" src="src/js/tools/ToggleSources.js"></script>
+
     <!-- MENU SCRIPTS -->
     <script type="module" src="src/js/menu/CreateClaim.js"></script>
     <script type="module" src="src/js/menu/SaveEditsButton.js"></script>
@@ -171,17 +174,10 @@
               </div>
             </div>
           </div>
-          <div id="myholder" class="joint-style-default">
+          <div id="paper-wrapper">
+            <div id="myholder" class="joint-style-default"></div>
           </div>
         </div>
-
-        <!-- <div id="legend-info" class="collapsed">
-          <div class="collapsed-content">
-            <h1>Legend Info</h1>
-            
-          </div>
-          
-        </div> -->
       </div>
       <div id="settings-dropdown">
         <label id="settings-title">Settings</label>
@@ -248,5 +244,31 @@
       firebase.analytics();
     </script>
     <script type="module" src="src/js/Settings.js"></script>
+
+    <template id="edit-form-template">
+      <div id="edit-dialog">
+        <div id="model-text-container"></div>
+        <div class="edit-item single-claim">
+          <label for="model-validity-rect" class="menu-text">Claim Likelihood</label>
+          <input type="number" id="model-validity-rect" name="model-validity-rect" class="edit-number-form" min="0" max="1" step="0.1">
+        </div>
+        <div class="edit-item edit-link">
+          <label for="link-weight-rect" class="menu-text">Link Weight</label>
+          <input type="number" id="link-weight-rect" name="link-weight-rect" class="edit-number-form" min="0" max="1" maxlength="3" step="0.1">
+        </div>
+        <div class="edit-item edit-link">
+          <span id="objection-label" class="menu-text">Objection</span>
+          <label id="switch-label" class="switch">
+            <input id="objection-switch" type="checkbox">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div id="edit-bottom" class="edit-bottom edit-item">
+          <button id="save-edit-button" class="menu-button save-button">
+            <i class="fa fa-save"></i><span>Save</span>
+          </button>
+        </div>
+      </div>
+    </template>
   </body>
 </html>

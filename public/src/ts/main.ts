@@ -13,12 +13,15 @@ import { Claim } from "./Claim.js";
 import { color } from "./colors.js";
 import { paper, graph } from "./graph.js";
 import { evaluateArgument } from "./menu/EvaluateArgument.js"
-import { AutomaticCleanUp } from "./menu/CleanUp/AutomaticCleanUp.js"
+import { AutomaticCleanUp, findArguments } from "./menu/CleanUp/AutomaticCleanUp.js"
 import { createLink } from "./tools/LinkButton.js";
 import { toggleSettings } from "./Settings.js";
+import { initializeContainerDrag } from "./util.js";
 
 const claimImage = new Image();
 claimImage.src = "src/img/Claim.jpg";
+
+initializeContainerDrag('paper-wrapper');
 
 let argCounter = 0; //TODO: temporary until we fix selecting claims
 const newClaimButton = document.getElementById("new-claim-button") as HTMLElement;
@@ -35,10 +38,24 @@ newClaimButton.addEventListener("dragstart", (event) => {
   event.dataTransfer?.setData("type", "claim");
 });
 
+
+const edit_template = $('#edit-form-template').html();
+$(edit_template).dialog({ 
+  autoOpen: false, 
+  title: 'Edit Claim', 
+  resizable: true, 
+  width: 500, 
+  height: 500,
+  dialogClass: 'edit',
+  close: function(event, ui) {
+    //$(this).dialog('close');
+  }
+});
+
 const saveEditButton = document.getElementById("save-edit-button") as HTMLElement;
 saveEditButton.addEventListener("click", saveEdits);
-const exitEditButton = document.getElementById("exit-edit-button") as HTMLElement;
-exitEditButton.addEventListener("click", discardEdits);
+// const exitEditButton = document.getElementById("exit-edit-button") as HTMLElement;
+// exitEditButton.addEventListener("click", discardEdits);
 
 const paperContainer = document.getElementById("myholder") as HTMLElement;
 paperContainer.addEventListener("dragover", (event) => {
@@ -74,7 +91,7 @@ const evaluateButton = document.getElementById('evaluate-button') as HTMLElement
 evaluateButton.addEventListener('click', evaluateArgument);
 
 const CleanArgumentButton = document.getElementById('clean-argument-button') as HTMLElement;
-CleanArgumentButton.addEventListener('click', AutomaticCleanUp)
+CleanArgumentButton.addEventListener('click', findArguments)
 
 const PNGButton = document.getElementById("png-button") as HTMLElement;
 PNGButton.addEventListener("click", savePNG);
