@@ -166,7 +166,7 @@ export function addDependentPremiseTools(element) {
         }
     });
     let toolsView = new joint.dia.ToolsView({
-        tools: [boundaryTool, removeDependentPremiseButton, linkButton, editDependentPremiseButton, combinePremiseButton]
+        tools: [removeDependentPremiseButton, linkButton, editDependentPremiseButton, combinePremiseButton]
     });
     //element view is in charge of rendering the elements on the paper
     let elementView = element.findView(paper);
