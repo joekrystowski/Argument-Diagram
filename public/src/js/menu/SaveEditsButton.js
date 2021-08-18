@@ -4,11 +4,12 @@ import { editModel } from '../tools/EditButton.js';
 import { legend } from './Legend.js';
 import { color } from '../colors.js';
 export function saveEdits() {
+    console.log('saving edits...');
     let texts = $('[name^="model-text-"]').toArray();
     console.log($('[name^="model-validity-"]').toArray());
-    let validities = $('[name^="model-validity-"]').toArray().map((element) => parseFloat(element.value));
+    let validities = $('[name^="model-validity-"]').toArray().map((element) => +(Math.min(Math.max(0, parseFloat(element.value)), 1).toFixed(1)));
     console.log('validities', validities);
-    let text_wraps = texts.map((element) => joint.util.breakText(element.value, { width: 90 }));
+    let text_wraps = texts.map((element) => joint.util.breakText(element.value, { width: 190 }));
     let num_lines = text_wraps.map(wrap => (wrap.match(/\n/g) || []).length);
     //magic numbers have to do with font size... ask Joe
     let heights = num_lines.map(lines => 16 + 13 * lines);
@@ -18,7 +19,7 @@ export function saveEdits() {
         let link_color = "#bbbbbb";
         const objectionSwitch = document.getElementById("objection-switch");
         link_color = objectionSwitch.checked ? color.link.dark.objection.stroke : color.link.dark.claim.stroke;
-        let weight = $('#link-weight-rect').val();
+        let weight = Math.min(Math.max(0, $('#link-weight-rect').val()), 1).toFixed(1);
         let oldLabel = editModel.attributes.labels[0];
         editModel.label(0, {
             attrs: {
@@ -79,8 +80,9 @@ export function saveEdits() {
     }
     const saveButton = document.getElementById("save-edit-button");
     saveButton === null || saveButton === void 0 ? void 0 : saveButton.classList.remove("changed");
-    const editContainer = $('#edit-container');
-    editContainer.hide(200);
+    // const editContainer = $('#edit-container');
+    // editContainer.hide(200);
+    $('#edit-dialog').dialog('close');
     legend.refresh();
 }
 export function discardEdits() {

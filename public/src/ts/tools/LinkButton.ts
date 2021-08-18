@@ -133,6 +133,7 @@ function isCircularArgument(current:joint.dia.Cell, disallowed_ids:Array<string>
         resizable: true, 
         width: 500, 
         height: 500,
+        dialogClass: 'error',
         close: function(event, ui) {
           $(this).dialog('destroy').remove()
         }

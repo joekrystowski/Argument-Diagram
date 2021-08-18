@@ -1,6 +1,6 @@
 /* global joint createDependentPremise */
 // const joint = window.joint;
-import { saveEdits, discardEdits } from "./menu/SaveEditsButton.js";
+import { saveEdits } from "./menu/SaveEditsButton.js";
 import { createClaim, createObjection, createDependentPremise, } from "./menu/CreateClaim.js";
 import { importGraph, exportGraph } from "./menu/ImportExport.js";
 import { savePNG, savePDF } from "./menu/saveAs.js";
@@ -26,10 +26,22 @@ newClaimButton.addEventListener("dragstart", (event) => {
     (_a = event.dataTransfer) === null || _a === void 0 ? void 0 : _a.setDragImage(claimImage, 0, 0);
     (_b = event.dataTransfer) === null || _b === void 0 ? void 0 : _b.setData("type", "claim");
 });
+const edit_template = $('#edit-form-template').html();
+$(edit_template).dialog({
+    autoOpen: false,
+    title: 'Edit Menu',
+    resizable: true,
+    width: 500,
+    height: 500,
+    dialogClass: 'edit',
+    close: function (event, ui) {
+        //$(this).dialog('close');
+    }
+});
 const saveEditButton = document.getElementById("save-edit-button");
 saveEditButton.addEventListener("click", saveEdits);
-const exitEditButton = document.getElementById("exit-edit-button");
-exitEditButton.addEventListener("click", discardEdits);
+// const exitEditButton = document.getElementById("exit-edit-button") as HTMLElement;
+// exitEditButton.addEventListener("click", discardEdits);
 const paperContainer = document.getElementById("myholder");
 paperContainer.addEventListener("dragover", (event) => {
     event.preventDefault();
