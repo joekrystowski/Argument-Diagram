@@ -164,7 +164,8 @@ function findLeaves(cells) {
     let leaves = [];
     for (let cell of cells) {
         if (cell.get("parent")) {
-            cell = graph.getCell(cell.get("parent"));
+            //cells inside dp do not count as leaves\
+            continue;
         }
         let outbound_links = graph.getConnectedLinks(cell, { outbound: true });
         if (outbound_links.length === 0) {
@@ -183,6 +184,7 @@ function findCell(nodes, cell) {
 export function findArguments() {
     //array of all elements (excludes links) on graph
     let all_cells = graph.getElements();
+    console.log("all_cells", all_cells);
     //filter out sources
     let cells = [];
     for (const cell of all_cells) {
@@ -190,6 +192,7 @@ export function findArguments() {
             cells.push(cell);
         }
     }
+    console.log("cells after source filter", [...cells]);
     //array of arguments (arguments are arrays of nodes)
     //cant name a variable "arguments" in typescript
     let all_arguments = [];
@@ -198,6 +201,10 @@ export function findArguments() {
     let head = pickCell(cells);
     //check if there are no cells left in the levels array, if there are none, exit. All arguments found
     while (head != null) {
+        if (head.get("parent")) {
+            //cells inside dp do not count as head
+            continue;
+        }
         //search through this argument recursively to find all of the other cells in it's argument block
         //  - when a cell is checked, remove it from the levels array so that it can not be selected later
         let argument = searchArgument(head, cells);
@@ -263,13 +270,15 @@ function searchArgument(head, cells) {
             }
             let connections = graph.getConnectedLinks(cell);
             if (connections.length === 0 && next.length === 0) {
-                //cell by itself
-                argument.push(cell);
-                //find cell index in cells array
-                let index = findCellIndex(cell.id, cells);
-                cells.splice(index, 1);
-                console.log("ARGUMENT SEARCH COMPLETE", argument);
-                return argument;
+                if (cells.filter(c => c.id === cell.id).length > 0) {
+                    //cell by itself
+                    argument.push(cell);
+                    //find cell index in cells array
+                    let index = findCellIndex(cell.id, cells);
+                    cells.splice(index, 1);
+                    console.log("ARGUMENT SEARCH COMPLETE", argument);
+                    return argument;
+                }
             }
             for (const connection of connections) {
                 console.log("connection", connection);
@@ -282,9 +291,6 @@ function searchArgument(head, cells) {
                     connected_cell = graph.getCell(connection.attributes.source.id);
                 }
                 console.log("connected cell", connected_cell);
-                if (connected_cell.get("parent")) {
-                    next.push(graph.getCell(connected_cell.get("parent")));
-                }
                 //check if connection is new to argument
                 if (cells.filter(c => c.id === connected_cell.id).length > 0) {
                     //cells array contains this connection, which means it is new
