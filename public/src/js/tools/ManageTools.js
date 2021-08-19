@@ -98,7 +98,6 @@ export function addRectTools(element) {
     element.on("change:position", function (eventView) {
         element.toFront();
     });
-
     // deselects elements that were not clicked on.
     paper.on("element:pointerclick", function (eventView) {
         if (eventView !== elementView) {

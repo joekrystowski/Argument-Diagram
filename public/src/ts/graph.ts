@@ -28,6 +28,13 @@ export let minimap = new joint.dia.Paper({
 });
 minimap.scale(MINIMAP_SCALE);
 
+document.addEventListener('keyup', function(event:KeyboardEvent){
+  if (event.key === "m") {
+    $('#minimap').toggleClass('off-screen')
+    $('#minimap-canvas').toggleClass('off-screen');
+  }
+});
+
 let sketch = function(p:any) {
 
   const view_x = window.innerWidth / PAPER_SIZE.width * MINIMAP_SIZE.width;
@@ -90,8 +97,8 @@ let myp5 = new p5(sketch, 'wrapper');
 
 const dx = PAPER_SIZE.width/2 - window.innerWidth/2;
 const dy =  PAPER_SIZE.height/2 - window.innerHeight/2;
-paper.translate(dx, dy);
-minimap.translate(dx * MINIMAP_SCALE, dy * MINIMAP_SCALE)
+//paper.translate(dx, dy);
+//minimap.translate(dx * MINIMAP_SCALE, dy * MINIMAP_SCALE)
 const paper_wrapper = $('#paper-wrapper');
 paper_wrapper.scrollLeft(PAPER_SIZE.width/2 - window.innerWidth/2);
 paper_wrapper.scrollTop(PAPER_SIZE.height/2 - window.innerHeight/2);

@@ -24,13 +24,19 @@ claimImage.src = "public/src/img/Claim.jpg";
 initializeContainerDrag('paper-wrapper');
 
 let argCounter = 0; //TODO: temporary until we fix selecting claims
+const paper_wrapper = $('#paper-wrapper')
+let previousScroll = {x: paper_wrapper.scrollLeft(), y: paper_wrapper.scrollTop()}
 const newClaimButton = document.getElementById("new-claim-button") as HTMLElement;
 newClaimButton.addEventListener("click", () => {
-  createClaim(100+10*argCounter, 100+10*argCounter);
-  ++argCounter;
-  if(argCounter > 29) {
+  const currentScroll = {x: <number>paper_wrapper.scrollLeft(), y: <number>paper_wrapper.scrollTop()}
+  if (currentScroll.x === previousScroll.x && currentScroll.y === previousScroll.y) {
+    argCounter = (argCounter + 1) % 29;
+  } else {
     argCounter = 0;
+    previousScroll = Object.assign({}, currentScroll);
   }
+
+  createClaim(currentScroll.x +10*argCounter, currentScroll.y + 10*argCounter);
 });
 
 newClaimButton.addEventListener("dragstart", (event) => {
@@ -62,11 +68,14 @@ paperContainer.addEventListener("dragover", (event) => {
   event.preventDefault();
 });
 paperContainer.addEventListener("drop", (event) => {
+  console.log('dropping')
   const type = event.dataTransfer?.getData("type");
   if (type === "claim") {
+    const x = event.clientX - paperContainer.getBoundingClientRect().left;
+    const y = event.clientY - paperContainer.getBoundingClientRect().top;
+    console.log(x, y);
     createClaim(
-      event.clientX - paperContainer.getBoundingClientRect().left,
-      event.clientY - paperContainer.getBoundingClientRect().top
+      x, y
     );
   } else if (type === "objection") {
     createObjection(

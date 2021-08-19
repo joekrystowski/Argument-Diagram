@@ -135,7 +135,8 @@ export function AutomaticCleanUp(argument:Array<joint.dia.Cell>) {
 
 function buildGraph(arg_data:Array<argument_data>) {
 
-    let start_x = increment.x;    
+    const paper_wrapper = $('#paper-wrapper');
+    let start_x = increment.x + <number>paper_wrapper.scrollLeft();    
 
     for (const argument of arg_data) {
         let levels = argument.levels;
@@ -155,7 +156,7 @@ function buildGraph(arg_data:Array<argument_data>) {
         }
     
         //build argument
-        let y = increment.y;
+        let y = increment.y + <number>paper_wrapper.scrollTop();
         for (let i = levels.length-1; i >= 0; i--) {
             let buffer = ( widest - dimensions[i].width ) / 2
             let x = start_x + buffer;
