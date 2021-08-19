@@ -29,7 +29,7 @@ newClaimButton.addEventListener("dragstart", (event) => {
 const edit_template = $('#edit-form-template').html();
 $(edit_template).dialog({
     autoOpen: false,
-    title: 'Edit Menu',
+    title: 'Edit Claim',
     resizable: true,
     width: 500,
     height: 500,

@@ -435,6 +435,18 @@ button:hover {
   overflow: scroll;
 }
 
+#minimap,
+#minimap-canvas {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+}
+
+#minimap {
+  border-top: 1px solid white;
+  border-right: 1px solid white;
+}
+
 #main-panel {
   height: calc(100vh - 3rem) !important;
   width: 100% !important;
@@ -468,6 +480,7 @@ button:hover {
   width: inherit;
   height: inherit;
   overflow: hidden;
+  position: relative;
 }
 
 #edit-container {
