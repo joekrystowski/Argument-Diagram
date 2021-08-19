@@ -36,7 +36,7 @@ newClaimButton.addEventListener("click", () => {
     previousScroll = Object.assign({}, currentScroll);
   }
 
-  createClaim(currentScroll.x + 100 + 10*argCounter, currentScroll.y + 100 + 10*argCounter);
+  createClaim(currentScroll.x +10*argCounter, currentScroll.y + 10*argCounter);
 });
 
 newClaimButton.addEventListener("dragstart", (event) => {
@@ -48,7 +48,7 @@ newClaimButton.addEventListener("dragstart", (event) => {
 const edit_template = $('#edit-form-template').html();
 $(edit_template).dialog({ 
   autoOpen: false, 
-  title: 'Edit Claim', 
+  title: 'Edit Menu', 
   resizable: true, 
   width: 500, 
   height: 500,

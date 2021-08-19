@@ -42,6 +42,14 @@ export function addRectTools(element) {
             y: -15
         }
     });
+    let editSourceButton = new joint.elementTools.EditSourceButton({
+        x: "59%",
+        y: "0%",
+        offset: {
+            x: 0,
+            y: -15
+        }
+    });
     let addSourceButton = new joint.elementTools.AddSourceButton({
         x: "77%",
         y: "0%",
@@ -83,7 +91,7 @@ export function addRectTools(element) {
         rect_tools = [removeButton, linkButton, combinedPremiseButton, addSourceButton];
     }
     else if (element.attributes.type === "source") {
-        rect_tools = [removeSourceButton, editButton];
+        rect_tools = [removeSourceButton, editSourceButton];
     }
     else {
         //regular claim (not in dependent premise)
