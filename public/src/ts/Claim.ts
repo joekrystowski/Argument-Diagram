@@ -29,12 +29,6 @@ const ClaimRect = joint.shapes.standard.Rectangle.define("app.ClaimRect", {
       "y-alignment": "middle",
       "x-alignment": "middle",
     },
-    link: {
-      refWidth: '100%',
-      refHeight: '100%',
-      xlinkShow: 'new',
-      cursor: 'pointer'
-    }
   },
   link_color: "#222222",
   weight: "1",

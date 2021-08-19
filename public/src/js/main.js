@@ -24,7 +24,7 @@ newClaimButton.addEventListener("click", () => {
         argCounter = 0;
         previousScroll = Object.assign({}, currentScroll);
     }
-    createClaim(currentScroll.x + 10 * argCounter, currentScroll.y + 10 * argCounter);
+    createClaim(currentScroll.x + 100 + 10 * argCounter, currentScroll.y + 100 + 10 * argCounter);
 });
 newClaimButton.addEventListener("dragstart", (event) => {
     var _a, _b;
