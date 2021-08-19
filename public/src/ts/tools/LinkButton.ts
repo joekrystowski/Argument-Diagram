@@ -175,9 +175,9 @@ function generateCircularAlertString(path:Array<string>, final_id:string) {
 }
 
 //link two rects together
-export function createLink(model1:joint.shapes.app.ClaimRect, model2:joint.shapes.app.ClaimRect) {
+export function createLink(model1:joint.shapes.app.ClaimRect, model2:joint.shapes.app.ClaimRect, _color?:string) {
   console.log(model1.attributes.link_color);
-  let link_color = color.link.dark.claim.stroke
+  let link_color = _color ?? color.link.dark.claim.stroke
   // if (model1.attributes.type === "claim") {
   //   link_color = color.claim.dark.stroke
   // } else if (model1.attributes.type === "objection") {

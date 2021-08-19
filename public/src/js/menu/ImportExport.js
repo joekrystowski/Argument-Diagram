@@ -14,7 +14,9 @@ function parseJSON(cells, legend_import) {
         if (type === "standard.Link") {
             const source = cells[i].source.id;
             const target = cells[i].target.id;
-            createLink(ids[source].rect, ids[target].rect);
+            console.log(cells[i]);
+            const color = cells[i].attrs.line.stroke;
+            createLink(ids[source].rect, ids[target].rect, color);
         }
         else {
             //skip if has parent, will be added when dp is added
