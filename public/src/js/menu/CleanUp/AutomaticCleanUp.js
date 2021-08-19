@@ -107,7 +107,8 @@ export function AutomaticCleanUp(argument) {
     return data;
 }
 function buildGraph(arg_data) {
-    let start_x = increment.x;
+    const paper_wrapper = $('#paper-wrapper');
+    let start_x = increment.x + paper_wrapper.scrollLeft();
     for (const argument of arg_data) {
         let levels = argument.levels;
         let dimensions = argument.dimensions;
@@ -123,7 +124,7 @@ function buildGraph(arg_data) {
             }
         }
         //build argument
-        let y = increment.y;
+        let y = increment.y + paper_wrapper.scrollTop();
         for (let i = levels.length - 1; i >= 0; i--) {
             let buffer = (widest - dimensions[i].width) / 2;
             let x = start_x + buffer;
