@@ -1,4 +1,4 @@
-import { graph } from "./graph.js"
+import { graph, paper } from "./graph.js"
 import { selected_links } from "./tools/LinkButton.js"
 import { selected_premises } from "./tools/CombinePremise.js"
 import { legend } from "./menu/Legend.js";
@@ -41,3 +41,72 @@ graph.on('remove', function(cell) {
     legend.remove(cell);
   }
 })
+
+
+interface KeyMap {
+  [key: number]: boolean
+}
+const keys:KeyMap = {}
+
+$(document).on('keydown', function(e:JQuery.Event) {
+  keys[<number>e.which] = true;
+  const paper_element = $('#paper-wrapper')[0];
+  if (e.which === 16) {
+    paper_element.style.cursor = 'grab'
+  }
+});
+
+
+$(document).on('keyup', function(e:JQuery.Event) {
+  keys[<number>e.which] = false;
+  $('#paper-wrapper')[0].style.cursor = 'default';
+});
+
+
+//Div drag functionality taken from: 
+//https://github.com/phuoc-ng/html-dom/blob/master/demo/drag-to-scroll/index.html
+//adapted for conditional use based on shift key
+export function initializeContainerDrag(container_id:string){
+  const ele = document.getElementById(container_id) as HTMLElement;
+  ele.style.cursor = 'default';
+
+    let pos = { top: 0, left: 0, x: 0, y: 0 };
+
+    const mouseDownHandler = function(e:MouseEvent) {
+        if (!keys[16]) return;
+        ele.style.cursor = 'grabbing';
+        ele.style.userSelect = 'none';
+
+        pos = {
+            left: ele.scrollLeft,
+            top: ele.scrollTop,
+            // Get the current mouse position
+            x: e.clientX,
+            y: e.clientY,
+        };
+
+        ele.addEventListener('mousemove', mouseMoveHandler);
+        ele.addEventListener('mouseup', mouseUpHandler);
+    };
+
+    const mouseMoveHandler = function(e:MouseEvent) {
+        // How far the mouse has been moved
+        const dx = e.clientX - pos.x;
+        const dy = e.clientY - pos.y;
+
+        // Scroll the element
+        ele.scrollTop = pos.top - dy;
+        ele.scrollLeft = pos.left - dx;
+    };
+  
+    const mouseUpHandler = function() {
+        ele.style.cursor = 'default';
+        ele.style.removeProperty('user-select');
+
+        ele.removeEventListener('mousemove', mouseMoveHandler);
+        ele.removeEventListener('mouseup', mouseUpHandler);
+    };
+
+    // Attach the handler
+    ele.addEventListener('mousedown', mouseDownHandler);
+}

@@ -14,10 +14,14 @@ import { color } from "./colors.js";
 import { paper, graph } from "./graph.js";
 import { evaluateArgument } from "./menu/EvaluateArgument.js"
 import { AutomaticCleanUp, findArguments } from "./menu/CleanUp/AutomaticCleanUp.js"
-import { createLink } from "./tools/LinkButton.js";
+import { createLink, selected_links } from "./tools/LinkButton.js";
+import { selected_element } from "./tools/ManageTools.js";
+import { initializeContainerDrag } from "./util.js";
 
 const claimImage = new Image();
 claimImage.src = "src/img/Claim.jpg";
+
+initializeContainerDrag('paper-wrapper');
 
 let argCounter = 0; //TODO: temporary until we fix selecting claims
 const newClaimButton = document.getElementById("new-claim-button") as HTMLElement;
@@ -34,10 +38,24 @@ newClaimButton.addEventListener("dragstart", (event) => {
   event.dataTransfer?.setData("type", "claim");
 });
 
+
+const edit_template = $('#edit-form-template').html();
+$(edit_template).dialog({ 
+  autoOpen: false, 
+  title: 'Edit Claim', 
+  resizable: true, 
+  width: 500, 
+  height: 500,
+  dialogClass: 'edit',
+  close: function(event, ui) {
+    //$(this).dialog('close');
+  }
+});
+
 const saveEditButton = document.getElementById("save-edit-button") as HTMLElement;
 saveEditButton.addEventListener("click", saveEdits);
-const exitEditButton = document.getElementById("exit-edit-button") as HTMLElement;
-exitEditButton.addEventListener("click", discardEdits);
+// const exitEditButton = document.getElementById("exit-edit-button") as HTMLElement;
+// exitEditButton.addEventListener("click", discardEdits);
 
 const paperContainer = document.getElementById("myholder") as HTMLElement;
 paperContainer.addEventListener("dragover", (event) => {

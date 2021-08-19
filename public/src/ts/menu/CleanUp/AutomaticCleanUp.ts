@@ -355,7 +355,7 @@ function searchArgument(head:joint.dia.Cell, cells:Array<joint.dia.Cell>) {
     }
 }
 
-function findCellIndex(id:string | number, cells:Array<joint.dia.Cell>) {
+export function findCellIndex(id:string | number, cells:Array<joint.dia.Cell>) {
     for (let i = 0; i < cells.length; i++) {
         if (cells[i].id === id) {
             return i

@@ -87,6 +87,9 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
         //check if two models are the same model
         if (isValidLink(selected_links[0], selected_links[1])) {
           createLink(selected_links[0], selected_links[1]);
+        } else {
+          joint.dia.HighlighterView.remove(selected_links[1].findView(paper), 'link-highlight');
+          selected_links.pop();
         }
         joint.dia.HighlighterView.remove(elementView, 'link-highlight');
         joint.dia.HighlighterView.remove(selected_links[1].findView(paper), 'link-highlight');
@@ -133,6 +136,7 @@ function isCircularArgument(current:joint.dia.Cell, disallowed_ids:Array<string>
         resizable: true, 
         width: 500, 
         height: 500,
+        dialogClass: 'error',
         close: function(event, ui) {
           $(this).dialog('destroy').remove()
         }
@@ -174,9 +178,9 @@ function generateCircularAlertString(path:Array<string>, final_id:string) {
 }
 
 //link two rects together
-export function createLink(model1:joint.shapes.app.ClaimRect, model2:joint.shapes.app.ClaimRect) {
+export function createLink(model1:joint.shapes.app.ClaimRect, model2:joint.shapes.app.ClaimRect, _color?:string) {
   console.log(model1.attributes.link_color);
-  let link_color = color.link.dark.claim.stroke
+  let link_color = _color ?? color.link.dark.claim.stroke
   // if (model1.attributes.type === "claim") {
   //   link_color = color.claim.dark.stroke
   // } else if (model1.attributes.type === "objection") {
