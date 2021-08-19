@@ -28,6 +28,13 @@ export let minimap = new joint.dia.Paper({
 });
 minimap.scale(MINIMAP_SCALE);
 
+document.addEventListener('keyup', function(event:KeyboardEvent){
+  if (event.key === "m") {
+    $('#minimap').toggleClass('off-screen')
+    $('#minimap-canvas').toggleClass('off-screen');
+  }
+});
+
 let sketch = function(p:any) {
 
   const view_x = window.innerWidth / PAPER_SIZE.width * MINIMAP_SIZE.width;

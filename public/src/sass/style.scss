@@ -76,6 +76,10 @@ button {
   border-right: 1px solid white;
 }
 
+.off-screen {
+  left: -99999px !important;
+}
+
 #paper-wrapper {
   position: relative;
   width: 100%;

@@ -68,6 +68,7 @@ paperContainer.addEventListener("dragover", (event) => {
   event.preventDefault();
 });
 paperContainer.addEventListener("drop", (event) => {
+  console.log('dropping')
   const type = event.dataTransfer?.getData("type");
   if (type === "claim") {
     const x = event.clientX - paperContainer.getBoundingClientRect().left;
