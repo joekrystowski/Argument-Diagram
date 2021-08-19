@@ -72,6 +72,10 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
                 if (isValidLink(selected_links[0], selected_links[1])) {
                     createLink(selected_links[0], selected_links[1]);
                 }
+                else {
+                    joint.dia.HighlighterView.remove(selected_links[1].findView(paper), 'link-highlight');
+                    selected_links.pop();
+                }
                 joint.dia.HighlighterView.remove(elementView, 'link-highlight');
                 joint.dia.HighlighterView.remove(selected_links[1].findView(paper), 'link-highlight');
                 selected_links = [];
