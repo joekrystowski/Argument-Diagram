@@ -76,6 +76,36 @@ button {
   border-right: 1px solid white;
 }
 
+#paper-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+}
+
+#right-border-trigger {
+  position: absolute;
+  right: 0;
+  top:0;
+  height: 100%;
+  width: 40px;
+  background-color: #ffcc0099;
+}
+
+#bottom-border-trigger {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  background-color: #9d00ff99;
+}
+
+#minimap-holder {
+  position: absolute;
+  left: 0;
+  bottom: 0px;
+}
+
 #main-panel {
   height: calc(100vh - 3rem) !important;
   width: 100% !important;

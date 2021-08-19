@@ -1,5 +1,4 @@
 import { dia } from "jointjs";
-import { getStrokeWidth } from "./Claim";
 
 const joint = window.joint;
 export let graph = new joint.dia.Graph();

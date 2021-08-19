@@ -428,6 +428,10 @@ button:hover {
   cursor: pointer;
 }
 
+<<<<<<< HEAD
+=======
+/* !important to override default styling */
+>>>>>>> 26ddef1523e51e3fca508b4ac08669a9d0afdbc8
 #paper-wrapper {
   position: relative;
   width: 100%;
@@ -435,6 +439,7 @@ button:hover {
   overflow: scroll;
 }
 
+<<<<<<< HEAD
 #minimap,
 #minimap-canvas {
   position: absolute;
@@ -445,6 +450,29 @@ button:hover {
 #minimap {
   border-top: 1px solid white;
   border-right: 1px solid white;
+=======
+#right-border-trigger {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 40px;
+  background-color: #ffcc0099;
+}
+
+#bottom-border-trigger {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  background-color: #9d00ff99;
+}
+
+#minimap-holder {
+  position: absolute;
+  left: 0;
+  bottom: 0px;
+>>>>>>> 26ddef1523e51e3fca508b4ac08669a9d0afdbc8
 }
 
 #main-panel {
