@@ -68,7 +68,7 @@ export function saveEdits() {
     // console.log((height/16) - 1)
     //console.log("new_text", editModel.attributes.attrs.text.text)
   }
-  else {
+  else if (editModel.attributes.type === "claim") {
     //just update the single model with the new text and size
     editModel.attr('text/text', text_wraps[0]);
     //console.log(validities)
@@ -88,6 +88,8 @@ export function saveEdits() {
     // }
     
     console.log(editModel)
+  } else if (editModel.attributes.type === "source") {
+    
   }
   
   const saveButton = document.getElementById("save-edit-button");

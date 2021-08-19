@@ -49,6 +49,15 @@ export function addRectTools(element: joint.shapes.app.ClaimRect) {
     }
   });
 
+  let editSourceButton = new joint.elementTools.EditSourceButton({
+    x: "59%",
+    y: "0%",
+    offset: {
+      x: 0,
+      y: -15
+    }
+  });
+
 
   let addSourceButton = new joint.elementTools.AddSourceButton({
     x: "77%",
@@ -93,7 +102,7 @@ export function addRectTools(element: joint.shapes.app.ClaimRect) {
   } else if (element.attributes.inLegendForm) {
     rect_tools = [removeButton, linkButton, combinedPremiseButton, addSourceButton];
   } else if (element.attributes.type === "source") {
-    rect_tools = [removeSourceButton, editButton]
+    rect_tools = [removeSourceButton, editSourceButton]
   } else {
     //regular claim (not in dependent premise)
     rect_tools = [removeButton, linkButton, editButton, combinedPremiseButton, addSourceButton, toggleSourceButton];
