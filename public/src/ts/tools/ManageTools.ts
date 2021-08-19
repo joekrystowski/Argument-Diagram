@@ -5,6 +5,8 @@ import { paper } from '../graph.js'
 import { graph } from '../graph.js'
 import { editModel } from './EditButton.js';
 
+export let selected_element:any;
+
 export function refreshTools (element: joint.shapes.app.ClaimRect) {
   const view = element.findView(paper);
   view.hideTools();
@@ -104,10 +106,10 @@ export function addRectTools(element: joint.shapes.app.ClaimRect) {
   //start with tools hidden
   elementView.hideTools();
 
-  element.on("change:position", function (eventView) {
-    paper.hideTools();
-    elementView.showTools();
-  })
+  // element.on("change:position", function (eventView) {
+  //   paper.hideTools();
+  //   elementView.showTools();
+  // })
 
   // deselects elements that were not clicked on.
   paper.on("element:pointerclick", function(eventView){
@@ -219,6 +221,7 @@ paper.on("element:pointerclick", function(eventView){
   }else{
     //console.log("Clicked=>Showing!");
     eventView.showTools();
+    selected_element = eventView.model;
   }
 });
 

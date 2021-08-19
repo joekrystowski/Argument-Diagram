@@ -14,7 +14,6 @@ export function saveEdits() {
 
   let validities:Array<number> = $('[name^="model-validity-"]').toArray().map((element:HTMLElement) => +(Math.min(Math.max(0, parseFloat((<HTMLInputElement>element).value)), 1).toFixed(1)));
   console.log('validities', validities)
-  
   let text_wraps:Array<string> = texts.map((element:HTMLElement) => joint.util.breakText((<HTMLTextAreaElement>element).value, {width: 190}));
   let num_lines:Array<number> = text_wraps.map(wrap => (wrap.match(/\n/g) || []).length);
   //magic numbers have to do with font size... ask Joe
