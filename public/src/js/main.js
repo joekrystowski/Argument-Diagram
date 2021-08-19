@@ -1,25 +1,30 @@
 /* global joint createDependentPremise */
 // const joint = window.joint;
-import { saveEdits, discardEdits } from "./menu/SaveEditsButton.js";
-import { createClaim, createObjection, createDependentPremise, } from "./menu/CreateClaim.js";
+import { saveEdits } from "./menu/SaveEditsButton.js";
+import { createClaim, createObjection, } from "./menu/CreateClaim.js";
 import { importGraph, exportGraph } from "./menu/ImportExport.js";
 import { savePNG, savePDF } from "./menu/saveAs.js";
 import { legend, toggleLegend } from './menu/Legend.js';
 import { evaluateArgument } from "./menu/EvaluateArgument.js";
 import { findArguments } from "./menu/CleanUp/AutomaticCleanUp.js";
-import { createLink } from "./tools/LinkButton.js";
 import { initializeContainerDrag } from "./util.js";
 const claimImage = new Image();
 claimImage.src = "public/src/img/Claim.jpg";
 initializeContainerDrag('paper-wrapper');
 let argCounter = 0; //TODO: temporary until we fix selecting claims
+const paper_wrapper = $('#paper-wrapper');
+let previousScroll = { x: paper_wrapper.scrollLeft(), y: paper_wrapper.scrollTop() };
 const newClaimButton = document.getElementById("new-claim-button");
 newClaimButton.addEventListener("click", () => {
-    createClaim(100 + 10 * argCounter, 100 + 10 * argCounter);
-    ++argCounter;
-    if (argCounter > 29) {
-        argCounter = 0;
+    const currentScroll = { x: paper_wrapper.scrollLeft(), y: paper_wrapper.scrollTop() };
+    if (currentScroll.x === previousScroll.x && currentScroll.y === previousScroll.y) {
+        argCounter = (argCounter + 1) % 29;
     }
+    else {
+        argCounter = 0;
+        previousScroll = Object.assign({}, currentScroll);
+    }
+    createClaim(currentScroll.x + 10 * argCounter, currentScroll.y + 10 * argCounter);
 });
 newClaimButton.addEventListener("dragstart", (event) => {
     var _a, _b;
@@ -50,7 +55,10 @@ paperContainer.addEventListener("drop", (event) => {
     var _a;
     const type = (_a = event.dataTransfer) === null || _a === void 0 ? void 0 : _a.getData("type");
     if (type === "claim") {
-        createClaim(event.clientX - paperContainer.getBoundingClientRect().left, event.clientY - paperContainer.getBoundingClientRect().top);
+        const x = event.clientX - paperContainer.getBoundingClientRect().left;
+        const y = event.clientY - paperContainer.getBoundingClientRect().top;
+        console.log(x, y);
+        createClaim(x, y);
     }
     else if (type === "objection") {
         createObjection(event.clientX - paperContainer.getBoundingClientRect().left, event.clientY - paperContainer.getBoundingClientRect().top);

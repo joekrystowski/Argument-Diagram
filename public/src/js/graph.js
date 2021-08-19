@@ -75,8 +75,8 @@ let sketch = function (p) {
 let myp5 = new p5(sketch, 'wrapper');
 const dx = PAPER_SIZE.width / 2 - window.innerWidth / 2;
 const dy = PAPER_SIZE.height / 2 - window.innerHeight / 2;
-paper.translate(dx, dy);
-minimap.translate(dx * MINIMAP_SCALE, dy * MINIMAP_SCALE);
+//paper.translate(dx, dy);
+//minimap.translate(dx * MINIMAP_SCALE, dy * MINIMAP_SCALE)
 const paper_wrapper = $('#paper-wrapper');
 paper_wrapper.scrollLeft(PAPER_SIZE.width / 2 - window.innerWidth / 2);
 paper_wrapper.scrollTop(PAPER_SIZE.height / 2 - window.innerHeight / 2);
