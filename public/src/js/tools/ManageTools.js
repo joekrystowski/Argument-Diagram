@@ -95,10 +95,10 @@ export function addRectTools(element) {
     elementView.addTools(toolsView);
     //start with tools hidden
     elementView.hideTools();
-    // element.on("change:position", function (eventView) {
-    //   paper.hideTools();
-    //   elementView.showTools();
-    // })
+    element.on("change:position", function (eventView) {
+        element.toFront();
+    });
+
     // deselects elements that were not clicked on.
     paper.on("element:pointerclick", function (eventView) {
         if (eventView !== elementView) {
@@ -168,17 +168,16 @@ export function addDependentPremiseTools(element) {
         }
     });
     let toolsView = new joint.dia.ToolsView({
-        tools: [boundaryTool, removeDependentPremiseButton, linkButton, editDependentPremiseButton, combinePremiseButton]
+        tools: [removeDependentPremiseButton, linkButton, editDependentPremiseButton, combinePremiseButton]
     });
     //element view is in charge of rendering the elements on the paper
     let elementView = element.findView(paper);
     elementView.addTools(toolsView);
     //start with tools hidden
     elementView.hideTools();
-    // element.on("change:position", function () {
-    //   paper.hideTools();
-    //   elementView.showTools();
-    // })
+    element.on("change:position", function (eventView) {
+        element.toFront();
+    });
     // ------ paper events -------
     paper.on("element:pointerclick", function (eventView) {
         if (eventView !== elementView) {

@@ -139,6 +139,7 @@ joint.elementTools.EditDependentPremiseButton = joint.elementTools.Button.extend
       attributes: {
         'r': 7,
         'fill': "#222222",
+        "fill-opacity": 0,
         'cursor': "pointer",
         'outline': 'black',
       }
