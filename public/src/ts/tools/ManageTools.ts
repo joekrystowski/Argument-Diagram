@@ -5,6 +5,8 @@ import { paper } from '../graph.js'
 import { graph } from '../graph.js'
 import { editModel } from './EditButton.js';
 
+export let selected_element:any;
+
 export function refreshTools (element: joint.shapes.app.ClaimRect) {
   const view = element.findView(paper);
   view.hideTools();
@@ -216,6 +218,7 @@ paper.on("element:pointerclick", function(eventView){
   }else{
     //console.log("Clicked=>Showing!");
     eventView.showTools();
+    selected_element = eventView.model;
   }
 });
 

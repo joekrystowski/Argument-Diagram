@@ -1,6 +1,7 @@
 /* global joint paper */
 const joint = window.joint;
 import { paper } from '../graph.js';
+export let selected_element;
 export function refreshTools(element) {
     const view = element.findView(paper);
     view.hideTools();
@@ -97,6 +98,7 @@ export function addRectTools(element) {
     element.on("change:position", function (eventView) {
         element.toFront();
     });
+
     // deselects elements that were not clicked on.
     paper.on("element:pointerclick", function (eventView) {
         if (eventView !== elementView) {
@@ -197,6 +199,7 @@ paper.on("element:pointerclick", function (eventView) {
     else {
         //console.log("Clicked=>Showing!");
         eventView.showTools();
+        selected_element = eventView.model;
     }
 });
 paper.on("blank:pointerclick", function (evt) {

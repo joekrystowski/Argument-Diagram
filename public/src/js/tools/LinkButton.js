@@ -72,6 +72,10 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
                 if (isValidLink(selected_links[0], selected_links[1])) {
                     createLink(selected_links[0], selected_links[1]);
                 }
+                else {
+                    joint.dia.HighlighterView.remove(selected_links[1].findView(paper), 'link-highlight');
+                    selected_links.pop();
+                }
                 joint.dia.HighlighterView.remove(elementView, 'link-highlight');
                 joint.dia.HighlighterView.remove(selected_links[1].findView(paper), 'link-highlight');
                 selected_links = [];
@@ -161,9 +165,11 @@ function generateCircularAlertString(path, final_id) {
     return output;
 }
 //link two rects together
-export function createLink(model1, model2) {
+export function createLink(model1, model2, _color) {
     console.log(model1.attributes.link_color);
-    let link_color = color.link.dark.claim.stroke;
+
+    let link_color = _color !== null && _color !== void 0 ? _color : color.link.dark.claim.stroke;
+    
     console.log("link color", link_color);
     //prevent dp from linking to one of its children
     if (model2.get('parent') && graph.getCell(model2.get("parent")) === model1) {
