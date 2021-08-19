@@ -19,7 +19,7 @@ import { selected_element } from "./tools/ManageTools.js";
 import { initializeContainerDrag } from "./util.js";
 
 const claimImage = new Image();
-claimImage.src = "src/img/Claim.jpg";
+claimImage.src = "public/src/img/Claim.jpg";
 
 initializeContainerDrag('paper-wrapper');
 
