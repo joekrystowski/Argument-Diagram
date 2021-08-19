@@ -13,7 +13,7 @@ export let color = {
         }
     },
     dependentPremise: {
-        bodyColor: "#6696ff",
+        bodyColor: "#222222ff",
         textColor: "#222222",
         stroke: "#ababab",
         linkColor: "#61E786"
