@@ -103,6 +103,14 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
 
 function isValidLink(source: joint.shapes.app.ClaimRect, target:joint.shapes.app.ClaimRect) {
   if(source.id === target.id) return false;
+  //prevent duplicate link from being created
+  let links = graph.getConnectedLinks(source, {outbound:true}) 
+  for (const link of links) {
+    if (link.attributes.target.id === target.id) {
+      //link between these two already exists
+      return false;
+    }
+  }
   let disallowed_ids:Array<string> = [<string>source.id];
   let path:Array<string> = [<string>source.id];
   if(isCircularArgument(graph.getCell(target.id), disallowed_ids, path)) return false;
@@ -180,14 +188,9 @@ function generateCircularAlertString(path:Array<string>, final_id:string) {
 //link two rects together
 export function createLink(model1:joint.shapes.app.ClaimRect, model2:joint.shapes.app.ClaimRect, _color?:string) {
   console.log(model1.attributes.link_color);
+  
   let link_color = _color ?? color.link.dark.claim.stroke
-  // if (model1.attributes.type === "claim") {
-  //   link_color = color.claim.dark.stroke
-  // } else if (model1.attributes.type === "objection") {
-  //   link_color = color.objection.dark.stroke
-  // } else if (model1.attributes.type === "dependent-premise") {
-  //   link_color = color.dependentPremise.stroke
-  // }
+
   console.log("link color", link_color)
 
   //prevent dp from linking to one of its children
@@ -195,6 +198,7 @@ export function createLink(model1:joint.shapes.app.ClaimRect, model2:joint.shape
     console.log("ERROR: Dependent premise can not link to one of its own embeded children")
     return;
   }
+
 
   //passes in Claim objects
   let link = new joint.shapes.standard.Link();

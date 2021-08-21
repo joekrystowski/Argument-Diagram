@@ -20,18 +20,24 @@ import { selected_element } from "./tools/ManageTools.js";
 import { initializeContainerDrag } from "./util.js";
 
 const claimImage = new Image();
-claimImage.src = "src/img/Claim.jpg";
+claimImage.src = "public/src/img/Claim.jpg";
 
 initializeContainerDrag('paper-wrapper');
 
 let argCounter = 0; //TODO: temporary until we fix selecting claims
+const paper_wrapper = $('#paper-wrapper')
+let previousScroll = {x: paper_wrapper.scrollLeft(), y: paper_wrapper.scrollTop()}
 const newClaimButton = document.getElementById("new-claim-button") as HTMLElement;
 newClaimButton.addEventListener("click", () => {
-  createClaim(100+10*argCounter, 100+10*argCounter);
-  ++argCounter;
-  if(argCounter > 29) {
+  const currentScroll = {x: <number>paper_wrapper.scrollLeft(), y: <number>paper_wrapper.scrollTop()}
+  if (currentScroll.x === previousScroll.x && currentScroll.y === previousScroll.y) {
+    argCounter = (argCounter + 1) % 29;
+  } else {
     argCounter = 0;
+    previousScroll = Object.assign({}, currentScroll);
   }
+
+  createClaim(currentScroll.x + 100 + 10*argCounter, currentScroll.y + 100 + 10*argCounter);
 });
 
 newClaimButton.addEventListener("dragstart", (event) => {
@@ -43,7 +49,7 @@ newClaimButton.addEventListener("dragstart", (event) => {
 const edit_template = $('#edit-form-template').html();
 $(edit_template).dialog({ 
   autoOpen: false, 
-  title: 'Edit Claim', 
+  title: 'Edit Menu', 
   resizable: true, 
   width: 500, 
   height: 500,
@@ -90,11 +96,14 @@ paperContainer.addEventListener("dragover", (event) => {
   event.preventDefault();
 });
 paperContainer.addEventListener("drop", (event) => {
+  console.log('dropping')
   const type = event.dataTransfer?.getData("type");
   if (type === "claim") {
+    const x = event.clientX - paperContainer.getBoundingClientRect().left;
+    const y = event.clientY - paperContainer.getBoundingClientRect().top;
+    console.log(x, y);
     createClaim(
-      event.clientX - paperContainer.getBoundingClientRect().left,
-      event.clientY - paperContainer.getBoundingClientRect().top
+      x, y
     );
   } else if (type === "objection") {
     createObjection(
@@ -172,16 +181,16 @@ let sort_start = 0;
 });
 
 //testing
-const claim1 = createClaim(0, 100, "the past does not exist");
-const claim2 = createClaim(200, 100, "the future does not exist");
-const claim3 = createClaim(200, 300, "only the present exists");
-const claim5 = createClaim(500, 100, "the present is always instantaneous");
-const claim4 = createClaim(300, 300, "during the present there can be no lapse of time");
-const claim6 = createClaim(300, 500, "time does not exist");
+// const claim1 = createClaim(0, 100, "the past does not exist");
+// const claim2 = createClaim(200, 100, "the future does not exist");
+// const claim3 = createClaim(200, 300, "only the present exists");
+// const claim5 = createClaim(500, 100, "the present is always instantaneous");
+// const claim4 = createClaim(300, 300, "during the present there can be no lapse of time");
+// const claim6 = createClaim(300, 500, "time does not exist");
 
-const dp1 = createDependentPremise(claim1.rect, claim2.rect);
-const dp2 = createDependentPremise(claim3.rect, claim4.rect);
+// const dp1 = createDependentPremise(claim1.rect, claim2.rect);
+// const dp2 = createDependentPremise(claim3.rect, claim4.rect);
 
-createLink(dp1.rect, claim3.rect);
-createLink(claim5.rect, claim4.rect);
-createLink(dp2.rect, claim6.rect)
+// createLink(dp1.rect, claim3.rect);
+// createLink(claim5.rect, claim4.rect);
+// createLink(dp2.rect, claim6.rect)

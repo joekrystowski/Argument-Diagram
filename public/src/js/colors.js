@@ -13,9 +13,9 @@ export let color = {
         }
     },
     dependentPremise: {
-        bodyColor: "#222222ff",
+        bodyColor: "#c2c2c2",
         textColor: "#222222",
-        stroke: "#ababab",
+        stroke: "#898989",
         linkColor: "#61E786"
     },
     link: {
