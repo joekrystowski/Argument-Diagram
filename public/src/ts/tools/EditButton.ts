@@ -105,6 +105,24 @@ joint.elementTools.EditButton = joint.elementTools.Button.extend({
       });
 
       //TODO: remove loop and replace with object
+      $("#model-validity-rect").each(function () {
+        const elem = $(this);
+      
+        let val = elem.val() as string;
+        elem.data("oldVal", val);
+      
+        elem.on("propertychange change click keyup input paste", function () {
+          let newVal = elem.val();
+          if (elem.data("oldVal") != newVal) {
+            exitButton?.classList.add("changed");
+            saveButton?.classList.add("changed");
+          }
+          if (elem.data("oldVal") === newVal) {
+            exitButton?.classList.remove("changed");
+            saveButton?.classList.remove("changed");
+          }
+        });
+      });
       $(".model-text-rect").each(function () {
         const elem = $(this);
       
@@ -200,6 +218,24 @@ joint.elementTools.EditDependentPremiseButton = joint.elementTools.Button.extend
       });
       //TODO: remove loop and replace with objects
       //fix for dependent premises
+      $("#model-validity-rect").each(function () {
+        const elem = $(this);
+      
+        let val = elem.val() as string;
+        elem.data("oldVal", val);
+      
+        elem.on("propertychange change click keyup input paste", function () {
+          let newVal = elem.val();
+          if (elem.data("oldVal") != newVal) {
+            exitButton?.classList.add("changed");
+            saveButton?.classList.add("changed");
+          }
+          if (elem.data("oldVal") === newVal) {
+            exitButton?.classList.remove("changed");
+            saveButton?.classList.remove("changed");
+          }
+        });
+      });
       $(".model-text-rect").each(function () {
         const elem = $(this);
       

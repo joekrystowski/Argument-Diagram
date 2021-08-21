@@ -80,6 +80,22 @@ joint.elementTools.EditButton = joint.elementTools.Button.extend({
                 $(this).val(constrained);
             });
             //TODO: remove loop and replace with object
+            $("#model-validity-rect").each(function () {
+                const elem = $(this);
+                let val = elem.val();
+                elem.data("oldVal", val);
+                elem.on("propertychange change click keyup input paste", function () {
+                    let newVal = elem.val();
+                    if (elem.data("oldVal") != newVal) {
+                        exitButton === null || exitButton === void 0 ? void 0 : exitButton.classList.add("changed");
+                        saveButton === null || saveButton === void 0 ? void 0 : saveButton.classList.add("changed");
+                    }
+                    if (elem.data("oldVal") === newVal) {
+                        exitButton === null || exitButton === void 0 ? void 0 : exitButton.classList.remove("changed");
+                        saveButton === null || saveButton === void 0 ? void 0 : saveButton.classList.remove("changed");
+                    }
+                });
+            });
             $(".model-text-rect").each(function () {
                 const elem = $(this);
                 let val = elem.val();
@@ -167,6 +183,22 @@ joint.elementTools.EditDependentPremiseButton = joint.elementTools.Button.extend
             });
             //TODO: remove loop and replace with objects
             //fix for dependent premises
+            $("#model-validity-rect").each(function () {
+                const elem = $(this);
+                let val = elem.val();
+                elem.data("oldVal", val);
+                elem.on("propertychange change click keyup input paste", function () {
+                    let newVal = elem.val();
+                    if (elem.data("oldVal") != newVal) {
+                        exitButton === null || exitButton === void 0 ? void 0 : exitButton.classList.add("changed");
+                        saveButton === null || saveButton === void 0 ? void 0 : saveButton.classList.add("changed");
+                    }
+                    if (elem.data("oldVal") === newVal) {
+                        exitButton === null || exitButton === void 0 ? void 0 : exitButton.classList.remove("changed");
+                        saveButton === null || saveButton === void 0 ? void 0 : saveButton.classList.remove("changed");
+                    }
+                });
+            });
             $(".model-text-rect").each(function () {
                 const elem = $(this);
                 let val = elem.val();

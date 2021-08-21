@@ -77,7 +77,7 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
         layer: "back",
 
         attrs: {
-            'stroke': '#6696ffff',
+            'stroke': '#6696ff',
             'stroke-opacity': 1,
             'stroke-width': 3,
         }
@@ -138,14 +138,14 @@ function isCircularArgument(current:joint.dia.Cell, disallowed_ids:Array<string>
       const alert_dialog = document.createElement('div');
       alert_dialog.innerHTML = `<pre>${alert_text}</pre>`;
       document.body.append(alert_dialog);
-      $(alert_dialog).dialog({
+      (<any>$(alert_dialog)).dialog({
         autoOpen: true, 
         title: 'ERROR', 
         resizable: true, 
         width: 500, 
         height: 500,
         dialogClass: 'error',
-        close: function(event, ui) {
+        close: function() {
           $(this).dialog('destroy').remove()
         }
       });
