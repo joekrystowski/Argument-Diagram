@@ -49,6 +49,15 @@ export function addRectTools(element: joint.shapes.app.ClaimRect) {
     }
   });
 
+  let editSourceButton = new joint.elementTools.EditSourceButton({
+    x: "59%",
+    y: "0%",
+    offset: {
+      x: 0,
+      y: -15
+    }
+  });
+
 
   let addSourceButton = new joint.elementTools.AddSourceButton({
     x: "77%",
@@ -93,7 +102,7 @@ export function addRectTools(element: joint.shapes.app.ClaimRect) {
   } else if (element.attributes.inLegendForm) {
     rect_tools = [removeButton, linkButton, combinedPremiseButton, addSourceButton];
   } else if (element.attributes.type === "source") {
-    rect_tools = [removeSourceButton, editButton]
+    rect_tools = [removeSourceButton, editSourceButton]
   } else {
     //regular claim (not in dependent premise)
     rect_tools = [removeButton, linkButton, editButton, combinedPremiseButton, addSourceButton, toggleSourceButton];
@@ -106,10 +115,9 @@ export function addRectTools(element: joint.shapes.app.ClaimRect) {
   //start with tools hidden
   elementView.hideTools();
 
-  // element.on("change:position", function (eventView) {
-  //   paper.hideTools();
-  //   elementView.showTools();
-  // })
+  element.on("change:position", function (eventView) {
+    element.toFront()
+  })
 
   // deselects elements that were not clicked on.
   paper.on("element:pointerclick", function(eventView){
@@ -185,7 +193,7 @@ export function addDependentPremiseTools(element: joint.shapes.app.DependentPrem
   });
 
   let toolsView = new joint.dia.ToolsView({
-    tools: [boundaryTool, removeDependentPremiseButton, linkButton, editDependentPremiseButton, combinePremiseButton]
+    tools: [removeDependentPremiseButton, linkButton, editDependentPremiseButton, combinePremiseButton]
   });
 
   //element view is in charge of rendering the elements on the paper
@@ -194,11 +202,9 @@ export function addDependentPremiseTools(element: joint.shapes.app.DependentPrem
   //start with tools hidden
   elementView.hideTools();
 
-  // element.on("change:position", function () {
-  //   paper.hideTools();
-  //   elementView.showTools();
-  // })
-
+  element.on("change:position", function (eventView) {
+    element.toFront()
+  })
   // ------ paper events -------
   paper.on("element:pointerclick", function(eventView){
     if (eventView !== elementView){

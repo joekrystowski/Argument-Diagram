@@ -1,7 +1,7 @@
 import { graph, paper } from '../graph.js'
 import { save } from '../util.js';
 import { legend } from './Legend.js';
-import jsPDF from 'jspdf';
+// import jsPDF from 'jspdf';
 
 declare const InstallTrigger: any;
 
@@ -32,7 +32,7 @@ function createCanvas(callback: Function): void {
     canvas.width = width;
     canvas.height = height;
     const ctx = canvas.getContext('2d')!;
-    ctx.fillStyle = "gray";
+    ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(svgImg, 0, 0, canvas.width, canvas.height);
     const data = canvas.toDataURL("image/png", 1.0);

@@ -22,7 +22,7 @@ const DependentPremiseRect = joint.shapes.standard.Rectangle.define(
   {
     markup: '<g class="rotatable"><g class="scalable"><rect/></g><text/></g>',
     attrs: {
-      rect: { fill: "white", stroke: "green", width: 100, height: 100 },
+      rect: { fill: "white", stroke: "", width: 100, height: 100 },
       text: {
         "font-size": 12,
         "ref-x": 0.5,
@@ -119,7 +119,8 @@ export class DependentPremise {
       },
       attrs: {
         rect: {
-          fill: color.dependentPremise.bodyColor
+          fill: color.dependentPremise.bodyColor,
+          stroke: color.dependentPremise.stroke
         }
 
       },

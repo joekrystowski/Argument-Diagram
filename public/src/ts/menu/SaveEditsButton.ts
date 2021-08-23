@@ -25,6 +25,12 @@ export function saveEdits() {
     let link_color = "#bbbbbb"
     const objectionSwitch = document.getElementById("objection-switch") as HTMLInputElement;
     link_color = objectionSwitch.checked ? color.link.dark.objection.stroke : color.link.dark.claim.stroke;
+    if(objectionSwitch.checked) {
+      editModel.attributes.type = "objection";
+    }
+    else {
+      editModel.attributes.type = "";
+    }
     let weight = Math.min(Math.max(0, <number>$('#link-weight-rect').val()), 1).toFixed(1);
     let oldLabel = editModel.attributes.labels[0]
     editModel.label(0, {
@@ -68,7 +74,7 @@ export function saveEdits() {
     // console.log((height/16) - 1)
     //console.log("new_text", editModel.attributes.attrs.text.text)
   }
-  else {
+  else if (editModel.attributes.type === "claim") {
     //just update the single model with the new text and size
     editModel.attr('text/text', text_wraps[0]);
     //console.log(validities)
@@ -88,6 +94,8 @@ export function saveEdits() {
     // }
     
     console.log(editModel)
+  } else if (editModel.attributes.type === "source") {
+    
   }
   
   const saveButton = document.getElementById("save-edit-button");

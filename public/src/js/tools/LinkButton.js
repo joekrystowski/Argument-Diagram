@@ -62,7 +62,7 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
                 padding: 5,
                 layer: "back",
                 attrs: {
-                    'stroke': '#6696ffff',
+                    'stroke': '#6696ff',
                     'stroke-opacity': 1,
                     'stroke-width': 3,
                 }
@@ -87,6 +87,14 @@ joint.elementTools.LinkButton = joint.elementTools.Button.extend({
 function isValidLink(source, target) {
     if (source.id === target.id)
         return false;
+    //prevent duplicate link from being created
+    let links = graph.getConnectedLinks(source, { outbound: true });
+    for (const link of links) {
+        if (link.attributes.target.id === target.id) {
+            //link between these two already exists
+            return false;
+        }
+    }
     let disallowed_ids = [source.id];
     let path = [source.id];
     if (isCircularArgument(graph.getCell(target.id), disallowed_ids, path))
@@ -121,7 +129,7 @@ function isCircularArgument(current, disallowed_ids, path) {
                 width: 500,
                 height: 500,
                 dialogClass: 'error',
-                close: function (event, ui) {
+                close: function () {
                     $(this).dialog('destroy').remove();
                 }
             });
@@ -160,13 +168,6 @@ function generateCircularAlertString(path, final_id) {
 export function createLink(model1, model2, _color) {
     console.log(model1.attributes.link_color);
     let link_color = _color !== null && _color !== void 0 ? _color : color.link.dark.claim.stroke;
-    // if (model1.attributes.type === "claim") {
-    //   link_color = color.claim.dark.stroke
-    // } else if (model1.attributes.type === "objection") {
-    //   link_color = color.objection.dark.stroke
-    // } else if (model1.attributes.type === "dependent-premise") {
-    //   link_color = color.dependentPremise.stroke
-    // }
     console.log("link color", link_color);
     //prevent dp from linking to one of its children
     if (model2.get('parent') && graph.getCell(model2.get("parent")) === model1) {
