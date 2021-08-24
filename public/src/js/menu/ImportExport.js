@@ -120,8 +120,7 @@ export function saveGraph() {
     $("#filename-dialog").dialog('open');
     const saveName = document.getElementById("save-filename-button");
     saveName.onclick = function () {
-        var _a;
-        const diagram = (_a = inputName.value) !== null && _a !== void 0 ? _a : "myDiagram";
+        const diagram = inputName.value === "" ? "myDiagram" : inputName.value;
         let confirm = true;
         console.log(diagram);
         userRef.child(diagram).once('value', (snapshot) => {
