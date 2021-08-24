@@ -35,7 +35,7 @@ newClaimButton.addEventListener("dragstart", (event) => {
 const edit_template = $('#edit-form-template').html();
 $(edit_template).dialog({
     autoOpen: false,
-    title: 'Edit Claim',
+    title: 'Edit Menu',
     resizable: true,
     width: 500,
     height: 500,
@@ -67,6 +67,14 @@ $(files_template).dialog({
     close: function (event, ui) {
         //$(this).dialog('close');
     }
+});
+const filename_template = $('#filename-form-template').html();
+$(filename_template).dialog({
+    autoOpen: false,
+    title: 'Diagram Name:',
+    width: 500,
+    height: 175,
+    dialogClass: 'filename'
 });
 const saveEditButton = document.getElementById("save-edit-button");
 saveEditButton.addEventListener("click", saveEdits);

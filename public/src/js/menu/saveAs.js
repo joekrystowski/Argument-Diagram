@@ -1,6 +1,7 @@
 import { paper } from '../graph.js';
 import { save } from '../util.js';
 import { legend } from './Legend.js';
+import { currentDiagram } from "../menu/ImportExport.js";
 function createCanvas(callback) {
     paper.hideTools();
     const svg = paper.svg;
@@ -40,7 +41,7 @@ function createCanvas(callback) {
 }
 export function savePNG() {
     createCanvas(function (data) {
-        save(data, "image/png", "myDiagram.png");
+        save(data, "image/png", `${currentDiagram}.png`);
     });
 }
 export function savePDF() {

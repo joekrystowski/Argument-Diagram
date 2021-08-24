@@ -12,6 +12,8 @@ import { ClaimToObjection } from "../ToggleTypes.js"
 
 var firebase = window.firebase.default;
 var database = firebase.database();
+// default name that updates for exporting
+export let currentDiagram = "myDiagram";
 
 export interface HashMap {
 	[details: string] : Claim;
@@ -120,29 +122,36 @@ export function exportGraph(): void {
 	let dataObj = JSON.parse(graph_data);
 	dataObj.legend = legend.toExportForm();
 	const data = JSON.stringify(dataObj, null, 2);
-	const filename = "myDiagram.json"; // default name
+	const filename = `${currentDiagram}.json`; // default name
 	save(data, "application/json", filename);
 }
 
 export function saveGraph(): void {
 	const user = firebase.auth().currentUser;
-	if(user===null){ return; }
+	if (user === null) return;
 	const userRef = firebase.database().ref('users/' + user.uid);
-
 	let graph_data = JSON.stringify(graph.toJSON(), null, 2);
 	let dataObj = JSON.parse(graph_data);
 	dataObj.legend = legend.toExportForm();
 	const data = JSON.stringify(dataObj, null, 2);
-
-	userRef.child('myDiagram').once('value', (snapshot) => {
-		if (snapshot.exists()) {
-			console.log('exists, rename file');
-		}
-		else {
-			console.log('does not exist, saving');
-			userRef.child('myDiagram').set(data);
-		}
-	});
+ 	const inputName = document.getElementById("filename") as HTMLInputElement;
+	inputName.value = currentDiagram;
+	$("#filename-dialog").dialog('open');
+	const saveName = document.getElementById("save-filename-button") as HTMLButtonElement;
+	saveName.onclick = function() {
+		const diagram = inputName.value ?? "myDiagram";
+		let confirm = true;
+		console.log(diagram);
+		userRef.child(diagram).once('value', (snapshot) => {
+			if (snapshot.exists()) // handle pre-existing diagram name
+				confirm = window.confirm(`Erase existing content in diagram with name: \"${diagram}\"?`);
+			if (confirm) {
+				currentDiagram = diagram;
+				userRef.child(diagram).set(data);
+				$('#filename-dialog').dialog('close');
+			}
+		});
+	}
 }
 
 export function openGraph(): void {
@@ -154,10 +163,10 @@ export function openGraph(): void {
 	userRef.on('value', (snapshot) => {
 		const data = snapshot.val();
 		// console.log(data);
-		while(diagramsContainer.firstChild) { //TODO: make more efficient
+		while (diagramsContainer.firstChild) { //TODO: make more efficient
 			diagramsContainer.removeChild(diagramsContainer.firstChild);
 		}
-		for(const diagram in data) {
+		for (const diagram in data) {
 			console.log('diagram');
 			const diagramItem:HTMLLIElement = document.createElement('li');
 			diagramItem.classList.add('diagram-item');
@@ -171,15 +180,15 @@ export function openGraph(): void {
 					const dataObj = JSON.parse(data[diagram]);
 					parseJSON(dataObj.cells, dataObj.legend);
 					diagramsContainer.style.display = 'none';
+					currentDiagram = diagram;
 					$('#files-dialog').dialog('close');
 				}
 			});
 			diagramsContainer.appendChild(diagramItem);
-			diagramsContainer.style.display = 'flex';	
+			diagramsContainer.style.display = 'block';
+			diagramsContainer.style.alignItems = 'center';	
 		}
 	});
-
-	
 }
 
 function getCellById(id:string, cells:any[]){

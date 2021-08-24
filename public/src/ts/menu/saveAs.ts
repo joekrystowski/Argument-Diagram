@@ -1,6 +1,7 @@
 import { graph, paper } from '../graph.js'
 import { save } from '../util.js';
 import { legend } from './Legend.js';
+import { currentDiagram } from "../menu/ImportExport.js";
 // import jsPDF from 'jspdf';
 
 declare const InstallTrigger: any;
@@ -44,7 +45,7 @@ function createCanvas(callback: Function): void {
 
 export function savePNG(): void {
   createCanvas(function(data: string) {
-    save(data, "image/png", "myDiagram.png");
+    save(data, "image/png", `${currentDiagram}.png`);
   });
 }
 

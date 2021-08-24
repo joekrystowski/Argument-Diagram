@@ -6,6 +6,8 @@ import { legend } from './Legend.js';
 import { ClaimToObjection } from "../ToggleTypes.js";
 var firebase = window.firebase.default;
 var database = firebase.database();
+// default name that updates for exporting
+export let currentDiagram = "myDiagram";
 // not fully working
 function parseJSON(cells, legend_import) {
     let ids = {};
@@ -101,28 +103,37 @@ export function exportGraph() {
     let dataObj = JSON.parse(graph_data);
     dataObj.legend = legend.toExportForm();
     const data = JSON.stringify(dataObj, null, 2);
-    const filename = "myDiagram.json"; // default name
+    const filename = `${currentDiagram}.json`; // default name
     save(data, "application/json", filename);
 }
 export function saveGraph() {
     const user = firebase.auth().currentUser;
-    if (user === null) {
+    if (user === null)
         return;
-    }
     const userRef = firebase.database().ref('users/' + user.uid);
     let graph_data = JSON.stringify(graph.toJSON(), null, 2);
     let dataObj = JSON.parse(graph_data);
     dataObj.legend = legend.toExportForm();
     const data = JSON.stringify(dataObj, null, 2);
-    userRef.child('myDiagram').once('value', (snapshot) => {
-        if (snapshot.exists()) {
-            console.log('exists, rename file');
-        }
-        else {
-            console.log('does not exist, saving');
-            userRef.child('myDiagram').set(data);
-        }
-    });
+    const inputName = document.getElementById("filename");
+    inputName.value = currentDiagram;
+    $("#filename-dialog").dialog('open');
+    const saveName = document.getElementById("save-filename-button");
+    saveName.onclick = function () {
+        var _a;
+        const diagram = (_a = inputName.value) !== null && _a !== void 0 ? _a : "myDiagram";
+        let confirm = true;
+        console.log(diagram);
+        userRef.child(diagram).once('value', (snapshot) => {
+            if (snapshot.exists()) // handle pre-existing diagram name
+                confirm = window.confirm(`Erase existing content in diagram with name: \"${diagram}\"?`);
+            if (confirm) {
+                currentDiagram = diagram;
+                userRef.child(diagram).set(data);
+                $('#filename-dialog').dialog('close');
+            }
+        });
+    };
 }
 export function openGraph() {
     const user = firebase.auth().currentUser;
@@ -152,11 +163,13 @@ export function openGraph() {
                     const dataObj = JSON.parse(data[diagram]);
                     parseJSON(dataObj.cells, dataObj.legend);
                     diagramsContainer.style.display = 'none';
+                    currentDiagram = diagram;
                     $('#files-dialog').dialog('close');
                 }
             });
             diagramsContainer.appendChild(diagramItem);
-            diagramsContainer.style.display = 'flex';
+            diagramsContainer.style.display = 'block';
+            diagramsContainer.style.alignItems = 'center';
         }
     });
 }
