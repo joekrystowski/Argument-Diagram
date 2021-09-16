@@ -85,6 +85,15 @@ $(files_template).dialog({
   } 
 });
 
+const filename_template = $('#filename-form-template').html();
+$(filename_template).dialog({
+  autoOpen: false,
+  title: 'Diagram Name:',
+  width: 500,
+  height: 175,
+  dialogClass: 'filename'
+});
+
 
 const saveEditButton = document.getElementById("save-edit-button") as HTMLElement;
 saveEditButton.addEventListener("click", saveEdits);
